@@ -691,23 +691,8 @@
 				"Airspaces" : {
 					'On': airspaces,
 					'Off': none
-				}
+				},
 			};
-
-			function showAirspaceLabels() {
-				if (map.getZoom() >= 10 && !map.hasLayer(openaip_cached_hotspot)) {
-					openaip_cached_hotspot.addTo(map);
-				}
-				else {
-					openaip_cached_hotspot.redraw();
-				}
-			}
-
-			function updateMapSystem() {
-				showAirspaceLabels();
-			}
-
-			setInterval(updateMapSystem, 1000);
 
 			var options = {
 			// Make the "Landmarks" group exclusive (use radio inputs)
@@ -719,7 +704,7 @@
 			// Where you want to render the map.
 			var element = document.getElementById('map');
 
-			var openaip_basemap_osm = L.featureGroup([streets, airspaces]);
+			var openaip_basemap_osm = L.featureGroup([streets, airspaces, openaip_cached_hotspot]);
 
 			map = L.map('map', {
 				center: [49.47211425492292, 9.040833186453408],
@@ -781,7 +766,6 @@
 			//L.marker(target).addTo(map);
 			pointLayer.addData(data_points);
 			//map.addLayer();
-
 
 			toggle = L.easyButton('gg-track', function(){
 				follow = true;
@@ -847,6 +831,22 @@
 			});
 
 			L.control.groupedLayers(baseMaps, groupedOverlays, options).addTo(map);
+
+
+			function showAirspaceLabels() {
+				if (map.getZoom() >= 10 && !map.hasLayer(openaip_cached_hotspot)) {
+					openaip_cached_hotspot.addTo(map);
+				}
+				else {
+					map.removeLayer(openaip_cached_hotspot);
+				}
+			}
+
+			function updateMapSystem() {
+				showAirspaceLabels();
+			}
+
+			setInterval(updateMapSystem, 1000);
 
 			var iconAirplane = L.divIcon({				
 				html: '<div id="imageAirplane"><img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KIDx0aXRsZS8+CgogPGc+CiAgPHRpdGxlPmJhY2tncm91bmQ8L3RpdGxlPgogIDxyZWN0IGZpbGw9Im5vbmUiIGlkPSJjYW52YXNfYmFja2dyb3VuZCIgaGVpZ2h0PSIxMDIiIHdpZHRoPSIxMDIiIHk9Ii0xIiB4PSItMSIvPgogPC9nPgogPGc+CiAgPHRpdGxlPkxheWVyIDE8L3RpdGxlPgogIDxwYXRoIGZpbGw9IiNmZjJlNjMiIHN0cm9rZT0ibnVsbCIgaWQ9InN2Z18xIiBkPSJtOTcuOTg4MDU5LDQuOTU2MzI3YTkuMjA3NDg1LDkuMTIxMDkxIDAgMCAwIC0xNC4wMTU4MDYsLTEuMTcwMzU3bC0xOC4zMzYyNjQsMTguMTY0NTQ5bC00Ny45MjQzNDcsLTEzLjk2MzgyYTQuMTI4NDU3LDQuMDg5NzE5IDAgMCAwIC00LjA4NTQyNywxLjAzMjAwOGwtNS4yODc0MDQsNS4yMzcxNjlhNC4xMzAzMTksNC4wOTE1NjQgMCAwIDAgMC42ODkzNDYsNi4zMzYzODdsMzUuMzE0NTY1LDIyLjQ1MTM5MmwtMy4yMjE0OTUsMy4xOTE1NTVhNjguNjEyOTAxLDY3Ljk2OTEwMiAwIDAgMCAtNy43MzE4NDksOS4xOTEyOTVsLTI0LjQxMjM3NywtMi41Nzk4NGE0LjE1MDIyNSw0LjExMTI4NCAwIDAgMCAtMy4zNzQzNjEsMS4xODE0NzRsLTMuMzgzMzM0LDMuMzUxMDYxYTQuMTQ5ODYzLDQuMTEwOTI0IDAgMCAwIDAuNjkyODI5LDYuMzY2MzM4bDIwLjQzMjY5OCwxMi45ODk1ODFsMTMuMTMyNTI0LDIwLjI3MTI2M2E0LjEyMDIzMyw0LjA4MTU3MiAwIDAgMCA2LjM4MDk5NywwLjY4MTg3MWwzLjQxODkzOCwtMy4zODcwNzRhNC4xMjA4NjIsNC4wODIxOTUgMCAwIDAgMS4xODM0MjYsLTMuMzE5MzYxbC0yLjYwNTAwMiwtMjQuMTk2OTI0YTY4LjU3MTYxMyw2Ny45MjgyMDEgMCAwIDAgOS4yNzc5NjgsLTcuNjU5NTg5bDMuMjIxNDk1LC0zLjE5MTAwNGwyMi42NDE1MzIsMzQuOTQ3NDU3YTQuMTY0NDI0LDQuMTI1MzQ5IDAgMCAwIDYuNDQ5MTU4LDAuNjg5MTA4bDUuMjQyNTYxLC01LjE5MzcwNWE0LjE2NDY2NSw0LjEyNTU4OCAwIDAgMCAxLjA1MDQ0MiwtNC4wODEyNjFsLTE0LjA5MDEzNSwtNDcuNDU0NzgzbDE3Ljk4ODQ3MSwtMTcuODE5OTQ3YzMuMjQxMTExLC0zLjIxMDk4NyA0LjAyOTg2OCwtOC4zODAzNzIgMS4zNTA4NTIsLTEyLjA2NDg0NXoiLz4KIDwvZz4KPC9zdmc+" /></div>',
