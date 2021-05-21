@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 
-<html>
+<html id="html" lang="en">
 
 	<head>
-		<meta charset="utf-8">
+		<meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>Map</title>
 
@@ -21,6 +21,7 @@
 		<link href='https://css.gg/airplane.css' rel='stylesheet'>
 
 		<style>
+
 			body {
 				padding: 0;
 				margin: 0;
@@ -32,7 +33,6 @@
 				background-color: white;
 			}
 	
-	
 			html, body, #map {
 				height: 91vh;
 				width: 100%;
@@ -41,13 +41,21 @@
 				font-family: Arial !important;
 				background-color: white;
 			}
+			
+			p{
+				font-family: Arial !important;
+				padding: 0;
+				margin: 0;
+			}
 	
+
+
 			input .glass{
 				font-family: Arial !important;
 			}
 	
 			.leaflet-popup-close-button{
-				color: red;
+				color: black;
 				font-family: Arial;
 			}
 	
@@ -57,32 +65,15 @@
 	
 			.leaflet-control-geosearch .results > * {
 				font-family: Arial !important;
-				color: red;
-			}
-	
-			.popup{
-				color: gray;
-				width: 80px;
-				margin: 3px 10px;
-				font-family: Arial !important;
-				font-weight: normal;
-			}
-	
-			.popup:hover{
-				color: dimgray;
+				color: black;
 			}
 	
 			.leaflet-popup-content {
-				margin: 13px 19px;
+				margin: 5px 12px;
 				line-height: 1.4;
 				text-align: center;
 				font-family: Arial !important;
 				font-weight: normal;
-			}
-	
-			.leaflet-popup-content p{
-				margin: 0;
-				margin-top: 30px;
 			}
 	
 			.leaflet-tooltip.my-labels {
@@ -94,6 +85,48 @@
 				font-family: Arial !important;
 			}
 	
+			.triangle-up {
+				width: 0;
+				height: 0;
+				border-left: 11px solid transparent;
+				border-right: 11px solid transparent;
+				border-bottom: 21px solid darkblue;
+				margin-bottom: 4px;
+			}
+
+			.label {
+				position: absolute;
+				background-color: transparent;
+				border: transparent;
+				box-shadow: none;
+				font-weight: normal;
+				font-size: 20px;
+				font-family: Arial !important;
+				color: darkblue;
+				left: -32.5px;
+				bottom: -25px;
+				width: 100px;
+				text-align: center;
+				background-color: transparent;
+			}
+
+			.labelLabel {
+				display: inline-block;
+				position: relative;
+				background-color: transparent;
+				border: transparent;
+				box-shadow: none;
+				font-weight: normal;
+				font-size: 20px;
+				font-family: Arial !important;
+				color: darkblue;
+				text-align: center;
+				min-width: 20px;
+				text-shadow: -2px 0 white, 0 2px white, 2px 0 white, 0 -2px white;
+				border-radius: 5px;
+				padding: 0 5px;
+			}
+
 			.leaflet-touch .leaflet-bar a {
 				color: gray;
 				font-family: Arial !important;
@@ -129,6 +162,11 @@
 				background-color: white;
 			}
 	
+			.leaflet-popup-content p {
+				width: 100%;
+				text-align: center;
+				margin: 0;
+			}
 			.gg-track {
 				color: gray;
 				box-sizing: border-box;
@@ -216,62 +254,141 @@
 				top: -6px
 			}
 	
-			.gg-airplane {
+			.gg-arrow-up {
+				color: gray;
 				box-sizing: border-box;
 				position: relative;
 				display: block;
-				width: 18px;
-				height: 18px;
-				transform: scale(5);
-				color: #035869;
-				background:
-					linear-gradient(
-						to left,
-						currentColor 22px,
-						transparent 0
-					) no-repeat center/16px 2px,
-					radial-gradient(
-						circle,
-						currentColor 60%,
-						transparent 40%
-					) no-repeat right center/2px 2px
-					
+				transform: scale(var(--ggs,1));
+				width: 22px;
+				height: 22px
 			}
-			.gg-airplane::after,
-			.gg-airplane::before {
+			.gg-arrow-up::after,
+			.gg-arrow-up::before {
 				content: "";
 				display: block;
-				position: absolute;
 				box-sizing: border-box;
-				color: #035869;
-				width: 10px;
+				position: absolute;
+				top: 4px
+			}
+			.gg-arrow-up::after {
+				width: 8px;
 				height: 8px;
-				border-right: 4px solid
-	
+				border-top: 2px solid;
+				border-left: 2px solid;
+				transform: rotate(45deg);
+				left: 7px
 			}
-			.gg-airplane::before {
-				border-top-right-radius: 2px;
-				top: 0;
-				color: #035869;
-				transform:
-					perspective(10px)
-					rotateX(10deg)
-					skewX(30deg);
-				box-shadow: -4px 3px 0 -2px
-	
+			.gg-arrow-up::before {
+				width: 2px;
+				height: 16px;
+				left: 10px;
+				background: currentColor
 			}
-			.gg-airplane::after {
-				border-bottom-right-radius: 2px;
-				bottom: 0;
-				color: #035869;
-				transform:
-					perspective(10px)
-					rotateX(-10deg)
-					skewX(-30deg);
-				box-shadow: -4px -3px 0 -2px
-	
+
+			#arrowButton {
+				height: 44px; 
+				width: 44px;
 			}
-			  </style>
+
+			span.backButton {
+				position: relative;
+				bottom: 8px;
+				color: gray;
+				font-size: 9px;
+			}
+
+			i.gg-arrow-up {
+				/* text-align: center; */
+				position: relative;
+				left: 1px;
+				top: 2px;
+			}
+
+			td{
+				margin: 0;
+				padding: 0;
+			}
+
+			input[type="number"] {
+				-webkit-appearance: textfield;
+				-moz-appearance: textfield;
+				appearance: textfield;
+			}
+
+			input[type=number]::-webkit-inner-spin-button,
+			input[type=number]::-webkit-outer-spin-button {
+				-webkit-appearance: none;
+			}
+
+			.number-input {
+				border: 2px solid #ddd;
+				display: inline-flex;
+				background-color: #ffffff;
+			}
+
+			.number-input,
+			.number-input * {
+				box-sizing: border-box;
+			}
+
+			.number-input button {
+				outline:none;
+				-webkit-appearance: none;
+				background-color: transparent;
+				border: none;
+				align-items: center;
+				justify-content: center;
+				width: 1.5rem;
+				height: 1.5rem;
+				cursor: pointer;
+				margin: 0;
+				position: relative;
+			}
+
+			.number-input button:before,
+			.number-input button:after {
+				display: inline-block;
+				position: absolute;
+				content: '';
+				width: 0.9rem;
+				height: 2px;
+				background-color: #212121;
+				transform: translate(-50%, -50%);
+				}
+			
+			.number-input button.plus:after {
+				transform: translate(-50%, -50%) rotate(90deg);
+			}
+
+			.number-input input[type=text] {
+				font-family: arial;
+				max-width: 5rem;
+				padding: .5rem;
+				border: solid #ddd;
+				border-width: 0 2px;
+				font-size: 0.9rem;
+				height: 1.5rem;
+				font-weight: bold;
+				text-align: center;
+				background-color: #ffffff;
+			}
+
+			.teleportButton{
+				color: black;
+				width: 80px;
+				margin: 3px 10px;
+				padding: 0;
+				font-family: Arial !important;
+				font-weight: normal;
+				background-color: #ffffff;
+				border: solid #ddd;
+				border-width: 2px;
+				height: 1.5rem;
+				font-size: 0.9rem;
+			}
+
+		  </style>
 	</head>
 
 	<body id="documentBody">
@@ -294,6 +411,9 @@
 		var newMarker;
 		var airplane;
 		var follow = true;
+		var heading = 0;
+		var altitude = 0;
+		var speed = 0;
 
 		window.addEventListener("DOMContentLoaded", function () {
 			loadMap(47.50737, 19.04611);
@@ -602,10 +722,11 @@
 
 		var pointLayer = L.geoJSON(null, {
 			pointToLayer: function(feature,latlng){
-				label = String(feature.properties.name) // .bindTooltip can't use straight 'feature.properties.attribute'
+				label = String(feature.properties.name)
 				return new L.CircleMarker(latlng, {
+				color: 'darkblue',	
 				radius: 14,
-				}).bindTooltip(label, {permanent: true, direction: "center", className: "my-labels"}).openTooltip();
+				}).bindTooltip('<div class="triangle-up"></div>' + '<div class="label"><div class="labelLabel">'+ label +'</div></div>' , {permanent: true, direction: "center", className: "my-labels"}).openTooltip();
 			}
 		});
 
@@ -694,6 +815,20 @@
 				},
 			};
 
+			var baseMaps = {
+				"Streets": streets,
+				"Monochrome": monochrome,
+				"Terrain": terrain,
+				"Water": water
+			}
+
+			var groupedOverlays = {
+				"Airspaces" : {
+					'On': airspaces,
+					'Off': none
+				},
+			};
+
 			var options = {
 			// Make the "Landmarks" group exclusive (use radio inputs)
 			exclusiveGroups: ["Airspaces"],
@@ -751,7 +886,7 @@
 				}
 				else{
 					newMarker = new L.marker(e.latlng).addTo(map);
-					newMarker.bindPopup("<p style='padding:0; font-size: 14px'>Lat: "+ e.latlng.lat + "<br>Lng: "+ e.latlng.lng + "</p><br><button class='popup' type='button' onclick='teleport(" + e.latlng.lat +","+ e.latlng.lng + ")' >Teleport</button>").openPopup();
+					newMarker.bindPopup("<table><tr><td><p style='font-size: 1.5rem'>Teleport<p></td></tr><tr><td style='text-align:left; padding:0; font-size: 14px'>&nbsp;Altitude (ft): </td></tr><tr><td><div class='number-input'><button onclick='altitudeDwn()'></button><input id='altitudeInput' class='quantity' min='0' name='quantity' value= " + Math.round(altitude) + " type='text'><button onclick='altitudeUp()' class='plus'></button></div></td></tr><tr><td style='text-align:left; padding:0; font-size: 14px'>&nbsp;Heading (deg): </td><tr><td><div class='number-input'><button onclick='headingDwn()'></button><input id='headingInput' class='quantity' min='0' name='quantity' value= " + Math.round(heading) + " type='text'><button onclick='headingUp()' class='plus'></button></div></td></tr><tr><td style='text-align:left; padding:0; font-size: 14px'>&nbsp;Airspeed (kt): </td></tr><tr><td><div class='number-input'><button onclick='speedDwn()'></button><input id='speedInput' class='quantity' min='0' name='quantity' value= " + Math.round(speed) + " type='text'><button onclick='speedUp()' class='plus'></button></div></td></tr><br><tr><td><span style='margin-top: 15px'><button style='margin-top:10px; text-align: center' class='teleportButton' onclick='teleport(" + e.latlng.lat +","+ e.latlng.lng + ")' >OK</button></span></td></tr></table>").openPopup();
 					//loadMap(e.location.y, e.location.x)
 					var slides = document.getElementsByClassName("leaflet-popup-close-button");
 					for (var i = 0; i < slides.length; i++) {	
@@ -762,6 +897,7 @@
 				toggle.enable();
 			});
 			
+
 			// Place a marker on the same location.
 			//L.marker(target).addTo(map);
 			pointLayer.addData(data_points);
@@ -774,6 +910,7 @@
 					map.removeLayer(newMarker);
 				}
 			}).addTo(map);
+		
 			toggle.disable();
 
 			//toggle.addTo(map);
@@ -832,6 +969,19 @@
 
 			L.control.groupedLayers(baseMaps, groupedOverlays, options).addTo(map);
 
+			var toggle2 = L.easyButton({
+				id: 'arrowButton',  // an id for the generated button
+				position: 'topright',      // inherited from L.Control -- the corner it goes in
+				type: 'replace',          // set to animate when you're comfy with css
+				leafletClasses: true,     // use leaflet classes to style the button?
+				states:[{                 // specify different icons and responses for your button
+					stateName: 'get-center',
+					title: '',
+					icon: '<i id="arrow"; class="gg-arrow-up"></i>'+'<span class="backButton">3kts</span><br>',
+					
+				}]
+				}).addTo(map);
+
 
 			function showAirspaceLabels() {
 				if (map.getZoom() >= 10 && !map.hasLayer(openaip_cached_hotspot)) {
@@ -858,22 +1008,65 @@
 			airplane = L.marker([47.442, 10.23], { icon: iconAirplane }).addTo(map);
 		}
 
+		function altitudeUp(){
+			//console.log('altitude Up');
+			var altitudeInput = parseFloat(document.getElementById('altitudeInput').value);
+			document.getElementById('altitudeInput').value = (altitudeInput + 1);
+		}
+
+		function altitudeDwn(){
+			//console.log('altitude Down');
+			var altitudeInput = parseFloat(document.getElementById('altitudeInput').value);
+			document.getElementById('altitudeInput').value = (altitudeInput - 1);
+		}
+
+		function headingUp(){
+			//console.log('heading Up');
+			var headingInput = parseFloat(document.getElementById('headingInput').value);
+			document.getElementById('headingInput').value = (headingInput + 1);
+		}
+
+		function headingDwn(){
+			//console.log('heading Down');
+			var headingInput = parseFloat(document.getElementById('headingInput').value);
+			document.getElementById('headingInput').value = (headingInput - 1);
+		}
+
+		function speedUp(){
+			//console.log('speed Up');
+			var speedInput = parseFloat(document.getElementById('speedInput').value);
+			document.getElementById('speedInput').value = (speedInput + 1);
+		}
+
+		function speedDwn(){
+			//console.log('speed Down');
+			var speedInput = parseFloat(document.getElementById('speedInput').value);
+			document.getElementById('speedInput').value = (speedInput - 1);
+		}
+
 		function setPosition(lat, lng) {
-            	var pos = new L.LatLng(lat, lng);
-            	airplane.setLatLng(pos).update();
-				if (follow==true){
-					map.panTo(pos);
-				}
-        	}
+           	var pos = new L.LatLng(lat, lng);
+           	airplane.setLatLng(pos).update();
+			if (follow==true){
+				map.panTo(pos);
+			}
+        }
 			
-		function setRotation(rad) {
-			deg = rad * 180 / Math.PI;
+		function setRotation(deg) {
             $('#imageAirplane').css('transform', 'rotate(' + Math.round(deg -45) + 'deg)  scale(0.3)');
 			$('#imageAirplane').css('fill', 'red');
         }
 
+		function setWind(direction , speed) {
+            $('i#arrow').css('transform', 'rotate(' + Math.round(direction) + 'deg)');
+			$('.backButton').text(Math.round(speed) + ' kt');
+        }
+
 		function teleport(lat, lng){
-			postMessage('map:' + lat + '_' + lng)
+			var altInput =  parseFloat(document.getElementById('altitudeInput').value);
+			var headingInput =  parseFloat(document.getElementById('headingInput').value);
+			var speedInput =  parseFloat(document.getElementById('speedInput').value);
+			postMessage('map:' + lat + '_' + lng + '_' + altInput + '_' + headingInput + '_' + speedInput)
 			if (map.hasLayer(newMarker)){
 					map.removeLayer(newMarker);
 				}
@@ -886,12 +1079,15 @@
 				console.log(e.data);
 				// Call function:
 				var latlng = request.split("_");
-				//map.panTo(new L.LatLng(latlng[0], latlng[1]));
+				altitude = (latlng[2]);
+				heading = latlng[3] * 180 / Math.PI;
+				speed = (latlng[4]);
+				$('#map').css('height', latlng[7] - 10 + 'px');
+				$('body').css('height', latlng[7] - 10 + 'px');
+				$('html').css('height', latlng[7] - 10 + 'px');
 				setPosition(latlng[0], latlng[1]);
-				setRotation(latlng[2]);
-				$('#map').css('height', latlng[3] - 10 + 'px');
-				$('body').css('height', latlng[3] - 10 + 'px');
-				$('html').css('height', latlng[3] - 10 + 'px');
+				setRotation(heading);
+				setWind(latlng[5], latlng[6]);
 			}	
 		}
 
