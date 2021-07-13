@@ -39,8 +39,61 @@
 				overflow: hidden;
 				font-family: Arial !important;
 				background-color: white;
+				z-index: 10;
 			}
 			
+			#overlay{
+				position: absolute;
+				width: 160px;
+				height: auto;
+				max-height:50%;
+				right: 10px;
+				bottom: 80px;
+				background-color:white;
+				z-index: 1000;
+				border: 2px solid rgba(0,0,0,0.2);
+    			background-clip: padding-box;
+				border-radius: 10px;
+				overflow: auto;
+			}
+
+			#overlay2{
+				position: absolute;
+				width: 60%;
+				height: 60px;
+				right: 20%;
+				top: 10px;
+				background-color:white;
+				z-index: 1000;
+				border: 2px solid rgba(0,0,0,0.2);
+    			background-clip: padding-box;
+				border-radius: 10px;
+				vertical-align: middle;
+			}
+
+			#overlay ul{
+				padding-top: 10%;
+				padding-bottom: 10%;
+			}
+
+			#overlay ul p{
+				padding-bottom: 8%;
+			}
+
+			#wpListClose{
+				position: absolute;
+				top: 0px;
+				right: 0px;
+				color: lightgrey;
+				background-color: white;
+				border: 0;
+				border-radius: 10px;
+			}
+
+			#wpListClose:hover{
+				color: gray;
+			}
+
 			p{
 				font-family: Arial !important;
 				padding: 0;
@@ -54,6 +107,15 @@
 			.leaflet-popup-close-button{
 				color: black;
 				font-family: Arial;
+			}
+	
+			.leaflet-geosearch-bar {
+				font-family: Arial !important;
+			}
+	
+			.leaflet-control-geosearch .results > * {
+				font-family: Arial !important;
+				color: black;
 			}
 	
 			.leaflet-popup-content {
@@ -73,6 +135,48 @@
 				font-family: Arial !important;
 			}
 	
+			.triangle-up {
+				width: 0;
+				height: 0;
+				border-left: 11px solid transparent;
+				border-right: 11px solid transparent;
+				border-bottom: 21px solid darkblue;
+				margin-bottom: 4px;
+			}
+
+			.label {
+				position: absolute;
+				background-color: transparent;
+				border: transparent;
+				box-shadow: none;
+				font-weight: normal;
+				font-size: 20px;
+				font-family: Arial !important;
+				color: darkblue;
+				left: -32.5px;
+				bottom: -25px;
+				width: 100px;
+				text-align: center;
+				background-color: transparent;
+			}
+
+			.labelLabel {
+				display: inline-block;
+				position: relative;
+				background-color: transparent;
+				border: transparent;
+				box-shadow: none;
+				font-weight: normal;
+				font-size: 20px;
+				font-family: Arial !important;
+				color: darkblue;
+				text-align: center;
+				min-width: 20px;
+				text-shadow: -2px 0 white, 0 2px white, 2px 0 white, 0 -2px white;
+				border-radius: 5px;
+				padding: 0 5px;
+			}
+
 			.leaflet-touch .leaflet-bar a {
 				color: gray;
 				font-family: Arial !important;
@@ -343,11 +447,278 @@
 				font-size: 0.9rem;
 			}
 
+			.marker-delete-button{
+				color: black;
+				width: 100px;
+				margin: 3px 10px;
+				padding: 0;
+				font-family: Arial !important;
+				font-weight: normal;
+				background-color: #ffffff;
+				border: solid #ddd;
+				border-width: 2px;
+				height: 1.5rem;
+				font-size: 0.9rem;
+			}
+
+			.gg-erase {
+			color: gray;
+			box-sizing: border-box;
+			position: relative;
+			display: block;
+			transform: scale(var(--ggs,1));
+			width: 22px;
+			height: 18px;
+			left: -6px;
+			top: 3px;
+			}
+
+			.gg-erase::after,
+			.gg-erase::before {
+			content: "";
+			display: block;
+			box-sizing: border-box;
+			position: absolute
+			}
+
+			.gg-erase::before {
+			width: 6px;
+			height: 14px;
+			border-bottom:
+			4px solid transparent;
+			border-radius: 1px;
+			box-shadow:
+			0 0 0 2px,
+			inset 0 -2px 0 0;
+			left: 7px;
+			top: 2px;
+			transform: rotate(45deg)
+			}
+
+			.gg-erase::after {
+			background: currentColor;
+			width: 22px;
+			height: 2px;
+			bottom: 0;
+			border-radius: 20px
+			} 
+
+			.gg-edit-markup {
+				color: gray;
+				box-sizing: border-box;
+				position: relative;
+				display: block;
+				transform: scale(var(--ggs,1));
+				width: 22px;
+				height: 22px;
+				border: 2px solid;
+				border-radius: 22px;
+				overflow: hidden;
+				perspective: 20px;
+				left: -6px;
+				top: 2px;
+			}
+			.gg-edit-markup::after,
+			.gg-edit-markup::before {
+				content: "";
+				display: block;
+				position: absolute;
+				box-sizing: border-box
+			}
+			.gg-edit-markup::before {
+				width: 0;
+				height: 6px;
+				border-bottom: 6px solid;
+				border-left: 3px solid transparent;
+				border-right: 3px solid transparent;
+				bottom: 9px;
+				left: 6px
+			}
+			.gg-edit-markup::after {
+				width: 10px;
+				height: 12px;
+				border: 2px solid;
+				border-top: 4px solid;
+				border-bottom: 0;
+				bottom: 0;
+				left: 4px;
+				transform: rotateX(60deg)
+			}
+
+			.gg-globe-alt,
+			.gg-globe-alt::after,
+			.gg-globe-alt::before {
+				color: gray;
+				display: block;
+				box-sizing: border-box;
+				height: 18px;
+				border: 2px solid;
+				color: gray;
+				left: -4px;
+				top: 3px;
+			}
+			.gg-globe-alt {
+				position: relative;
+				transform: scale(var(--ggs,1));
+				width: 18px;
+				border-radius: 22px
+			}
+			.gg-globe-alt::after,
+			.gg-globe-alt::before {
+				content: "";
+				position: absolute;
+				width: 8px;
+				border-radius: 100%;
+				top: -2px;
+				left: 3px
+			}
+			.gg-globe-alt::after {
+				width: 24px;
+				height: 20px;
+				border: 2px solid transparent;
+				border-bottom: 2px solid;
+				top: -11px;
+				left: -5px
+			}
+
+			.gg-trash {
+				color: gray;
+				left: 0px;
+				top: 3px;
+				box-sizing: border-box;
+				position: relative;
+				display: block;
+				transform: scale(var(--ggs,1));
+				width: 10px;
+				height: 12px;
+				border: 2px solid transparent;
+				box-shadow:
+					0 0 0 2px,
+					inset -2px 0 0,
+					inset 2px 0 0;
+				border-bottom-left-radius: 1px;
+				border-bottom-right-radius: 1px;
+				margin-top: 4px
+			}
+			.gg-trash::after,
+			.gg-trash::before {
+				content: "";
+				display: block;
+				box-sizing: border-box;
+				position: absolute
+			}
+			.gg-trash::after {
+				background: currentColor;
+				border-radius: 3px;
+				width: 16px;
+				height: 2px;
+				top: -4px;
+				left: -5px
+			}
+			.gg-trash::before {
+				width: 10px;
+				height: 4px;
+				border: 2px solid;
+				border-bottom: transparent;
+				border-top-left-radius: 2px;
+				border-top-right-radius: 2px;
+				top: -7px;
+				left: -2px
+			}
+
+			.gg-attribution {
+				color: gray;
+				position: relative;
+				left: -3px;
+				top: 3px;
+				display: block;
+				box-sizing: border-box;
+				transform: scale(var(--ggs,1));
+				width: 16px;
+				height: 18px;
+				background:
+					linear-gradient(
+						to left,
+						currentColor 14px,
+						transparent 0
+					) no-repeat 1px 2px/8px 2px,
+					linear-gradient(
+						to left,
+						currentColor 14px,
+						transparent 0
+					) no-repeat 6px 14px/6px 2px,
+					radial-gradient(
+						circle,
+						currentColor 60%,
+						transparent 40%
+					) no-repeat 10px 12px/6px 6px,
+					radial-gradient(
+						circle,
+						currentColor 60%,
+						transparent 40%
+					) no-repeat 0 0/6px 6px;
+
+			}
+			.gg-attribution::after,
+			.gg-attribution::before {
+				content: "";
+				display: block;
+				box-sizing: border-box;
+				position: absolute;
+				width: 8px;
+				height: 8px;
+				border: 2px solid;
+			}
+			.gg-attribution::before {
+				border-right: 0;
+				border-top-left-radius: 10px;
+				border-bottom-left-radius: 10px;
+				top: 8px;
+				left: 2px
+			}
+			.gg-attribution::after {
+				border-left: 0;
+				border-top-right-radius: 10px;
+				border-bottom-right-radius: 10px;
+				right: 2px;
+				top: 2px
+			}
+
+			.gg-pin {
+				color: gray;
+				left: -4px;
+				top: 3px;
+				box-sizing: border-box;
+				position: relative;
+				display: block;
+				transform: rotate(45deg) scale(var(--ggs,1));
+				width: 18px;
+				height: 18px;
+				border-radius: 100% 100% 0 100%;
+				border: 2px solid;
+				margin-top: -4px
+			}
+			.gg-pin::before {
+				content: "";
+				display: block;
+				box-sizing: border-box;
+				position: absolute;
+				width: 8px;
+				height: 8px;
+				border: 2px solid;
+				top: 3px;
+				left: 3px;
+				border-radius: 40px
+			}
+
 		  </style>
 	</head>
 
 	<body id="documentBody">
 		<div id="map"></div>
+		<div id="overlay"><button id="wpListClose" type="button" onclick="hideWpList()">x</button><h3 style = 'font-size: 5; text-align: center; padding-top: 10px; margin-bottom: -20px;'>Flightplan</h3><ul></ul></div>
+		<div id="overlay2"><button id="wpListClose" type="button" onclick="hideWpList()">x</button><h3 style = 'font-size: 5; text-align: center; margin-bottom: 10px;'>Heading:</h3></div>
+
 	</body>
 
 	<script>
@@ -360,22 +731,46 @@
 		};
 		var map;
 		var toggle;
+		var toggle2;
+		var toggle3;
+		var toggle4;
+		var toggle5;
 		var newMarker;
 		var airplane;
-		var follow = true;
+		var follow;
 		var heading = 0;
 		var altitude = 0;
 		var speed = 0;
+		var polyline = [];
+		var markers;
+		var wp1_lat;
+		var wp1_lng;
+		var overlayi;
+		var startLineGroup;
+		var pos_lat;
+		var pos_lng;
+		var coordinates = [];
+		var polylinepoints = [];
+		var showPath = true;
+		var targetMarker = 0;
+		var distance;
+		var bearing;
+		var middleMarkers;
+		var headings = [];
+		var startlineShow = true;
+		var altitudes= [];
+		var activeWP;
+		var distances = [];
+		var deleted = false;
 
 		window.addEventListener("DOMContentLoaded", function() {
 			loadMap(47.50737, 19.04611);
 			// Get the message reference
 			var messageElement = document.getElementById('message');
-
 			// Register the event listener
 			window.addEventListener('message', receiveMessage);
 		});
-
+		
 		function loadMap(lat, lon){
 
 			// Create Leaflet map on map element.
@@ -509,7 +904,17 @@
 				}
 			});
 
+			var waypointmode = true;
+			var clickArr=[];
+			var markerId = 0;
+			var coordinatesArray = [];
+			var geojsonFeature;
+			var id = 0;
+			
+
 			map.on('click', function(e) {
+				if (waypointmode==false){
+					
 				if (map.hasLayer(newMarker)) {
 					map.removeLayer(newMarker);
 				} else {
@@ -522,8 +927,409 @@
 				}
 				follow = false;
 				toggle.enable();
-			});
+			
+			}else{
+												
+					var marker;
+					deleted = false;
+					document.getElementById("overlay").style.display= 'block' ;
+					document.getElementById("overlay2").style.display= 'block' ;			
+					//console.log(geojsonFeature.length);
+					//// hier ändern .....
+					geojsonFeature = {
+						"type": "Feature",
+						"properties": {},
+						"geometry": {
+							"type": "Point",
+							"coordinates": [e.latlng.lat, e.latlng.lng]		
+						},
+						"id": markerId
+					}
 
+					if(markerId == 0){
+						wp1_lat = e.latlng.lat;
+						wp1_lng = e.latlng.lng;
+					}
+					markers = L.layerGroup();
+					markers = L.geoJson(geojsonFeature, {
+					pointToLayer: function(feature, latlng){
+							marker = L.marker(e.latlng, {
+								title: "WP",
+								alt: 1000,
+								myId: markerId,
+								coord: e.latlng,
+								riseOnHover: true,
+								draggable: true
+							});
+							//console.log(coordinates);
+							//marker.on("popupopen", onPopupOpen);
+							return marker;
+						}
+					}).addTo(map);
+				
+					coordinates.push(e.latlng);
+					///markers.addLayer(marker);
+
+					const popup = L.popup({
+						closeOnClick: false,
+						autoClose: true,	
+					});
+					popup.setContent("<table><tr><td><p style='font-size: 1.5rem'>WP"+ (coordinatesArray.length+1) +"<p></td></tr><tr><td style='text-align:left; padding:0; font-size: 14px'>&nbsp;Altitude (ft): </td></tr><tr><td><div class='number-input'; onchange='setWPaltitude2();'><button onclick='WPaltitudeDwn()' ondblclick='WPaltitudeDwnDwn()'></button><input id='WPaltitudeInput' class='quantity' min='0' name='WPaltitudeInput' value=0 type='text'><button onclick='WPaltitudeUp()' ondblclick='WPaltitudeUpUp()' class='plus'></button></div></td></tr><br><tr><td><span style='margin-top: 15px'><button style='margin-top:10px; text-align: center' class='marker-delete-button' onclick='' >Delete</button></span></td></tr></table>");
+					//}).setContent("<table><tr><td><p style='font-size: 1.5rem'>WP"+ coordinates.length +"<p></td></tr><tr><td><span style='margin-top: 15px'><button style='margin-top:10px; text-align: center' class='marker-delete-button' onclick='' >Delete</button></span></td></tr></table>");
+
+
+					marker.bindPopup(popup);
+					marker.on("popupopen", onPopupOpen);
+					marker.on("click", function(e){
+						//console.log(this.options.myId);
+						id = this.options.myId;
+						showWpList();
+						//console.log(marker.feature.id);
+					});
+					////var group = new L.featureGroup(markerArray);//getting 'getBounds() not a function error.
+					////map.fitBounds(group.getBounds());			
+					//coordinates = [];	
+					var points = getJSON('clickedPoints');
+					//console.log(points);
+					map.closePopup();
+					marker.openPopup();
+					coordinatesArray = [];
+					drawLines();
+					markerId++;
+				}
+
+
+				marker.on('dragend', function(e) {
+						//console.log('Dragend - ID: '+ this.options.myId + ' Coordinate: ' + this.options.coord);
+						var dragid = this.options.myId;				
+						var lat = marker.getLatLng().lat;
+						var lng = marker.getLatLng().lng;			
+						setTimeout(function() {
+								coordinatesArray[dragid][0] = lat;
+								coordinatesArray[dragid][1] = lng;
+								coordinatesArray[dragid][2] = dragid;
+								coordinatesArray = [];
+								drawLines();
+							}, 10);
+
+							if(dragid == 0){
+								wp1_lat = lat;
+								wp1_lng = lng;
+							}
+							//console.log(coordinatesArray);
+					});
+				});
+
+				// Function to handle delete as well as other events on marker popup open
+				function onPopupOpen() {
+					var tempMarker = this;
+					activeWP = this.options.myId;
+					setTimeout(loadAltitude, 200);
+					//loadAltitude();	
+						// To remove marker on click of delete button in the popup of marker
+						$(".marker-delete-button:visible").click(function () {
+							map.removeLayer(tempMarker);
+							pLineGroup.clearLayers();
+							coordinatesArray = [];
+							//console.log(tempMarker);
+							//console.log(tempMarker.feature.geometry.coordinates[0]);
+							$(tempMarker).parent('li').remove();
+							markerId--;
+							var i = 0;
+							$.each(map._layers, function (ml) {
+								if (map._layers[ml].feature) {
+									map._layers[ml].feature.id = i;
+									map._layers[ml].options.myId = i;
+									coordinates.push(map._layers[ml].feature.geometry.coordinates);
+									//console.log(map._layers[ml].feature.id);
+									if (i==0){
+										//console.log(map._layers[ml]);
+										//console.log(map._layers[ml].feature.geometry.coordinates);
+										wp1_lat = map._layers[ml].feature.geometry.coordinates[0];
+										wp1_lng = map._layers[ml].feature.geometry.coordinates[1];
+									}
+									i++;
+								}
+							});
+							if (i==0){
+								removeAllMarkers();
+							}else{
+								startLineGroup.clearLayers();
+								startlineShow = false;
+							}
+							drawLines();
+						});
+				}
+
+				function loadAltitude()
+					{
+						if ($('input[name="WPaltitudeInput"]').length)
+						{
+							if(altitudes[activeWP]> 0){
+								var alt = altitudes[activeWP];
+								$('input[name="WPaltitudeInput"]').val(alt);
+							}
+							else{
+								//$('input[name="WPaltitudeInput"]').val(0);
+							}
+						}
+				}
+
+			var pLineGroup = new L.FeatureGroup();
+			var startLineGroup = new L.FeatureGroup();
+			middleMarkers = new L.FeatureGroup();
+			pLineGroup.addTo(map);
+		
+			function drawLines(){
+				savePoints();
+				overlayi = 0;
+				var poslat = pos_lat;
+				var poslng = pos_lng;
+				$('#overlay > ul').empty();
+				headings = [];
+				altitudes = JSON.parse(window.localStorage.getItem("altitudes") || "[]");
+				$.each(map._layers, function (ml) {
+					if (map._layers[ml].feature) {
+						//console.log(map._layers[ml].feature);
+						coordinatesArray.push(map._layers[ml].feature.geometry.coordinates);
+						//coordinates.push(map._layers[ml].feature.geometry.coordinates);
+						
+						if(overlayi==0){										//$("#overlay > ul > li")[target].css('color','red');					
+								$('#overlay > ul').append('<li  href="#" class="target" id="' + 0 + '">WP '+ (1) + ' ' + '<a href="#" class="" id="' + 0 + ' "></a></li>');						
+						}
+						if(overlayi>0){										//$("#overlay > ul > li")[target].css('color','red');
+
+								var bearing2 = calculateBearing(coordinatesArray[(overlayi-1)][0],coordinatesArray[(overlayi-1)][1],coordinatesArray[overlayi][0],coordinatesArray[overlayi][1]);
+								//console.log(bearing2)						
+								if (altitudes[overlayi]){
+									if (Math.round(bearing2) <10){
+										$('#overlay > ul').append('<p style="color:rgb(41,129,202)">00' + Math.round(bearing2)+ ' <sup>o</sup> - <a style="color:red">' + parseFloat(altitudes[overlayi]) +' ft</a></p> ');
+									}	
+									else if (Math.round(bearing2) <100){
+										$('#overlay > ul').append('<p style="color:rgb(41,129,202)">0' + Math.round(bearing2) + ' <sup>o</sup> - <a style="color:red">' + parseFloat(altitudes[overlayi]) +' ft</a></p> ');
+									}
+									else{
+										$('#overlay > ul').append('<p style="color:rgb(41,129,202)">' + Math.round(bearing2) + ' <sup>o</sup> - <a style="color:red">' + parseFloat(altitudes[overlayi]) +' ft</a></p> ');
+									}
+								}
+								else{
+									if (Math.round(bearing2) <10){
+										$('#overlay > ul').append('<p style="color:rgb(41,129,202)">00' + Math.round(bearing2) +' <sup>o</sup> - <a style="">0 ft</a></p> ');
+									}	
+									else if (Math.round(bearing2) <100){
+										$('#overlay > ul').append('<p style="color:rgb(41,129,202)">0' + Math.round(bearing2)  + ' <sup>o</sup> - <a style="">0 ft</a></p> ');
+									}
+									else{
+										$('#overlay > ul').append('<p style="color:rgb(41,129,202)">' + Math.round(bearing2)  + ' <sup>o</sup> - <a style="">0 ft</a></p> ');
+									}
+								}
+								$('#overlay > ul').append('<li  href="#" class="target" id="' + overlayi + '">WP '+ (overlayi+1) + ' ' + '<a href="#" class="" id="' + overlayi + ' "></a></li>');
+							}
+					overlayi++;
+					}
+				});
+
+				if (overlayi == 0){
+					startLineGroup.clearLayers();
+					map.removeLayer(startLineGroup);
+				}
+
+				var secondclick = false;
+
+				$('.target').on("click", function(event) {
+						if (targetMarker != event.target.id){
+							var targetMarker2 = event.target;
+							//console.log('target marker: ' + targetMarker2.id);
+							targetMarker = targetMarker2.id;
+							$('.target').css('color','black');
+							$(this).css('color','red');
+							localStorage.setItem('targetMarker', event.target.id);
+							//console.log('target marker saved: ' + event.target.id);
+							secondclick = false;
+							if (map.hasLayer(startLineGroup)) {
+									map.removeLayer(startLineGroup);
+								}
+							if (!map.hasLayer(startLineGroup)) {
+									map.addLayer(startLineGroup);
+								}
+							startlineShow = true;
+							document.getElementById("overlay2").style.display= 'block' ;
+						}
+						else{
+							if (targetMarker == event.target.id && secondclick == false){
+								$('.target').css('color','black');
+								secondclick = true;
+								if (map.hasLayer(startLineGroup)) {
+									map.removeLayer(startLineGroup);
+								}
+								startlineShow = false;
+								document.getElementById("overlay2").style.display= 'none' ;
+							}
+							else if (targetMarker == event.target.id && secondclick == true){
+								localStorage.setItem('targetMarker', event.target.id);
+								//console.log('target marker saved: ' + event.target.id);
+								$('.target').css('color','black');
+								$(this).css('color','red');
+								secondclick = false;
+								if (map.hasLayer(startLineGroup)) {
+									map.removeLayer(startLineGroup);
+								}
+								if (!map.hasLayer(startLineGroup)) {
+									map.addLayer(startLineGroup);
+								}
+								startlineShow = true;
+								document.getElementById("overlay2").style.display= 'block' ;
+							}
+						}
+						map.closePopup();
+					});
+
+				var pline = L.polyline(coordinatesArray, {color:'rgb(41,129,202)'});
+				
+				if(map.hasLayer(middleMarkers)){
+					map.removeLayer(middleMarkers);
+				}
+				if(map.hasLayer(pLineGroup)){
+					pLineGroup.clearLayers();
+				}
+
+				pLineGroup.addLayer(pline);
+				
+				var startline = setInterval(line,100);
+				if (overlayi > 0 && startlineShow == true){
+					if (!map.hasLayer(startLineGroup)){
+						startLineGroup.addTo(map);
+					}
+				}
+				else{
+					if (map.hasLayer(startLineGroup)){
+						map.removeLayer(startLineGroup);
+					}
+				}
+				pLineGroup.eachLayer(function(layer) {
+					createMiddleMarkers(layer);
+				});
+
+			}
+	
+			function markerFunction(id){
+				for (var i in markers){
+					var markerID = markers[i].options.title;
+					if (markerID == id){
+						markers[i].openPopup();
+					};
+				}
+			}
+
+			function line(){
+				var nwp1_lat;
+				var nwp1_lng;
+				var target = localStorage.getItem('targetMarker');
+				//console.log(target);
+				if (coordinatesArray)
+				{
+					var nlat = pos_lat;
+					var nlng = pos_lng;
+					var i = 0;
+					if (target <= coordinatesArray.length){
+						nwp1_lat = coordinatesArray[target][0];
+						nwp1_lng = coordinatesArray[target][1];
+						if(browserDebug == 0){
+							var p2 = new L.LatLng(nwp1_lat, nwp1_lng);
+							var pos2 = new L.LatLng(nlat, nlng);
+							var coordinates2 = [p2,pos2];
+							if (startlineShow == true){
+								startLineGroup.clearLayers();
+								startLineGroup.addLayer(L.polyline(coordinates2, {color:'#ff2e63'}));
+							}
+						}
+					}
+					
+					var x = document.querySelectorAll('#overlay > ul > li'); 				
+					for (let i = 0; i < x.length; i++) {
+						x[i].style.color = "black";
+						if (i == target && startlineShow == true){
+							x[i].style.color = "red";
+						}
+					}
+
+					var distance2 = 0;
+					var heading = 0;
+					var alt = 0
+
+					if (startlineShow == true){
+						distance2 = calculateDistance(nlat,nlng,nwp1_lat,nwp1_lng, 'nm');
+						heading = calculateBearing(nlat,nlng,nwp1_lat,nwp1_lng);
+					}
+					if (altitudes[target] && startlineShow == true){
+						alt = parseFloat(altitudes[target]);
+					}
+					//alt = parseFloat(altitudes[0]);
+					$('#overlay2 > h3').html('Heading: '+ heading.toFixed(0) + ' <sup>o</sup>&nbsp;&nbsp;I&nbsp;&nbsp;Distance: ' + distance2.toFixed(2) +' nm'+ '&nbsp;&nbsp;I&nbsp;&nbsp;Altitude: ' + alt.toFixed(0) +' ft');
+					distance = calculateDistance(nlat,nlng,nwp1_lat,nwp1_lng, 'K');					
+					if (distance <= 1){
+						//$('#overlay > ul').append('<li  href="#" class="target" id="' + i + '">WP '+ distance + ' ' + '<a href="#" class="" id="' + ' "></a></li>');						
+						if (startlineShow == true){
+							targetMarker++;
+							localStorage.setItem('targetMarker', targetMarker);
+							if (targetMarker == coordinatesArray.length){
+								targetMarker = 0;
+								localStorage.setItem('targetMarker', targetMarker);
+								startlineShow = false;
+								if (map.hasLayer(startLineGroup)){
+									startLineGroup.clearLayers();
+									map.removeLayer(startLineGroup);
+								}
+							}
+						}
+					}
+					else{
+						//$('#overlay > ul').append('<li  href="#" class="target" id="' + i + '">WP '+ distance + ' ' + '<a href="#" class="" id="' + ' "></a></li>');						
+
+					}
+				}
+			}
+
+			// Converts from degrees to radians.
+			function toRadians(degrees) {
+				return degrees * Math.PI / 180;
+			};
+				
+			// Converts from radians to degrees.
+			function toDegrees(radians) {
+				return radians * 180 / Math.PI;
+			}
+
+			function calculateBearing(startLat, startLng, destLat, destLng){
+				var start_latitude  = toRadians(startLat);
+				var start_longitude = toRadians(startLng);
+				var stop_latitude   = toRadians(destLat);
+				var stop_longitude  = toRadians(destLng);
+				var y = Math.sin(stop_longitude - start_longitude) * Math.cos(stop_latitude);
+				var x = Math.cos(start_latitude) * Math.sin(stop_latitude) -
+						Math.sin(start_latitude) * Math.cos(stop_latitude) * Math.cos(stop_longitude - start_longitude);
+				var brng = Math.atan2(y, x);
+				var brng = toDegrees(brng);
+				var heading = (brng + 360) % 360;
+				headings.push(heading);
+				//console.log(headings);
+				return heading;
+			}
+
+			function deleteAllMarkers() {
+				deleted = true;
+				$.each(map._layers, function (ml) {
+					if (map._layers[ml].feature) {
+						map.removeLayer(this);
+					}
+				})
+				targetMarker = 0;
+				window.localStorage.removeItem('clickedPoints');
+				window.localStorage.removeItem('altitudes');
+				//console.log('All markers deleted');
+				altitudes = [];
+			}
+			
 			toggle = L.easyButton('gg-track', function() {
 				follow = true;
 				toggle.disable();
@@ -532,12 +1338,8 @@
 				}
 			}).addTo(map);
 
-			toggle.disable();
-
-			follow = true;
-			toggle.disable();
-
-			//map.invalidateSize()
+			loadPoints();
+			map.invalidateSize();
 
 			map.on("dragstart", function(e) {
 				toggle.enable();
@@ -550,11 +1352,25 @@
 				}
 				follow = true;
 				toggle.disable();
+				toggle4.enable();
 			});
 
 			L.control.groupedLayers(baseMaps, groupedOverlays, options).addTo(map);
 
-			var toggle2 = L.easyButton({
+			polyline = L.polyline(polylinepoints).addTo(map);
+			toggle5 = L.easyButton('gg-attribution', function() {
+				if (map.hasLayer(polyline)) {
+					map.removeLayer(polyline);
+					showPath = false;
+					}
+					else{	
+						map.addLayer(polyline);
+						showPath = true;
+					}
+			}).addTo(map);
+
+
+			toggle2 = L.easyButton({
 				id: 'arrowButton', // an id for the generated button
 				position: 'topright', // inherited from L.Control -- the corner it goes in
 				type: 'replace', // set to animate when you're comfy with css
@@ -563,11 +1379,123 @@
 					stateName: 'get-center',
 					title: '',
 					icon: '<i id="arrow"; class="gg-arrow-down"></i>' + '<span class="backButton">3kts</span><br>',
-
 				}]
 			}).addTo(map);
 
+			toggle4 = L.easyButton({
+			states: [{
+				stateName: 'teleport',
+				icon: 'gg-pin',
+				title: 'Teleport mode',
+				onClick: function(control) {
+					control.state('add-markers');
+					markerId = 0;
+					coordinates = [];
+					coordinatesArray = [];
+					hideWpList();
+					map.closePopup();
+					if (map.hasLayer(startLineGroup)) {
+						map.removeLayer(startLineGroup);
+						startLineGroup.clearLayers();
+					}
 
+					if (map.hasLayer(pLineGroup)) {
+						map.removeLayer(pLineGroup);
+						pLineGroup.clearLayers();
+					}
+
+					if (map.hasLayer(middleMarkers)) {
+						
+						map.removeLayer(middleMarkers);
+						middleMarkers.clearLayers();
+					}
+					
+					$.each(map._layers, function (ml) {
+						if (map._layers[ml].feature) {
+							map.removeLayer(this);
+						}
+					})
+					window.localStorage.setItem("altitudes", JSON.stringify(altitudes));
+					localStorage.setItem('targetMarker', 0);
+					toggle3 = false;
+					startlineShow = false;
+					waypointmode = false;
+				}
+			}, {
+				icon: 'gg-globe-alt',
+				stateName: 'add-markers',
+				onClick: function(control) {
+					control.state('teleport');
+						coordinates = [];
+						coordinatesArray = [];
+						altitudes = [];
+						headings = [];
+						map.closePopup();
+						//loadPoints();
+						if (!map.hasLayer(polyline)) {
+							map.addLayer(polyline);
+						}
+						if (!map.hasLayer(pLineGroup)) {
+							map.addLayer(pLineGroup);
+						}
+						waypointmode = true;
+						loadPoints();
+						if (deleted == false){
+							showWpList();
+						}
+				},
+				title: 'Flightplan mode'
+			}]
+			});
+			toggle4.addTo(map);
+
+			toggle3 = L.easyButton('gg-trash', function() {
+				removeAllMarkers();
+			}).addTo(map);
+
+			function removeAllMarkers(){
+					markerId = 0;
+					coordinates = [];
+					coordinatesArray = [];
+
+					map.removeLayer(startLineGroup);
+					hideWpList();
+					if (map.hasLayer(startLineGroup)) {
+						map.removeLayer(startLineGroup);
+					}
+					middleMarkers.clearLayers();
+					pLineGroup.clearLayers();
+					if (map.hasLayer(polyline)) {
+						map.removeLayer(polyline);
+						polylinepoints = [];
+						polyline = [];
+						if (showPath == true){
+							polyline = L.polyline(polylinepoints).addTo(map);
+							map.addLayer(polyline);
+						}
+					}
+					else{
+						if (showPath == true){
+							polyline = L.polyline(polylinepoints).addTo(map);
+							map.addLayer(polyline);
+						}
+					}
+					//map.addLayer(polyline);
+
+					window.localStorage.setItem("altitudes", JSON.stringify(altitudes));
+					localStorage.setItem('targetMarker', 0);
+					deleteAllMarkers();	
+					toggle3 = false;
+					startlineShow = false;
+					altitudes = [];
+			}
+
+			function clearArray(array) {
+				while (array.length) {
+					array.pop();
+				}
+			}
+			
 			function showAirspaceLabels() {
 				if (map.getZoom() >= 10 && !map.hasLayer(openaip_cached_hotspot)) {
 					openaip_cached_hotspot.addTo(map);
@@ -594,6 +1522,128 @@
 			}).addTo(map);
 		}
 
+		function setJSON(key, value) {
+			window.localStorage.setItem(key, JSON.stringify(value));
+		}
+
+		function getJSON(key) {
+			return JSON.parse(window.localStorage.getItem(key));
+		}
+
+		function loadPoints(){
+			var coordinates = getJSON('clickedPoints');
+			if (coordinates){
+				targetMarker = 0;
+				var i = 0;
+				coordinates.forEach((entry) => {
+					map.fire('click', {
+						latlng: L.latLng(coordinates[i])
+					});
+					i++;
+				});
+				if (coordinates.length > 2){
+					toggle.enable();
+					follow = false;
+					var bounds = L.latLngBounds(coordinates);
+					map.fitBounds(bounds);
+				}
+				else{
+					toggle.disable();
+					follow = true;
+				}
+				map.closePopup();
+			}
+			else{
+				toggle.disable();
+				follow = true;
+			}
+		}
+
+		function savePoints(){
+			var coordinates = [];
+			$.each(map._layers, function (ml) {
+				if (map._layers[ml].feature) {
+					//console.log(map._layers[ml].feature);
+					coordinates.push(map._layers[ml].feature.geometry.coordinates);					
+				}
+			});
+			//console.log(coordinates);
+			setJSON('clickedPoints', coordinates);
+		}
+
+		function calcMiddleLatLng(map, latlng1, latlng2) {
+			// calculate the middle coordinates between two markers
+			const p1 = map.project(latlng1);
+			const p2 = map.project(latlng2);
+			return map.unproject(p1._add(p2)._divideBy(2));
+		}
+		
+		function createMiddleMarkers(line){
+			middleMarkers.clearLayers();
+			var latlngs = line.getLatLngs();
+			distances = [];
+			var gesDist = 0;
+			for(var i = 1; i < latlngs.length; i++){
+				var left = latlngs[i-1];
+				var right = latlngs[i];
+				var newLatLng = calcMiddleLatLng(map,left,right);
+				distance = calculateDistance(latlngs[i-1].lat,latlngs[i-1].lng ,latlngs[i].lat,latlngs[i].lng, 'N');
+				distances.push(distance);
+				gesDist = gesDist + distance;
+				var heading = headings[i-1];
+				if (heading < 10){
+					heading = '00' + Math.round(headings[i-1]);
+				}	
+				else if (heading < 100){
+					heading = '0' + Math.round(headings[i-1]);
+				}
+				else{
+					heading = Math.round(headings[i-1]);
+				}
+				new L.Marker(newLatLng, {
+					icon: new L.DivIcon({
+						className: 'my-div-icon',
+						iconAnchor: [25, 25],
+						iconSize: [50, 50],
+						html: '<div style="background-color:white; color:rgb(41,129,202); border-radius: 4px; text-align: center; width:100px; font-size: 16px; border: 2px solid rgba(0,0,0,0.2); background-clip: padding-box;	border-radius: 10px;">'+ distance.toFixed(2)+' nm</div>'
+					})
+				}).addTo(middleMarkers);
+			}
+			middleMarkers.addTo(map);
+			$('#overlay > ul').append('<div style="margin-left:-15px; margin-bottom:-15px; padding-top: 20px";><b>Total:</b >&nbsp;'+ gesDist.toFixed(2) +' nm</div>');
+		}
+
+		function calculateDistance(lat1, lon1, lat2, lon2, unit) {
+			var rlat1 = Math.PI * lat1/180
+			var rlat2 = Math.PI * lat2/180
+			var rlon1 = Math.PI * lon1/180
+				var rlon2 = Math.PI * lon2/180
+			var theta = lon1-lon2
+			var rtheta = Math.PI * theta/180
+			var dist = Math.sin(rlat1) * Math.sin(rlat2) + Math.cos(rlat1) * Math.cos(rlat2) * Math.cos(rtheta);
+			dist = Math.acos(dist)
+			dist = dist * 180/Math.PI
+			dist = dist * 60 * 1.1515
+			if (unit=="K") { dist = dist * 1.609344 }
+			if (unit=="N") { dist = dist * 0.8684 }
+			return dist
+		}	
+
+		document.getElementById("overlay").style.display= 'none' ;
+		document.getElementById("overlay2").style.display= 'none' ;
+
+		function hideWpList(){
+			document.getElementById("overlay").style.display= 'none' ;
+			document.getElementById("overlay2").style.display= 'none' ;
+		}
+
+		function showWpList(){
+			document.getElementById("overlay").style.display= 'block' ;
+			if (startlineShow == true){
+				document.getElementById("overlay2").style.display= 'block' ;
+			}
+		}
+
 		function altitudeUp() {
 			//console.log('altitude Up');
 			var altitudeInput = parseFloat(document.getElementById('altitudeInput').value);
@@ -605,7 +1655,7 @@
 			var altitudeInput = parseFloat(document.getElementById('altitudeInput').value);
 			document.getElementById('altitudeInput').value = (altitudeInput - 1);
 		}
-
+	
 		function headingUp() {
 			//console.log('heading Up');
 			var headingInput = parseFloat(document.getElementById('headingInput').value);
@@ -630,12 +1680,65 @@
 			document.getElementById('speedInput').value = (speedInput - 1);
 		}
 
+		function WPaltitudeUp() {
+			//console.log('altitude Up');
+			var altitudeInput = parseFloat(document.getElementById('WPaltitudeInput').value);
+			document.getElementById('WPaltitudeInput').value = (altitudeInput + 100);
+			setWPaltitude(altitudeInput+100);
+		}
+
+		function WPaltitudeDwn() {
+			//console.log('altitude Down');
+			var altitudeInput = parseFloat(document.getElementById('WPaltitudeInput').value);
+			document.getElementById('WPaltitudeInput').value = (altitudeInput - 100);
+			setWPaltitude(altitudeInput-100);
+		}
+
+		function WPaltitudeUpUp() {
+			//console.log('altitude Up');
+			var altitudeInput = parseFloat(document.getElementById('WPaltitudeInput').value);
+			document.getElementById('WPaltitudeInput').value = (altitudeInput + 1000);
+			setWPaltitude(altitudeInput+1000);
+		}
+
+		function WPaltitudeDwnDwn() {
+			//console.log('altitude Down');
+			var altitudeInput = parseFloat(document.getElementById('WPaltitudeInput').value);
+			document.getElementById('WPaltitudeInput').value = (altitudeInput - 1000);
+			setWPaltitude(altitudeInput-1000);
+		}
+
+		function setWPaltitude(altitude){
+			//altitudes[activeWP] = parseFloat(alt);
+			altitudes[activeWP] = altitude;
+			window.localStorage.setItem("altitudes", JSON.stringify(altitudes));
+			//altitudes[id] = alt;
+			//altitudes.splice(0, 0, parseFloat(document.getElementById('WPaltitudeInput').value));
+			updateLiElement();
+		}
+
+		function setWPaltitude2(){
+			//altitudes[activeWP] = parseFloat(alt);
+			altitudes[activeWP] = document.getElementById('WPaltitudeInput').value;
+			window.localStorage.setItem("altitudes", JSON.stringify(altitudes));
+			//altitudes[id] = alt;
+			//altitudes.splice(0, 0, parseFloat(document.getElementById('WPaltitudeInput').value));
+			updateLiElement();
+		}
+
+		function updateLiElement(){
+			var x = document.querySelectorAll('#overlay > ul > p > a')[activeWP-1]; 				
+			x.innerHTML = altitudes[activeWP] + ' ft';
+		}
+
 		function setPosition(lat, lng) {
 			var pos = new L.LatLng(lat, lng);
 			airplane.setLatLng(pos).update();
 			if (follow == true) {
 				map.panTo(pos);
 			}
+			pos_lat = lat;
+			pos_lng = lng;
 		}
 
 		function setRotation(deg) {
@@ -657,12 +1760,12 @@
 				map.removeLayer(newMarker);
 			}
 		}
-
+    
 		// Receive controls from parent page
 		function receiveMessage(e) {
 			if (browserDebug == 0) {
 				var request = e.data;
-				console.log(e.data);
+				//console.log(e.data);
 				// Call function:
 				var latlng = request.split("_");
 				altitude = (latlng[2]);
@@ -674,6 +1777,7 @@
 				setPosition(latlng[0], latlng[1]);
 				setRotation(heading);
 				setWind(latlng[5], latlng[6]);
+				polyline.addLatLng([latlng[0], latlng[1]]);
 			}
 		}
 
