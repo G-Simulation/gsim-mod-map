@@ -991,6 +991,8 @@
 					//coordinates = [];	
 					var points = getJSON('clickedPoints');
 					//console.log(points);
+					follow = false;
+					toggle.enable();
 					map.closePopup();
 					marker.openPopup();
 					coordinatesArray = [];
@@ -1350,8 +1352,10 @@
 				if (map.hasLayer(newMarker)) {
 					map.removeLayer(newMarker);
 				}
-				follow = true;
-				toggle.disable();
+				if (waypointmode == false){
+					follow = true;
+					toggle.disable();
+				}
 				toggle4.enable();
 			});
 
