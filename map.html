@@ -22,6 +22,8 @@
 		<link rel="stylesheet" href="./leaflet/geosearch.css"/>
 		<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css"/>
 		<link href='https://css.gg/airplane.css' rel='stylesheet'>
+
+
 		<style>
 
 			@font-face {
@@ -70,8 +72,6 @@
 			#overlay2{
 				position: absolute;
 				width: 70%;
-				max-width: 80%;
-				height: 44px;
 				right: 15%;
 				top: 10px;
 				background-color:white;
@@ -83,11 +83,13 @@
 				display: hidden;
 			}
 
-			#overlay2 h3{
-				position: absolute;
+			table.overlay2Table{
 				width: 100%;
-				top: -7px;
-				vertical-align: middle;
+				min-height: 90%;
+				top: 5%;
+				right: 5%;
+				bottom: 5%;
+				font-size: 2vh;
 				text-align: center;
 			}
 			
@@ -171,16 +173,11 @@
 				border: 2px solid gray;
 			}
 
-			.leaflet-geosearch-button.active .leaflet-bar-part {
-				border-radius: 4px 0 0 4px;
-				width: 45px;
-			}
-
 			.leaflet-control-geosearch form {
 				display: none;
 				position: absolute;
 				top: 0;
-				left: 40px;
+				left: 30px;
 				border-radius: 0 4px 4px 0;
 				background-color: #fff;
 				/* background-clip: padding-box; */
@@ -247,7 +244,7 @@
 				font-size: 14px;
 				font-family: "Roboto-Light";
 			}
-
+	
 			.quantityTeleport{
 				max-width: 5rem;
 			}
@@ -965,7 +962,7 @@
 	<body id="documentBody">
 		<div id="map"><div id="keyb">&nbsp;</div></div>
 		<div id="overlay"><button id="wpListClose" type="button" onclick="hideWpList()">x</button><span id='date-time'></span><br><h3 style = 'font-size: 5; text-align: center; padding-top: 10px; margin-bottom: -20px;'>Flightplan</h3><ul></ul></div>
-		<div id="overlay2"><button id="wpListClose" type="button" onclick="hideWpList()">x</button><h3 style= 'font-size: 5; text-align: center; margin-bottom: 10px;'>Heading:</h3></div>
+		<div id="overlay2"><button id="wpListClose" type="button" onclick="hideWpList()">x</button><table class="overlay2Table" style= 'text-align: center;'><tr><td>IAS: 9999kts  I&nbsp;&nbsp;HEAD:&nbsp;999°  I&nbsp;&nbsp;DIST:&nbsp;999999nm  I&nbsp;&nbsp;ALT:&nbsp;99999ft</td></tr></table></div>
 	</body>
 
 	<script>
@@ -1004,7 +1001,7 @@
 		var bearing;
 		var middleMarkers;
 		var headings = [];
-		var startlineShow = true;
+		var startlineShow = false;
 		var altitudes= [];
 		var activeWP;
 		var distances = [];
@@ -1015,8 +1012,8 @@
 		var AlgoliaProvider;
 		var provider;
 		var GeoSearchControl;
-		var distance2 = 0;
-		var gesDist = 0;
+		var POIMarkers;
+		var searchControl;
 
 		window.addEventListener("DOMContentLoaded", function() {
 			loadMap(47.50737, 19.04611);
@@ -1026,6 +1023,7 @@
 			window.addEventListener('message', receiveMessage);
 			Keyboard.init();
 		});
+
 
 		var data_points = {
 			"type": "FeatureCollection",
@@ -2297,16 +2295,20 @@
 		});
 
 		function loadMap(lat, lon){
+
+			// Create Leaflet map on map element.
 			var initMapCenter = [47.442, 8.23];
-			var initMapZoom = 10;
+			var initMapZoom = 9;
 			var southWest = new L.LatLng(-90, -180),
 			northEast = new L.LatLng(90, 180),
 			maxExtent = new L.LatLngBounds(southWest, northEast);
 
-			var streets = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.{ext}', {attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-				ext: 'png',
-				maxZoom: 17,
-				minZoom: 2,
+			var streets = L.tileLayer('https://{s}.tile.openstreetmap.de/tiles/osmde/{z}/{x}/{y}.png',{
+				maxZoom: 18,
+				minZoom: 4,
+				format: 'image/png',
+				transparent: true,
+				subdomains: ['a', 'b', 'c']
 			});
 
 			var hybrid = L.tileLayer('http://{s}.google.com/vt/lyrs=s,h&x={x}&y={y}&z={z}',{
@@ -2342,7 +2344,7 @@
 			var airspaces = L.tileLayer('http://{s}.tile.maps.openaip.net/geowebcache/service/tms/1.0.0/openaip_basemap@EPSG%3A900913@png/{z}/{x}/{y}.{ext}', {
 				ext: 'png',
 				maxZoom: 12,
-				minZoom: 8,
+				minZoom: 9,
 				tms: true,
 				detectRetina: true,
 				subdomains: '12',
@@ -2392,12 +2394,14 @@
 			};
 
 			// Where you want to render the map.
-			var openaip_basemap_osm = L.featureGroup([streets, airspaces]);
+			var element = document.getElementById('map');
+
+			var openaip_basemap_osm = L.featureGroup([streets, airspaces, openaip_cached_hotspot]);
 
 			map = L.map('map', {
 				center: [49.47211425492292, 9.040833186453408],
-				zoom: 8,
-				edgeBufferTiles: 2,
+				zoom: 9,
+				edgeBufferTiles: 3,
 				layers: [openaip_basemap_osm],
 				bounds: maxExtent
 			});
@@ -2409,11 +2413,12 @@
 			provider = new AlgoliaProvider({});
 
 			//  Define search controls
-			var searchControl = new GeoSearchControl({
+				searchControl = new GeoSearchControl({
 					provider: provider,
 					autoComplete: true,
 					autoCompleteDelay: 250,
 					style: 'button',
+					id: 'search',
 					showMarker: true,
 					showPopup: true,
 					popupFormat: ( { query, result}) => "<table class='searchboxTable'><tr><td><p style='font-size: 1.5rem'>Teleport<p></td></tr><tr><td class='resaultLabel'>"+ result.label + "</td></tr><tr><td style='text-align:left; padding:0; font-size: 14px'><p style='text-align: left'>&nbsp;Altitude (ft): </p></td></tr><tr><td><div class='number-input'><button onclick='altitudeDwn()'></button><input id='altitudeInput' class='quantity' min='0' name='quantity' value= " + Math.round(altitude) + " type='text'><button onclick='altitudeUp()' class='plus'></button></div></td></tr><tr><td style='text-align:left; padding:0; font-size: 14px'><p style='text-align: left'>&nbsp;Heading (deg): </p></td><tr><td><div class='number-input'><button onclick='headingDwn()'></button><input id='headingInput' class='quantity' min='0' name='quantity' value= " + Math.round(heading) + " type='text'><button onclick='headingUp()' class='plus'></button></div></td></tr><tr><td style='text-align:left; padding:0; font-size: 14px'><p style='text-align: left'>&nbsp;Airspeed (kt): </p></td></tr><tr><td><div class='number-input'><button onclick='speedDwn()'></button><input id='speedInput' class='quantity' min='0' name='quantity' value= " + Math.round(speed) + " type='text'><button onclick='speedUp()' class='plus'></button></div></td></tr><br><tr><td><span style='margin-top: 15px'><button class='teleportButton' type='button' onclick='geoTeleport()'>OK</button></span></td></tr></table></div></div>", // optional: function    - default returns result label,			
@@ -2429,6 +2434,8 @@
 		
 			// Add searchbar to the map
 			map.addControl(searchControl);
+
+			/* Create new layer for markers  */
 
 			map.on('geosearch/showlocation', function(e) {
 				disableFollow();
@@ -2470,26 +2477,27 @@
 			var id = 0;
 			
 			map.on('click', function(e) {
-				if (waypointmode==false){
-					
-				if (map.hasLayer(newMarker)) {
-					map.removeLayer(newMarker);
-				} else {
-					newMarker = new L.marker(e.latlng).addTo(map);
-					newMarker.bindPopup("<table><tr><td><p style='font-size: 1.5rem'>Teleport<p></td></tr><tr><td style='text-align:left; padding:0; font-size: 14px'><p style='text-align: left'>&nbsp;Altitude (ft): </p></td></tr><tr><td><div class='number-input'><button onclick='altitudeDwn()'></button><input id='altitudeInput' class='quantityTeleport' min='0' name='quantity' value= " + Math.round(altitude) + " type='text'><button onclick='altitudeUp()' class='plus'></button></div></td></tr><tr><td style='text-align:left; padding:0; font-size: 14px'><p style='text-align: left'>&nbsp;Heading (deg): </p></td><tr><td><div class='number-input'><button onclick='headingDwn()'></button><input id='headingInput' class='quantityTeleport' min='0' name='quantity' value= " + Math.round(heading) + " type='text'><button onclick='headingUp()' class='plus'></button></div></td></tr><tr><td style='text-align:left; padding:0; font-size: 14px'><p style='text-align: left'>&nbsp;Airspeed (kt): </p></td></tr><tr><td><div class='number-input'><button onclick='speedDwn()'></button><input id='speedInput' class='quantityTeleport' min='0' name='quantity' value= " + Math.round(speed) + " type='text'><button onclick='speedUp()' class='plus'></button></div></td></tr><br><tr><td><span style='margin-top: 15px'><button style='margin-top:10px; text-align: center' class='teleportButton' onclick='teleport(" + e.latlng.lat + "," + e.latlng.lng + ")' >OK</button></span></td></tr></table>").openPopup();
-					var slides = document.getElementsByClassName("leaflet-popup-close-button");
-					for (var i = 0; i < slides.length; i++) {
-						slides[i].innerHTML = '<span>x</font>';
+				if (waypointmode==false){		
+					if (map.hasLayer(newMarker)) {
+						map.removeLayer(newMarker);
+					} else {
+						newMarker = new L.marker(e.latlng).addTo(map);
+						newMarker.bindPopup("<table><tr><td><p style='font-size: 1.5rem'>Teleport<p></td></tr><tr><td style='text-align:left; padding:0; font-size: 14px'><p style='text-align: left'>&nbsp;Altitude (ft): </p></td></tr><tr><td><div class='number-input'><button onclick='altitudeDwn()'></button><input id='altitudeInput' class='quantityTeleport' min='0' name='quantity' value= " + Math.round(altitude) + " type='text'><button onclick='altitudeUp()' class='plus'></button></div></td></tr><tr><td style='text-align:left; padding:0; font-size: 14px'><p style='text-align: left'>&nbsp;Heading (deg): </p></td><tr><td><div class='number-input'><button onclick='headingDwn()'></button><input id='headingInput' class='quantityTeleport' min='0' name='quantity' value= " + Math.round(heading) + " type='text'><button onclick='headingUp()' class='plus'></button></div></td></tr><tr><td style='text-align:left; padding:0; font-size: 14px'><p style='text-align: left'>&nbsp;Airspeed (kt): </p></td></tr><tr><td><div class='number-input'><button onclick='speedDwn()'></button><input id='speedInput' class='quantityTeleport' min='0' name='quantity' value= " + Math.round(speed) + " type='text'><button onclick='speedUp()' class='plus'></button></div></td></tr><br><tr><td><span style='margin-top: 15px'><button style='margin-top:10px; text-align: center' class='teleportButton' onclick='teleport(" + e.latlng.lat + "," + e.latlng.lng + ")' >OK</button></span></td></tr></table>").openPopup();
+						var slides = document.getElementsByClassName("leaflet-popup-close-button");
+						for (var i = 0; i < slides.length; i++) {
+							slides[i].innerHTML = '<span>x</font>';
+						}
 					}
-				}
-				follow = false;
-				toggle.enable();
-			
-			}else{												
+					follow = false;
+					toggle.enable();
+				}else{											
 					var marker;
 					deleted = false;
 					document.getElementById("overlay").style.display= 'block' ;
+					//document.getElementById("overlay2").style.display= 'block' ;
 					$(".leaflet-geosearch-bar").css('top', 0);			
+					//console.log(geojsonFeature.length);
+					//// hier ändern .....
 					geojsonFeature = {
 						"type": "Feature",
 						"properties": {},
@@ -2499,14 +2507,13 @@
 						},
 						"id": markerId
 					}
-
 					if(markerId == 0){
 						wp1_lat = e.latlng.lat;
 						wp1_lng = e.latlng.lng;
 					}
 					markers = L.layerGroup();
 					markers = L.geoJson(geojsonFeature, {
-					pointToLayer: function(feature, latlng){
+						pointToLayer: function(feature, latlng){
 							marker = L.marker(e.latlng, {
 								title: "WP",
 								alt: 1000,
@@ -2515,12 +2522,9 @@
 								riseOnHover: true,
 								draggable: true
 							});
-							//console.log(coordinates);
-							//marker.on("popupopen", onPopupOpen);
 							return marker;
 						}
-					}).addTo(map);
-					
+					}).addTo(map);				
 					coordinates.push(e.latlng);
 					const popup = L.popup({
 						closeOnClick: false,
@@ -2532,6 +2536,7 @@
 					marker.on("click", function(e){
 						//console.log(this.options.myId);
 						id = this.options.myId;
+						startlineShow = true;
 						showWpList();
 						//console.log(marker.feature.id);
 					});
@@ -2550,6 +2555,7 @@
 					drawLines();
 					markerId++;
 				}
+
 
 				marker.on('dragend', function(e) {
 						//console.log('Dragend - ID: '+ this.options.myId + ' Coordinate: ' + this.options.coord);
@@ -2577,40 +2583,39 @@
 					var tempMarker = this;
 					activeWP = this.options.myId;
 					setTimeout(loadAltitude, 200);
-					//loadAltitude();	
 						// To remove marker on click of delete button in the popup of marker
-						$(".marker-delete-button:visible").click(function () {
-							map.removeLayer(tempMarker);
-							pLineGroup.clearLayers();
-							coordinatesArray = [];
-							//console.log(tempMarker);
-							//console.log(tempMarker.feature.geometry.coordinates[0]);
-							$(tempMarker).parent('li').remove();
-							markerId--;
-							var i = 0;
-							$.each(map._layers, function (ml) {
-								if (map._layers[ml].feature) {
-									map._layers[ml].feature.id = i;
-									map._layers[ml].options.myId = i;
-									coordinates.push(map._layers[ml].feature.geometry.coordinates);
+					$(".marker-delete-button:visible").click(function () {
+						map.removeLayer(tempMarker);
+						pLineGroup.clearLayers();
+						coordinatesArray = [];
+						//console.log(tempMarker);
+						//console.log(tempMarker.feature.geometry.coordinates[0]);
+						$(tempMarker).parent('li').remove();
+						markerId--;
+						var i = 0;
+						$.each(map._layers, function (ml) {
+							if (map._layers[ml].feature) {
+								map._layers[ml].feature.id = i;
+								map._layers[ml].options.myId = i;
+								coordinates.push(map._layers[ml].feature.geometry.coordinates);
 									//console.log(map._layers[ml].feature.id);
-									if (i==0){
-										//console.log(map._layers[ml]);
-										//console.log(map._layers[ml].feature.geometry.coordinates);
-										wp1_lat = map._layers[ml].feature.geometry.coordinates[0];
-										wp1_lng = map._layers[ml].feature.geometry.coordinates[1];
-									}
-									i++;
+								if (i==0){
+									//console.log(map._layers[ml]);
+									//console.log(map._layers[ml].feature.geometry.coordinates);
+									wp1_lat = map._layers[ml].feature.geometry.coordinates[0];
+									wp1_lng = map._layers[ml].feature.geometry.coordinates[1];
 								}
-							});
-							if (i==0){
-								removeAllMarkers();
-							}else{
-								startLineGroup.clearLayers();
-								startlineShow = false;
+								i++;
 							}
-							drawLines();
-						});
+						});					
+						if (i==0){
+							removeAllMarkers();
+						}else{
+							startLineGroup.clearLayers();
+							startlineShow = false;
+						}
+						drawLines();
+					});
 				}
 
 				function loadAltitude()
@@ -2624,7 +2629,7 @@
 						}
 				}
 
-							// Place a marker on the same location.
+			// Place a marker on the same location.
 			pointLayer.addData(data_points);
 
 			POIMarkers = L.markerClusterGroup({
@@ -2640,6 +2645,7 @@
 				});
 
 			POIMarkers.addLayer(pointLayer);
+
 			var pLineGroup = new L.FeatureGroup();
 			var startLineGroup = new L.FeatureGroup();
 			middleMarkers = new L.FeatureGroup();
@@ -2656,47 +2662,48 @@
 				$.each(map._layers, function (ml) {
 					if (map._layers[ml].feature) {
 						//console.log(map._layers[ml].feature);
-						coordinatesArray.push(map._layers[ml].feature.geometry.coordinates);
-						//coordinates.push(map._layers[ml].feature.geometry.coordinates);
-						
-						if(overlayi==0){													
-								$('#overlay > ul').append('<li  href="#" class="target" id="' + 0 + '">WP '+ (1) + ' ' + '<a href="#" class="" id="' + 0 + ' "></a></li>');						
+						coordinatesArray.push(map._layers[ml].feature.geometry.coordinates);			
+						if(overlayi==0){				
+							$('#overlay > ul').append('<li  href="#" class="target" id="' + 0 + '">WP '+ (1) + ' ' + '<a href="#" class="" id="' + 0 + ' "></a></li>');						
 						}
-						if(overlayi>0){									
-							var bearing2 = calculateBearing(coordinatesArray[(overlayi-1)][0],coordinatesArray[(overlayi-1)][1],coordinatesArray[overlayi][0],coordinatesArray[overlayi][1]);
-							//console.log(bearing2)						
-							if (altitudes[overlayi]){
-								if (Math.round(bearing2) <10){
-									$('#overlay > ul').append('<p style="color:rgb(41,129,202)">00' + Math.round(bearing2)+ ' ° - <a style="color:red">' + parseFloat(altitudes[overlayi]) +' ft</a></p> ');
-								}	
-								else if (Math.round(bearing2) <100){
-									$('#overlay > ul').append('<p style="color:rgb(41,129,202)">0' + Math.round(bearing2) + ' ° - <a style="color:red">' + parseFloat(altitudes[overlayi]) +' ft</a></p> ');
+						if(overlayi>0){
+								var bearing2 = calculateBearing(coordinatesArray[(overlayi-1)][0],coordinatesArray[(overlayi-1)][1],coordinatesArray[overlayi][0],coordinatesArray[overlayi][1]);
+								//console.log(bearing2)						
+								if (altitudes[overlayi]){
+									if (Math.round(bearing2) <10){
+										$('#overlay > ul').append('<p style="color:rgb(41,129,202)">00' + Math.round(bearing2)+ ' ° - <a style="color:red">' + parseFloat(altitudes[overlayi]) +' ft</a></p> ');
+									}	
+									else if (Math.round(bearing2) <100){
+										$('#overlay > ul').append('<p style="color:rgb(41,129,202)">0' + Math.round(bearing2) + ' ° - <a style="color:red">' + parseFloat(altitudes[overlayi]) +' ft</a></p> ');
+									}
+									else{
+										$('#overlay > ul').append('<p style="color:rgb(41,129,202)">' + Math.round(bearing2) + ' ° - <a style="color:red">' + parseFloat(altitudes[overlayi]) +' ft</a></p> ');
+									}
 								}
 								else{
-									$('#overlay > ul').append('<p style="color:rgb(41,129,202)">' + Math.round(bearing2) + ' ° - <a style="color:red">' + parseFloat(altitudes[overlayi]) +' ft</a></p> ');
+									if (Math.round(bearing2) <10){
+										$('#overlay > ul').append('<p style="color:rgb(41,129,202)">00' + Math.round(bearing2) +' ° - <a style="">0 ft</a></p> ');
+									}	
+									else if (Math.round(bearing2) <100){
+										$('#overlay > ul').append('<p style="color:rgb(41,129,202)">0' + Math.round(bearing2)  + ' ° - <a style="">0 ft</a></p> ');
+									}
+									else{
+										$('#overlay > ul').append('<p style="color:rgb(41,129,202)">' + Math.round(bearing2)  + ' ° - <a style="">0 ft</a></p> ');
+									}
 								}
+								$('#overlay > ul').append('<li  href="#" class="target" id="' + overlayi + '">WP '+ (overlayi+1) + ' ' + '<a href="#" class="" id="' + overlayi + ' "></a></li>');
 							}
-							else{
-								if (Math.round(bearing2) <10){
-									$('#overlay > ul').append('<p style="color:rgb(41,129,202)">00' + Math.round(bearing2) +' ° - <a style="">0 ft</a></p> ');
-								}	
-								else if (Math.round(bearing2) <100){
-									$('#overlay > ul').append('<p style="color:rgb(41,129,202)">0' + Math.round(bearing2)  + ' ° - <a style="">0 ft</a></p> ');
-								}
-								else{
-									$('#overlay > ul').append('<p style="color:rgb(41,129,202)">' + Math.round(bearing2)  + ' ° - <a style="">0 ft</a></p> ');
-								}
-							}
-							$('#overlay > ul').append('<li  href="#" class="target" id="' + overlayi + '">WP '+ (overlayi+1) + ' ' + '<a href="#" class="" id="' + overlayi + ' "></a></li>');
-						}
 					overlayi++;
 					}
 				});
+
 				if (overlayi == 0){
 					startLineGroup.clearLayers();
 					map.removeLayer(startLineGroup);
 				}
+
 				var secondclick = false;
+
 				$('.target').on("click", function(event) {
 					if (targetMarker != event.target.id){
 						var targetMarker2 = event.target;
@@ -2747,16 +2754,20 @@
 					}
 					map.closePopup();
 				});
-				var pline = L.polyline(coordinatesArray, {color:'rgb(41,129,202)'});			
+
+				var pline = L.polyline(coordinatesArray, {color:'rgb(41,129,202)'});
+				
 				if(map.hasLayer(middleMarkers)){
 					map.removeLayer(middleMarkers);
 				}
 				if(map.hasLayer(pLineGroup)){
 					pLineGroup.clearLayers();
 				}
-				pLineGroup.addLayer(pline);	
+
+				pLineGroup.addLayer(pline);
+				
 				var startline = setInterval(line,100);
-				if (startlineShow == true){
+				if (overlayi > 0 && startlineShow == true){
 					if (!map.hasLayer(startLineGroup)){
 						startLineGroup.addTo(map);
 					}
@@ -2769,9 +2780,9 @@
 				pLineGroup.eachLayer(function(layer) {
 					createMiddleMarkers(layer);
 				});
-				$('#overlay > ul').append('<div id="gesDist" style="margin-left:-15px;"><b>Total:</b >&nbsp;'+ gesDist.toFixed(2) +' nm</div>');
-			}
 
+			}
+	
 			function markerFunction(id){
 				for (var i in markers){
 					var markerID = markers[i].options.title;
@@ -2803,7 +2814,8 @@
 								startLineGroup.addLayer(L.polyline(coordinates2, {color:'#ff2e63'}));
 							}
 						}
-					}				
+					}
+
 					var x = document.querySelectorAll('#overlay > ul > li'); 				
 					for (let i = 0; i < x.length; i++) {
 						x[i].style.color = "black";
@@ -2811,22 +2823,22 @@
 							x[i].style.color = "red";
 						}
 					}
+
+					var distance2 = 0;
 					var heading = 0;
 					var alt = 0
 					var vel = parseFloat(speed).toFixed(0);
+
 					if (startlineShow == true){
-						distance2 = calculateDistance(nlat,nlng,nwp1_lat,nwp1_lng, 'Nm');
-						$("#gesDist").html('<div id="gesDist" style="margin-left: -25px; text-align: center; margin-bottom:-15px; padding-top: 20px";><b>Total:</b >&nbsp;'+ (gesDist+distance2).toFixed(2) +' nm</div>');
+						distance2 = calculateDistance(nlat,nlng,nwp1_lat,nwp1_lng, 'nm');
 						heading = calculateBearing(nlat,nlng,nwp1_lat,nwp1_lng);
-					}
-					else{
-						$("#gesDist").html('<div id="gesDist" style="margin-left: -25px; text-align: center; margin-bottom:-15px; padding-top: 20px";><b>Total:</b >&nbsp;'+ (gesDist).toFixed(2) +' nm</div>');
 					}
 					if (altitudes[target] && startlineShow == true){
 						alt = parseFloat(altitudes[target]);
 					}
-					$('#overlay2 > h3').html('IAS: '+ vel + 'kts&nbsp;&nbsp;I&nbsp;&nbsp;HEAD: '+ heading.toFixed(0) + '°&nbsp;&nbsp;I&nbsp;&nbsp;DIST: ' + distance2.toFixed(2) +'nm'+ '&nbsp;&nbsp;I&nbsp;&nbsp;ALT: ' + alt.toFixed(0) +'ft');
-					distance = calculateDistance(nlat,nlng,nwp1_lat,nwp1_lng, 'Km');					
+			
+					$('#overlay2').html('<table class="overlay2Table" style="text-align: center;"><tr><td>IAS:&nbsp;'+ vel + 'kts  I&nbsp;&nbsp;HEAD:&nbsp;'+ heading.toFixed(0) + '°  I&nbsp;&nbsp;DIST:&nbsp;' + distance2.toFixed(2) +'nm  I&nbsp;&nbsp;ALT:&nbsp;' + alt.toFixed(0) +'ft</td></tr></table>');
+					distance = calculateDistance(nlat,nlng,nwp1_lat,nwp1_lng, 'K');					
 					if (distance <= 1){				
 						if (startlineShow == true){
 							targetMarker++;
@@ -2861,7 +2873,8 @@
 				var stop_latitude   = toRadians(destLat);
 				var stop_longitude  = toRadians(destLng);
 				var y = Math.sin(stop_longitude - start_longitude) * Math.cos(stop_latitude);
-				var x = Math.cos(start_latitude) * Math.sin(stop_latitude) - Math.sin(start_latitude) * Math.cos(stop_latitude) * Math.cos(stop_longitude - start_longitude);
+				var x = Math.cos(start_latitude) * Math.sin(stop_latitude) -
+						Math.sin(start_latitude) * Math.cos(stop_latitude) * Math.cos(stop_longitude - start_longitude);
 				var brng = Math.atan2(y, x);
 				var brng = toDegrees(brng);
 				var heading = (brng + 360) % 360;
@@ -2893,9 +2906,7 @@
 			}).addTo(map);
 
 			loadPoints();
-			if (wpNum == 0){
-				removeAllMarkers();
-			}
+			map.invalidateSize();
 
 			map.on("dragstart", function(e) {
 				toggle.enable();
@@ -2977,70 +2988,68 @@
 			}).addTo(map);
 
 			toggle4 = L.easyButton({
-				states: [{
-					stateName: 'teleport',
-					icon: 'gg-pin',
-					title: 'Teleport mode',
-					onClick: function(control) {
-						control.state('add-markers');
-						markerId = 0;
+			states: [{
+				stateName: 'teleport',
+				icon: 'gg-pin',
+				title: 'Teleport mode',
+				onClick: function(control) {
+					control.state('add-markers');
+					markerId = 0;
+					coordinates = [];
+					coordinatesArray = [];
+					hideWpList();
+					map.closePopup();
+					if (map.hasLayer(startLineGroup)) {
+						map.removeLayer(startLineGroup);
+						startLineGroup.clearLayers();
+					}
+
+					if (map.hasLayer(pLineGroup)) {
+						map.removeLayer(pLineGroup);
+						pLineGroup.clearLayers();
+					}
+
+					if (map.hasLayer(middleMarkers)) {
+						
+						map.removeLayer(middleMarkers);
+						middleMarkers.clearLayers();
+					}
+					
+					$.each(map._layers, function (ml) {
+						if (map._layers[ml].feature) {
+							map.removeLayer(this);
+						}
+					})
+					window.localStorage.setItem("altitudes", JSON.stringify(altitudes));
+					localStorage.setItem('targetMarker', 0);
+					toggle3 = false;
+					startlineShow = false;
+					waypointmode = false;
+				}
+			}, {
+				icon: 'gg-globe-alt',
+				stateName: 'add-markers',
+				onClick: function(control) {
+					control.state('teleport');
 						coordinates = [];
 						coordinatesArray = [];
-						hideWpList();
+						altitudes = [];
+						headings = [];
 						map.closePopup();
-						if (map.hasLayer(startLineGroup)) {
-							map.removeLayer(startLineGroup);
-							startLineGroup.clearLayers();
+						//loadPoints();
+						if (!map.hasLayer(polyline)) {
+							map.addLayer(polyline);
 						}
-						if (map.hasLayer(pLineGroup)) {
-							map.removeLayer(pLineGroup);
-							pLineGroup.clearLayers();
+						if (!map.hasLayer(pLineGroup)) {
+							map.addLayer(pLineGroup);
 						}
-						if (map.hasLayer(middleMarkers)) {
-							
-							map.removeLayer(middleMarkers);
-							middleMarkers.clearLayers();
-						}				
-						$.each(map._layers, function (ml) {
-							if (map._layers[ml].feature) {
-								map.removeLayer(this);
-							}
-						})
-						window.localStorage.setItem("altitudes", JSON.stringify(altitudes));
-						localStorage.setItem('targetMarker', 0);
-						toggle3 = false;
-						startlineShow = false;
-						waypointmode = false;
-						var x = document.getElementById("keyboard");
-						x.style.display = "none";
-					}
-				}, {
-					icon: 'gg-globe-alt',
-					stateName: 'add-markers',
-					onClick: function(control) {
-						control.state('teleport');
-							coordinates = [];
-							coordinatesArray = [];
-							altitudes = [];
-							headings = [];
-							map.closePopup();
-							if (!map.hasLayer(polyline)) {
-								map.addLayer(polyline);
-							}
-							if (!map.hasLayer(pLineGroup)) {
-								map.addLayer(pLineGroup);
-							}
-							waypointmode = true;
-							loadPoints();
-							if (wpNum > 0){
-								showWpList();
-							}
-							var x = document.getElementById("keyboard");
-							x.style.display = "none";
-					},
-					title: 'Flightplan mode'
-				}]
-			}).addTo(map);
+						waypointmode = true;
+						loadPoints();
+				},
+				title: 'Flightplan mode'
+			}]
+			});
+			toggle4.addTo(map);
 
 			toggle3 = L.easyButton('gg-trash', function() {
 				removeAllMarkers();
@@ -3140,12 +3149,14 @@
 					follow = false;
 					var bounds = L.latLngBounds(coordinates);
 					map.fitBounds(bounds);
+					startlineShow = true;
+					showWpList();
 				}
 				else{
 					toggle.disable();
 					follow = true;
 				}
-				map.closePopup();
+					map.closePopup();
 			}
 			else{
 				toggle.disable();
@@ -3154,10 +3165,11 @@
 		}
 
 		function savePoints(){
+			map.removeLayer(POIMarkers);
 			var coordinates = [];
 			$.each(map._layers, function (ml) {
 				if (map._layers[ml].feature) {
-					//console.log(map._layers[ml].feature);
+					console.log(map._layers[ml].feature);
 					coordinates.push(map._layers[ml].feature.geometry.coordinates);					
 				}
 			});
@@ -3176,12 +3188,12 @@
 			middleMarkers.clearLayers();
 			var latlngs = line.getLatLngs();
 			distances = [];
-			gesDist = 0;
+			var gesDist = 0;
 			for(var i = 1; i < latlngs.length; i++){
 				var left = latlngs[i-1];
 				var right = latlngs[i];
 				var newLatLng = calcMiddleLatLng(map,left,right);
-				distance = calculateDistance(latlngs[i-1].lat,latlngs[i-1].lng ,latlngs[i].lat,latlngs[i].lng, 'Nm');
+				distance = calculateDistance(latlngs[i-1].lat,latlngs[i-1].lng ,latlngs[i].lat,latlngs[i].lng, 'N');
 				distances.push(distance);
 				gesDist = gesDist + distance;
 				var heading = headings[i-1];
@@ -3204,6 +3216,7 @@
 				}).addTo(middleMarkers);
 			}
 			middleMarkers.addTo(map);
+			$('#overlay > ul').append('<div style="margin-left:-15px; margin-bottom:-15px; padding-top: 20px";><b>Total:</b >&nbsp;'+ gesDist.toFixed(2) +' nm</div>');
 		}
 
 		function calculateDistance(lat1, lon1, lat2, lon2, unit) {
@@ -3216,10 +3229,10 @@
 			var dist = Math.sin(rlat1) * Math.sin(rlat2) + Math.cos(rlat1) * Math.cos(rlat2) * Math.cos(rtheta);
 			dist = Math.acos(dist)
 			dist = dist * 180/Math.PI
-			var dist2 = dist * 60 * 1.1515
-			if (unit=="Km") { var dist3 = dist2 * 1.609344 }
-			if (unit=="Nm") { dist3 = dist2 * 0.8684 }
-			return dist3
+			dist = dist * 60 * 1.1515
+			if (unit=="K") { dist = dist * 1.609344 }
+			if (unit=="N") { dist = dist * 0.8684 }
+			return dist
 		}	
 
 		document.getElementById("overlay").style.display= 'none' ;
@@ -3234,7 +3247,9 @@
 
 		function showWpList(){
 			document.getElementById("overlay").style.display= 'block' ;
-			$(".leaflet-geosearch-bar").css('top', 72);	
+			//$("leaflet-geosearch-bar").css({ top: '100px' });
+			$(".leaflet-geosearch-bar").css('top', 72);
+			
 			if (startlineShow == true){
 				document.getElementById("overlay2").style.display= 'block' ;
 			}
@@ -3305,14 +3320,20 @@
 		}
 
 		function setWPaltitude(altitude){
+			//altitudes[activeWP] = parseFloat(alt);
 			altitudes[activeWP] = altitude;
 			window.localStorage.setItem("altitudes", JSON.stringify(altitudes));
+			//altitudes[id] = alt;
+			//altitudes.splice(0, 0, parseFloat(document.getElementById('WPaltitudeInput').value));
 			updateLiElement();
 		}
 
 		function setWPaltitude2(){
+			//altitudes[activeWP] = parseFloat(alt);
 			altitudes[activeWP] = document.getElementById('WPaltitudeInput').value;
 			window.localStorage.setItem("altitudes", JSON.stringify(altitudes));
+			//altitudes[id] = alt;
+			//altitudes.splice(0, 0, parseFloat(document.getElementById('WPaltitudeInput').value));
 			updateLiElement();
 		}
 
@@ -3392,7 +3413,7 @@
 				var dt = new Date();
 				var time = dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds();
 				var date = dt.getFullYear()+'-'+(dt.getMonth()+1)+'-'+dt.getDate();
-				document.getElementById('date-time').innerHTML= date  + "&nbsp;&nbsp;&nbsp;" + time;
+				document.getElementById('date-time').innerHTML= date  + "   " + time;
 				setPosition(latlng[0], latlng[1]);
 				setRotation(heading);
 				setWind(latlng[5], latlng[6]);
@@ -3416,359 +3437,367 @@
 		var textstart = '';
 		var textend = '';
 		var capslock = false;
-		const Keyboard = {
-			elements: {
-				main: null,
-				keysContainer: null,
-				keys: []
-			},
-			eventHandlers: {
-				oninput: null,
-				//onclose: null
-			},
-			properties: {
-				value: "",
-				capsLock: false
-			},				
-			init() {	
-				// Create main elements       
-				this.elements.main = document.createElement("div");
-				this.elements.main.setAttribute("id", "keyboard");
-				this.elements.keysContainer = document.createElement("div");
-				this.elements.keysContainer.setAttribute("id", "keyContainer");				
-				// Setup main elements
-				this.elements.main.classList.add("keyboard", "keyboard--hidden");
-				this.elements.keysContainer.classList.add("keyboard__keys");
-				this.elements.keysContainer.appendChild(this._createKeys());
-				this.elements.keys = this.elements.keysContainer.querySelectorAll(".keyboard__key");					
-				// Add to DOM
-				this.elements.main.appendChild(this.elements.keysContainer);
-				document.getElementById("keyb").appendChild(this.elements.main);				
-				// Automatically use keyboard for elements with .use-keyboard-input
-				document.querySelectorAll(".glass ").forEach(element => {
-					element.addEventListener("focus", () => {
-						id = element.id;				
-						this.open(element.value, currentValue => {
-							element.value = currentValue;
-						});
-						textstart ='';
-						textend = '';
-					});	
-					element.addEventListener("click", () => {
-						var text = element.value;
-						textstart = text.slice(0, element.selectionStart);
-						textend = text.slice(element.selectionEnd, element.value.length);
-						this.properties.value = textstart;
-					});	
-					element.addEventListener("select", () => {
-						var text = element.value;
-						textstart = text.slice(0, element.selectionStart);
-						textend = text.slice(element.selectionEnd,element.value.length);
-						this.properties.value = textstart;
-					});
-				});
-			},
-			_createKeys() {
-				const fragment = document.createDocumentFragment();
-				const keyLayout = [			
-					"1", "2", "3", "4", "5", "6", "7", "8", "9", "0", ".", "backspace",
-					"q", "w", "e", "r", "t", "y", "u", "i", "o", "p",
-					"a", "s", "d", "f", "g", "h", "j", "k", "l", "enter",
-					"caps", "z", "x", "c", "v", "b", "n", "m",
-					"done", "space", "clear"
-				];
-				// Creates HTML for an icon
-				const createIconHTML = (icon_name) => {
-					return `<i class="material-icons">${icon_name}</i>`;
-				};	
-				keyLayout.forEach(key => {
-					const keyElement = document.createElement("button");
-					const insertLineBreak = ["backspace", "p", "enter", "m"].indexOf(key) !== -1;
-					// Add attributes/classes
-					keyElement.setAttribute("type", "button");
-					keyElement.classList.add("keyboard__key");
-					switch (key) {
-						case "backspace":
-							keyElement.classList.add("keyboard__key--wide");
-							keyElement.innerHTML = createIconHTML("Bksp");
-							keyElement.addEventListener("click", () => {
-								if (window.getSelection().toString() == '') {
-									this.properties.value = this.properties.value.substring(0, this.properties.value.length - 1);
-								}
-								this._triggerEvent("oninput");
+				const Keyboard = {
+					elements: {
+						main: null,
+						keysContainer: null,
+						keys: []
+					},	
+					eventHandlers: {
+						oninput: null,
+						//onclose: null
+					},
+					properties: {
+						value: "",
+						capsLock: false
+					},	
+					init() {	
+						// Create main elements       
+						this.elements.main = document.createElement("div");
+						this.elements.main.setAttribute("id", "keyboard");
+						this.elements.keysContainer = document.createElement("div");
+						this.elements.keysContainer.setAttribute("id", "keyContainer");				
+						// Setup main elements
+						this.elements.main.classList.add("keyboard", "keyboard--hidden");
+						this.elements.keysContainer.classList.add("keyboard__keys");
+						this.elements.keysContainer.appendChild(this._createKeys());
+						this.elements.keys = this.elements.keysContainer.querySelectorAll(".keyboard__key");			
+						// Add to DOM
+						this.elements.main.appendChild(this.elements.keysContainer);
+						document.getElementById("keyb").appendChild(this.elements.main);			
+						// Automatically use keyboard for elements with .use-keyboard-input
+						document.querySelectorAll(".glass ").forEach(element => {
+							element.addEventListener("focus", () => {
+								id = element.id;				
+								this.open(element.value, currentValue => {
+									element.value = currentValue;
+								});
+								textstart ='';
+								textend = '';
 							});
-							break;
-							case "caps":
-								keyElement.classList.add("keyboard__key--wide", "keyboard__key--activatable");
-								keyElement.innerHTML = createIconHTML("Shift");
-								keyElement.addEventListener("click", () => {
-									this._toggleCapsLock();
-									keyElement.classList.toggle("keyboard__key--active", this.properties.capsLock);
-								});
-								break;
-							case "enter":
-								keyElement.classList.add("keyboard__key--wide");
-								keyElement.innerHTML = createIconHTML("Enter");
-								keyElement.addEventListener("click", () => {
-									this.properties.value += "\n";
-									this._triggerEvent("oninput");
-								});
-								break;
-							case "space":
-								keyElement.classList.add("keyboard__key--extra-wide");
-								keyElement.innerHTML = createIconHTML("Space");
-								keyElement.addEventListener("click", () => {
-									this.properties.value += " ";
-									this._triggerEvent("oninput");
-								});
-								break;
-							case "done":
-								keyElement.classList.add("keyboard__key--wide", "keyboard__key--dark");
-								keyElement.innerHTML = createIconHTML("Close");
-								keyElement.addEventListener("click", () => {
-									var x = document.getElementById("keyboard");
-									x.style.display = "none";
-								});
-								break;
-							case "rwy":
-								keyElement.classList.add("keyboard__key--spezial", "keyboard__key--dark");
-								keyElement.innerHTML = createIconHTML("RWY");
-								keyElement.addEventListener("click", () => {
-									this.properties.value += "Runway: ";
-									this._triggerEvent("oninput");
-								});
-							break;
-							case "sqwk":
-								keyElement.classList.add("keyboard__key--spezial", "keyboard__key--dark");
-								keyElement.innerHTML = createIconHTML("SQWK");
-								keyElement.addEventListener("click", () => {
-									this.properties.value += "Squawk: ";
-									this._triggerEvent("oninput");
-								});
-							break;
-							case "ent":
-								keyElement.classList.add("keyboard__key--spezial", "keyboard__key--dark");
-								keyElement.innerHTML = createIconHTML("ENTR");
-								keyElement.addEventListener("click", () => {
-									this.properties.value += "Entry: ";
-									this._triggerEvent("oninput");
-								});
-								break;
-							case "fl":
-								keyElement.classList.add("keyboard__key--spezial", "keyboard__key--dark");
-								keyElement.innerHTML = createIconHTML("FL");
-								keyElement.addEventListener("click", () => {
-									this.properties.value += "Flightlevel: ";
-									this._triggerEvent("oninput");
-								});
-								break;
-							case "clear":
-								keyElement.classList.add("keyboard__key--spezial", "keybord__key--clear");
-								keyElement.innerHTML = createIconHTML("Clear");
-								keyElement.addEventListener("click", () => {
-									this.properties.value = "";
-									this._triggerEvent("oninput");
-								});
-								break;
-							case "clearAll":
-								keyElement.classList.add("keyboard__key--wide", "keybord__key--clear");
-								keyElement.innerHTML = createIconHTML("Reset");
-								break;
-							default:
-								keyElement.textContent = key.toLowerCase();	
-								keyElement.addEventListener("click", () => {
-									//this.properties.value += this.properties.capsLock ? key.toUpperCase() : key.toLowerCase();		
-									if (capslock==true){
-										if (key == 1){
-											this.properties.value += "-";
-										}
-										else if (key == 2){
-											this.properties.value += "+";
-										}
-										else if (key == 3){
-											this.properties.value += "\xB0";
-										}
-										else if (key == 4){
-											this.properties.value += "'";
-										}
-										else if (key == 5){
-											this.properties.value += "''";
-										}
-										else if (key == 6){
-											this.properties.value += "(";
-										}
-										else if (key == 7){
-											this.properties.value += ")";
-										}
-										else if (key == 8){
-											this.properties.value += "/";
-										}
-										else if (key == 9){
-											this.properties.value += "!";
-										}
-										else if (key == 0){
-											this.properties.value += ":";
-										}
-										else if (key == "."){
-											this.properties.value += ".";
+							element.addEventListener("click", () => {
+								var text = element.value;
+								textstart = text.slice(0, element.selectionStart);
+								textend = text.slice(element.selectionEnd, element.value.length);
+								this.properties.value = textstart;
+							});
+							element.addEventListener("select", () => {
+								var text = element.value;
+								textstart = text.slice(0, element.selectionStart);
+								textend = text.slice(element.selectionEnd,element.value.length);
+								this.properties.value = textstart;
+							});
+						});
+					},
+					_createKeys() {
+						const fragment = document.createDocumentFragment();
+						const keyLayout = [		
+							"1", "2", "3", "4", "5", "6", "7", "8", "9", "0", ".", "backspace",
+							"q", "w", "e", "r", "t", "y", "u", "i", "o", "p",
+							"a", "s", "d", "f", "g", "h", "j", "k", "l", "enter",
+							"caps", "z", "x", "c", "v", "b", "n", "m",
+							"done", "space", "clear"
+						];	 
+						// Creates HTML for an icon
+						const createIconHTML = (icon_name) => {
+							return `<i class="material-icons">${icon_name}</i>`;
+						};
+						keyLayout.forEach(key => {
+							const keyElement = document.createElement("button");
+							const insertLineBreak = ["backspace", "p", "enter", "m"].indexOf(key) !== -1;
+							// Add attributes/classes
+							keyElement.setAttribute("type", "button");
+							keyElement.classList.add("keyboard__key");
+							switch (key) {
+								case "backspace":
+									keyElement.classList.add("keyboard__key--wide");
+									keyElement.innerHTML = createIconHTML("Bksp");
+									keyElement.addEventListener("click", () => {
+									if (window.getSelection().toString() == '') {
+										this.properties.value = this.properties.value.substring(0, this.properties.value.length - 1);
+									}
+										this._triggerEvent("oninput");
+									});
+									break;
+								case "caps":
+									keyElement.classList.add("keyboard__key--wide", "keyboard__key--activatable");
+									keyElement.innerHTML = createIconHTML("Shift");
+									keyElement.addEventListener("click", () => {
+										this._toggleCapsLock();
+										keyElement.classList.toggle("keyboard__key--active", this.properties.capsLock);
+									});
+									break;
+								case "enter":
+									keyElement.classList.add("keyboard__key--wide");
+									keyElement.innerHTML = createIconHTML("Enter");
+									keyElement.addEventListener("click", () => {
+										this.properties.value += "\n";
+										this._triggerEvent("oninput");
+									});
+									break;
+								case "space":
+									keyElement.classList.add("keyboard__key--extra-wide");
+									keyElement.innerHTML = createIconHTML("Space");
+	
+									keyElement.addEventListener("click", () => {
+										this.properties.value += " ";
+										this._triggerEvent("oninput");
+									});
+									break;
+								case "done":
+									keyElement.classList.add("keyboard__key--wide", "keyboard__key--dark");
+									keyElement.innerHTML = createIconHTML("Close");
+	
+									keyElement.addEventListener("click", () => {
+										var x = document.getElementById("keyboard");
+										x.style.display = "none";
+										startlineShow = true;
+										showWpList();
+									});
+									break;
+								case "rwy":
+									keyElement.classList.add("keyboard__key--spezial", "keyboard__key--dark");
+									keyElement.innerHTML = createIconHTML("RWY");
+									keyElement.addEventListener("click", () => {
+										this.properties.value += "Runway: ";
+										this._triggerEvent("oninput");
+									});
+									break;
+								case "sqwk":
+									keyElement.classList.add("keyboard__key--spezial", "keyboard__key--dark");
+									keyElement.innerHTML = createIconHTML("SQWK");
+									keyElement.addEventListener("click", () => {
+										this.properties.value += "Squawk: ";
+										this._triggerEvent("oninput");
+									});
+									break;
+								case "ent":
+									keyElement.classList.add("keyboard__key--spezial", "keyboard__key--dark");
+									keyElement.innerHTML = createIconHTML("ENTR");
+									keyElement.addEventListener("click", () => {
+										this.properties.value += "Entry: ";
+										this._triggerEvent("oninput");
+									});
+									break;
+								case "fl":
+									keyElement.classList.add("keyboard__key--spezial", "keyboard__key--dark");
+									keyElement.innerHTML = createIconHTML("FL");
+									keyElement.addEventListener("click", () => {
+										this.properties.value += "Flightlevel: ";
+										this._triggerEvent("oninput");
+									});
+									break;
+								case "clear":
+									keyElement.classList.add("keyboard__key--spezial", "keybord__key--clear");
+									keyElement.innerHTML = createIconHTML("Clear");
+									keyElement.addEventListener("click", () => {
+										this.properties.value = "";
+										this._triggerEvent("oninput");
+									});
+									break;
+								case "clearAll":
+									keyElement.classList.add("keyboard__key--wide", "keybord__key--clear");
+									keyElement.innerHTML = createIconHTML("Reset");
+									keyElement.addEventListener("click", () => {
+									
+									});
+									break;
+								default:
+									keyElement.textContent = key.toLowerCase();
+									keyElement.addEventListener("click", () => {								
+										if (capslock==true){
+											if (key == 1){
+												this.properties.value += "-";
+											}
+											else if (key == 2){
+												this.properties.value += "+";
+											}
+											else if (key == 3){
+												this.properties.value += "\xB0";
+											}
+											else if (key == 4){
+												this.properties.value += "'";
+											}
+											else if (key == 5){
+												this.properties.value += "''";
+											}
+											else if (key == 6){
+												this.properties.value += "(";
+											}
+											else if (key == 7){
+												this.properties.value += ")";
+											}
+											else if (key == 8){
+												this.properties.value += "/";
+											}
+											else if (key == 9){
+												this.properties.value += "!";
+											}
+											else if (key == 0){
+												this.properties.value += ":";
+											}
+											else if (key == "."){
+												this.properties.value += ".";
+											}
+											else{
+												this.properties.value += this.properties.capsLock ? key.toUpperCase() : key.toLowerCase();
+											}
 										}
 										else{
 											this.properties.value += this.properties.capsLock ? key.toUpperCase() : key.toLowerCase();
-										}
-									}
-									else{
-										this.properties.value += this.properties.capsLock ? key.toUpperCase() : key.toLowerCase();
-									}
-									this._triggerEvent("oninput");
-									keyPress(key);
-								});
-								break;
-					}
-						fragment.appendChild(keyElement);
-						if (insertLineBreak) {
-							fragment.appendChild(document.createElement("br"));
+										}	
+										this._triggerEvent("oninput");
+										keyPress(key);
+									});
+									break;
+							}
+							fragment.appendChild(keyElement);
+							if (insertLineBreak) {
+								fragment.appendChild(document.createElement("br"));
+							}
+						});
+						return fragment;
+					},	
+					_triggerEvent(handlerName) {
+						if (typeof this.eventHandlers[handlerName] == "function") {
+							if (textend != ''){
+								this.eventHandlers[handlerName](this.properties.value + textend);
+							}
+							else{
+								this.eventHandlers[handlerName](this.properties.value);
+							}
 						}
+					},		
+					_toggleCapsLock() {	
+						capslock = !capslock;
+						this.properties.capsLock = !this.properties.capsLock;
+						for (const key of this.elements.keys) {
+							if (key.childElementCount === 0) {
+								key.textContent = this.properties.capsLock ? key.textContent.toUpperCase() : key.textContent.toLowerCase();
+								this.properties.capsLock ? keyContSpecial() : keyContNormal();
+								function  keyContSpecial() {
+									if (key.textContent == 1){
+									key.textContent = "-";
+									}
+									if (key.textContent == 2){
+									key.textContent = "+";
+									}
+									if (key.textContent == 3){
+									key.textContent = "\xB0";
+									}
+									if (key.textContent == 4){
+									key.textContent = "'";
+									}
+									if (key.textContent == 5){
+									key.textContent = "''";
+									}
+									if (key.textContent == 6){
+									key.textContent = "(";
+									}
+									if (key.textContent == 7){
+									key.textContent = ")";
+									}
+									if (key.textContent == 8){
+									key.textContent = "/";
+									}
+									if (key.textContent == 9){
+									key.textContent = "!";
+									}
+									if (key.textContent == 0){
+									key.textContent = ":";
+									}
+									if (key.textContent == "."){
+									key.textContent = ".";
+									}
+								}
+								function  keyContNormal() {
+									if (key.textContent == "-"){
+									key.textContent = 1;
+									}
+									if (key.textContent == "+"){
+									key.textContent = 2;
+									}
+									if (key.textContent == "\xB0"){
+									key.textContent = 3;
+									}
+									if (key.textContent == "'"){
+									key.textContent = 4;
+									}
+									if (key.textContent == "''"){
+									key.textContent = 5;
+									}
+									if (key.textContent == "("){
+									key.textContent = 6;
+									}
+									if (key.textContent == ")"){
+									key.textContent = 7;
+									}
+									if (key.textContent == "/"){
+									key.textContent = 8;
+									}
+									if (key.textContent == "!"){
+									key.textContent = 9;
+									}
+									if (key.textContent == ":"){
+									key.textContent = 0;
+									}
+									if (key.textContent == "."){
+									key.textContent = ".";
+									}
+								}
+							}
+						}
+					},
+					open(initialValue, oninput/*, onclose*/) {
+						this.properties.value = initialValue || "";
+						this.eventHandlers.oninput = oninput;
+						this.elements.main.classList.remove("keyboard--hidden");
+						var x = document.getElementById("keyboard");
+						x.style.display = "block";
+						var x2 = document.getElementById("keyContainer");
+						x2.style.display = "block";
+						hideWpList();
+					},
+					close() {
+						this.properties.value = "";
+						this.eventHandlers.oninput = oninput;
+						this.elements.main.classList.add("keyboard--hidden");
+						var x = document.getElementById("keyboard");
+						x.style.display = "none";
+						var x2 = document.getElementById("keyContainer");
+						x2.style.display = "none";
+						startlineShow = true;
+						showWpList();
+					}
+				};
+
+				function keyPress(char){
+					// get the element in question
+					const input = document.getElementsByTagName("input")[0];
+					// focus on the input element
+					input.focus();
+					// add event listeners to the input element
+					input.addEventListener('keypress', (event) => {
+						console.log("You have pressed key: ", event.key);
+					});
+					input.addEventListener('keydown', (event) => {
+						console.log(`key: ${event.key} has been pressed down`);
+					});
+					input.addEventListener('keyup', (event) => {
+						console.log(`key: ${event.key} has been released`);
+					});
+					// dispatch keyboard events
+					input.dispatchEvent(new KeyboardEvent('keypress',  {'key': char}));
+					input.dispatchEvent(new KeyboardEvent('keydown',  {'key':char}));
+					input.dispatchEvent(new KeyboardEvent('keyup', {'key': char}));
+				}
+
+				const box = document.querySelector('#keyb');
+				box.addEventListener('click', function (e) {
+					e.stopPropagation();
 				});
-				return fragment;
-			},
-			_triggerEvent(handlerName) {
-				if (typeof this.eventHandlers[handlerName] == "function") {
-					if (textend != ''){
-						this.eventHandlers[handlerName](this.properties.value + textend);
-					}
-					else{
-						this.eventHandlers[handlerName](this.properties.value);
-					}
-				}
-			},					
-			_toggleCapsLock() {	
-				capslock = !capslock;
-				this.properties.capsLock = !this.properties.capsLock;
-				for (const key of this.elements.keys) {
-					if (key.childElementCount === 0) {
-						key.textContent = this.properties.capsLock ? key.textContent.toUpperCase() : key.textContent.toLowerCase();
-						this.properties.capsLock ? keyContSpecial() : keyContNormal();
-						function  keyContSpecial() {
-							if (key.textContent == 1){
-								key.textContent = "-";
-							}
-							if (key.textContent == 2){
-								key.textContent = "+";
-							}
-							if (key.textContent == 3){
-								key.textContent = "\xB0";
-							}
-							if (key.textContent == 4){
-								key.textContent = "'";
-							}
-							if (key.textContent == 5){
-								key.textContent = "''";
-							}
-							if (key.textContent == 6){
-								key.textContent = "(";
-							}
-							if (key.textContent == 7){
-								key.textContent = ")";
-							}
-							if (key.textContent == 8){
-								key.textContent = "/";
-							}
-							if (key.textContent == 9){
-								key.textContent = "!";
-							}
-							if (key.textContent == 0){
-								key.textContent = ":";
-							}
-							if (key.textContent == "."){
-								key.textContent = ".";
-							}
-						}
-						function  keyContNormal() {
-							if (key.textContent == "-"){
-								key.textContent = 1;
-							}
-							if (key.textContent == "+"){
-								key.textContent = 2;
-							}
-							if (key.textContent == "\xB0"){
-								key.textContent = 3;
-							}
-							if (key.textContent == "'"){
-								key.textContent = 4;
-							}
-							if (key.textContent == "''"){
-								key.textContent = 5;
-							}
-							if (key.textContent == "("){
-								key.textContent = 6;
-							}
-							if (key.textContent == ")"){
-								key.textContent = 7;
-							}
-							if (key.textContent == "/"){
-								key.textContent = 8;
-							}
-							if (key.textContent == "!"){
-								key.textContent = 9;
-							}
-							if (key.textContent == ":"){
-								key.textContent = 0;
-							}
-							if (key.textContent == "."){
-								key.textContent = ".";
-							}
-						}
-					}
-				}
-			},
-			open(initialValue, oninput/*, onclose*/) {
-				this.properties.value = initialValue || "";
-				this.eventHandlers.oninput = oninput;
-				this.elements.main.classList.remove("keyboard--hidden");
-				var x = document.getElementById("keyboard");
-				x.style.display = "block";
-				var x2 = document.getElementById("keyContainer");
-				x2.style.display = "block";
-				hideWpList();
-			},
-			close() {
-				this.properties.value = "";
-				this.eventHandlers.oninput = oninput;
-				this.elements.main.classList.add("keyboard--hidden");
-				var x = document.getElementById("keyboard");
-				x.style.display = "none";
-				var x2 = document.getElementById("keyContainer");
-				x2.style.display = "none";
-			}
-		};
-
-		function keyPress(char){
-			// get the element in question
-			const input = document.getElementsByTagName("input")[0];
-			// focus on the input element
-			input.focus();
-			// add event listeners to the input element
-			input.addEventListener('keypress', (event) => {
-				console.log("You have pressed key: ", event.key);
-			});
-			input.addEventListener('keydown', (event) => {
-				console.log(`key: ${event.key} has been pressed down`);
-			});
-			input.addEventListener('keyup', (event) => {
-				console.log(`key: ${event.key} has been released`);
-			});
-			// dispatch keyboard events
-			input.dispatchEvent(new KeyboardEvent('keypress',  {'key': char}));
-			input.dispatchEvent(new KeyboardEvent('keydown',  {'key':char}));
-			input.dispatchEvent(new KeyboardEvent('keyup', {'key': char}));
-		}
-
-		const box = document.querySelector('#keyb');
-		box.addEventListener('click', function (e) {
-			e.stopPropagation();
-		});
-		box.addEventListener('dblclick', function (e) {
-			e.stopPropagation();
-		});			
+				box.addEventListener('dblclick', function (e) {
+					e.stopPropagation();
+				});
     </script>
 </html>
