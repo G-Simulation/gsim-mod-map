@@ -8,7 +8,8 @@
 		<title>Map</title>
 
 		<script type="text/javascript" src="http://maps.stamen.com/js/tile.stamen.js?v1.3.0"></script>
-		<script src="./leaflet/leaflet.js"></script>
+		<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+		<!--<script src="./leaflet/leaflet.js"></script>-->
 		<script src="./leaflet/easy-button.js"></script>
 		<script src="./leaflet/leaflet.groupedlayercontrol.min.js"></script>
 		<script src="./leaflet/jquery.min.js"></script>
@@ -16,7 +17,8 @@
 		<script src="./leaflet/geosearch.js"></script>
 		<script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
 		
-		<link rel="stylesheet" href="./leaflet/leaflet.css"/>
+		<!--<link rel="stylesheet" href="./leaflet/leaflet.css"/>-->
+		<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"/>
 		<link rel="stylesheet" href="./leaflet/easy-button.css"/>
 		<link rel="stylesheet" href="./leaflet/leaflet.groupedlayercontrol.min.css"/>
 		<link rel="stylesheet" href="./leaflet/geosearch.css"/>
@@ -1013,15 +1015,25 @@
 		var provider;
 		var GeoSearchControl;
 		var POIMarkers;
+		var reportingPoints;
 		var searchControl;
+		var mapCenter = [47.50737, 19.04611];
+		var zoomLevel = 9;
 
 		window.addEventListener("DOMContentLoaded", function() {
-			loadMap(47.50737, 19.04611);
 			// Get the message reference
 			var messageElement = document.getElementById('message');
 			// Register the event listener
 			window.addEventListener('message', receiveMessage);
 			Keyboard.init();
+			if (window.localStorage.getItem("mapCenterLat")){
+				mapCenter[0] = window.localStorage.getItem("mapCenterLat");
+				mapCenter[1] = window.localStorage.getItem("mapCenterLng");
+			}
+			if (window.localStorage.getItem("zoomLevel")){
+				zoomLevel = window.localStorage.getItem("zoomLevel");
+			}
+			loadMap(mapCenter[0],mapCenter[1]);
 		});
 
 
@@ -2295,79 +2307,98 @@
 		});
 
 		function loadMap(lat, lon){
-
 			// Create Leaflet map on map element.
-			var initMapCenter = [47.442, 8.23];
-			var initMapZoom = 9;
-			var southWest = new L.LatLng(-90, -180),
-			northEast = new L.LatLng(90, 180),
+			var initMapCenter = mapCenter;
+			var initMapZoom = zoomLevel;
+			var southWest = new L.LatLng(-90, -180);
+			var northEast = new L.LatLng(90, 180);
 			maxExtent = new L.LatLngBounds(southWest, northEast);
 
 			var streets = L.tileLayer('https://{s}.tile.openstreetmap.de/tiles/osmde/{z}/{x}/{y}.png',{
+				bounds:maxExtent,
 				maxZoom: 18,
 				minZoom: 4,
 				format: 'image/png',
 				transparent: true,
+				reuseTiles : true,
 				subdomains: ['a', 'b', 'c']
 			});
 
 			var hybrid = L.tileLayer('http://{s}.google.com/vt/lyrs=s,h&x={x}&y={y}&z={z}',{
+				bounds:maxExtent,
 				maxZoom: 20,
+				reuseTiles : true,
 				subdomains:['mt0','mt1','mt2','mt3']
 			});
 
 			var satellite = L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}',{
+				bounds:maxExtent,
 				maxZoom: 20,
+				reuseTiles : true,
 				subdomains:['mt0','mt1','mt2','mt3']
 			});
 
 			var terrain = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png',{
+				bounds:maxExtent,
 				maxZoom: 17,
 				minZoom: 4,
 				format: 'image/png',
 				transparent: true,
+				reuseTiles : true,
 				subdomains: ['a', 'b', 'c']
 			});
 
 			var monochrome = L.tileLayer('http://{s}.tile.stamen.com/toner/{z}/{x}/{y}.png',{
+				bounds:maxExtent,
 				minZoom: 0,
 				maxZoom: 14,
+				reuseTiles : true,
 				subdomains: 'abcd'
 			});
 
 			var water = L.tileLayer('http://{s}.tile.stamen.com/watercolor/{z}/{x}/{y}.png',{
+				bounds:maxExtent,
 				minZoom: 0,
 				maxZoom: 14,
+				reuseTiles : true,
 				subdomains: 'abcd'
 			});
 
 			var airspaces = L.tileLayer('http://{s}.tile.maps.openaip.net/geowebcache/service/tms/1.0.0/openaip_basemap@EPSG%3A900913@png/{z}/{x}/{y}.{ext}', {
 				ext: 'png',
-				maxZoom: 12,
+				bounds:maxExtent,
+				maxZoom: 13,
 				minZoom: 9,
 				tms: true,
 				detectRetina: true,
 				subdomains: '12',
 				format: 'image/png',
-				transparent: true
+				transparent: true,
+				reuseTiles : true
+			});
+
+			reportingPoints = L.tileLayer('', {
+				maxZoom: 13,
+				minZoom: 9,
 			});
 
 			var openaip_cached_hotspot = new L.TileLayer('http://{s}.tile.maps.openaip.net/geowebcache/service/tms/1.0.0/openaip_approved_hotspots@EPSG%3A900913@png/{z}/{x}/{y}.png', {
+				bounds:maxExtent,
 				maxZoom: 12,
 				minZoom: 9,
 				tms: true,
 				detectRetina: true,
 				subdomains: '12',
 				format: 'image/png',
-				transparent: true
+				transparent: true,
+				reuseTiles : true
 			});
 
 
-			var none = L.tileLayer('http://{s}./{z}/{x}/{y}.{ext}', {
-				ext: 'png',
-				tms: true,
-				minZoom: 100,
-				maxZoom: 100,
+			var none = L.tileLayer('http://', {
+			});
+
+			var none2 = L.tileLayer('http://', {
 			});
 
 			var baseMaps = {
@@ -2382,13 +2413,17 @@
 			var groupedOverlays = {
 				"Airspaces" : {
 					'On': airspaces,
-					'Off': none
+					'Off': none,
 				},
+				"MRP's" : {
+					'On': reportingPoints,
+					'Off': none2,
+				}
 			};
 
 			var options = {
 				// Make the "Landmarks" group exclusive (use radio inputs)
-				exclusiveGroups: ["Airspaces"],
+				exclusiveGroups: ["Airspaces", "MRP's" ],
 				// Show a checkbox next to non-exclusive group labels for toggling all
 				groupCheckboxes: true
 			};
@@ -2396,10 +2431,10 @@
 			// Where you want to render the map.
 			var element = document.getElementById('map');
 
-			var openaip_basemap_osm = L.featureGroup([streets, airspaces, openaip_cached_hotspot]);
+			var openaip_basemap_osm = L.featureGroup([streets, airspaces, reportingPoints, openaip_cached_hotspot]);
 
 			map = L.map('map', {
-				center: [49.47211425492292, 9.040833186453408],
+				center: mapCenter,
 				zoom: 9,
 				edgeBufferTiles: 3,
 				layers: [openaip_basemap_osm],
@@ -2407,7 +2442,6 @@
 			});
 
 			L.control.scale({maxWidth: 100}).addTo(map);
-
 			GeoSearchControl = window.GeoSearch.GeoSearchControl;
 			AlgoliaProvider = window.GeoSearch.AlgoliaProvider;
 			provider = new AlgoliaProvider({});
@@ -2637,8 +2671,8 @@
 					showCoverageOnHover: false,
 					zoomToBoundsOnClick: false,
 					chunkedLoading: true,
-					disableClusteringAtZoom: 8, 
-					//animate: true,
+					disableClusteringAtZoom: 9, 
+					animate: true,
 					//nimateAddingMarkers: true,
 					//maxClusterRadius: 35,
 					removeOutsideVisibleBounds: true,
@@ -2905,8 +2939,19 @@
 				}
 			}).addTo(map);
 
+			zoomLevel = map.getZoom();
+
+			if(window.localStorage.getItem("zoomLevel")){
+				zoomLevel = window.localStorage.getItem("zoomLevel")
+				map.setZoom(zoomLevel);
+			}
+
+			setInterval(function () {
+				map.invalidateSize();
+				//console.log('invalidate');
+			}, 100);
+
 			loadPoints();
-			map.invalidateSize();
 
 			map.on("dragstart", function(e) {
 				toggle.enable();
@@ -2926,16 +2971,19 @@
 
 			map.on('overlayadd', onOverlayAdd);
 			function onOverlayAdd(e){
-				if (map.hasLayer(airspaces)){
-					if (!map.hasLayer(POIMarkers)) {
-						map.addLayer(POIMarkers);
-					}
+				zoomLevel = map.getZoom();
+				if (zoomLevel >= 9 && zoomLevel <= 13){
+						if (map.hasLayer(reportingPoints)){
+							if (!map.hasLayer(POIMarkers)){
+								map.addLayer(POIMarkers);
+							}	
+						}
 				}
 			}
 
 			map.on('overlayremove', onOverlayRemove);
 			function onOverlayRemove(e){
-				if (map.hasLayer(airspaces)){
+				if (!map.hasLayer(reportingPoints)){
 					if (map.hasLayer(POIMarkers)) {
 						map.removeLayer(POIMarkers);
 					}	
@@ -2943,22 +2991,24 @@
 			}
 
 			map.on('zoomend', function() {
-				var zoomlevel = map.getZoom();
-				if (zoomlevel  <10||zoomlevel  > 13){
+				zoomLevel = map.getZoom();
+				window.localStorage.setItem("zoomLevel", zoomLevel)
+
+				if (zoomLevel  <9||zoomLevel  > 13){
 					if (map.hasLayer(POIMarkers)) {
 						map.removeLayer(POIMarkers);
 					} else {
 						console.log("no point layer active");
 					}
 				}
-				if (zoomlevel >= 10 && zoomlevel <= 13){
-						if (map.hasLayer(airspaces)){
-							if (!map.hasLayer(POIMarkers)){
-								map.addLayer(POIMarkers);
-							}	
+				else if (zoomLevel >= 9 && zoomLevel <= 13){
+					if (map.hasLayer(reportingPoints)){
+						if (!map.hasLayer(POIMarkers)) {
+							map.addLayer(POIMarkers);
 						}
+					}
 				}
-				console.log("Current Zoom Level =" + zoomlevel)
+				console.log("Current Zoom Level =" + zoomLevel);
 			});
 
 			map.on('overlayadd', onOverlayAdd);
@@ -3162,10 +3212,21 @@
 				toggle.disable();
 				follow = true;
 			}
+			
+			if (zoomLevel >= 9 && zoomLevel <= 13){
+				if (map.hasLayer(reportingPoints)){
+					if (!map.hasLayer(POIMarkers)){
+						map.addLayer(POIMarkers);
+					}	
+				}
+			}
 		}
 
 		function savePoints(){
-			map.removeLayer(POIMarkers);
+			if (map.hasLayer(POIMarkers)) {
+				map.removeLayer(POIMarkers);
+			}
+
 			var coordinates = [];
 			$.each(map._layers, function (ml) {
 				if (map._layers[ml].feature) {
@@ -3347,6 +3408,8 @@
 			airplane.setLatLng(pos).update();
 			if (follow == true) {
 				map.panTo(pos);
+				window.localStorage.setItem("mapCenterLat", lat);
+				window.localStorage.setItem("mapCenterLng", lng);
 			}
 			pos_lat = lat;
 			pos_lng = lng;
