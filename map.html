@@ -1134,52 +1134,91 @@
 		var northEast = new L.LatLng(90, 180);
 		var maxExtent = new L.LatLngBounds(southWest, northEast);
 
-		var streets = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.{ext}', {attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-			ext: 'png',
+		var streets = L.tileLayer('https://{s}.tile.openstreetmap.de/tiles/osmde/{z}/{x}/{y}.png', {
+			bounds: maxExtent,
+			maxZoom: 18,
+			minZoom: 0,
+			format: 'image/png',
+			transparent: true,
+			reuseTiles: true,
+			subdomains: ['a', 'b', 'c']
+		});
+
+		var hybrid = L.tileLayer('http://{s}.google.com/vt/lyrs=s,h&x={x}&y={y}&z={z}', {
+			bounds: maxExtent,
+			maxZoom: 20,
+			minZoom: 0,
+			reuseTiles: true,
+			subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
+		});
+
+		var satellite = L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
+			bounds: maxExtent,
+			maxZoom: 20,
+			minZoom: 0,
+			reuseTiles: true,
+			subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
+		});
+
+		var terrain = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
+			bounds: maxExtent,
 			maxZoom: 17,
-			minZoom: 2,
+			minZoom: 0,
+			format: 'image/png',
+			transparent: true,
+			reuseTiles: true,
+			subdomains: ['a', 'b', 'c']
 		});
 
-		var monochrome = L.tileLayer('http://{s}.tile.stamen.com/toner/{z}/{x}/{y}.{ext}', {attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a href="http://openstreetmap.org"> OpenStreetMap </a>, under <a href="http://www.openstreetmap.org/copyright">ODbL</a>.',
-			ext: 'png',
+		var monochrome = L.tileLayer('http://{s}.tile.stamen.com/toner/{z}/{x}/{y}.png', {
+			bounds: maxExtent,
 			minZoom: 0,
 			maxZoom: 14,
+			reuseTiles: true,
 			subdomains: 'abcd'
 		});
 
-		var terrain = L.tileLayer('http://{s}.tile.stamen.com/terrain/{z}/{x}/{y}.{ext}', {attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, under <a href="http://www.openstreetmap.org/copyright">ODbL</a>.',	
-			ext: 'png',
+		var water = L.tileLayer('http://{s}.tile.stamen.com/watercolor/{z}/{x}/{y}.png', {
+			bounds: maxExtent,
 			minZoom: 0,
 			maxZoom: 14,
-			subdomains: 'abcd'
-		});
-
-		var water = L.tileLayer('http://{s}.tile.stamen.com/watercolor/{z}/{x}/{y}.{ext}', {attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, under <a href="http://creativecommons.org/licenses/by-sa/3.0">CC BY SA</a>.',
-			ext: 'png',
-			minZoom: 0,
-			maxZoom: 14,
+			reuseTiles: true,
 			subdomains: 'abcd'
 		});
 
 		var airspaces = L.tileLayer('http://{s}.tile.maps.openaip.net/geowebcache/service/tms/1.0.0/openaip_basemap@EPSG%3A900913@png/{z}/{x}/{y}.{ext}', {
 			ext: 'png',
-			maxZoom: 12,
-			minZoom: 8,
+			bounds: maxExtent,
+			maxZoom: 13,
+			minZoom: 7,
 			tms: true,
 			detectRetina: true,
 			subdomains: '12',
 			format: 'image/png',
 			transparent: true,
+			reuseTiles: true
+		});
+
+		var airspacesEurope = new L.TileLayer("https://nwy-tiles-api.prod.newaydata.com/tiles/{z}/{x}/{y}.png?path=" + airac + "/aero/latest", {
+			maxZoom: 18,
+			minZoom: 7,
+			detectRetina: true,
+			format: "image/png",
+			transparent: true,
+			reuseTiles: true
 		});
 
 		var openaip_cached_hotspot = new L.TileLayer('http://{s}.tile.maps.openaip.net/geowebcache/service/tms/1.0.0/openaip_approved_hotspots@EPSG%3A900913@png/{z}/{x}/{y}.png', {
+			bounds: maxExtent,
 			maxZoom: 12,
 			minZoom: 9,
 			tms: true,
 			detectRetina: true,
 			subdomains: '12',
 			format: 'image/png',
-			transparent: true
+			transparent: true,
+			reuseTiles: true,
+			edgeBufferTiles: 5
 		});
 
 		var openaip_cached_hotspot_off = L.tileLayer('http://', {
@@ -1205,6 +1244,8 @@
 
 		var baseMaps = {
 			"Streets": streets,
+			"Hybrid": hybrid,
+			"Satellite": satellite,
 			"Terrain": terrain,
 			"Monochrome": monochrome,
 			"Water": water
@@ -1213,6 +1254,7 @@
 		var groupedOverlays = {
 			"Airspaces": {
 				'World': airspaces,
+				'Europe': airspacesEurope,
 				'Off': airspaces_off
 			},
 			"Hotspots": {
@@ -1240,7 +1282,7 @@
 		// Where you want to render the map.
 		var element = document.getElementById('map');
 
-		var openaip_basemap_osm = L.featureGroup([streets, airspaces, openaip_cached_hotspot_off, aircraft, flightpath]);
+		var openaip_basemap_osm = L.featureGroup([streets, airspacesEurope, openaip_cached_hotspot_off, aircraft, flightpath]);
 
 		map = L.map('map', {
 			center: mapCenter,
