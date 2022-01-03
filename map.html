@@ -27,7 +27,7 @@
 	<style>
 		@font-face {
 			font-family: "Roboto-Light";
-			src: url("/Fonts/Roboto-Light.ttf") format("truetype");
+			src: url("./Fonts/Roboto-Light.ttf") format("truetype");
 			font-weight: normal;
 			font-style: normal;
 		}
@@ -66,22 +66,22 @@
 		::-webkit-scrollbar-track {
 			background: #f1f1f1;
 		}
-		
+
 		/* Handle */
 		::-webkit-scrollbar-thumb {
-			background: var(--dark); 
+			background: var(--dark);
 		}
 
 		/* Handle on hover */
 		::-webkit-scrollbar-thumb:hover {
-			background: var(--light); 
+			background: var(--light);
 		}
 
 		#overlay {
 			position: absolute;
-			width: 160px;
+			width: 170px;
 			height: auto;
-			min-height: 40%;
+			min-height: 50%;
 			max-height: 50%;
 			right: 10px;
 			bottom: 80px;
@@ -92,12 +92,26 @@
 			border-radius: 8px;
 		}
 
-		#overlayContainer{
-			display: contents;
+		h4#depArrTop {
+			top: -25px;
+			position: relative;
+		}
+
+
+		td#start, td#target {
+			font-size: small;
+		}
+
+		td#dep, td#arr {
+			font-size: x-small;
+		}
+
+		#overlayContainer {
+			display: inline-block;
 			overflow-y: scroll;
 			position: absolute;
 			height: auto;
-			top: 25%;
+			top: 115px;
 			bottom: 10%;
 			left: 0;
 			right: 0;
@@ -105,11 +119,18 @@
 
 		div#overlayListSum {
 			position: absolute;
-			bottom: 5%;
+			display: inline-block;
+			bottom: 20px;
 			left: 0;
 			right: 0;
 			text-align: center;
 			height: 3%;
+		}
+
+		table#depArrTable {
+			width: 100%;
+			padding-left: 20px;
+			padding-right: 20px;
 		}
 
 		ul {
@@ -118,15 +139,30 @@
 		}
 
 		h3 {
-			margin-top: 13%;
+			margin-top: 15px;
+			margin-block-start: 0;
+		}
+
+		h4 {
 			padding-bottom: 5%;
+			margin-block-start: 0;
+		}
+
+		#banner {
+			position: absolute;
+			/* width: 100%; */
+			top: 10px;
+			left: 60px;
+			right: 60px;
+			background-color: transparent;
+			z-index: 1000;
+			text-align: center;
 		}
 
 		#overlay2 {
-			position: absolute;
-			width: 70%;
-			right: 15%;
-			top: 10px;
+			display: inline-block;
+			max-width: 60%;
+			height: 100%;
 			background-color: white;
 			z-index: 1000;
 			border: 2px solid rgba(0, 0, 0, 0.2);
@@ -134,6 +170,8 @@
 			border-radius: 8px;
 			vertical-align: middle;
 			display: hidden;
+			padding-left: 20px;
+			padding-right: 20px;
 		}
 
 		table.overlay2Table {
@@ -148,28 +186,46 @@
 
 		span#date-time {
 			position: absolute;
-			top: 25px;
+			top: 27px;
 			font-size: 12px;
 			width: 100%;
 			text-align: center;
 		}
 
+		#overlay ul li {
+			padding-top: 5px;
+		}
+
 		#overlay ul p {
-			padding-bottom: 8%;
+			padding-bottom: 0;
 		}
 
 		#wpListClose {
 			position: absolute;
 			top: 0px;
 			right: 0px;
-			color: lightgrey;
+			color: gray;
 			background-color: white;
 			border: 0;
 			border-radius: 8px;
 		}
 
 		#wpListClose:hover {
+			color: lightgray;
+		}
+
+		#wpListMinimize {
+			position: absolute;
+			top: 0px;
+			right: 16px;
 			color: gray;
+			background-color: white;
+			border: 0;
+			border-radius: 8px;
+		}
+
+		#wpListMinimize:hover {
+			color: lightgray;
 		}
 
 		p {
@@ -236,14 +292,15 @@
 		}
 
 		.leaflet-popup-content {
-			margin: 13px 19px;
+			margin: 0;
 			line-height: 1.4;
 			/* min-width: 200px; */
 			display: contents;
 		}
 
 		.leaflet-popup-content-wrapper {
-			padding: 15px;
+			margin: 3px;
+			padding: 5px;
 			text-align: left;
 			border-radius: 8px;
 		}
@@ -533,7 +590,7 @@
 
 		td {
 			margin: 0;
-			padding: 5px;
+			padding: 2px;
 			font-size: larger;
 			text-align: center;
 		}
@@ -570,7 +627,6 @@
 			align-items: center;
 			justify-content: center;
 			min-width: 1.5rem;
-			min-height: 2rem;
 			cursor: pointer;
 			margin: 0;
 			position: relative;
@@ -593,34 +649,29 @@
 
 		.number-input input[type=text] {
 			font-family: "Roboto-Light";
-			padding: .5rem;
+			/* padding: 0.5rem; */
 			min-width: 5rem;
 			border: solid #ddd;
 			border-width: 0 2px;
 			font-size: 0.9rem;
-			height: 2rem;
+			height: 1.5rem;
 			font-weight: bold;
 			text-align: center;
 			background-color: #ffffff;
 		}
 
-		.button {
-			margin: 10px;
-		}
-
 		.teleportButton {
 			color: black;
 			width: 100%;
-			margin-top: 10px;
-			margin-bottom: 10px;
 			padding: 0;
 			font-family: "Roboto-Light";
 			font-weight: normal;
 			background-color: #ffffff;
 			border: solid #ddd;
 			border-width: 2px;
-			height: 2rem;
+			height: 1.6rem;
 			font-size: 0.9rem;
+			margin: 0;
 		}
 
 		.searchboxTable {
@@ -631,16 +682,16 @@
 		.marker-delete-button {
 			color: black;
 			width: 100%;
-			margin-top: 10px;
-			margin-bottom: 10px;
+			margin-top: 3px;
 			padding: 0;
 			font-family: "Roboto-Light";
 			font-weight: normal;
 			background-color: #ffffff;
 			border: solid #ddd;
 			border-width: 2px;
-			height: 2rem;
+			height: 1.6rem;
 			font-size: 0.9rem;
+			margin: 0;
 		}
 
 		.gg-erase {
@@ -898,6 +949,18 @@
 			border-radius: 40px
 		}
 
+		.refreshIcon { 
+			color: gray;
+			display: inline-block;
+			width: 20px;
+			height: 20px;
+			background: url("data:image/svg+xml,%3C%3Fxml version='1.0'%3F%3E%3Csvg fill='gray' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24px' height='24px'%3E%3Cpath d='M 9 3 C 8.448 3 8 3.448 8 4 C 8 4.552 8.448 5 9 5 L 18 5 C 18.552 5 19 5.448 19 6 L 19 15 L 17 15 C 16.596 15 16.231172 15.243188 16.076172 15.617188 C 16.025172 15.741187 16 15.871 16 16 C 16 16.26 16.101969 16.516031 16.292969 16.707031 L 19.292969 19.707031 C 19.683969 20.098031 20.317031 20.098031 20.707031 19.707031 L 23.707031 16.707031 C 23.993031 16.421031 24.077828 15.992188 23.923828 15.617188 C 23.768828 15.243187 23.404 15 23 15 L 21 15 L 21 6 C 21 4.343 19.657 3 18 3 L 9 3 z M 4 4 C 3.744125 4 3.4879687 4.0974687 3.2929688 4.2929688 L 0.29296875 7.2929688 C 0.00696875 7.5789687 -0.077828125 8.0078125 0.076171875 8.3828125 C 0.23117187 8.7568125 0.596 9 1 9 L 3 9 L 3 18 C 3 19.657 4.343 21 6 21 L 15 21 C 15.552 21 16 20.552 16 20 C 16 19.448 15.552 19 15 19 L 6 19 C 5.448 19 5 18.552 5 18 L 5 9 L 7 9 C 7.404 9 7.7688281 8.7568125 7.9238281 8.3828125 C 7.9748281 8.2588125 8 8.129 8 8 C 8 7.74 7.8980312 7.4839687 7.7070312 7.2929688 L 4.7070312 4.2929688 C 4.5115312 4.0974687 4.255875 4 4 4 z'/%3E%3C/svg%3E");
+			background-size: 100%;
+			position: relative; 
+			left: -5px;
+			top: 2px;
+		}
+
 		:root {
 			--light: #357987;
 			--dark: #035869;
@@ -939,8 +1002,8 @@
 			height: 4vh;
 			width: 6vw;
 			max-width: 90vw;
-				min-height: 10PX;
-				min-width: 10px;
+			min-height: 10PX;
+			min-width: 10px;
 			margin: 0.3vw;
 			border-radius: 0.4vw;
 			border: none;
@@ -970,10 +1033,12 @@
 			width: 30vw;
 			max-width: 15vw;
 		}
+
 		.keyboard__key--extra-wide {
 			width: 36vw;
 			max-width: 50vw;
 		}
+
 		.keyboard__key--activatable::after {
 			content: '';
 			top: 20%;
@@ -999,10 +1064,10 @@
 			background: rgba(0, 0, 0, 0.25);
 		}
 
-		.keybord__key--clear{
+		.keybord__key--clear {
 			background: rgba(255, 0, 0, 0.363);
 		}
-
+		
 	</style>
 </head>
 
@@ -1010,19 +1075,28 @@
 	<div id="map">
 		<div id="keyb">&nbsp;</div>
 	</div>
-	<div id="overlay"><div><button id="wpListClose" type="button" onclick="hideWpList()">x</button><span
-			id='date-time'></span></div>
-		<div style="padding-top: 15%;"><h3 style='font-size: 5; text-align: center; padding-top: 5px; margin-bottom: -20px;'>Flightplan</h3></div>
-		<div id="overlayContainer"><div id="overlayList"><ul></ul></div></div>
+	<div id="overlay">
+		<div><button id="wpListMinimize" type="button" onclick="minimizeWpList()">_</button><button id="wpListClose" type="button" onclick="hideWpList()">x</button><span id='date-time'></span></div>
+		<div id="wpHeaderDiv" style="padding-top: 12%;">
+			<h3 id="wpHeader" style='font-size: 5; text-align: center; padding-top: 12px; margin-bottom: -22px;'>Flightplan</h3>
+			<br><h4 id="depArrTop" style='font-size: 5; text-align: center; padding-top: 10px; margin-bottom: -10px;'><table id="depArrTable"><tr style="font-size: small;"><td id="start" style="text-align: center; width: 41%;">Start</td><td style="text-align: center; width: 18%;" rowspan="2">-</td><td id="target" style="text-align: center; width: 41%;">Target</td></tr><tr style="font-size: smaller;"><td id="dep" style="text-align: center;">Departure</td><td id="arr" style="text-align: center;">Arrival</td></tr></table></h4>
+		</div>
+		<div id="overlayContainer">
+			<div id="overlayList">
+				<ul></ul>
+			</div>
+		</div>
 		<div id="overlayListSum"></div>
 	</div>
-	<div id="overlay2"><button id="wpListClose" type="button" onclick="hideWpList()">x</button>
-		<table class="overlay2Table" style='text-align: center;'>
-			<tr>
-				<td>IAS: 9999kts I&nbsp;&nbsp;HEAD:&nbsp;999° I&nbsp;&nbsp;DIST:&nbsp;999999nm
-					I&nbsp;&nbsp;ALT:&nbsp;99999ft</td>
-			</tr>
-		</table>
+	<div id="banner" text-align: center;">
+		<div id="overlay2">
+			<table class="overlay2Table" style='text-align: center;'>
+				<tr>
+					<td>IAS: 9999kts I&nbsp;&nbsp;HEAD:&nbsp;999° I&nbsp;&nbsp;DIST:&nbsp;999999nm
+						I&nbsp;&nbsp;ALT:&nbsp;99999ft</td>
+				</tr>
+			</table>
+		</div>
 	</div>
 </body>
 
@@ -1039,6 +1113,7 @@
 	var toggle2;
 	var toggle3;
 	var toggle4;
+	var toggle5;
 	var newMarker;
 	var airplane;
 	var follow;
@@ -1055,13 +1130,13 @@
 	var pos_lng;
 	var coordinates = [];
 	var polylinepoints = [];
-	var showPath = true;
-	var targetMarker = 0;
+	var showPath = false;
+	var targetMarker = -1;
 	var distance;
 	var bearing;
 	var middleMarkers;
 	var headings = [];
-	var startlineShow = false;
+	var startlineShow = true;
 	var altitudes = [];
 	var activeWP;
 	var distances = [];
@@ -1079,23 +1154,63 @@
 	var LayerControl;
 	var wpListOn = false;
 	var popupTimeout;
+	var waypointmode = true;
+	var clickArr = [];
+	var markerId = 0;
+	var coordinatesArray = [];
+	var geojsonFeature;
+	var id = 0;
+	var markerTimeout;
+	var pLineGroup;
+	var pline;
+	var wpNames = [];
+	var wpTypes = [];
+	var atbls = [];
+	var wpi = 0;
+	var wpi2 = 0;
+	var wpi3 = 0;
+	var dep = "";
+	var arr = "";
 
 	window.addEventListener("DOMContentLoaded", function () {
 		// Get the message reference
+		airac = calculate_airac_cycle();
 		var messageElement = document.getElementById('message');
 		// Register the event listener
 		window.addEventListener('message', receiveMessage);
+
 		if (window.localStorage.getItem("mapCenterLat")) {
 			mapCenter[0] = window.localStorage.getItem("mapCenterLat");
 			mapCenter[1] = window.localStorage.getItem("mapCenterLng");
 		}
+
 		if (window.localStorage.getItem("zoomLevel")) {
 			zoomLevel = window.localStorage.getItem("zoomLevel");
 		}
-		airac = calculate_airac_cycle();
+
+		if (window.localStorage.getItem("altitudes")) {
+			altitudes = JSON.parse(window.localStorage.getItem("altitudes"));
+		}
+
+		if (window.localStorage.getItem("atbls")) {
+			atbls = JSON.parse(window.localStorage.getItem("atbls"));
+		}
+
+		if (window.localStorage.getItem("wpNames")) {
+			wpNames = JSON.parse(window.localStorage.getItem("wpNames"));
+		}
+
+		if (window.localStorage.getItem("wpTypes")) {
+			wpTypes = JSON.parse(window.localStorage.getItem("wpTypes"));
+		}
+
+		if (window.localStorage.getItem("targetMarker")) {
+			targetMarker = window.localStorage.getItem("targetMarker");
+		}
+
 		loadMap(mapCenter[0], mapCenter[1]);
 		Keyboard.init();
-		setTimeout(function(){ Keyboard.close(); }, 10);
+		setTimeout(function () { Keyboard.close(); }, 10);
 	});
 
 	function calculate_airac_cycle() {
@@ -1135,6 +1250,7 @@
 		var maxExtent = new L.LatLngBounds(southWest, northEast);
 
 		var streets = L.tileLayer('https://{s}.tile.openstreetmap.de/tiles/osmde/{z}/{x}/{y}.png', {
+			attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
 			bounds: maxExtent,
 			maxZoom: 18,
 			minZoom: 0,
@@ -1145,6 +1261,7 @@
 		});
 
 		var hybrid = L.tileLayer('http://{s}.google.com/vt/lyrs=s,h&x={x}&y={y}&z={z}', {
+			attribution:"<a href=\'http://maps.google.com/\'>Google</a> Maps Satellite",
 			bounds: maxExtent,
 			maxZoom: 20,
 			minZoom: 0,
@@ -1153,6 +1270,7 @@
 		});
 
 		var satellite = L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
+			attribution:"<a href=\'http://maps.google.com/\'>Google</a> Maps Satellite",
 			bounds: maxExtent,
 			maxZoom: 20,
 			minZoom: 0,
@@ -1161,6 +1279,7 @@
 		});
 
 		var terrain = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
+			attribution: 'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)',
 			bounds: maxExtent,
 			maxZoom: 17,
 			minZoom: 0,
@@ -1171,6 +1290,7 @@
 		});
 
 		var monochrome = L.tileLayer('http://{s}.tile.stamen.com/toner/{z}/{x}/{y}.png', {
+			attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a href="http://openstreetmap.org"> OpenStreetMap </a>, under <a href="http://www.openstreetmap.org/copyright">ODbL</a>.',
 			bounds: maxExtent,
 			minZoom: 0,
 			maxZoom: 14,
@@ -1179,6 +1299,7 @@
 		});
 
 		var water = L.tileLayer('http://{s}.tile.stamen.com/watercolor/{z}/{x}/{y}.png', {
+			attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, under <a href="http://creativecommons.org/licenses/by-sa/3.0">CC BY SA</a>.',
 			bounds: maxExtent,
 			minZoom: 0,
 			maxZoom: 14,
@@ -1187,6 +1308,7 @@
 		});
 
 		var airspaces = L.tileLayer('http://{s}.tile.maps.openaip.net/geowebcache/service/tms/1.0.0/openaip_basemap@EPSG%3A900913@png/{z}/{x}/{y}.{ext}', {
+			attribution: '<a href="https://www.openaip.net/">openAIP Data</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-NC-SA</a>)',
 			ext: 'png',
 			bounds: maxExtent,
 			maxZoom: 13,
@@ -1293,10 +1415,7 @@
 			bounds: maxExtent
 		});
 
-
-
 		L.control.scale({ maxWidth: 100 }).addTo(map);
-
 
 		GeoSearchControl = window.GeoSearch.GeoSearchControl;
 		AlgoliaProvider = window.GeoSearch.AlgoliaProvider;
@@ -1360,14 +1479,6 @@
 			}
 		});
 
-		var waypointmode = true;
-		var clickArr = [];
-		var markerId = 0;
-		var coordinatesArray = [];
-		var geojsonFeature;
-		var id = 0;
-		var markerTimeout;
-
 		map.on('click', function (e) {
 			if (waypointmode == false) {
 				if (map.hasLayer(newMarker)) {
@@ -1386,45 +1497,78 @@
 				var marker;
 				deleted = false;
 				document.getElementById("overlay").style.display = 'block';
+				document.getElementById("overlay2").style.display = 'inline-table';
 				clearTimeout(markerTimeout);
-				markerTimeout = setTimeout(function(){map.closePopup();}, 6000);
+				//markerTimeout = setTimeout(function(){map.closePopup();}, 6000);
 				//document.getElementById("overlay2").style.display= 'block' ;
 				$(".leaflet-geosearch-bar").css('top', 0);
 				//console.log(geojsonFeature.length);
 				//// hier ändern .....
 				geojsonFeature = {
 					"type": "Feature",
-					"properties": {},
+					"properties": {
+					},
 					"geometry": {
 						"type": "Point",
 						"coordinates": [e.latlng.lat, e.latlng.lng]
 					},
-					"id": markerId
+					"id": markerId,
 				}
+
 				if (markerId == 0) {
 					wp1_lat = e.latlng.lat;
 					wp1_lng = e.latlng.lng;
 				}
+
+				const svgIcon = L.divIcon({
+					html: `
+				<svg height="30" width="30"><circle cx="15" cy="15" r="5" stroke="grey" stroke-width="3" fill="rgb(41, 129, 202)" /></svg>`,
+					className: "",
+					iconSize: [30, 30],
+					iconAnchor: [15, 15],
+				});
+
+				if (!wpNames[markerId]) {
+					wpNames.push('WP' + (wpi3 + 1));
+					wpTypes.push('User');
+					wpi3++;
+				}
+
+				getMarkerId();
+
 				markers = L.layerGroup();
 				markers = L.geoJson(geojsonFeature, {
 					pointToLayer: function (feature, latlng) {
 						marker = L.marker(e.latlng, {
 							title: "WP",
 							alt: 1000,
+							name: wpNames[markerId],
+							type: wpTypes[markerId],
 							myId: markerId,
 							coord: e.latlng,
 							riseOnHover: true,
-							draggable: true
+							draggable: true,
+							icon: svgIcon
 						});
 						return marker;
 					}
 				}).addTo(map);
+
+				marker.bindTooltip(marker.options.type + " " + marker.options.name,
+					{
+						permanent: false,
+						direction: 'right'
+					});
+
 				coordinates.push(e.latlng);
+
 				const popup = L.popup({
 					closeOnClick: false,
 					autoClose: true,
 				});
-				popup.setContent("<table><tr><td><p style='font-size: 1.5rem'>WP" + (coordinatesArray.length + 1) + "</p></td></tr><tr style='text-align: left;'><td style='text-align: left;'><p style='font-size: 1rem, text-align: left;'>" + e.latlng.lat.toFixed(6) + ",<br>" + e.latlng.lng.toFixed(6) + "</p></td></tr><tr><td style='text-align:left; padding:0; font-size: 14px'><p style='text-align: left'>Altitude (ft): </p></td></tr><tr><td><div class='number-input'; onchange='setWPaltitude2();'><button onclick='WPaltitudeDwn()' ondblclick='WPaltitudeDwnDwn()'></button><input id='WPaltitudeInput' class='quantityTeleport' min='0' name='WPaltitudeInput' value=0 type='text'><button onclick='WPaltitudeUp()' ondblclick='WPaltitudeUpUp()' class='plus'></button></div></td></tr><br><tr><td><span style='margin-top: 15px'><button style='margin-top:10px; text-align: center' class='marker-delete-button' onclick='' >Delete</button></span></td></tr></table>");
+
+				popup.setContent("<table><tr><td><p style='font-size: 1.2rem'>" + marker.options.name + "</p></td></tr><tr><td><p style='font-size: 0.8rem'>" + marker.options.type + "</p></td></tr><tr style='text-align: left;'><td style='text-align: left;'><p style='font-size: 0.8rem, text-align: left;'>" + e.latlng.lat.toFixed(6) + ",<br>" + e.latlng.lng.toFixed(6) + "</p></td></tr><tr><td style='text-align:left; padding:0; font-size: 14px'><p style='text-align: center'>Altitude (ft): </p></td></tr><tr><td><div class='number-input'; onchange='setWPaltitude2();'><button onclick='WPaltitudeDwn()' ondblclick='WPaltitudeDwnDwn()'></button><input id='WPaltitudeInput' class='quantityTeleport' min='0' name='WPaltitudeInput' value=0 type='text'><button onclick='WPaltitudeUp()' ondblclick='WPaltitudeUpUp()' class='plus'></button></div></td></tr><br><tr><td><span style='margin-top: 5px'><button style='margin-top:5px; text-align: center' class='marker-delete-button' onclick='' >Delete</button></span></td></tr><tr><td><span><button style='margin-top:0px; text-align: center' class='teleportButton' onclick='teleport(" + e.latlng.lat + "," + e.latlng.lng + ")' >Teleport</button></span></td></tr></table>");
+
 				marker.bindPopup(popup);
 				marker.on("popupopen", onPopupOpen);
 				marker.on("click", function (e) {
@@ -1435,9 +1579,67 @@
 					//console.log(marker.feature.id);
 				});
 
-				if (targetMarker == 0) {
+				marker.on('mouseover', function (e) {
+					//this.openPopup();
+					id = this.options.myId;
 					startlineShow = true;
 					showWpList();
+					var tempMarker = this;
+					activeWP = this.options.myId;
+					setTimeout(loadAltitude, 200);
+
+					$(".marker-delete-button:visible").click(function () {
+						map.removeLayer(tempMarker);
+						pLineGroup.clearLayers();
+						coordinatesArray = [];
+						console.log(tempMarker);
+						//console.log(tempMarker.feature.geometry.coordinates[0]);
+						$(tempMarker).parent('li').remove();
+						var i = 0;
+						markerId = 0;
+						wpNames.splice(tempMarker.options.myId, 1);
+						wpTypes.splice(tempMarker.options.myId, 1);
+						console.log(wpNames);
+						$.each(map._layers, function (ml) {
+							if (map._layers[ml].feature) {
+								//map._layers[ml].feature.id = i;
+								//map._layers[ml].options.myId = i;
+								coordinates.push(map._layers[ml].feature.geometry.coordinates);
+								//console.log(map._layers[ml].feature.id);
+								if (i == 0) {
+									//console.log(map._layers[ml]);
+									//console.log(map._layers[ml].feature.geometry.coordinates);
+									wp1_lat = map._layers[ml].feature.geometry.coordinates[0];
+									wp1_lng = map._layers[ml].feature.geometry.coordinates[1];
+								}
+								i++;
+								markerId++;
+							}
+						});
+						if (i == 0) {
+							removeAllMarkers();
+						} else {
+							startLineGroup.clearLayers();
+							startlineShow = false;
+						}
+						$('.target').css('color', 'black');
+						localStorage.removeItem('targetMarker');
+						getMarkerId();
+						drawLines();
+					});
+					clearTimeout(popupTimeout);
+					popupTimeout = setTimeout(function () { map.closePopup(); }, 3000);
+				});
+
+				marker.on('mouseout', function (e) {
+					//this.closePopup();
+				});
+
+				if (targetMarker == -1) {
+					startlineShow = true;
+					showWpList();
+					targetMarker = 0;
+					localStorage.setItem('targetMarker', 0);
 				};
 				var points = getJSON('clickedPoints');
 				follow = false;
@@ -1449,7 +1651,6 @@
 				drawLines();
 				markerId++;
 			}
-
 
 			marker.on('dragend', function (e) {
 				//console.log('Dragend - ID: '+ this.options.myId + ' Coordinate: ' + this.options.coord);
@@ -1469,6 +1670,9 @@
 					wp1_lng = lng;
 				}
 				//console.log(coordinatesArray);
+				pLineGroup.eachLayer(function (layer) {
+					createMiddleMarkers(layer);
+				});
 			});
 		});
 
@@ -1485,8 +1689,11 @@
 				//console.log(tempMarker);
 				//console.log(tempMarker.feature.geometry.coordinates[0]);
 				$(tempMarker).parent('li').remove();
-				markerId--;
+				wpNames.splice(tempMarker.options.myId, 1);
+				wpTypes.splice(tempMarker.options.myId, 1);
+				console.log(wpNames);
 				var i = 0;
+				markerId = 0;
 				$.each(map._layers, function (ml) {
 					if (map._layers[ml].feature) {
 						map._layers[ml].feature.id = i;
@@ -1500,6 +1707,7 @@
 							wp1_lng = map._layers[ml].feature.geometry.coordinates[1];
 						}
 						i++;
+						markerId++;
 					}
 				});
 				if (i == 0) {
@@ -1508,132 +1716,70 @@
 					startLineGroup.clearLayers();
 					startlineShow = false;
 				}
+				localStorage.removeItem('targetMarker');
+				$('.target').css('color', 'black');
+				getMarkerId();
 				drawLines();
 			});
 			clearTimeout(popupTimeout);
-			popupTimeout = setTimeout(function(){ map.closePopup(); }, 5000);
+			popupTimeout = setTimeout(function () { map.closePopup(); }, 3000);
 		}
 
 		function loadAltitude() {
 			if ($('input[name="WPaltitudeInput"]').length) {
 				if (altitudes[activeWP] > 0) {
-					var alt = altitudes[activeWP];
-					$('input[name="WPaltitudeInput"]').val(alt);
+					$('input[name="WPaltitudeInput"]').val(altitudes[activeWP]);
 				}
 			}
 		}
 
-		var pLineGroup = new L.FeatureGroup();
-		var startLineGroup = new L.FeatureGroup();
+		function loadName() {
+			if ($('input[name="WPnameInput"]').length) {
+				if (wpNames[activeWP] > 0) {
+					$('input[name="WPnameInput"]').val(wpNames[activeWP]);
+				}
+			}
+		}
+
+		pLineGroup = new L.FeatureGroup();
+		startLineGroup = new L.FeatureGroup();
 		middleMarkers = new L.FeatureGroup();
 		pLineGroup.addTo(map);
 
 		function drawLines() {
 			savePoints();
 			wpi = 0;
+			wpi2 = 0;
 			var poslat = pos_lat;
 			var poslng = pos_lng;
 			$('#overlayList > ul').empty();
 			$('#overlayListSum').empty();
 			headings = [];
-			altitudes = JSON.parse(window.localStorage.getItem("altitudes") || "[]");
+			if (window.localStorage.getItem("altitudes")) {
+				altitudes = JSON.parse(window.localStorage.getItem("altitudes"));
+			}
+			if (window.localStorage.getItem("distances")) {
+				distances = JSON.parse(window.localStorage.getItem("distances"));
+			}
+			if (window.localStorage.getItem("wpNames")) {
+				wpNames = JSON.parse(window.localStorage.getItem("wpNames"));
+			}
+			if (window.localStorage.getItem("wpTypes")) {
+				wpTypes = JSON.parse(window.localStorage.getItem("wpTypes"));
+			}
 			$.each(map._layers, function (ml) {
 				if (map._layers[ml].feature) {
 					//console.log(map._layers[ml].feature);
 					coordinatesArray.push(map._layers[ml].feature.geometry.coordinates);
-					if (wpi == 0) {
-						$('#overlayList > ul').append('<li href="#" class="target" id="' + 0 + '">WP ' + (1) + ' ' + '<a href="#" class="" id="' + 0 + ' "></a></li>');
-					}
-					if (wpi > 0) {
-						var bearing2 = calculateBearing(coordinatesArray[(wpi - 1)][0], coordinatesArray[(wpi - 1)][1], coordinatesArray[wpi][0], coordinatesArray[wpi][1]);
-						//console.log(bearing2)						
-						if (altitudes[wpi]) {
-							if (Math.round(bearing2) < 10) {
-								$('#overlayList > ul').append('<p style="color:var(--light)">00' + Math.round(bearing2) + ' ° - <a style="color:red">' + parseFloat(altitudes[wpi]) + ' ft</a></p> ');
-							}
-							else if (Math.round(bearing2) < 100) {
-								$('#overlayList > ul').append('<p style="color:var(--light)">0' + Math.round(bearing2) + ' ° - <a style="color:red">' + parseFloat(altitudes[wpi]) + ' ft</a></p> ');
-							}
-							else {
-								$('#overlayList > ul').append('<p style="color:var(--light)">' + Math.round(bearing2) + ' ° - <a style="color:red">' + parseFloat(altitudes[wpi]) + ' ft</a></p> ');
-							}
-						}
-						else {
-							if (Math.round(bearing2) < 10) {
-								$('#overlayList > ul').append('<p style="color:var(--light)">00' + Math.round(bearing2) + ' ° - <a style="">0 ft</a></p> ');
-							}
-							else if (Math.round(bearing2) < 100) {
-								$('#overlayList > ul').append('<p style="color:var(--light)">0' + Math.round(bearing2) + ' ° - <a style="">0 ft</a></p> ');
-							}
-							else {
-								$('#overlayList > ul').append('<p style="color:var(--light)">' + Math.round(bearing2) + ' ° - <a style="">0 ft</a></p> ');
-							}
-						}
-						$('#overlayList > ul').append('<li href="#" class="target" id="' + wpi + '">WP ' + (wpi + 1) + ' ' + '<a href="#" class="" id="' + wpi + ' "></a></li>');
-					}
 					wpi++;
 				}
 			});
-
 			if (wpi == 0) {
 				startLineGroup.clearLayers();
 				map.removeLayer(startLineGroup);
 			}
 
-			var secondclick = false;
-
-			$('.target').on("click", function (event) {
-				if (targetMarker != event.target.id) {
-					var targetMarker2 = event.target;
-					//console.log('target marker: ' + targetMarker2.id);
-					targetMarker = targetMarker2.id;
-					$('.target').css('color', 'black');
-					$(this).css('color', 'red');
-					localStorage.setItem('targetMarker', event.target.id);
-					//console.log('target marker saved: ' + event.target.id);
-					secondclick = false;
-					if (map.hasLayer(startLineGroup)) {
-						map.removeLayer(startLineGroup);
-					}
-					if (!map.hasLayer(startLineGroup)) {
-						map.addLayer(startLineGroup);
-					}
-					startlineShow = true;
-					document.getElementById("overlay2").style.display = 'block';
-					$(".leaflet-geosearch-bar").css('top', 72);
-				}
-				else {
-					if (targetMarker == event.target.id && secondclick == false) {
-						$('.target').css('color', 'black');
-						secondclick = true;
-						if (map.hasLayer(startLineGroup)) {
-							map.removeLayer(startLineGroup);
-						}
-						startlineShow = false;
-						document.getElementById("overlay2").style.display = 'none';
-						$(".leaflet-geosearch-bar").css('top', 0);
-					}
-					else if (targetMarker == event.target.id && secondclick == true) {
-						localStorage.setItem('targetMarker', event.target.id);
-						//console.log('target marker saved: ' + event.target.id);
-						$('.target').css('color', 'black');
-						$(this).css('color', 'red');
-						secondclick = false;
-						if (map.hasLayer(startLineGroup)) {
-							map.removeLayer(startLineGroup);
-						}
-						if (!map.hasLayer(startLineGroup)) {
-							map.addLayer(startLineGroup);
-						}
-						startlineShow = true;
-						document.getElementById("overlay2").style.display = 'block';
-						$(".leaflet-geosearch-bar").css('top', 72);
-					}
-				}
-				map.closePopup();
-			});
-
-			var pline = L.polyline(coordinatesArray, { color: 'rgb(41,129,202)' });
+			pline = L.polyline(coordinatesArray, { color: 'rgb(41,129,202)' });
 
 			if (map.hasLayer(middleMarkers)) {
 				map.removeLayer(middleMarkers);
@@ -1661,6 +1807,178 @@
 				createMiddleMarkers(layer);
 			});
 
+
+			$.each(map._layers, function (ml) {
+				if (map._layers[ml].feature) {
+					//console.log(map._layers[ml].feature);
+					if (wpi2 == 0) {
+						$('#overlayList > ul').append('<li href="#" class="target" id="' + wpi2 + '">' + map._layers[ml].options.name + '<br>' + map._layers[ml].options.type + ' ' + '<a href="#" class="" id="' + wpi2 + ' "></a></li>');
+					}
+					if (wpi2 > 0) {
+						var bearing2 = calculateBearing(coordinatesArray[(wpi2 - 1)][0], coordinatesArray[(wpi2 - 1)][1], coordinatesArray[wpi2][0], coordinatesArray[wpi2][1]);
+						//console.log(bearing2)						
+						if (altitudes[wpi2]) {
+							if (Math.round(bearing2) < 10) {
+								if (atbls[wpi2]) {
+									$('#overlayList > ul').append('<p style="color:var(--light)">00' + Math.round(bearing2) + '&deg; - <a>' + parseFloat(altitudes[wpi2 - 1]).toFixed(0) + ' ft ' + atbls[wpi2] + '</a></p> ');
+								}
+								else {
+									$('#overlayList > ul').append('<p style="color:var(--light)">00' + Math.round(bearing2) + '&deg; - <a>' + parseFloat(altitudes[wpi2 - 1]).toFixed(0) + ' ft ' + '</a></p> ');
+								}
+							}
+							else if (Math.round(bearing2) < 100) {
+								if (atbls[wpi2]) {
+									$('#overlayList > ul').append('<p style="color:var(--light)">0' + Math.round(bearing2) + '&deg; - <a>' + parseFloat(altitudes[wpi2 - 1]).toFixed(0) + ' ft ' + atbls[wpi2] + '</a></p> ');
+								}
+								else {
+									$('#overlayList > ul').append('<p style="color:var(--light)">0' + Math.round(bearing2) + '&deg; - <a>' + parseFloat(altitudes[wpi2 - 1]).toFixed(0) + ' ft ' + '</a></p> ');
+								}
+							}
+							else {
+								if (atbls[wpi2]) {
+									$('#overlayList > ul').append('<p style="color:var(--light)">' + Math.round(bearing2) + '&deg; - <a>' + parseFloat(altitudes[wpi2 - 1]).toFixed(0) + ' ft ' + atbls[wpi2] + '</a></p> ');
+								}
+								else {
+									$('#overlayList > ul').append('<p style="color:var(--light)">' + Math.round(bearing2) + '&deg; - <a>' + parseFloat(altitudes[wpi2 - 1]).toFixed(0) + ' ft ' + '</a></p> ');
+								}
+							}
+						}
+						else {
+							if (Math.round(bearing2) < 10) {
+								$('#overlayList > ul').append('<p style="color:var(--light)">00' + Math.round(bearing2) + '&deg;</p> ');
+							}
+							else if (Math.round(bearing2) < 100) {
+								$('#overlayList > ul').append('<p style="color:var(--light)">0' + Math.round(bearing2) + '&deg;</p> ');
+							}
+							else {
+								$('#overlayList > ul').append('<p style="color:var(--light)">' + Math.round(bearing2) + '&deg;</p> ');
+							}
+						}
+						if (distances[wpi2 - 1]) {
+							$('#overlayList > ul').append('<a style="">' + parseFloat(distances[wpi2 - 1]).toFixed(0) + ' nm</a> ');
+						}
+						$('#overlayList > ul').append('<li href="#" class="target" id="' + wpi2 + '">' + map._layers[ml].options.name + '<br>' + map._layers[ml].options.type + ' ' + '<a href="#" class="" id="' + wpi2 + ' "></a></li>');
+					}
+					wpi2++;
+				}
+			});
+
+			if(wpNames[0]){
+				document.getElementById('start').innerHTML = wpNames[0];
+				document.getElementById('depArrTable').style.display = '';
+				if(dep!= "" || arr!= ""){
+					document.getElementById('dep').innerHTML = dep;
+					document.getElementById('arr').innerHTML = arr;
+					document.getElementById("overlayContainer").style.top = '115px';
+					if (wpListMinimized == true){
+						document.getElementById("overlay").style.minHeight = '8%';
+					}
+				}
+				else{
+					document.getElementById('dep').innerHTML = '';
+					document.getElementById('arr').innerHTML = '';
+					document.getElementById("overlayContainer").style.top = '100px';
+					if (wpListMinimized == true){
+						if (start != "" && target != ""){
+							document.getElementById("overlay").style.minHeight = '3%';
+						}
+						else{
+							document.getElementById("overlay").style.minHeight = '1.5%';
+						}
+					}
+				}
+			}
+			else{
+				document.getElementById('start').innerHTML = '';
+				document.getElementById('depArrTable').style.display = 'none';
+				document.getElementById("overlayContainer").style.top = '80px';
+			}
+
+			if(wpNames[wpNames.length-1] && wpNames[0]!= wpNames[wpNames.length-1]){
+				document.getElementById('target').innerHTML = wpNames[wpNames.length-1];
+				document.getElementById('depArrTable').style.display = '';
+				if(dep!= "" || arr!= ""){
+					document.getElementById('dep').innerHTML = dep;
+					document.getElementById('arr').innerHTML = arr;
+					document.getElementById("overlayContainer").style.top = '115px';
+					if (wpListMinimized == true){
+						document.getElementById("overlay").style.minHeight = '8%';
+					}
+				}
+				else{
+					document.getElementById('dep').innerHTML = '';
+					document.getElementById('arr').innerHTML = '';
+					document.getElementById("overlayContainer").style.top = '100px';
+					if (wpListMinimized == true){
+						if (start != "" && target != ""){
+							document.getElementById("overlay").style.minHeight = '3%';
+						}
+						else{
+							document.getElementById("overlay").style.minHeight = '1.5%';
+						}
+					}
+				}
+			}
+			else{
+				document.getElementById('target').innerHTML = '';
+				document.getElementById('depArrTable').style.display = 'none';
+				document.getElementById("overlayContainer").style.top = '80px';
+			}
+
+
+			for (let i = wpTypes.length-1; i >= 0; i--) {
+				var splitted =  wpTypes[i].split(' ');
+				var type = splitted[0];
+				var name = splitted[1];
+				if (type == 'ARR'){
+					arr = name;
+					break; 
+				}
+			}
+
+			for (let i = 0; i < wpTypes.length; i++) {
+				var splitted =  wpTypes[i].split(' ');
+				var type = splitted[0];
+				var name = splitted[1];
+				if (type == 'DEP'){
+					dep = name;
+					break; 
+				}
+			}
+
+			$('.target').on("click", function (event) {
+				if (targetMarker != event.target.id || targetMarker == -2) {
+					var targetMarker2 = event.target;
+					startlineShow = true;
+					//console.log('target marker: ' + targetMarker2.id);
+					targetMarker = targetMarker2.id;
+					$('.target').css('color', 'black');
+					if(startlineShow == true){
+						$(this).css('color', 'red');
+					}
+					localStorage.setItem('targetMarker', event.target.id);
+					//console.log('target marker saved: ' + event.target.id);
+					secondclick = false;
+					if (!map.hasLayer(startLineGroup)) {
+						map.addLayer(startLineGroup);
+					}
+					document.getElementById("overlay2").style.display = 'inline-block';
+					$(".leaflet-geosearch-bar").css('top', 72);
+				}
+				else {
+					$('.target').css('color', 'black');
+					if (map.hasLayer(startLineGroup)) {
+						map.removeLayer(startLineGroup);
+					}
+					startlineShow = false;
+					localStorage.setItem('targetMarker', -2);
+					document.getElementById("overlay2").style.display = 'none';
+					$(".leaflet-geosearch-bar").css('top', -2);
+					targetMarker = -2;
+					localStorage.setItem('targetMarker', -2);
+				}
+				map.closePopup();
+			});
 		}
 
 		function markerFunction(id) {
@@ -1681,13 +1999,15 @@
 				var nlat = pos_lat;
 				var nlng = pos_lng;
 				var i = 0;
-				if (target <= coordinatesArray.length) {
-					nwp1_lat = coordinatesArray[target][0];
-					nwp1_lng = coordinatesArray[target][1];
-					if (browserDebug == 0) {
+				if (browserDebug == 0) {
+					if (target <= coordinatesArray.length) {
+						nwp1_lat = coordinatesArray[target][0];
+						nwp1_lng = coordinatesArray[target][1];
 						var p2 = new L.LatLng(nwp1_lat, nwp1_lng);
 						var pos2 = new L.LatLng(nlat, nlng);
 						var coordinates2 = [p2, pos2];
+					}
+					if(coordinatesArray.length > 0){
 						if (startlineShow == true) {
 							startLineGroup.clearLayers();
 							startLineGroup.addLayer(L.polyline(coordinates2, { color: '#ff2e63' }));
@@ -1705,7 +2025,8 @@
 
 				var distance2 = 0;
 				var heading = 0;
-				var alt = 0
+				var alt1 = 0;
+				var alt = parseFloat(altitude).toFixed(0);
 				var vel = parseFloat(speed).toFixed(0);
 
 				if (startlineShow == true) {
@@ -1713,16 +2034,16 @@
 					heading = calculateBearing(nlat, nlng, nwp1_lat, nwp1_lng);
 				}
 				if (altitudes[target] && startlineShow == true) {
-					alt = parseFloat(altitudes[target]);
+					alt1 = parseFloat(altitudes[target]);
 				}
 
-				$('#overlay2').html('<table class="overlay2Table" style="text-align: center;"><tr><td>IAS:&nbsp;' + vel + 'kts  I&nbsp;&nbsp;HEAD:&nbsp;' + heading.toFixed(0) + '°  I&nbsp;&nbsp;DIST:&nbsp;' + distance2.toFixed(2) + 'nm  I&nbsp;&nbsp;ALT:&nbsp;' + alt.toFixed(0) + 'ft</td></tr></table>');
+				$('#overlay2').html('<table class="overlay2Table" style="text-align: center;"><tr><td>IAS:&nbsp;' + vel + 'kts  I&nbsp;&nbsp;HEAD:&nbsp;' + heading.toFixed(0) + '°  I&nbsp;&nbsp;DIST:&nbsp;' + distance2.toFixed(2) + 'nm  I&nbsp;&nbsp;ALT:&nbsp;' + alt + 'ft/' + alt1.toFixed(0) + 'ft</td></tr></table>');
 				distance = calculateDistance(nlat, nlng, nwp1_lat, nwp1_lng, 'K');
 				if (distance <= 1) {
 					if (startlineShow == true) {
 						targetMarker++;
 						localStorage.setItem('targetMarker', targetMarker);
-						if (targetMarker == coordinatesArray.length) {
+						if (targetMarker == coordinatesArray.length && coordinatesArray.length > 1) {
 							targetMarker = 0;
 							localStorage.setItem('targetMarker', targetMarker);
 							startlineShow = false;
@@ -1762,20 +2083,6 @@
 			return heading;
 		}
 
-		function deleteAllMarkers() {
-			deleted = true;
-			$.each(map._layers, function (ml) {
-				if (map._layers[ml].feature) {
-					map.removeLayer(this);
-				}
-			})
-			targetMarker = 0;
-			window.localStorage.removeItem('clickedPoints');
-			window.localStorage.removeItem('altitudes');
-			//console.log('All markers deleted');
-			altitudes = [];
-		}
-
 		toggle = L.easyButton('gg-track', function () {
 			follow = true;
 			toggle.disable();
@@ -1791,12 +2098,13 @@
 			map.setZoom(zoomLevel);
 		}
 
+		loadPoints();
+
 		setInterval(function () {
 			map.invalidateSize();
 			//console.log('invalidate');
 		}, 100);
 
-		loadPoints();
 
 		map.on("dragstart", function (e) {
 			toggle.enable();
@@ -1814,6 +2122,8 @@
 			toggle4.enable();
 		});
 
+		polyline = L.polyline(polylinepoints);
+		
 		map.on('overlayadd', function (e) {
 			console.log(e.group.name);
 
@@ -1849,7 +2159,7 @@
 					var imgAirplane = document.getElementById('imageAirplane');
 					imgAirplane.style.visibility = 'visible';
 
-					if(map.hasLayer(flightpath)){
+					if (map.hasLayer(flightpath)) {
 						if (!map.hasLayer(polyline)) {
 							map.addLayer(polyline);
 						}
@@ -1861,7 +2171,7 @@
 						}
 					}
 
-					if (wpi > 0){
+					if (wpi > 0) {
 						showWpList();
 					}
 				}
@@ -1896,11 +2206,10 @@
 
 		map.on('overlayremove', onOverlayRemove);
 		function onOverlayRemove(e) {
-
 		}
 
 		function flightpathReset() {
-			if(showPath == true){
+			if (showPath == true) {
 				console.log('Flightpath reset!');
 				if (map.hasLayer(polyline)) {
 					map.removeLayer(polyline);
@@ -1913,7 +2222,7 @@
 				}
 				setTimeout(function () { map.removeLayer(flightpath_reset); map.addLayer(flightpath); }, 100);
 			}
-			else if (showPath == false){
+			else if (showPath == false) {
 				setTimeout(function () { map.removeLayer(flightpath_reset); map.addLayer(flightpath_off); }, 100);
 			}
 
@@ -1928,28 +2237,26 @@
 		LayerControl = L.control.groupedLayers(baseMaps, groupedOverlays, options).addTo(map);
 
 		$('.leaflet-control-layers.leaflet-control').on('mouseenter', () => {
-			if(wpListOn == true){
+			if (wpListOn == true) {
 				document.getElementById("overlay").style.display = 'none';
 				document.getElementById("overlay2").style.display = 'none';
 			}
 		});
 
 		$('.leaflet-control-layers.leaflet-control').on('mouseleave', () => {
-			if(wpListOn == true){
+			if (wpListOn == true) {
 				document.getElementById("overlay").style.display = 'block';
-				document.getElementById("overlay2").style.display = 'block';
+				document.getElementById("overlay2").style.display = 'inline-block';
 			}
 		});
 
 		var firstStart = true;
 		$('.glass').on('click', () => {
-			if (firstStart == true){
+			if (firstStart == true) {
 				firstStart = false;
 			}
 			Keyboard.open();
 		});
-
-		polyline = L.polyline(polylinepoints).addTo(map);
 
 		toggle2 = L.easyButton({
 			id: 'arrowButton', // an id for the generated button
@@ -1962,6 +2269,7 @@
 				icon: '<i id="arrow"; class="gg-arrow-down"></i>' + '<span class="backButton">3kts</span><br>',
 			}]
 		}).addTo(map);
+
 
 		toggle4 = L.easyButton({
 			states: [{
@@ -1997,7 +2305,7 @@
 						}
 					})
 					window.localStorage.setItem("altitudes", JSON.stringify(altitudes));
-					localStorage.setItem('targetMarker', 0);
+					localStorage.setItem('targetMarker', -1);
 					toggle3 = false;
 					startlineShow = false;
 					waypointmode = false;
@@ -2027,45 +2335,30 @@
 		});
 		toggle4.addTo(map);
 
+		toggle5 = L.easyButton('refreshIcon', function () {
+			try {
+				console.log('Get flightplan!');
+				var xhr2 = new XMLHttpRequest();
+				xhr2.open("POST", 'synchronizeFlightplan', true);
+				var myText2 = "foobar";
+				xhr2.send(myText2);
+				xhr2.onreadystatechange = function () {
+					if (xhr2.readyState == XMLHttpRequest.DONE) {
+						console.log('Response: ' + xhr2.responseText);
+						window.parent.postMessage('flightplan:' + xhr2.responseText, 'coui://html_ui');
+					}
+				}
+			}
+			catch (e) {
+				//console.log(e);
+			}
+		}).addTo(map);
+
 		toggle3 = L.easyButton('gg-trash', function () {
 			removeAllMarkers();
 			var x = document.getElementById("keyboard");
 			x.style.display = "none";
 		}).addTo(map);
-
-		function removeAllMarkers() {
-			markerId = 0;
-			coordinates = [];
-			coordinatesArray = [];
-			map.removeLayer(startLineGroup);
-			hideWpList();
-			if (map.hasLayer(startLineGroup)) {
-				map.removeLayer(startLineGroup);
-			}
-			middleMarkers.clearLayers();
-			pLineGroup.clearLayers();
-			if (map.hasLayer(polyline)) {
-				map.removeLayer(polyline);
-				polylinepoints = [];
-				polyline = [];
-				if (showPath == true) {
-					polyline = L.polyline(polylinepoints).addTo(map);
-					map.addLayer(polyline);
-				}
-			}
-			else {
-				if (showPath == true) {
-					polyline = L.polyline(polylinepoints).addTo(map);
-					map.addLayer(polyline);
-				}
-			}
-			window.localStorage.setItem("altitudes", JSON.stringify(altitudes));
-			localStorage.setItem('targetMarker', 0);
-			deleteAllMarkers();
-			toggle3 = false;
-			startlineShow = false;
-			altitudes = [];
-		}
 
 		function clearArray(array) {
 			while (array.length) {
@@ -2085,6 +2378,81 @@
 		}).addTo(map);
 	}
 
+	function getMarkerId() {
+		var markerIdArrray = [];
+		wpi3 = 0;
+		for (let index = 0; index < wpNames.length; index++) {
+			const element = wpNames[index];
+			const elementSplit = element.split('WP');
+			if (elementSplit[1] && !isNaN(elementSplit[1])) {
+				markerIdArrray.push(elementSplit[1]);
+			}
+		}
+		if (markerIdArrray.length > 0) {
+			wpi3 = Math.max.apply(Math, markerIdArrray);
+		}
+	}
+
+	function removeAllMarkers() {
+		markerId = 0;
+		wpi = 0;
+		coordinates = [];
+		coordinatesArray = [];
+		map.removeLayer(startLineGroup);
+		hideWpList();
+		if (map.hasLayer(startLineGroup)) {
+			map.removeLayer(startLineGroup);
+		}
+		middleMarkers.clearLayers();
+		pLineGroup.clearLayers();
+		if (map.hasLayer(polyline)) {
+			map.removeLayer(polyline);
+			polylinepoints = [];
+			polyline = [];
+			if (showPath == true) {
+				polyline = L.polyline(polylinepoints).addTo(map);
+				map.addLayer(polyline);
+			}
+		}
+		else {
+			if (showPath == true) {
+				polyline = L.polyline(polylinepoints).addTo(map);
+				map.addLayer(polyline);
+			}
+		}
+		localStorage.setItem('targetMarker', -1);
+		startlineShow = false;
+		targetMarker = -1;
+		deleteAllMarkers();
+		toggle3 = false;
+		altitudes = [];
+		wpNames = [];
+		wpTypes = [];
+		wpi2 = 0;
+		wpi3 = 0;
+		dep = "";
+		arr = "";
+	}
+
+	function deleteAllMarkers() {
+		deleted = true;
+		$.each(map._layers, function (ml) {
+			if (map._layers[ml].feature) {
+				map.removeLayer(this);
+			}
+		})
+		window.localStorage.removeItem('clickedPoints');
+		window.localStorage.removeItem('altitudes');
+		//console.log('All markers deleted');
+		altitudes = [];
+		wpNames = [];
+		wpTypes = [];
+		atbls = [];
+		window.localStorage.removeItem("wpNames");
+		window.localStorage.removeItem("wpTypes");
+	}
+
+
 	function setJSON(key, value) {
 		window.localStorage.setItem(key, JSON.stringify(value));
 	}
@@ -2097,7 +2465,7 @@
 		var coordinates = getJSON('clickedPoints');
 		wpNum = 0;
 		if (coordinates) {
-			targetMarker = 0;
+
 			var i = 0;
 			coordinates.forEach((entry) => {
 				map.fire('click', {
@@ -2136,6 +2504,10 @@
 		});
 		//console.log(coordinates);
 		setJSON('clickedPoints', coordinates);
+		window.localStorage.setItem("wpNames", JSON.stringify(wpNames));
+		window.localStorage.setItem("wpTypes", JSON.stringify(wpTypes));
+		window.localStorage.setItem("altitudes", JSON.stringify(altitudes));
+		window.localStorage.setItem("atbls", JSON.stringify(atbls));
 	}
 
 	function calcMiddleLatLng(map, latlng1, latlng2) {
@@ -2175,8 +2547,9 @@
 					html: '<div style="background-color:white; color: var(--dark); border-radius: 4px; text-align: center; width:100px; font-size: 16px; border: 2px solid rgba(0,0,0,0.2); background-clip: padding-box;	border-radius: 10px;">' + distance.toFixed(2) + ' nm</div>'
 				})
 			}).addTo(middleMarkers);
+
 		}
-		middleMarkers.addTo(map);
+		//middleMarkers.addTo(map);
 		$('#overlayListSum').append('<b>Total:</b >&nbsp;' + gesDist.toFixed(2) + ' nm');
 	}
 
@@ -2200,6 +2573,26 @@
 	document.getElementById("overlay2").style.display = 'none';
 	$(".leaflet-geosearch-bar").css('top', 0);
 
+	var wpListMinimized = false;
+	function minimizeWpList() {
+		if (wpListMinimized == false){
+			document.getElementById("overlayContainer").style.display = 'none';
+			document.getElementById("overlayListSum").style.display = 'none';
+			document.getElementById("wpHeader").style.display = 'none';
+			document.getElementById("overlay").style.minHeight = '2%';
+			document.getElementById("wpListMinimize").innerHTML = '+';
+			wpListMinimized = true;
+		}
+		else{
+			document.getElementById("overlayContainer").style.display = '';
+			document.getElementById("overlayListSum").style.display = 'inline-block';
+			document.getElementById("wpHeader").style.display = '';
+			document.getElementById("overlay").style.minHeight = '50%';
+			document.getElementById("wpListMinimize").innerHTML = '_';
+			wpListMinimized = false;
+		}
+	}
+
 	function hideWpList() {
 		wpListOn = false;
 		document.getElementById("overlay").style.display = 'none';
@@ -2208,14 +2601,14 @@
 	}
 
 	function showWpList() {
-		if (wpi > 1){
+		if (wpi > 1) {
 			wpListOn = true;
 			document.getElementById("overlay").style.display = 'block';
 			//$("leaflet-geosearch-bar").css({ top: '100px' });
 			$(".leaflet-geosearch-bar").css('top', 72);
 
 			if (startlineShow == true) {
-				document.getElementById("overlay2").style.display = 'block';
+				document.getElementById("overlay2").style.display = 'inline-block';
 			}
 		}
 	}
@@ -2303,10 +2696,10 @@
 	}
 
 	function updateLiElement() {
-		var x = document.querySelectorAll('#overlayList > ul > p > a')[activeWP - 1];
+		var x = document.querySelectorAll('#overlayList > ul > p > a')[activeWP];
 		x.innerHTML = altitudes[activeWP] + ' ft';
 		clearTimeout(popupTimeout);
-		popupTimeout = setTimeout(function(){ map.closePopup(); }, 5000);
+		popupTimeout = setTimeout(function () { map.closePopup(); }, 5000);
 	}
 
 	function setPosition(lat, lng) {
@@ -2334,12 +2727,18 @@
 	function teleport(lat, lng) {
 		var x = document.getElementById("keyboard");
 		x.style.display = "none";
-		var altInput = parseFloat(document.getElementById('altitudeInput').value);
-		var headingInput = parseFloat(document.getElementById('headingInput').value);
-		var speedInput = parseFloat(document.getElementById('speedInput').value);
-		postMessage('map:' + lat + '_' + lng + '_' + altInput + '_' + headingInput + '_' + speedInput)
-		if (map.hasLayer(newMarker)) {
-			map.removeLayer(newMarker);
+
+		if (waypointmode == true) {
+			postMessage('map:' + lat + '_' + lng + '_' + altitude + '_' + heading + '_' + speed)
+		}
+		else {
+			var altInput = parseFloat(document.getElementById('altitudeInput').value);
+			var headingInput = parseFloat(document.getElementById('headingInput').value);
+			var speedInput = parseFloat(document.getElementById('speedInput').value);
+			postMessage('map:' + lat + '_' + lng + '_' + parseFloat(altInput) + '_' + parseFloat(headingInput) + '_' + parseFloat(speedInput))
+			if (map.hasLayer(newMarker)) {
+				map.removeLayer(newMarker);
+			}
 		}
 	}
 
@@ -2364,36 +2763,138 @@
 
 	var lastLat;
 	var lastLng;
+	var flightplan;
+	var atbl = [];
+	const delay = ms => new Promise(res => setTimeout(res, ms));
 	// Receive controls from parent page
 	function receiveMessage(e) {
-		if (browserDebug == 0) {
-			var request = e.data;
-			console.log(e.data);
-			// Call function:
-			var latlng = request.split("_");
-			altitude = (latlng[2]);
-			heading = latlng[3] * 180 / Math.PI;
-			speed = (latlng[4]);
-			$('#map').css('height', latlng[7] - 10 + 'px');
-			$('body').css('height', latlng[7] - 10 + 'px');
-			$('html').css('height', latlng[7] - 10 + 'px');
-			document.documentElement.style.setProperty('--light', latlng[8]);
-			document.documentElement.style.setProperty('--dark', latlng[9]);
-			document.documentElement.style.setProperty('--fontLight', latlng[10]);
-			document.documentElement.style.setProperty('--fontDark', latlng[11]);
-			var dt = new Date();
-			var time = dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds();
-			var date = dt.getFullYear() + '-' + (dt.getMonth() + 1) + '-' + dt.getDate();
-			document.getElementById('date-time').innerHTML = date + "   " + time;
-			setPosition(latlng[0], latlng[1]);
-			setRotation(heading);
-			setWind(latlng[5], latlng[6]);
-			if (latlng[0] != lastLat && latlng[1] != lastLng) {
-				polyline.addLatLng([latlng[0], latlng[1]]);
-				lastLat = latlng[0];
-				lastLng = latlng[1];
+		var sender = e.data.substr(0, e.data.indexOf(':'));
+		var message = e.data.substr(e.data.indexOf(':') + 1, e.data.length);
+		console.log(e.data);
+		if (sender == 'Position') {
+			if (browserDebug == 0) {
+				// Call function:
+				var latlng = message.split("_");
+				altitude = (latlng[2]);
+				heading = latlng[3] * 180 / Math.PI;
+				speed = (latlng[4]);
+				$('#map').css('height', latlng[7] - 10 + 'px');
+				$('body').css('height', latlng[7] - 10 + 'px');
+				$('html').css('height', latlng[7] - 10 + 'px');
+				document.documentElement.style.setProperty('--light', latlng[8]);
+				document.documentElement.style.setProperty('--dark', latlng[9]);
+				document.documentElement.style.setProperty('--fontLight', latlng[10]);
+				document.documentElement.style.setProperty('--fontDark', latlng[11]);
+				var dt = new Date();
+				var time = dt.getHours() + ":" + dt.getMinutes() + ":" + dt.getSeconds();
+				var date = dt.getFullYear() + '-' + (dt.getMonth() + 1) + '-' + dt.getDate();
+				document.getElementById('date-time').innerHTML = date + "   " + time;
+				setPosition(latlng[0], latlng[1]);
+				setRotation(heading);
+				setWind(latlng[5], latlng[6]);
+				if (latlng[0] != lastLat && latlng[1] != lastLng) {
+					polyline.addLatLng([latlng[0], latlng[1]]);
+					lastLat = latlng[0];
+					lastLng = latlng[1];
+				}
 			}
 		}
+		else if (sender == 'Flightplan') {
+			//console.log(message);
+			flightplan = JSON.parse(message);
+			if (flightplan) {
+				var x = document.getElementById("keyboard");
+				x.style.display = "none";
+				removeAllMarkers();
+				setTimeout(setWaypoints, 1000);
+			}
+		}
+	}
+
+	function setWaypoints() {
+		var i = 0;
+		var i2 = 0;
+		wpi = 0;
+
+		altitudes = [];
+		atbls = [];
+		wpTypes = [];
+		wpNames = [];
+		flightplan.forEach((entry) => {
+			if (entry.altitude) {
+				altitudes.splice(i2, 0, String(parseFloat(entry.altitude).toFixed(0)));
+			}
+			else {
+				altitudes.splice(i2, 0, "0");
+			}
+
+			if (entry.atbl) {
+				if (entry.atbl == "AT_OR_ABOVE") {
+					atbls.splice(i2, 0, 'A');
+				}
+				if (entry.atbl == "AT_OR_BELOW") {
+					atbls.splice(i2, 0, 'B');
+				}
+				else {
+					atbls.splice(i2, 0, '');
+				}
+			}
+
+			if (entry.name) {
+				if (entry.name == 'TIMEDSCNT'){
+					wpNames.splice(i2, 0, 'TOD');
+					wpTypes.push('Info');
+
+				}
+				else if (entry.name == 'TIMECRUIS'){
+					wpNames.splice(i2, 0, 'TOC');
+					wpTypes.push('Info');
+
+				}else{
+					wpNames.splice(i2, 0, entry.name);
+					if (entry.waypointType) {
+						wpTypes.push(entry.waypointType);
+					}
+					else {
+						wpTypes.push('User');
+					}
+				}
+			}
+			else {
+				wpNames.splice(i2, 0, "WP" + (wpi3 + 1));
+				wpi3++;
+			}
+			i2++;
+
+
+		});
+
+		window.localStorage.setItem("wpNames", JSON.stringify(wpNames));
+		window.localStorage.setItem("wpTypes", JSON.stringify(wpTypes));
+		window.localStorage.setItem("altitudes", JSON.stringify(altitudes));
+		window.localStorage.setItem("atbls", JSON.stringify(atbls));
+
+		flightplan.forEach((entry) => {
+			map.fire('click', {
+				latlng: L.latLng([flightplan[i].lat, flightplan[i].lng])
+			});
+			i++;
+		});
+
+		if (flightplan.length > 2) {
+			toggle.enable();
+			follow = false;
+			var bounds = L.latLngBounds(coordinates);
+			map.fitBounds(bounds);
+			startlineShow = true;
+			showWpList();
+		}
+		else {
+			toggle.disable();
+			follow = true;
+		}
+		map.closePopup();
+		getMarkerId();
 	}
 
 	// Send postMessage
@@ -2413,7 +2914,7 @@
 
 	function setCursorpos() {
 		if (cursorPos != null) {
-			var targetTextarea =  document.getElementsByTagName("input")[0];
+			var targetTextarea = document.getElementsByTagName("input")[0];
 			targetTextarea.focus();
 			setCaretToPos(targetTextarea, cursorPos);
 			var text = targetTextarea.value;
