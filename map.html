@@ -79,7 +79,7 @@
 
 		#overlay {
 			position: absolute;
-			width: 170px;
+			width: 25%;
 			height: auto;
 			min-height: 50%;
 			max-height: 50%;
@@ -93,16 +93,18 @@
 		}
 
 		h4#depArrTop {
-			top: -25px;
+			top: -32px;
 			position: relative;
 		}
 
 
-		td#start, td#target {
+		td#start,
+		td#target {
 			font-size: small;
 		}
 
-		td#dep, td#arr {
+		td#dep,
+		td#arr {
 			font-size: x-small;
 		}
 
@@ -112,7 +114,7 @@
 			position: absolute;
 			height: auto;
 			top: 115px;
-			bottom: 10%;
+			bottom: 8%;
 			left: 0;
 			right: 0;
 		}
@@ -120,7 +122,7 @@
 		div#overlayListSum {
 			position: absolute;
 			display: inline-block;
-			bottom: 20px;
+			bottom: 15px;
 			left: 0;
 			right: 0;
 			text-align: center;
@@ -574,9 +576,131 @@
 			width: 44px;
 		}
 
-		span.backButton {
+		.gg-controller {
+			color: gray;
+			box-sizing: border-box;
 			position: relative;
-			bottom: 8px;
+			display: block;
+			transform: scale(var(--ggs, 0.95));
+			width: 8px;
+			height: 8px;
+			border: 2px solid;
+			border-radius: 100px;
+			left: 10px;
+			top: 5px;
+		}
+
+		.gg-controller::before {
+			content: "";
+			display: block;
+			box-sizing: border-box;
+			position: absolute;
+			width: 14px;
+			height: 14px;
+			box-shadow:
+				-6px -6px 0 -4px,
+				6px 6px 0 -4px,
+				6px -6px 0 -4px,
+				-6px 6px 0 -4px;
+			left: -5px;
+			top: -5px;
+			transform: rotate(45deg)
+		}
+
+		#controllerOverlay {
+			display: none;
+			position: absolute;
+			width: 25%;
+			height: auto;
+			min-height: 50%;
+			max-height: 50%;
+			left: 10px;
+			bottom: 80px;
+			background-color: white;
+			z-index: 500;
+			border: 2px solid rgba(0, 0, 0, 0.2);
+			background-clip: padding-box;
+			border-radius: 8px;
+		}
+
+		#controllerContainer {
+			display: inline-block;
+			overflow-y: scroll;
+			position: absolute;
+			height: auto;
+			top: 55px;
+			bottom: 0;
+			left: 0;
+			right: 0;
+		}
+
+		#controllerButton {
+			height: 44px;
+			width: 44px;
+		}
+
+		#controllerButtonBefore {
+			height: 44px;
+			width: 44px;
+		}
+
+		#controllerListClose {
+			position: absolute;
+			top: 0px;
+			right: 0px;
+			color: gray;
+			background-color: transparent;
+			border: 0;
+			border-radius: 8px;
+		}
+
+		#controllerListClose:hover {
+			color: lightgray;
+		}
+
+		#controllerList {
+			text-align: left;
+			position: relative;
+			left: -20px;
+			right: 0;
+			top: 0;
+			overflow: auto;
+		}
+
+		#controllerList ul p {
+			padding-bottom: 5px;
+			padding-top: 5px;
+			color: var(--dark);
+		}
+
+		#controllerList li {
+			padding-bottom: 5px;
+			margin-left: 20px;
+		}
+
+		h3#controllerHeader {
+			padding-bottom: 5px;
+			margin-bottom: 5px;
+		}
+
+		.atisText{
+			word-wrap: break-word;
+		}
+
+		span.backButton {
+			position: absolute;
+			width: 44px;
+			left: -11px;
+			bottom: -10px;
+			color: gray;
+			font-size: 9px;
+		}
+
+		span.backButton2 {
+			position: absolute;
+			width: 44px;
+			left: -11px;
+			bottom: -10px;
 			color: gray;
 			font-size: 9px;
 		}
@@ -584,8 +708,17 @@
 		i.gg-arrow-down {
 			/* text-align: center; */
 			position: relative;
-			left: 1px;
+			left: 0px;
 			top: 2px;
+			display: inline-block;
+		}
+
+		i.gg-controller {
+			/* text-align: center; */
+			position: relative;
+			left: 0px;
+			top: -1px;
+			display: inline-block;
 		}
 
 		td {
@@ -949,14 +1082,14 @@
 			border-radius: 40px
 		}
 
-		.refreshIcon { 
+		.refreshIcon {
 			color: gray;
 			display: inline-block;
 			width: 20px;
 			height: 20px;
 			background: url("data:image/svg+xml,%3C%3Fxml version='1.0'%3F%3E%3Csvg fill='gray' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' width='24px' height='24px'%3E%3Cpath d='M 9 3 C 8.448 3 8 3.448 8 4 C 8 4.552 8.448 5 9 5 L 18 5 C 18.552 5 19 5.448 19 6 L 19 15 L 17 15 C 16.596 15 16.231172 15.243188 16.076172 15.617188 C 16.025172 15.741187 16 15.871 16 16 C 16 16.26 16.101969 16.516031 16.292969 16.707031 L 19.292969 19.707031 C 19.683969 20.098031 20.317031 20.098031 20.707031 19.707031 L 23.707031 16.707031 C 23.993031 16.421031 24.077828 15.992188 23.923828 15.617188 C 23.768828 15.243187 23.404 15 23 15 L 21 15 L 21 6 C 21 4.343 19.657 3 18 3 L 9 3 z M 4 4 C 3.744125 4 3.4879687 4.0974687 3.2929688 4.2929688 L 0.29296875 7.2929688 C 0.00696875 7.5789687 -0.077828125 8.0078125 0.076171875 8.3828125 C 0.23117187 8.7568125 0.596 9 1 9 L 3 9 L 3 18 C 3 19.657 4.343 21 6 21 L 15 21 C 15.552 21 16 20.552 16 20 C 16 19.448 15.552 19 15 19 L 6 19 C 5.448 19 5 18.552 5 18 L 5 9 L 7 9 C 7.404 9 7.7688281 8.7568125 7.9238281 8.3828125 C 7.9748281 8.2588125 8 8.129 8 8 C 8 7.74 7.8980312 7.4839687 7.7070312 7.2929688 L 4.7070312 4.2929688 C 4.5115312 4.0974687 4.255875 4 4 4 z'/%3E%3C/svg%3E");
 			background-size: 100%;
-			position: relative; 
+			position: relative;
 			left: -5px;
 			top: 2px;
 		}
@@ -969,6 +1102,7 @@
 		}
 
 		#keyb {
+			visibility: hidden;
 			z-index: 2000;
 			position: absolute;
 			bottom: 0px;
@@ -1067,7 +1201,6 @@
 		.keybord__key--clear {
 			background: rgba(255, 0, 0, 0.363);
 		}
-		
 	</style>
 </head>
 
@@ -1076,10 +1209,25 @@
 		<div id="keyb">&nbsp;</div>
 	</div>
 	<div id="overlay">
-		<div><button id="wpListMinimize" type="button" onclick="minimizeWpList()">_</button><button id="wpListClose" type="button" onclick="hideWpList()">x</button><span id='date-time'></span></div>
+		<div><button id="wpListMinimize" type="button" onclick="minimizeWpList()">_</button><button id="wpListClose"
+				type="button" onclick="hideWpList()">x</button><span id='date-time'></span></div>
 		<div id="wpHeaderDiv" style="padding-top: 12%;">
-			<h3 id="wpHeader" style='font-size: 5; text-align: center; padding-top: 12px; margin-bottom: -22px;'>Flightplan</h3>
-			<br><h4 id="depArrTop" style='font-size: 5; text-align: center; padding-top: 10px; margin-bottom: -10px;'><table id="depArrTable"><tr style="font-size: small;"><td id="start" style="text-align: center; width: 41%;">Start</td><td style="text-align: center; width: 18%;" rowspan="2">-</td><td id="target" style="text-align: center; width: 41%;">Target</td></tr><tr style="font-size: smaller;"><td id="dep" style="text-align: center;">Departure</td><td id="arr" style="text-align: center;">Arrival</td></tr></table></h4>
+			<h3 id="wpHeader" style='font-size: 5; text-align: center; padding-top: 5px; margin-bottom: -18px;'>
+				Flightplan</h3>
+			<br>
+			<h4 id="depArrTop" style='font-size: 5; text-align: center; padding-top: 10px; margin-bottom: -10px;'>
+				<table id="depArrTable">
+					<tr style="font-size: small;">
+						<td id="start" style="text-align: center; width: 41%;">Start</td>
+						<td style="text-align: center; width: 18%;" rowspan="2">-</td>
+						<td id="target" style="text-align: center; width: 41%;">Target</td>
+					</tr>
+					<tr style="font-size: smaller;">
+						<td id="dep" style="text-align: center;">Departure</td>
+						<td id="arr" style="text-align: center;">Arrival</td>
+					</tr>
+				</table>
+			</h4>
 		</div>
 		<div id="overlayContainer">
 			<div id="overlayList">
@@ -1088,7 +1236,21 @@
 		</div>
 		<div id="overlayListSum"></div>
 	</div>
-	<div id="banner" text-align: center;">
+	<div style="display: none;" id="controllerOverlay">
+		<div>
+			<button id="controllerListClose" type="button" onclick="mout()">x</button>
+		</div>
+		<div id="controllerHeaderDiv" style="padding-top: 10px;">
+			<h3 id="controllerHeader" style='font-size: 5; text-align: center;'>VATSIM Controllers</h3>
+		</div>
+		<div id="controllerContainer">
+			<div id="controllerList">
+				<ul id="controllerListUl">
+				</ul>
+			</div>
+		</div>
+	</div>
+	<div id="banner" style="text-align: center;">
 		<div id="overlay2">
 			<table class="overlay2Table" style='text-align: center;'>
 				<tr>
@@ -1114,6 +1276,7 @@
 	var toggle3;
 	var toggle4;
 	var toggle5;
+	var toggle10;
 	var newMarker;
 	var airplane;
 	var follow;
@@ -1126,8 +1289,8 @@
 	var wp1_lng;
 	var wpi;
 	var startLineGroup;
-	var pos_lat;
-	var pos_lng;
+	var pos_lat = 47.50737;
+	var pos_lng = 19.04611;
 	var coordinates = [];
 	var polylinepoints = [];
 	var showPath = false;
@@ -1171,6 +1334,14 @@
 	var wpi3 = 0;
 	var dep = "";
 	var arr = "";
+	var controllersInRange = [];
+	var vatsim = true;
+	var headerText = "Vatsim Controllers";
+	var airports = [];
+	var transceivers = [];
+	var controllers_array = [];
+	var controllersWithCoordArray = [];
+	var controllerInterval;
 
 	window.addEventListener("DOMContentLoaded", function () {
 		// Get the message reference
@@ -1241,6 +1412,21 @@
 		return airac_id.toString();
 	}
 
+	function getVatsimData() {
+		//if (selected == false){
+			clearInterval(controllerInterval);
+			controllers_array = [];
+			controllersWithCoordArray = [];
+			if (vatsim == true) {
+				getControllers();
+				getTransceivers();
+			}
+			else {
+				getIVAO();
+			}
+		//}
+	}
+
 	function loadMap(lat, lon) {
 		// Create Leaflet map on map element.
 		var initMapCenter = mapCenter;
@@ -1248,6 +1434,8 @@
 		var southWest = new L.LatLng(-90, -180);
 		var northEast = new L.LatLng(90, 180);
 		var maxExtent = new L.LatLngBounds(southWest, northEast);
+
+
 
 		var streets = L.tileLayer('https://{s}.tile.openstreetmap.de/tiles/osmde/{z}/{x}/{y}.png', {
 			attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
@@ -1393,7 +1581,7 @@
 				'Reset': flightpath_reset
 			}
 		};
-
+		
 		var options = {
 			// Make the "Landmarks" group exclusive (use radio inputs)
 			exclusiveGroups: ["Airspaces", "Hotspots", "Aircraft", "Flightpath"],
@@ -1404,7 +1592,7 @@
 		// Where you want to render the map.
 		var element = document.getElementById('map');
 
-		var openaip_basemap_osm = L.featureGroup([streets, airspacesEurope, openaip_cached_hotspot_off, aircraft, flightpath]);
+		var openaip_basemap_osm = L.featureGroup([streets, airspacesEurope, openaip_cached_hotspot_off, aircraft, flightpath_off]);
 
 		map = L.map('map', {
 			center: mapCenter,
@@ -1521,8 +1709,7 @@
 				}
 
 				const svgIcon = L.divIcon({
-					html: `
-				<svg height="30" width="30"><circle cx="15" cy="15" r="5" stroke="grey" stroke-width="3" fill="rgb(41, 129, 202)" /></svg>`,
+					html: `<svg height="30" width="30"><circle cx="15" cy="15" r="5" stroke="grey" stroke-width="3" fill="rgb(41, 129, 202)" /></svg>`,
 					className: "",
 					iconSize: [30, 30],
 					iconAnchor: [15, 15],
@@ -1531,6 +1718,7 @@
 				if (!wpNames[markerId]) {
 					wpNames.push('WP' + (wpi3 + 1));
 					wpTypes.push('User');
+					altitudes.push('0');
 					wpi3++;
 				}
 
@@ -1541,7 +1729,7 @@
 					pointToLayer: function (feature, latlng) {
 						marker = L.marker(e.latlng, {
 							title: "WP",
-							alt: 1000,
+							alt: 0,
 							name: wpNames[markerId],
 							type: wpTypes[markerId],
 							myId: markerId,
@@ -1592,14 +1780,14 @@
 						map.removeLayer(tempMarker);
 						pLineGroup.clearLayers();
 						coordinatesArray = [];
-						console.log(tempMarker);
+						//console.log(tempMarker);
 						//console.log(tempMarker.feature.geometry.coordinates[0]);
 						$(tempMarker).parent('li').remove();
 						var i = 0;
 						markerId = 0;
 						wpNames.splice(tempMarker.options.myId, 1);
 						wpTypes.splice(tempMarker.options.myId, 1);
-						console.log(wpNames);
+						//console.log(wpNames);
 						$.each(map._layers, function (ml) {
 							if (map._layers[ml].feature) {
 								//map._layers[ml].feature.id = i;
@@ -1691,7 +1879,7 @@
 				$(tempMarker).parent('li').remove();
 				wpNames.splice(tempMarker.options.myId, 1);
 				wpTypes.splice(tempMarker.options.myId, 1);
-				console.log(wpNames);
+				//console.log(wpNames);
 				var i = 0;
 				markerId = 0;
 				$.each(map._layers, function (ml) {
@@ -1809,6 +1997,10 @@
 
 
 			$.each(map._layers, function (ml) {
+				var altitude = '0';
+				if(altitudes[wpi2 - 1]){
+					altitude = altitudes[wpi2 - 1];
+				}
 				if (map._layers[ml].feature) {
 					//console.log(map._layers[ml].feature);
 					if (wpi2 == 0) {
@@ -1820,26 +2012,26 @@
 						if (altitudes[wpi2]) {
 							if (Math.round(bearing2) < 10) {
 								if (atbls[wpi2]) {
-									$('#overlayList > ul').append('<p style="color:var(--light)">00' + Math.round(bearing2) + '&deg; - <a>' + parseFloat(altitudes[wpi2 - 1]).toFixed(0) + ' ft ' + atbls[wpi2] + '</a></p> ');
+									$('#overlayList > ul').append('<p style="color:var(--light)">00' + Math.round(bearing2) + '&deg; - <a>' + parseFloat(altitude).toFixed(0) + ' ft ' + atbls[wpi2] + '</a></p> ');
 								}
 								else {
-									$('#overlayList > ul').append('<p style="color:var(--light)">00' + Math.round(bearing2) + '&deg; - <a>' + parseFloat(altitudes[wpi2 - 1]).toFixed(0) + ' ft ' + '</a></p> ');
+									$('#overlayList > ul').append('<p style="color:var(--light)">00' + Math.round(bearing2) + '&deg; - <a>' + parseFloat(altitude).toFixed(0) + ' ft ' + '</a></p> ');
 								}
 							}
 							else if (Math.round(bearing2) < 100) {
 								if (atbls[wpi2]) {
-									$('#overlayList > ul').append('<p style="color:var(--light)">0' + Math.round(bearing2) + '&deg; - <a>' + parseFloat(altitudes[wpi2 - 1]).toFixed(0) + ' ft ' + atbls[wpi2] + '</a></p> ');
+									$('#overlayList > ul').append('<p style="color:var(--light)">0' + Math.round(bearing2) + '&deg; - <a>' + parseFloat(altitude).toFixed(0) + ' ft ' + atbls[wpi2] + '</a></p> ');
 								}
 								else {
-									$('#overlayList > ul').append('<p style="color:var(--light)">0' + Math.round(bearing2) + '&deg; - <a>' + parseFloat(altitudes[wpi2 - 1]).toFixed(0) + ' ft ' + '</a></p> ');
+									$('#overlayList > ul').append('<p style="color:var(--light)">0' + Math.round(bearing2) + '&deg; - <a>' + parseFloat(altitude).toFixed(0) + ' ft ' + '</a></p> ');
 								}
 							}
 							else {
 								if (atbls[wpi2]) {
-									$('#overlayList > ul').append('<p style="color:var(--light)">' + Math.round(bearing2) + '&deg; - <a>' + parseFloat(altitudes[wpi2 - 1]).toFixed(0) + ' ft ' + atbls[wpi2] + '</a></p> ');
+									$('#overlayList > ul').append('<p style="color:var(--light)">' + Math.round(bearing2) + '&deg; - <a>' + parseFloat(altitude).toFixed(0) + ' ft ' + atbls[wpi2] + '</a></p> ');
 								}
 								else {
-									$('#overlayList > ul').append('<p style="color:var(--light)">' + Math.round(bearing2) + '&deg; - <a>' + parseFloat(altitudes[wpi2 - 1]).toFixed(0) + ' ft ' + '</a></p> ');
+									$('#overlayList > ul').append('<p style="color:var(--light)">' + Math.round(bearing2) + '&deg; - <a>' + parseFloat(altitude).toFixed(0) + ' ft ' + '</a></p> ');
 								}
 							}
 						}
@@ -1863,86 +2055,86 @@
 				}
 			});
 
-			if(wpNames[0]){
+			if (wpNames[0]) {
 				document.getElementById('start').innerHTML = wpNames[0];
 				document.getElementById('depArrTable').style.display = '';
-				if(dep!= "" || arr!= ""){
+				if (dep != "" || arr != "") {
 					document.getElementById('dep').innerHTML = dep;
 					document.getElementById('arr').innerHTML = arr;
 					document.getElementById("overlayContainer").style.top = '115px';
-					if (wpListMinimized == true){
+					if (wpListMinimized == true) {
 						document.getElementById("overlay").style.minHeight = '8%';
 					}
 				}
-				else{
+				else {
 					document.getElementById('dep').innerHTML = '';
 					document.getElementById('arr').innerHTML = '';
 					document.getElementById("overlayContainer").style.top = '100px';
-					if (wpListMinimized == true){
-						if (start != "" && target != ""){
+					if (wpListMinimized == true) {
+						if (start != "" && target != "") {
 							document.getElementById("overlay").style.minHeight = '3%';
 						}
-						else{
+						else {
 							document.getElementById("overlay").style.minHeight = '1.5%';
 						}
 					}
 				}
 			}
-			else{
+			else {
 				document.getElementById('start').innerHTML = '';
 				document.getElementById('depArrTable').style.display = 'none';
 				document.getElementById("overlayContainer").style.top = '80px';
 			}
 
-			if(wpNames[wpNames.length-1] && wpNames[0]!= wpNames[wpNames.length-1]){
-				document.getElementById('target').innerHTML = wpNames[wpNames.length-1];
+			if (wpNames[wpNames.length - 1] && wpNames[0] != wpNames[wpNames.length - 1]) {
+				document.getElementById('target').innerHTML = wpNames[wpNames.length - 1];
 				document.getElementById('depArrTable').style.display = '';
-				if(dep!= "" || arr!= ""){
+				if (dep != "" || arr != "") {
 					document.getElementById('dep').innerHTML = dep;
 					document.getElementById('arr').innerHTML = arr;
 					document.getElementById("overlayContainer").style.top = '115px';
-					if (wpListMinimized == true){
+					if (wpListMinimized == true) {
 						document.getElementById("overlay").style.minHeight = '8%';
 					}
 				}
-				else{
+				else {
 					document.getElementById('dep').innerHTML = '';
 					document.getElementById('arr').innerHTML = '';
 					document.getElementById("overlayContainer").style.top = '100px';
-					if (wpListMinimized == true){
-						if (start != "" && target != ""){
+					if (wpListMinimized == true) {
+						if (start != "" && target != "") {
 							document.getElementById("overlay").style.minHeight = '3%';
 						}
-						else{
+						else {
 							document.getElementById("overlay").style.minHeight = '1.5%';
 						}
 					}
 				}
 			}
-			else{
+			else {
 				document.getElementById('target').innerHTML = '';
 				document.getElementById('depArrTable').style.display = 'none';
 				document.getElementById("overlayContainer").style.top = '80px';
 			}
 
 
-			for (let i = wpTypes.length-1; i >= 0; i--) {
-				var splitted =  wpTypes[i].split(' ');
+			for (let i = wpTypes.length - 1; i >= 0; i--) {
+				var splitted = wpTypes[i].split(' ');
 				var type = splitted[0];
 				var name = splitted[1];
-				if (type == 'ARR'){
+				if (type == 'ARR') {
 					arr = name;
-					break; 
+					break;
 				}
 			}
 
 			for (let i = 0; i < wpTypes.length; i++) {
-				var splitted =  wpTypes[i].split(' ');
+				var splitted = wpTypes[i].split(' ');
 				var type = splitted[0];
 				var name = splitted[1];
-				if (type == 'DEP'){
+				if (type == 'DEP') {
 					dep = name;
-					break; 
+					break;
 				}
 			}
 
@@ -1953,7 +2145,7 @@
 					//console.log('target marker: ' + targetMarker2.id);
 					targetMarker = targetMarker2.id;
 					$('.target').css('color', 'black');
-					if(startlineShow == true){
+					if (startlineShow == true) {
 						$(this).css('color', 'red');
 					}
 					localStorage.setItem('targetMarker', event.target.id);
@@ -2007,7 +2199,7 @@
 						var pos2 = new L.LatLng(nlat, nlng);
 						var coordinates2 = [p2, pos2];
 					}
-					if(coordinatesArray.length > 0){
+					if (coordinatesArray.length > 0) {
 						if (startlineShow == true) {
 							startLineGroup.clearLayers();
 							startLineGroup.addLayer(L.polyline(coordinates2, { color: '#ff2e63' }));
@@ -2123,13 +2315,13 @@
 		});
 
 		polyline = L.polyline(polylinepoints);
-		
+
 		map.on('overlayadd', function (e) {
-			console.log(e.group.name);
+			//console.log(e.group.name);
 
 			if (e.group.name === 'Flightpath') {
 				if (e.name === 'On') {
-					console.log('Flightpath on!');
+					//console.log('Flightpath on!');
 					if (map.hasLayer(aircraft)) {
 						if (!map.hasLayer(polyline)) {
 							map.addLayer(polyline);
@@ -2139,7 +2331,7 @@
 				}
 
 				if (e.name === 'Off') {
-					console.log('Flightpath off!');
+					//console.log('Flightpath off!');
 					if (map.hasLayer(polyline)) {
 						map.removeLayer(polyline);
 						showPath = false;
@@ -2155,7 +2347,7 @@
 
 			if (e.group.name === 'Aircraft') {
 				if (e.name === 'On') {
-					console.log('Aircraft on!');
+					//console.log('Aircraft on!');
 					var imgAirplane = document.getElementById('imageAirplane');
 					imgAirplane.style.visibility = 'visible';
 
@@ -2177,7 +2369,7 @@
 				}
 
 				if (e.name === 'Off') {
-					console.log('Aircraft off!');
+					//console.log('Aircraft off!');
 					var imgAirplane = document.getElementById('imageAirplane');
 					imgAirplane.style.visibility = 'hidden';
 
@@ -2193,12 +2385,12 @@
 			}
 			if (e.group.name === 'Hotspots') {
 				if (e.name === 'On') {
-					console.log('Hotspots on!');
+					//console.log('Hotspots on!');
 					openAIPHotspots = true;
 				}
 
 				if (e.name === 'Off') {
-					console.log('Hotspots off!');
+					//console.log('Hotspots off!');
 					openAIPHotspots = false;
 				}
 			}
@@ -2210,7 +2402,7 @@
 
 		function flightpathReset() {
 			if (showPath == true) {
-				console.log('Flightpath reset!');
+				//console.log('Flightpath reset!');
 				if (map.hasLayer(polyline)) {
 					map.removeLayer(polyline);
 					polylinepoints = [];
@@ -2337,14 +2529,14 @@
 
 		toggle5 = L.easyButton('refreshIcon', function () {
 			try {
-				console.log('Get flightplan!');
+				//console.log('Get flightplan!');
 				var xhr2 = new XMLHttpRequest();
 				xhr2.open("POST", 'synchronizeFlightplan', true);
 				var myText2 = "foobar";
 				xhr2.send(myText2);
 				xhr2.onreadystatechange = function () {
 					if (xhr2.readyState == XMLHttpRequest.DONE) {
-						console.log('Response: ' + xhr2.responseText);
+						//console.log('Response: ' + xhr2.responseText);
 						window.parent.postMessage('flightplan:' + xhr2.responseText, 'coui://html_ui');
 					}
 				}
@@ -2358,6 +2550,62 @@
 			removeAllMarkers();
 			var x = document.getElementById("keyboard");
 			x.style.display = "none";
+		}).addTo(map);
+
+		toggle10 = L.easyButton({
+			id: 'controllerButtonBefore', // an id for the generated button
+			position: 'topright', // inherited from L.Control -- the corner it goes in
+			type: 'replace', // set to animate when you're comfy with css
+			leafletClasses: true, // use leaflet classes to style the button?
+			states: [{ // specify different icons and responses for your button
+				stateName: 'get-center',
+				title: '',
+				icon: '<i id="controllerIcon"; class="gg-controller"></i><div id="controllerList"><ul></ul></div>' + '<span class="backButton2">&nbspVATSIM</span><br>',
+				onClick: function () {
+					toggle10.remove();
+					getVatsimData();
+					listControllers();
+					var toggle11 = L.easyButton({
+						id: 'controllerButton', // an id for the generated button
+						position: 'topright', // inherited from L.Control -- the corner it goes in
+						type: 'replace', // set to animate when you're comfy with css
+						leafletClasses: true, // use leaflet classes to style the button?
+						states: [{
+							icon: '<i id="controllerIcon"; class="gg-controller"></i><div id="controllerList"><ul></ul></div>' + '<span class="backButton2">&nbspVATSIM</span><br>',
+							stateName: 'vatsim',
+							title: 'VATSIM',
+							onClick: function (control) {
+								lastIvao = '';
+								lastSelected = -1;
+								lastSelectedElement = null;
+								document.getElementById('controllerListUl').innerHTML = '';
+								vatsim = false;
+								document.getElementById("controllerHeader").innerHTML = "IVAO Controllers";
+								getVatsimData();
+								control.state('ivao');
+							}
+						}, {
+							icon: '<i id="controllerIcon"; class="gg-controller"></i><div id="controllerList"><ul></ul></div>' + '<span class="backButton2">&nbspIVAO</span><br>',
+							stateName: 'ivao',
+							title: 'IVAO',
+							onClick: function (control) {
+								lastVatsim = '';
+								lastSelected = -1;
+								lastSelectedElement = null;
+								document.getElementById('controllerListUl').innerHTML = '';
+								vatsim = true;
+								document.getElementById("controllerHeader").innerHTML = "VATSIM Controllers";
+								getVatsimData();
+								control.state('vatsim');
+							}
+						}]
+					});
+					if (document.getElementById('controllerOverlay').style.display == "none") {
+						mover();
+					}
+					toggle11.addTo(map);
+				}
+			}]
 		}).addTo(map);
 
 		function clearArray(array) {
@@ -2376,6 +2624,265 @@
 		airplane = L.marker([47.442, 10.23], {
 			icon: iconAirplane
 		}).addTo(map);
+	}
+
+	var lastIvao = "";
+	var lastVatsim = "";
+
+	function getControllers() {
+		//console.log('Get Controllers!');
+		var xhr = new XMLHttpRequest();
+		xhr.open("POST", 'synchronizeControllers', true);
+		var myText = "foobar";
+		xhr.send(myText);
+		xhr.onreadystatechange = function () {
+			if (xhr.readyState == XMLHttpRequest.DONE) {
+				if(xhr.responseText){
+					if(lastVatsim != xhr.responseText){
+						var myObj = JSON.parse(xhr.responseText);
+						filterAtis(myObj.atis);
+						filterControllers(myObj.controllers);
+						lastVatsim = xhr.responseText;
+					}
+				}
+			}
+		}
+	}
+
+	function getTransceivers() {
+		//console.log('Get Controllers!');
+		var xhr = new XMLHttpRequest();
+		xhr.open("POST", 'synchronizeTransceivers', true);
+		var myText = "foobar";
+		xhr.send(myText);
+		xhr.onreadystatechange = function () {
+			if (xhr.readyState == XMLHttpRequest.DONE) {
+				if(xhr.responseText){
+					transceivers = JSON.parse(xhr.responseText);
+				}
+			}
+		}
+	}
+
+	function getIVAO() {
+		//console.log('Get Controllers!');
+		var xhr = new XMLHttpRequest();
+		xhr.open("POST", 'synchronizeIVAO', true);
+		var myText = "foobar";
+		xhr.send(myText);
+		xhr.onreadystatechange = function () {
+			if (xhr.readyState == XMLHttpRequest.DONE) {
+				if(xhr.responseText){
+					if(lastIvao != xhr.responseText){
+						var myObj = xhr.responseText.split(/\r?\n/);
+						filterIVAO(myObj);
+						lastIvao = xhr.responseText;
+					}
+				}
+			}
+		}
+	}
+
+	var innerHTML = '';
+	var moverX = false;
+
+	function mover() {
+		if (moverX == false) {
+			var controllerOverlay = document.getElementById('controllerOverlay');
+			controllerOverlay.style.display = 'block';
+			controllerOverlay.style.position = 'absolute';
+			var list = document.getElementById('controllerList');
+			list.style.display = 'block';
+			moverX = true;
+		}
+	}
+
+	function mout() {
+		var controllerOverlay = document.getElementById('controllerOverlay');
+		controllerOverlay.style.display = 'none';
+		moverX = false;
+		var list = document.getElementById('controllerList');
+		list.style.display = 'none';
+	}
+
+	function dynamicSort(property) {
+		var sortOrder = 1;
+		if (property[0] === "-") {
+			sortOrder = -1;
+			property = property.substr(1);
+		}
+		return function (a, b) {
+			var result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
+			return result * sortOrder;
+		}
+	}
+
+	function dynamicSortMultiple() {
+		var props = arguments;
+		return function (obj1, obj2) {
+			var i = 0, result = 0, numberOfProperties = props.length;
+			while (result === 0 && i < numberOfProperties) {
+				result = dynamicSort(props[i])(obj1, obj2);
+				i++;
+			}
+			return result;
+		}
+	}
+
+	function filterAtis(_atis) {
+		//console.log(_atis);
+		for (var i = 0; i < _atis.length; i++) {
+			var controllerCode = _atis[i].callsign.substring(0, _atis[i].callsign.indexOf("_"));
+			var callsign = _atis[i].callsign;
+			var frequency = _atis[i].frequency;
+			var text_atis = [];
+			var visualRange = 100;
+			if (_atis[i].text_atis) {
+				text_atis = _atis[i].text_atis;
+			}
+			else{
+				text_atis = -1;
+			}
+			var controller = {
+				name: controllerCode,
+				callsign: callsign,
+				frequency: frequency,
+				visualRange: visualRange,
+				text_atis: text_atis
+			}
+			controllers_array.push(controller);
+		}
+	}
+
+	function filterControllers(_controllers) {
+		for (var i = 0; i < _controllers.length; i++) {
+			var controllerCode = _controllers[i].callsign.substring(0, _controllers[i].callsign.indexOf("_"));
+			var callsign = _controllers[i].callsign;
+			var frequency = _controllers[i].frequency;
+			var visualRange = _controllers[i].visual_range;
+			if (_controllers[i].text_atis) {
+				var text_atis = _controllers[i].text_atis;
+			}
+			else{
+				var text_atis = -1;
+			}
+			var controller = {
+				name: controllerCode,
+				callsign: callsign,
+				frequency: frequency,
+				visualRange: visualRange,
+				text_atis: text_atis
+			};
+			controllers_array.push(controller);
+		};
+		getCoordinates(controllers_array);
+	}
+
+	function filterIVAO(_ivaoControllers) {
+		for (var i = 0; i < _ivaoControllers.length; i++) {
+			var values = _ivaoControllers[i].split(":");
+			var controllerCode = values[0].substring(0, values[0].indexOf("_"));
+			var station = values[0].substring(values[0].lastIndexOf("_"), values[0].length);
+			var callsign = values[0];
+			var frequency = values[4];
+			var lat = values[5];
+			var lng = values[6];
+			var visualRange = values[19]; 
+			var text_atis = [];
+			if (values[35]){
+				text_atis = values[35].split('^§');
+				text_atis.shift(0);
+			}
+			else{
+				text_atis = -1;
+			}
+			var controller = {
+				name: controllerCode,
+				callsign: callsign,
+				frequency: frequency,
+				visualRange: visualRange,
+				text_atis: text_atis,
+				lat: lat,
+				lng: lng
+			};
+			if (controller.name != "" && controller.frequency != "") {
+				controllersWithCoordArray.push(controller);
+			}
+		};
+		checkInRange(controllersWithCoordArray);
+	}
+
+	function getCoordinates(_controllers_array) {
+		for (var i = 0; i < _controllers_array.length; i++) {
+			//console.log(controllers_array[i].name);
+			findAirportCoordinates(_controllers_array[i]);
+		};
+		checkInRange(controllersWithCoordArray);
+	}
+
+	function findAirportCoordinates(_controller) {
+		var index = transceivers.findIndex(x => x.callsign === _controller.callsign);
+		//console.log(index);
+		if (index != -1 && transceivers[index].transceivers[0]) {
+			//console.log(transceivers[index].transceivers);
+			if (transceivers[index].transceivers.length >= 1) {
+				var coordinate = getAreaCenter(transceivers[index].transceivers);
+				_controller.lat = coordinate[0];
+				_controller.lng = coordinate[1];
+				controllersWithCoordArray.push(_controller);
+			}
+			else {
+				_controller.lat = transceivers[index].transceivers[0].latDeg;
+				_controller.lng = transceivers[index].transceivers[0].lonDeg;
+				controllersWithCoordArray.push(_controller);
+			}
+		}
+	}
+
+	function getAreaCenter(arr) {
+		var minX, maxX, minY, maxY;
+		for (var i = 0; i < arr.length; i++) {
+			minX = (arr[i].latDeg < minX || minX == null) ? arr[i].latDeg : minX;
+			maxX = (arr[i].latDeg > maxX || maxX == null) ? arr[i].latDeg : maxX;
+			minY = (arr[i].lonDeg < minY || minY == null) ? arr[i].lonDeg : minY;
+			maxY = (arr[i].lonDeg > maxY || maxY == null) ? arr[i].lonDeg : maxY;
+		}
+		return [(minX + maxX) / 2, (minY + maxY) / 2];
+	}
+
+	var lastControllers = []
+
+	function checkInRange(_controllersWithCoordArray) {
+		//console.log(_controllersWithCoordArray);
+		var _CurrentPosLat = lastLat;
+		var _CurrentPosLng = lastLng;
+		controllersInRange = [];
+		for (var i = 0; i < _controllersWithCoordArray.length; i++) {
+			var distance = calculateDistance2(parseFloat(pos_lat), parseFloat(pos_lng), _controllersWithCoordArray[i].lat, _controllersWithCoordArray[i].lng);
+			var distance = distance.toFixed(0);
+			var station = _controllersWithCoordArray[i].callsign.substring(_controllersWithCoordArray[i].callsign.lastIndexOf("_") + 1, _controllersWithCoordArray[i].callsign.length);
+			if (station == "CTR" || station == "FSS") {
+				if (distance < 500) {
+					var controllerInRange = _controllersWithCoordArray[i];
+					controllerInRange.distance = distance;
+					controllersInRange.push(controllerInRange);
+				};
+			}
+			else {
+				if (distance < 100) {
+					var controllerInRange = _controllersWithCoordArray[i];
+					controllerInRange.distance = distance;
+					controllersInRange.push(controllerInRange);
+				};
+			}
+		}
+		controllersInRange.sort(dynamicSortMultiple("distance", "name"));
+		if (controllerInRange != lastControllers) {
+			document.getElementById('controllerListUl').innerHTML = '';
+			listControllers();
+			lastControlers = controllersInRange;
+		}
+		controllerInterval = setInterval(getVatsimData, 10000);
 	}
 
 	function getMarkerId() {
@@ -2554,19 +3061,34 @@
 	}
 
 	function calculateDistance(lat1, lon1, lat2, lon2, unit) {
-		var rlat1 = Math.PI * lat1 / 180
-		var rlat2 = Math.PI * lat2 / 180
-		var rlon1 = Math.PI * lon1 / 180
-		var rlon2 = Math.PI * lon2 / 180
-		var theta = lon1 - lon2
-		var rtheta = Math.PI * theta / 180
-		var dist = Math.sin(rlat1) * Math.sin(rlat2) + Math.cos(rlat1) * Math.cos(rlat2) * Math.cos(rtheta);
-		dist = Math.acos(dist)
-		dist = dist * 180 / Math.PI
-		dist = dist * 60 * 1.1515
-		if (unit == "K") { dist = dist * 1.609344 }
-		if (unit == "N") { dist = dist * 0.8684 }
-		return dist
+		var rlat1 = Math.PI * lat1 / 180;
+		var rlat2 = Math.PI * lat2 / 180;
+		var rlon1 = Math.PI * lon1 / 180;
+		var rlon2 = Math.PI * lon2 / 180;
+		var theta = lon1 - lon2;
+		var rtheta = Math.PI * theta / 180;
+		var distx = Math.sin(rlat1) * Math.sin(rlat2) + Math.cos(rlat1) * Math.cos(rlat2) * Math.cos(rtheta);
+		distx = Math.acos(distx);
+		distx = distx * 180 / Math.PI;
+		distx = distx * 60 * 1.1515;
+		if (unit == "K") { distx = distx * 1.609344 };
+		if (unit == "N") { distx = distx * 0.8684 };
+		return distx;
+	}
+
+	function calculateDistance2(lat1, lon1, lat2, lon2) {
+		var rlat1 = Math.PI * lat1 / 180;
+		var rlat2 = Math.PI * lat2 / 180;
+		var rlon1 = Math.PI * lon1 / 180;
+		var rlon2 = Math.PI * lon2 / 180;
+		var theta = lon1 - lon2;
+		var rtheta = Math.PI * theta / 180;
+		var dist2 = Math.sin(rlat1) * Math.sin(rlat2) + Math.cos(rlat1) * Math.cos(rlat2) * Math.cos(rtheta);
+		dist2 = Math.acos(dist2);
+		dist2 = dist2 * 180 / Math.PI;
+		dist2 = dist2 * 60 * 1.1515;
+		dist2 = dist2 * 0.8684;
+		return dist2;
 	}
 
 	document.getElementById("overlay").style.display = 'none';
@@ -2575,7 +3097,7 @@
 
 	var wpListMinimized = false;
 	function minimizeWpList() {
-		if (wpListMinimized == false){
+		if (wpListMinimized == false) {
 			document.getElementById("overlayContainer").style.display = 'none';
 			document.getElementById("overlayListSum").style.display = 'none';
 			document.getElementById("wpHeader").style.display = 'none';
@@ -2583,7 +3105,7 @@
 			document.getElementById("wpListMinimize").innerHTML = '+';
 			wpListMinimized = true;
 		}
-		else{
+		else {
 			document.getElementById("overlayContainer").style.display = '';
 			document.getElementById("overlayListSum").style.display = 'inline-block';
 			document.getElementById("wpHeader").style.display = '';
@@ -2765,12 +3287,14 @@
 	var lastLng;
 	var flightplan;
 	var atbl = [];
-	const delay = ms => new Promise(res => setTimeout(res, ms));
+	lastLat = '13.493889';
+	lastLng = '52.351389';
+	var tunedFrequency = ''
 	// Receive controls from parent page
 	function receiveMessage(e) {
 		var sender = e.data.substr(0, e.data.indexOf(':'));
 		var message = e.data.substr(e.data.indexOf(':') + 1, e.data.length);
-		console.log(e.data);
+		//console.log(e.data);
 		if (sender == 'Position') {
 			if (browserDebug == 0) {
 				// Call function:
@@ -2841,16 +3365,16 @@
 			}
 
 			if (entry.name) {
-				if (entry.name == 'TIMEDSCNT'){
+				if (entry.name == 'TIMEDSCNT') {
 					wpNames.splice(i2, 0, 'TOD');
 					wpTypes.push('Info');
 
 				}
-				else if (entry.name == 'TIMECRUIS'){
+				else if (entry.name == 'TIMECRUIS') {
 					wpNames.splice(i2, 0, 'TOC');
 					wpTypes.push('Info');
 
-				}else{
+				} else {
 					wpNames.splice(i2, 0, entry.name);
 					if (entry.waypointType) {
 						wpTypes.push(entry.waypointType);
@@ -2865,8 +3389,6 @@
 				wpi3++;
 			}
 			i2++;
-
-
 		});
 
 		window.localStorage.setItem("wpNames", JSON.stringify(wpNames));
@@ -2942,6 +3464,114 @@
 		setSelectionRange(input, pos, pos);
 	}
 
+	var selected = false;
+	var lastSelected = -1;
+	var lastSelectedElement;
+	function listControllers() {
+		var list = document.getElementById('controllerList');
+		list.style.display = 'inline-block';
+		var ctr = controllersInRange.filter(x => x.callsign.substring(x.callsign.lastIndexOf("_") + 1, x.callsign.length) === 'CTR' || x.callsign.substring(x.callsign.lastIndexOf("_") + 1, x.callsign.length) === 'FSS');
+		var app = controllersInRange.filter(x => x.callsign.substring(x.callsign.lastIndexOf("_") + 1, x.callsign.length) === 'APP' || x.callsign.substring(x.callsign.lastIndexOf("_") + 1, x.callsign.length) === 'DEP');
+		var twr = controllersInRange.filter(x => x.callsign.substring(x.callsign.lastIndexOf("_") + 1, x.callsign.length) === 'TWR');
+		var gnd = controllersInRange.filter(x => x.callsign.substring(x.callsign.lastIndexOf("_") + 1, x.callsign.length) === 'GND');
+		var del = controllersInRange.filter(x => x.callsign.substring(x.callsign.lastIndexOf("_") + 1, x.callsign.length) === 'DEL');
+		var atis = controllersInRange.filter(x => x.callsign.substring(x.callsign.lastIndexOf("_") + 1, x.callsign.length) === 'ATIS');
+
+		$('#controllerList > ul').append('<p>Center</p>');
+		for (var i = 0; i < ctr.length; i++) {
+			$('#controllerList > ul').append('<li href="#" class="station" id=' + ctr[i].callsign + '>' + ctr[i].callsign + ' -&nbsp' + ctr[i].frequency + '</li>');
+		}
+		$('#controllerList > ul').append('<p>App./Dep.</p>');
+		for (var i = 0; i < app.length; i++) {
+			$('#controllerList > ul').append('<li href="#" class="station" id=' + app[i].callsign + '>' + app[i].callsign + ' -&nbsp' + app[i].frequency + '</li>');
+		}
+		$('#controllerList > ul').append('<p>Tower</p>');
+		for (var i = 0; i < twr.length; i++) {
+			$('#controllerList > ul').append('<li href="#" class="station" id=' + twr[i].callsign + '>' + twr[i].callsign + ' -&nbsp' + twr[i].frequency + '</li>');
+		}
+		$('#controllerList > ul').append('<p>Ground</p>');
+		for (var i = 0; i < gnd.length; i++) {
+			$('#controllerList > ul').append('<li href="#" class="station" id=' + gnd[i].callsign + '>' + gnd[i].callsign + ' -&nbsp' + gnd[i].frequency + '</li>');
+		}
+		$('#controllerList > ul').append('<p>Delivery</p>');
+		for (var i = 0; i < del.length; i++) {
+			$('#controllerList > ul').append('<li href="#" class="station" id=' + del[i].callsign + '>' + del[i].callsign + ' -&nbsp' + del[i].frequency + '</li>');
+		}
+		if (vatsim == true){
+			$('#controllerList > ul').append('<p>ATIS</p>');
+			for (var i = 0; i < atis.length; i++) {
+				$('#controllerList > ul').append('<li href="#" class="station" id=' + atis[i].callsign + '>' + atis[i].callsign + ' -&nbsp' + atis[i].frequency + '</li>');
+			}
+		}
+		$('#controllerList > ul').append('<p>UNICOM</p>');
+		$('#controllerList > ul').append('<li href="#" class="station" id="UNICOM">UNICOM - 122.800</li>');
+	
+		//console.log(controllersInRange);
+		var stations = document.getElementsByClassName("station");
+		var frequency = "";
+		for (var i = 0; i < stations.length; i++) {
+			stations[i].addEventListener('mousedown', function(e){ e.preventDefault(); }, false);
+			stations[i].addEventListener("click", function (e) {
+				for (var i = 0; i < stations.length; i++) {
+					stations[i].style.color = 'black';
+				};
+				//console.log(this.id);
+				var index = controllersInRange.findIndex(x2 => x2.callsign === this.id);
+				if (lastSelected != this.id && this.id != 'UNICOM'){
+					if (lastSelected != -1){
+						var index2 = controllersInRange.findIndex(x3 => x3.callsign === lastSelected);
+						lastSelectedElement.innerHTML =  controllersInRange[index2].callsign + ' -&nbsp' + controllersInRange[index2].frequency;;
+					};
+					selected = true;
+					lastSelected = this.id;
+					lastSelectedElement = this;
+					//this.style.color = 'black';
+					console.log(controllersInRange[index]);
+					if (index != -1) {
+						if(controllersInRange[index].text_atis != -1){
+							var atisString = '';
+							controllersInRange[index].text_atis.forEach(element => {
+								if (element != ""){
+									atisString += element + '<br>';
+								}
+							});
+							var innerText = controllersInRange[index].callsign + ' -&nbsp' + controllersInRange[index].frequency + '<br><p class="atisText"><i>' + atisString + '</i></p>';
+							this.innerHTML = innerText;
+						}					
+						//console.log('Frequency: ' + controllersInRange[index].frequency);
+					};
+					if (this.id == "UNICOM"){
+						//console.log('Frequency: 122.800');
+					}
+				}
+				else if (this.id !='UNICOM'){
+					//this.style.color = 'black';
+					var innerText = controllersInRange[index].callsign + ' -&nbsp' + controllersInRange[index].frequency;
+					this.innerHTML = innerText;
+					selected = false;
+					lastSelected = -1;
+				}
+			});
+		};
+	}
+
+	function selectController(id){
+		var target = document.getElementById(id);
+	}
+
+	function tuneController(id){
+		var target = document.getElementById(id);
+		
+	}
+
+	function deselectController(id){
+		var target = document.getElementById(id);
+		target.style.color = 'black';
+		var innerText = controllersInRange[index].callsign + ' -&nbsp' + controllersInRange[index].frequency;
+		target.innerHTML = innerText;
+		selected = false;
+		lastSelected = -1;
+	}
 
 	// Keyboard
 	var id2 = '';
@@ -2986,6 +3616,7 @@
 					textend = '';
 				});
 				element.addEventListener("click", () => {
+					document.getElementById("keyb").style.visibility = "visible";
 					this.open(element.value, currentValue => {
 						element.value = currentValue;
 					});
