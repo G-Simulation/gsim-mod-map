@@ -1448,24 +1448,6 @@
 			subdomains: ['a', 'b', 'c']
 		});
 
-		var hybrid = L.tileLayer('http://{s}.google.com/vt/lyrs=s,h&x={x}&y={y}&z={z}', {
-			attribution:"<a href=\'http://maps.google.com/\'>Google</a> Maps Satellite",
-			bounds: maxExtent,
-			maxZoom: 20,
-			minZoom: 0,
-			reuseTiles: true,
-			subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
-		});
-
-		var satellite = L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
-			attribution:"<a href=\'http://maps.google.com/\'>Google</a> Maps Satellite",
-			bounds: maxExtent,
-			maxZoom: 20,
-			minZoom: 0,
-			reuseTiles: true,
-			subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
-		});
-
 		var terrain = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
 			attribution: 'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)',
 			bounds: maxExtent,
@@ -1554,8 +1536,6 @@
 
 		var baseMaps = {
 			"Streets": streets,
-			"Hybrid": hybrid,
-			"Satellite": satellite,
 			"Terrain": terrain,
 			"Monochrome": monochrome,
 			"Water": water
@@ -1564,7 +1544,6 @@
 		var groupedOverlays = {
 			"Airspaces": {
 				'World': airspaces,
-				'Europe': airspacesEurope,
 				'Off': airspaces_off
 			},
 			"Hotspots": {
@@ -1592,7 +1571,7 @@
 		// Where you want to render the map.
 		var element = document.getElementById('map');
 
-		var openaip_basemap_osm = L.featureGroup([streets, airspacesEurope, openaip_cached_hotspot_off, aircraft, flightpath_off]);
+		var openaip_basemap_osm = L.featureGroup([streets, airspaces, openaip_cached_hotspot_off, aircraft, flightpath_off]);
 
 		map = L.map('map', {
 			center: mapCenter,
@@ -2553,57 +2532,65 @@
 		}).addTo(map);
 
 		toggle10 = L.easyButton({
-			id: 'controllerButtonBefore', // an id for the generated button
+			id: 'controllerButton', // an id for the generated button
 			position: 'topright', // inherited from L.Control -- the corner it goes in
 			type: 'replace', // set to animate when you're comfy with css
 			leafletClasses: true, // use leaflet classes to style the button?
-			states: [{ // specify different icons and responses for your button
-				stateName: 'get-center',
-				title: '',
+			states: [{
 				icon: '<i id="controllerIcon"; class="gg-controller"></i><div id="controllerList"><ul></ul></div>' + '<span class="backButton2">&nbspVATSIM</span><br>',
-				onClick: function () {
-					toggle10.remove();
-					getVatsimData();
-					listControllers();
-					var toggle11 = L.easyButton({
-						id: 'controllerButton', // an id for the generated button
-						position: 'topright', // inherited from L.Control -- the corner it goes in
-						type: 'replace', // set to animate when you're comfy with css
-						leafletClasses: true, // use leaflet classes to style the button?
-						states: [{
-							icon: '<i id="controllerIcon"; class="gg-controller"></i><div id="controllerList"><ul></ul></div>' + '<span class="backButton2">&nbspVATSIM</span><br>',
-							stateName: 'vatsim',
-							title: 'VATSIM',
-							onClick: function (control) {
-								lastIvao = '';
-								lastSelected = -1;
-								lastSelectedElement = null;
-								document.getElementById('controllerListUl').innerHTML = '';
-								vatsim = false;
-								document.getElementById("controllerHeader").innerHTML = "IVAO Controllers";
-								getVatsimData();
-								control.state('ivao');
-							}
-						}, {
-							icon: '<i id="controllerIcon"; class="gg-controller"></i><div id="controllerList"><ul></ul></div>' + '<span class="backButton2">&nbspIVAO</span><br>',
-							stateName: 'ivao',
-							title: 'IVAO',
-							onClick: function (control) {
-								lastVatsim = '';
-								lastSelected = -1;
-								lastSelectedElement = null;
-								document.getElementById('controllerListUl').innerHTML = '';
-								vatsim = true;
-								document.getElementById("controllerHeader").innerHTML = "VATSIM Controllers";
-								getVatsimData();
-								control.state('vatsim');
-							}
-						}]
-					});
-					if (document.getElementById('controllerOverlay').style.display == "none") {
+				stateName: 'vatsim',
+				title: 'VATSIM',
+				onClick: function (control) {
+					if (document.getElementById('controllerOverlay').style.display == 'none'){
+						getVatsimData();
+						listControllers();
+						lastVatsim = '';
+						lastSelected = -1;
+						lastSelectedElement = null;
+						document.getElementById('controllerListUl').innerHTML = '';
+						vatsim = true;
+						document.getElementById("controllerHeader").innerHTML = "VATSIM Controllers";
+						getVatsimData();
+						control.state('vatsim');
 						mover();
+						return
 					}
-					toggle11.addTo(map);
+					lastIvao = '';
+					lastSelected = -1;
+					lastSelectedElement = null;
+					document.getElementById('controllerListUl').innerHTML = '';
+					vatsim = false;
+					document.getElementById("controllerHeader").innerHTML = "IVAO Controllers";
+					getVatsimData();
+					control.state('ivao');
+				}
+			}, {
+				icon: '<i id="controllerIcon"; class="gg-controller"></i><div id="controllerList"><ul></ul></div>' + '<span class="backButton2">&nbspIVAO</span><br>',
+				stateName: 'ivao',
+				title: 'IVAO',
+				onClick: function (control) {
+					if (document.getElementById('controllerOverlay').style.display == 'none'){
+						getVatsimData();
+						listControllers();
+						lastVatsim = '';
+						lastSelected = -1;
+						lastSelectedElement = null;
+						document.getElementById('controllerListUl').innerHTML = '';
+						vatsim = true;
+						document.getElementById("controllerHeader").innerHTML = "VATSIM Controllers";
+						getVatsimData();
+						control.state('vatsim');
+						mover();
+						return
+					}
+					lastVatsim = '';
+					lastSelected = -1;
+					lastSelectedElement = null;
+					document.getElementById('controllerListUl').innerHTML = '';
+					vatsim = true;
+					document.getElementById("controllerHeader").innerHTML = "VATSIM Controllers";
+					getVatsimData();
+					control.state('vatsim');
 				}
 			}]
 		}).addTo(map);
