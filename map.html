@@ -1448,6 +1448,24 @@
 			subdomains: ['a', 'b', 'c']
 		});
 
+		var hybrid = L.tileLayer('http://{s}.google.com/vt/lyrs=s,h&x={x}&y={y}&z={z}', {
+			attribution:"<a href=\'http://maps.google.com/\'>Google</a> Maps Satellite",
+			bounds: maxExtent,
+			maxZoom: 20,
+			minZoom: 0,
+			reuseTiles: true,
+			subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
+		});
+
+		var satellite = L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
+			attribution:"<a href=\'http://maps.google.com/\'>Google</a> Maps Satellite",
+			bounds: maxExtent,
+			maxZoom: 20,
+			minZoom: 0,
+			reuseTiles: true,
+			subdomains: ['mt0', 'mt1', 'mt2', 'mt3']
+		});
+
 		var terrain = L.tileLayer('https://{s}.tile.opentopomap.org/{z}/{x}/{y}.png', {
 			attribution: 'Map data: &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="http://viewfinderpanoramas.org">SRTM</a> | Map style: &copy; <a href="https://opentopomap.org">OpenTopoMap</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-SA</a>)',
 			bounds: maxExtent,
@@ -1536,6 +1554,8 @@
 
 		var baseMaps = {
 			"Streets": streets,
+			"Hybrid": hybrid,
+			"Satellite": satellite,
 			"Terrain": terrain,
 			"Monochrome": monochrome,
 			"Water": water
@@ -1544,6 +1564,7 @@
 		var groupedOverlays = {
 			"Airspaces": {
 				'World': airspaces,
+				'Europe': airspacesEurope,
 				'Off': airspaces_off
 			},
 			"Hotspots": {
@@ -1563,7 +1584,7 @@
 		
 		var options = {
 			// Make the "Landmarks" group exclusive (use radio inputs)
-			exclusiveGroups: ["Airspaces", "Hotspots", "Aircraft", "Flightpath"],
+			exclusiveGroups: ["AirspacesEurope", "Hotspots", "Aircraft", "Flightpath"],
 			// Show a checkbox next to non-exclusive group labels for toggling all
 			groupCheckboxes: true
 		};
