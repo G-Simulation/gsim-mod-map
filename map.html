@@ -1584,7 +1584,7 @@
 		
 		var options = {
 			// Make the "Landmarks" group exclusive (use radio inputs)
-			exclusiveGroups: ["AirspacesEurope", "Hotspots", "Aircraft", "Flightpath"],
+			exclusiveGroups: ["Airspaces", "Hotspots", "Aircraft", "Flightpath"],
 			// Show a checkbox next to non-exclusive group labels for toggling all
 			groupCheckboxes: true
 		};
@@ -1592,7 +1592,7 @@
 		// Where you want to render the map.
 		var element = document.getElementById('map');
 
-		var openaip_basemap_osm = L.featureGroup([streets, airspaces, openaip_cached_hotspot_off, aircraft, flightpath_off]);
+		var openaip_basemap_osm = L.featureGroup([streets, airspacesEurope, openaip_cached_hotspot_off, aircraft, flightpath_off]);
 
 		map = L.map('map', {
 			center: mapCenter,
