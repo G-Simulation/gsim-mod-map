@@ -608,7 +608,7 @@
 		}
 
 		#controllerOverlay {
-			display: none;
+			visibility: hidden;
 			position: absolute;
 			width: 25%;
 			height: auto;
@@ -1236,7 +1236,7 @@
 		</div>
 		<div id="overlayListSum"></div>
 	</div>
-	<div style="display: none;" id="controllerOverlay">
+	<div style="visibility: hidden;" id="controllerOverlay">
 		<div>
 			<button id="controllerListClose" type="button" onclick="mout()">x</button>
 		</div>
@@ -1289,8 +1289,8 @@
 	var wp1_lng;
 	var wpi;
 	var startLineGroup;
-	var pos_lat = 47.50737;
-	var pos_lng = 19.04611;
+	var pos_lat = 49.47211425492292;
+	var pos_lng = 9.040446950634873;
 	var coordinates = [];
 	var polylinepoints = [];
 	var showPath = false;
@@ -1311,7 +1311,7 @@
 	var provider;
 	var GeoSearchControl;
 	var searchControl;
-	var mapCenter = [47.50737, 19.04611];
+	var mapCenter = [49.47211425492292, 9.040446950634873];
 	var zoomLevel = 9;
 	var airac;
 	var LayerControl;
@@ -1380,6 +1380,11 @@
 		}
 
 		loadMap(mapCenter[0], mapCenter[1]);
+		var pos = new L.LatLng(pos_lat, pos_lng);
+		airplane.setLatLng(pos).update();
+		$('#imageAirplane').css('transform', 'rotate(' + Math.round(-45) + 'deg)  scale(0.3)');
+		$('#imageAirplane').css('fill', 'red');
+		map.panTo(pos);
 		Keyboard.init();
 		setTimeout(function () { Keyboard.close(); }, 10);
 	});
@@ -1684,7 +1689,7 @@
 			} else {
 				var marker;
 				deleted = false;
-				document.getElementById("overlay").style.display = 'block';
+				document.getElementById("overlay").style.visibility = 'block';
 				document.getElementById("overlay2").style.display = 'inline-table';
 				clearTimeout(markerTimeout);
 				//markerTimeout = setTimeout(function(){map.closePopup();}, 6000);
@@ -1837,7 +1842,9 @@
 				marker.openPopup();
 				coordinatesArray = [];
 				drawLines();
+				id = markerId;
 				markerId++;
+
 			}
 
 			marker.on('dragend', function (e) {
@@ -2191,7 +2198,7 @@
 				var nlat = pos_lat;
 				var nlng = pos_lng;
 				var i = 0;
-				if (browserDebug == 0) {
+				if (coordinatesArray[target] && coordinatesArray[target]){
 					if (target <= coordinatesArray.length) {
 						nwp1_lat = coordinatesArray[target][0];
 						nwp1_lng = coordinatesArray[target][1];
@@ -2206,7 +2213,7 @@
 						}
 					}
 				}
-
+				
 				var x = document.querySelectorAll('#overlayList > ul > li');
 				for (let i = 0; i < x.length; i++) {
 					x[i].style.color = "";
@@ -2350,6 +2357,10 @@
 					//console.log('Aircraft on!');
 					var imgAirplane = document.getElementById('imageAirplane');
 					imgAirplane.style.visibility = 'visible';
+					var pos = new L.LatLng(pos_lat, pos_lng);
+					airplane.setLatLng(pos).update();
+					$('#imageAirplane').css('transform', 'rotate(' + Math.round(-45) + 'deg)  scale(0.3)');
+					$('#imageAirplane').css('fill', 'red');
 
 					if (map.hasLayer(flightpath)) {
 						if (!map.hasLayer(polyline)) {
@@ -2562,7 +2573,7 @@
 				stateName: 'vatsim',
 				title: 'VATSIM',
 				onClick: function (control) {
-					if (document.getElementById('controllerOverlay').style.display == 'none'){
+					if (document.getElementById('controllerOverlay').style.visibility == 'hidden'){
 						getVatsimData();
 						listControllers();
 						lastVatsim = '';
@@ -2590,18 +2601,8 @@
 				stateName: 'ivao',
 				title: 'IVAO',
 				onClick: function (control) {
-					if (document.getElementById('controllerOverlay').style.display == 'none'){
-						getVatsimData();
-						listControllers();
-						lastVatsim = '';
-						lastSelected = -1;
-						lastSelectedElement = null;
-						document.getElementById('controllerListUl').innerHTML = '';
-						vatsim = true;
-						document.getElementById("controllerHeader").innerHTML = "VATSIM Controllers";
-						getVatsimData();
-						control.state('vatsim');
-						mover();
+					if (document.getElementById('controllerOverlay').style.visibility == 'visible'){
+						mout();
 						return
 					}
 					lastVatsim = '';
@@ -2697,7 +2698,7 @@
 	function mover() {
 		if (moverX == false) {
 			var controllerOverlay = document.getElementById('controllerOverlay');
-			controllerOverlay.style.display = 'block';
+			controllerOverlay.style.visibility = 'visible';
 			controllerOverlay.style.position = 'absolute';
 			var list = document.getElementById('controllerList');
 			list.style.display = 'block';
@@ -2706,8 +2707,9 @@
 	}
 
 	function mout() {
+		toggle10.state('vatsim');
 		var controllerOverlay = document.getElementById('controllerOverlay');
-		controllerOverlay.style.display = 'none';
+		controllerOverlay.style.visibility = 'hidden';
 		moverX = false;
 		var list = document.getElementById('controllerList');
 		list.style.display = 'none';
@@ -2870,7 +2872,14 @@
 			var distance = distance.toFixed(0);
 			var station = _controllersWithCoordArray[i].callsign.substring(_controllersWithCoordArray[i].callsign.lastIndexOf("_") + 1, _controllersWithCoordArray[i].callsign.length);
 			if (station == "CTR" || station == "FSS") {
-				if (distance < 500) {
+				if (distance < 700) {
+					var controllerInRange = _controllersWithCoordArray[i];
+					controllerInRange.distance = distance;
+					controllersInRange.push(controllerInRange);
+				};
+			}
+			else if (station == "ATIS") {
+				if (distance < 150) {
 					var controllerInRange = _controllersWithCoordArray[i];
 					controllerInRange.distance = distance;
 					controllersInRange.push(controllerInRange);
