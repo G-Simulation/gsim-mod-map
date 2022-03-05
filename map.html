@@ -1440,8 +1440,6 @@
 		var northEast = new L.LatLng(90, 180);
 		var maxExtent = new L.LatLngBounds(southWest, northEast);
 
-
-
 		var streets = L.tileLayer('https://{s}.tile.openstreetmap.de/tiles/osmde/{z}/{x}/{y}.png', {
 			attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
 			bounds: maxExtent,
@@ -1454,7 +1452,7 @@
 		});
 
 		var hybrid = L.tileLayer('http://{s}.google.com/vt/lyrs=s,h&x={x}&y={y}&z={z}', {
-			attribution:"<a href=\'http://maps.google.com/\'>Google</a> Maps Satellite",
+			attribution: "<a href=\'http://maps.google.com/\'>Google</a> Maps Satellite",
 			bounds: maxExtent,
 			maxZoom: 20,
 			minZoom: 0,
@@ -1463,7 +1461,7 @@
 		});
 
 		var satellite = L.tileLayer('http://{s}.google.com/vt/lyrs=s&x={x}&y={y}&z={z}', {
-			attribution:"<a href=\'http://maps.google.com/\'>Google</a> Maps Satellite",
+			attribution: "<a href=\'http://maps.google.com/\'>Google</a> Maps Satellite",
 			bounds: maxExtent,
 			maxZoom: 20,
 			minZoom: 0,
@@ -1593,9 +1591,6 @@
 			// Show a checkbox next to non-exclusive group labels for toggling all
 			groupCheckboxes: true
 		};
-
-		// Where you want to render the map.
-		var element = document.getElementById('map');
 
 		var openaip_basemap_osm = L.featureGroup([streets, airspacesEurope, openaip_cached_hotspot_off, aircraft, flightpath_off]);
 
@@ -1844,7 +1839,10 @@
 				drawLines();
 				id = markerId;
 				markerId++;
-
+				if (document.getElementById("keyboard")){
+					var x = document.getElementById("keyboard");
+					x.style.display = "none";
+				}
 			}
 
 			marker.on('dragend', function (e) {
@@ -3657,11 +3655,12 @@
 		_createKeys() {
 			const fragment = document.createDocumentFragment();
 			const keyLayout = [
+				"rwy", "sqwk", "ent", "fl", "clear",
 				"1", "2", "3", "4", "5", "6", "7", "8", "9", "0", ".", "backspace",
 				"q", "w", "e", "r", "t", "y", "u", "i", "o", "p",
 				"a", "s", "d", "f", "g", "h", "j", "k", "l", "enter",
 				"caps", "z", "x", "c", "v", "b", "n", "m",
-				"done", "space", "clear"
+				"done", "space", "clearAll",
 			];
 			// Creates HTML for an icon
 			const createIconHTML = (icon_name) => {
@@ -3669,7 +3668,7 @@
 			};
 			keyLayout.forEach(key => {
 				const keyElement = document.createElement("button");
-				const insertLineBreak = ["backspace", "p", "enter", "m"].indexOf(key) !== -1;
+				const insertLineBreak = ["clear", "backspace", "p", "enter", "m"].indexOf(key) !== -1;
 				// Add attributes/classes
 				keyElement.setAttribute("type", "button");
 				keyElement.classList.add("keyboard__key");
