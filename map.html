@@ -86,8 +86,6 @@
 
 		.leaflet-control-layers-selector {
 			margin-top: 0px !important;
-			position: relative;
-			top: -4px  !important;
 		}
 
 		.leaflet-touch .leaflet-control-layers-toggle {
@@ -133,8 +131,60 @@
 			text-indent: 20px !important;
 		}
 
-		.leaflet-touch .leaflet-control-zoom-in, .leaflet-touch .leaflet-control-zoom-out {
+		.leaflet-control-zoom-in, .leaflet-control-zoom-out {
 			font-size: 44px !important;
+		}
+
+		.leaflet-touch .leaflet-bar a {
+			color: gray;
+			font-family: "Roboto-Light";
+		}
+
+		.leaflet-control-zoom-out .leaflet-control-zoom-in {
+			color: gray;
+			font-family: "Roboto-Light";
+		}
+
+		.leaflet-control-layers-expanded {
+			color: gray;
+			font-family: "Roboto-Light";
+		}
+
+		.leaflet-touch:hover .leaflet-bar a:hover {
+			color: dimgray;
+		}
+
+		.leaflet-control-layers-expanded:hover {
+			color: dimgray;
+		}
+
+		.leaflet-touch .leaflet-control-geosearch a.reset {
+			color: gray;
+			font-family: "Roboto-Light";
+		}
+
+		.leaflet-touch:hover .leaflet-control-geosearch a.reset:hover {
+			color: dimgray;
+		}
+
+		.leaflet-control-geosearch form input {
+			background-color: white;
+			height: 30px;
+		}
+
+		.leaflet-popup-content p {
+			width: 100%;
+			text-align: center;
+			margin: 0;
+		}
+
+		.leaflet-bar a:last-child {
+			border-bottom: none;
+		}
+
+		.leaflet-touch .leaflet-bar a:last-child {
+			border-bottom-left-radius: 4px;
+			border-bottom-right-radius: 4px;
 		}
 
 		/* Track */
@@ -241,8 +291,8 @@
 			position: absolute;
 			/* width: 100%; */
 			top: 10px;
-			left: 60px;
-			right: 60px;
+			left: 200px;
+			right: 200px;
 			background-color: transparent;
 			z-index: 1000;
 			text-align: center;
@@ -512,224 +562,6 @@
 			font-size: 1.3em;
 		}
 
-		.leaflet-touch .leaflet-bar a {
-			color: gray;
-			font-family: "Roboto-Light";
-		}
-
-		.leaflet-control-zoom-out .leaflet-control-zoom-in {
-			color: gray;
-			font-family: "Roboto-Light";
-		}
-
-		.leaflet-control-layers-expanded {
-			color: gray;
-			font-family: "Roboto-Light";
-		}
-
-		.leaflet-touch:hover .leaflet-bar a:hover {
-			color: dimgray;
-		}
-
-		.leaflet-control-layers-expanded:hover {
-			color: dimgray;
-		}
-
-		.leaflet-touch .leaflet-control-geosearch a.reset {
-			color: gray;
-			font-family: "Roboto-Light";
-		}
-
-		.leaflet-touch:hover .leaflet-control-geosearch a.reset:hover {
-			color: dimgray;
-		}
-
-		.leaflet-control-geosearch form input {
-			background-color: white;
-			height: 30px;
-		}
-
-		.leaflet-popup-content p {
-			width: 100%;
-			text-align: center;
-			margin: 0;
-		}
-
-		.leaflet-bar a:last-child {
-			border-bottom: none;
-		}
-
-		.leaflet-touch .leaflet-bar a:last-child {
-			border-bottom-left-radius: 4px;
-			border-bottom-right-radius: 4px;
-		}
-
-
-
-
-		.gg-track {
-			color: gray;
-			box-sizing: border-box;
-			position: relative;
-			display: block;
-			transform: scale(var(--ggs, 1.7));
-			width: 10px;
-			height: 10px;
-			border: 2px solid transparent;
-			box-shadow:
-				0 0 0 2px,
-				inset 0 0 0 10px;
-			border-radius: 100px;
-			left: 15px;
-			top:22px;
-		}
-
-		.gg-track:hover {
-			color: dimgray;
-		}
-
-		.gg-track::after,
-		.gg-track::before {
-			content: "";
-			display: block;
-			box-sizing: border-box;
-			position: absolute;
-			border-radius: 3px
-		}
-
-		.gg-track::before {
-			border-left: 4px solid;
-			border-right: 4px solid;
-			width: 18px;
-			height: 2px;
-			left: -6px;
-			top: 2px
-		}
-
-		.gg-track::after {
-			width: 2px;
-			height: 18px;
-			border-top: 4px solid;
-			border-bottom: 4px solid;
-			left: 2px;
-			top: -6px
-		}
-
-		.gg-track-gray {
-			color: lightgrey;
-			box-sizing: border-box;
-			position: relative;
-			display: block;
-			transform: scale(var(--ggs, 1.7));
-			width: 10px;
-			height: 10px;
-			border: 2px solid transparent;
-			box-shadow:
-				0 0 0 2px,
-				inset 0 0 0 10px;
-			border-radius: 100px;
-			margin-top: 47%;
-			margin-left: 23%;
-		}
-
-		.gg-track-gray::after,
-		.gg-track-gray::before {
-			content: "";
-			display: block;
-			box-sizing: border-box;
-			position: absolute;
-			border-radius: 3px
-		}
-
-		.gg-track-gray::before {
-			border-left: 4px solid;
-			border-right: 4px solid;
-			width: 18px;
-			height: 2px;
-			left: -6px;
-			top: 2px
-		}
-
-		.gg-track-gray::after {
-			width: 2px;
-			height: 18px;
-			border-top: 4px solid;
-			border-bottom: 4px solid;
-			left: 2px;
-			top: -6px
-		}
-
-		.gg-arrow-down {
-			color: gray;
-			box-sizing: border-box;
-			position: relative;
-			display: block;
-			transform: scale(var(--ggs, 2));
-			width: 22px;
-			height: 22px;
-		}
-
-		.gg-arrow-down::after,
-		.gg-arrow-down::before {
-			content: "";
-			display: block;
-			box-sizing: border-box;
-			position: absolute;
-			bottom: 4px
-		}
-
-		.gg-arrow-down::after {
-			width: 8px;
-			height: 8px;
-			border-bottom: 2px solid;
-			border-left: 2px solid;
-			transform: rotate(-45deg);
-			left: 7px
-		}
-
-		.gg-arrow-down::before {
-			width: 2px;
-			height: 16px;
-			left: 10px;
-			background: currentColor
-		}
-
-		#arrowButton {
-			height: var(--buttonSize);
-			width: var(--buttonSize);
-		}
-
-		.gg-controller {
-			color: gray;
-			box-sizing: border-box;
-			position: relative;
-			display: block;
-			transform: scale(var(--ggs, 1.6));
-			width: 8px;
-			height: 8px;
-			border: 2px solid;
-			border-radius: 100px;
-			left: 10px;
-			top: 5px;
-		}
-
-		.gg-controller::before {
-			content: "";
-			display: block;
-			box-sizing: border-box;
-			position: absolute;
-			width: 14px;
-			height: 14px;
-			box-shadow:
-				-6px -6px 0 -4px,
-				6px 6px 0 -4px,
-				6px -6px 0 -4px,
-				-6px 6px 0 -4px;
-			left: -5px;
-			top: -5px;
-			transform: rotate(45deg)
-		}
-
 		#controllerOverlay {
 			visibility: hidden;
 			position: absolute;
@@ -970,6 +802,169 @@
 			height: 1.6rem;
 			font-size: 0.9rem;
 			margin: 0;
+		}
+
+		.gg-track {
+			color: gray;
+			box-sizing: border-box;
+			position: relative;
+			display: block;
+			transform: scale(var(--ggs, 1.7));
+			width: 10px;
+			height: 10px;
+			border: 2px solid transparent;
+			box-shadow:
+				0 0 0 2px,
+				inset 0 0 0 10px;
+			border-radius: 100px;
+			left: 15px;
+			top:22px;
+		}
+
+		.gg-track:hover {
+			color: dimgray;
+		}
+
+		.gg-track::after,
+		.gg-track::before {
+			content: "";
+			display: block;
+			box-sizing: border-box;
+			position: absolute;
+			border-radius: 3px
+		}
+
+		.gg-track::before {
+			border-left: 4px solid;
+			border-right: 4px solid;
+			width: 18px;
+			height: 2px;
+			left: -6px;
+			top: 2px
+		}
+
+		.gg-track::after {
+			width: 2px;
+			height: 18px;
+			border-top: 4px solid;
+			border-bottom: 4px solid;
+			left: 2px;
+			top: -6px
+		}
+
+		.gg-track-gray {
+			color: lightgrey;
+			box-sizing: border-box;
+			position: relative;
+			display: block;
+			transform: scale(var(--ggs, 1.7));
+			width: 10px;
+			height: 10px;
+			border: 2px solid transparent;
+			box-shadow:
+				0 0 0 2px,
+				inset 0 0 0 10px;
+			border-radius: 100px;
+			margin-top: 47%;
+			margin-left: 23%;
+		}
+
+		.gg-track-gray::after,
+		.gg-track-gray::before {
+			content: "";
+			display: block;
+			box-sizing: border-box;
+			position: absolute;
+			border-radius: 3px
+		}
+
+		.gg-track-gray::before {
+			border-left: 4px solid;
+			border-right: 4px solid;
+			width: 18px;
+			height: 2px;
+			left: -6px;
+			top: 2px
+		}
+
+		.gg-track-gray::after {
+			width: 2px;
+			height: 18px;
+			border-top: 4px solid;
+			border-bottom: 4px solid;
+			left: 2px;
+			top: -6px
+		}
+
+		.gg-arrow-down {
+			color: gray;
+			box-sizing: border-box;
+			position: relative;
+			display: block;
+			transform: scale(var(--ggs, 2));
+			width: 22px;
+			height: 22px;
+		}
+
+		.gg-arrow-down::after,
+		.gg-arrow-down::before {
+			content: "";
+			display: block;
+			box-sizing: border-box;
+			position: absolute;
+			bottom: 4px
+		}
+
+		.gg-arrow-down::after {
+			width: 8px;
+			height: 8px;
+			border-bottom: 2px solid;
+			border-left: 2px solid;
+			transform: rotate(-45deg);
+			left: 7px
+		}
+
+		.gg-arrow-down::before {
+			width: 2px;
+			height: 16px;
+			left: 10px;
+			background: currentColor
+		}
+
+		#arrowButton {
+			height: var(--buttonSize);
+			width: var(--buttonSize);
+		}
+
+		.gg-controller {
+			color: gray;
+			box-sizing: border-box;
+			position: relative;
+			display: block;
+			transform: scale(var(--ggs, 1.6));
+			width: 8px;
+			height: 8px;
+			border: 2px solid;
+			border-radius: 100px;
+			left: 10px;
+			top: 5px;
+		}
+
+		.gg-controller::before {
+			content: "";
+			display: block;
+			box-sizing: border-box;
+			position: absolute;
+			width: 14px;
+			height: 14px;
+			box-shadow:
+				-6px -6px 0 -4px,
+				6px 6px 0 -4px,
+				6px -6px 0 -4px,
+				-6px 6px 0 -4px;
+			left: -5px;
+			top: -5px;
+			transform: rotate(45deg)
 		}
 
 		.gg-erase {
@@ -3695,7 +3690,7 @@
 
 	function setWind(direction, speed) {
 		$('i#arrow').css('transform', 'rotate(' + Math.round(direction) + 'deg) scale(2.)');
-		$('.backButton').text(Math.round(direction) +'° ' +  Math.round(speed) + 'kts');
+		$('.backButton').text(Math.round(direction) +'/' +  Math.round(speed));
 	}
  
 	function teleport(lat, lng) {
@@ -4220,10 +4215,13 @@
 				outGeoJson['type']= "Feature"
 				outGeoJson['geometry'] = airport.geometry
 				outGeoJson['mytype']= "airport"
+				
 				airports.push(outGeoJson);
 			}
 			//console.log(airports);
 			var label = '';
+			var runwayLabels = '';
+			var airportElevation = '';
 			//console.log('zoooooomlevel: ' + zoomLevel);
 			airportMarkers = L.geoJSON(airports, {
 				pointToLayer: function(feature,latlng){
@@ -4282,14 +4280,25 @@
 							type = "Altiport";
 					}
 					
-					label += '<br>' + type;
-					label += '<br>Elevation:&nbsp;' +  elevation + '&apos;';
-					
+					console.log(feature.properties.runways);
+					runwayLabels = '';
+					airportElevation = '';
+					airportElevation +=  elevation + '&apos;';
+					if (feature.properties.runways){
+						$.each(feature.properties.runways, function (runway) {
+							runwayLabels += String(feature.properties.runways[runway].designator) + '&nbsp;' + '<br>';
+						});				
+					};
 					const airportPopup = L.popup({
 						closeOnClick: false,
 						autoClose: true	
 					});
-					airportPopup.setContent("<p style='font-size: 1.0rem'><br>" + label + "</p><tr style='text-align: left;'><td style='text-align: left;'><p style='font-size: 1rem, text-align: left;'></p></td></tr><br><tr><td><span style='margin-top: 15px'><button style='margin-top:10px; text-align: center' class='marker-delete-button' onclick='appendWaypoint(" + latlng.lat + ',' + latlng.lng + ");'>Add WP</button></span></td></tr><br><tr><td><span style='margin-top: 15px'><button style='margin-top:10px; text-align: center' class='marker-delete-button' onclick='teleport(" + latlng.lat + ',' + latlng.lng + ")' >Teleport</button></span></tr></td>");
+					if(runwayLabels != ''){
+						airportPopup.setContent("<p style='font-size: 1rem'><br>&nbsp;&nbsp;" + label +"&nbsp;&nbsp;</p><p style='font-size: 0.8rem'>" + type + "<br></p><p style='font-size: 0.6rem'> Elevation:<br>" + airportElevation + "<br>Runways: <br>" + runwayLabels + "</p><br><tr><td><span style='margin-top: 15px'><button style='margin-top:0px; text-align: center' class='marker-delete-button' onclick='appendWaypoint(" + latlng.lat + ',' + latlng.lng + ");'>&nbsp;Add WP&nbsp</button></span></td></tr><br><tr><td><span style='margin-top: 15px'><button style='margin-top:10px; text-align: center' class='marker-delete-button' onclick='teleport(" + latlng.lat + ',' + latlng.lng + ")' >&nbsp;Teleport&nbsp;</button></span></tr></td>");
+					}
+					else{
+						airportPopup.setContent("<p style='font-size: 1rem'><br>&nbsp;&nbsp;" + label +"&nbsp;&nbsp;</p><p style='font-size: 0.8rem'>" + type + "<br></p><p style='font-size: 0.6rem'> Elevation:<br>" + airportElevation + "</p><br><tr><td><span style='margin-top: 15px'><button style='margin-top:0px; text-align: center' class='marker-delete-button' onclick='appendWaypoint(" + latlng.lat + ',' + latlng.lng + ");'>&nbsp;Add WP&nbsp;</button></span></td></tr><br><tr><td><span style='margin-top: 15px'><button style='margin-top:10px; text-align: center' class='marker-delete-button' onclick='teleport(" + latlng.lat + ',' + latlng.lng + ")' >&nbsp;Teleport&nbsp;</button></span></tr></td>");
+					}
 					return new L.CircleMarker(latlng, {
 					color: 'transparent',
 					radius: 14,
@@ -4417,7 +4426,7 @@
 		xhr.send(null);
 	}
 
-	function onPopupOpenAirport() {
+	function onPopupOpenAirport(e) {
 		//console.log(this);
 		tempWPName = this.feature.properties.name;
 		if (this.feature.properties.icaoCode){
@@ -4468,9 +4477,17 @@
 			tempWPType = "Altiport";
 		}
 		//console.log(tempWPType);
+		polylinepoints = [];
+		polyline = [];
+		follow = false;
+		toggle.enable();
+		if (map.hasLayer(polyline)) {
+			map.removeLayer(polyline);
+		}
+		map.setView(e.target._popup._latlng, e.target._zoom);
 	}
 
-	function onPopupOpenNavaid() {
+	function onPopupOpenNavaid(e) {
 		//console.log(this);
 		tempWPName = this.feature.properties.identifier;
 		//console.log(tempWPName);
@@ -4514,6 +4531,14 @@
 		}
 		tempWPType += '&nbsp;' + frequency + '&nbsp;' + freqUnit;
 		//console.log(tempWPType);
+		polylinepoints = [];
+		polyline = [];
+		follow = false;
+		toggle.enable();
+		if (map.hasLayer(polyline)) {
+			map.removeLayer(polyline);
+		}
+		map.setView(e.target._popup._latlng, e.target._zoom);
 	}
 
 	function appendWaypoint(lat,lng){
