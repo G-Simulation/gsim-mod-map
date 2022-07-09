@@ -230,8 +230,11 @@
 		}
 
 		h4#depArrTop {
-			top: -30px;
 			position: relative;
+			display: inline-table;
+			left: 50%;
+			-webkit-transform: translate(-50%, 0%);
+			transform: translate(-50%, 0%);
 		}
 
 
@@ -246,14 +249,7 @@
 		}
 
 		#overlayContainer {
-			display: inline-block;
-			overflow-y: scroll;
-			position: absolute;
-			height: auto;
-			top: 115px;
-			bottom: 8%;
-			left: 0;
-			right: 0;
+			margin-top: -10px;
 		}
 
 		div#overlayListSum {
@@ -266,19 +262,30 @@
 			height: 3%;
 		}
 
-		table#depArrTable {
-			width: 100%;
-			padding-left: 20px;
-			padding-right: 20px;
+		#wpHeaderDiv{
+			margin-top: 0;
 		}
 
-		ul {
-			margin: 0;
-			margin-block-start: 0em;
+		#depArrTop{
+			margin-top: -30px;
+			padding-bottom: 0px;
+		}
+
+		table#depArrTable {
+			display: inline-table;
+			width: 100%;
+		}
+
+		ul{
+			margin-top: 0;
+            height: 50px;
+            overflow-x: hidden;
+            overflow-y: auto;
+            text-align:justify;
 		}
 
 		h3 {
-			margin-top: 20px;
+			margin-top: 40px;
 			margin-block-start: 0;
 		}
 
@@ -288,11 +295,12 @@
 		}
 
 		#banner {
-			position: absolute;
-			/* width: 100%; */
+			position: fixed;
 			top: 10px;
-			left: 200px;
-			right: 200px;
+			left: 50%;
+			-webkit-transform: translate(-50%, 0%);
+			transform: translate(-50%, 0%);
+			height: auto;
 			background-color: transparent;
 			z-index: 1000;
 			text-align: center;
@@ -1481,10 +1489,10 @@
 	<div id="overlay">
 		<div><span id='date-time'></span><button id="wpListMinimize" type="button" onclick="minimizeWpList()">_</button><button id="wpListClose"
 				type="button" onclick="hideWpList()">x</button></div>
-		<div id="wpHeaderDiv" style="padding-top: 10%;">
-			<h3 id="wpHeader" style='font-size: 15; text-align: center; padding-top: 0px; margin-bottom: -18px;'>Flightplan</h3>
+		<div id="wpHeaderDiv">
+			<h3 id="wpHeader" style='font-size: 15; text-align: center;'>Flightplan</h3>
 			<br>
-			<h4 id="depArrTop" style='font-size: 15; text-align: center; padding-top: 10px; margin-bottom: -10px;'>
+			<h4 id="depArrTop" style='font-size: 15; text-align: center; ;'>
 				<table id="depArrTable">
 					<tr style="font-size: small;">
 						<td id="start" style="text-align: center; width: 41%;">Start</td>
@@ -1500,7 +1508,7 @@
 		</div>
 		<div id="overlayContainer">
 			<div id="overlayList">
-				<ul></ul>
+				<ul id="content"></ul>
 			</div>
 		</div>
 		<div id="overlayListSum"></div>
@@ -1696,6 +1704,22 @@
 		const airac_id = (parseFloat(year.toString().substring(2, 4)) * 100) + counter;
 		return airac_id.toString();
 	}
+
+
+	$(function() {
+		var height = $('#wpHeaderDiv').outerHeight(true);
+		var bottomheight = $('#overlayListSum ').outerHeight(true);
+		var overlayheight = $('#overlay ').height();
+		$('#content').css('height', overlayheight - height - bottomheight - 80 );
+	});
+
+	$(window).on('resize', function(){
+		var height = $('#wpHeaderDiv').outerHeight(true);
+		var bottomheight = $('#overlayListSum ').outerHeight(true);
+		var overlayheight = $('#overlay ').height();
+		$('#content').css('height', overlayheight - height - bottomheight - 80);
+	});
+
 
 	function getVatsimData() {
 		clearInterval(controllerInterval);
@@ -2387,7 +2411,10 @@
 			if(wpTypes[1]){
 				document.getElementById('arr').innerHTML = wpTypes[wpTypes.length-1];
 			}
-			document.getElementById("overlayContainer").style.top = '115px';
+
+
+
+
 			if (wpListMinimized == true) {
 				document.getElementById("overlay").style.minHeight = '8%';
 			}
@@ -2507,7 +2534,7 @@
 				}
 
 				if (planeHeading != 0 && startlineShow == true){
-					$('#overlay2').html('<table class="overlay2Table" style="text-align: center;"><tr><td>IAS:&nbsp;' + vel + 'kts  &nbsp;I&nbsp;&nbsp;HEAD:&nbsp;' + heading.toFixed(0) + '° / '+ planeHeading.toFixed(0) + '°  &nbsp;I&nbsp;&nbsp;DIST:&nbsp;' + distance2.toFixed(2) + 'nm&nbsp;/&nbsp;' + times  + '  I&nbsp;&nbsp;ALT:&nbsp;' + alt + 'ft / ' + alt1.toFixed(0) + 'ft</td></tr></table>');
+					$('#overlay2').html('<table class="overlay2Table" style="text-align: center;"><tr><td>IAS:&nbsp;' + vel + 'kts  &nbsp;I&nbsp;&nbsp;HEAD:&nbsp;' + heading.toFixed(0) + '° / '+ planeHeading.toFixed(0) + '°  &nbsp;I&nbsp;&nbsp;DIST:&nbsp;' + distance2.toFixed(2) + 'nm&nbsp;/ ' + times  + '  I&nbsp;&nbsp;ALT:&nbsp;' + alt + 'ft / ' + alt1.toFixed(0) + 'ft</td></tr></table>');
 				}
 				else{
 					$('#overlay2').html('<table class="overlay2Table" style="text-align: center;"><tr><td>IAS:&nbsp;' + vel + 'kts  &nbsp;I&nbsp;&nbsp;HEAD:&nbsp;' + heading.toFixed(0) + '°  I&nbsp;&nbsp;ALT:&nbsp;' + alt + 'ft</td></tr></table>');
@@ -2776,19 +2803,22 @@
 
 		LayerControl = L.control.groupedLayers(baseMaps, groupedOverlays, options).addTo(map);
 
-		$('.leaflet-control-layers.leaflet-control').on('mouseenter', () => {
+		$('.leaflet-control').on('mouseenter', () => {
 			if (wpListOn == true) {
 				document.getElementById("overlay").style.visibility = 'hidden';
 				document.getElementById("overlay2").style.visibility = 'hidden';
 				document.getElementById("overlayContainer").style.visibility = 'hidden';
+				document.getElementById("banner").style.display = '';
+
 			}
 		});
 
-		$('.leaflet-control-layers.leaflet-control').on('mouseleave', () => {
+		$('.leaflet-control').on('mouseleave', () => {
 			if (wpListOn == true) {
 				document.getElementById("overlay").style.visibility = 'visible';
 				document.getElementById("overlay2").style.visibility = 'visible';
 				document.getElementById("overlayContainer").style.visibility = 'visible';
+				document.getElementById("banner").style.display = 'block';
 			}
 		});
 
