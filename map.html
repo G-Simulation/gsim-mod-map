@@ -31,8 +31,8 @@
 			font-weight: normal;
 			font-style: normal;
 		}
-		
-		*{
+
+		* {
 			font-family: "Roboto-Light" !important;
 		}
 
@@ -69,14 +69,14 @@
 		}
 
 		.leaflet-bar button {
-		height: 52px; /* easyButton's height default */
-		width: 52px;  /*  easyButton's width default */
+			height: 52px; /* easyButton's height default */
+			width: 52px; /*  easyButton's width default */
 		}
 
 		/* width */
 		::-webkit-scrollbar {
 			width: 10px;
-			height: 30px;
+			height: 10px;
 		}
 
 		label {
@@ -197,10 +197,10 @@
 			background: var(--dark);
 		}
 
-		/* Handle on hover */
-		::-webkit-scrollbar-thumb:hover {
-			background: var(--light);
-		}
+			/* Handle on hover */
+			::-webkit-scrollbar-thumb:hover {
+				background: var(--light);
+			}
 
 		.leaflet-touch .leaflet-bar button {
 			width: 60px;
@@ -262,11 +262,11 @@
 			height: 3%;
 		}
 
-		#wpHeaderDiv{
+		#wpHeaderDiv {
 			margin-top: 0;
 		}
 
-		#depArrTop{
+		#depArrTop {
 			margin-top: -30px;
 			padding-bottom: 0px;
 		}
@@ -276,12 +276,21 @@
 			width: 100%;
 		}
 
-		ul{
+		ul {
 			margin-top: 0;
-            height: 50px;
-            overflow-x: hidden;
-            overflow-y: auto;
-            text-align:justify;
+			height: 50px;
+			overflow-x: hidden;
+			overflow-y: auto;
+			text-align: justify;
+		}
+
+		#controllerListUl {
+			margin-top: 0;
+			height: 50px;
+			overflow-x: auto;
+			overflow-y: auto;
+			text-align: justify;
+			display: inline;
 		}
 
 		h3 {
@@ -358,9 +367,9 @@
 			font-size: 20px;
 		}
 
-		#wpListClose:hover {
-			color: lightgray;
-		}
+			#wpListClose:hover {
+				color: lightgray;
+			}
 
 		#wpListMinimize {
 			position: absolute;
@@ -373,9 +382,9 @@
 			font-size: 20px;
 		}
 
-		#wpListMinimize:hover {
-			color: lightgray;
-		}
+			#wpListMinimize:hover {
+				color: lightgray;
+			}
 
 		p {
 			font-family: "Roboto-Light";
@@ -392,17 +401,17 @@
 			top: 0px;
 			right: 10px;
 			padding: 4px 4px 0px 0;
-				padding-top: 4px;
-				padding-right: 4px;
-				padding-bottom: 0px;
-				padding-left: 0px;
+			padding-top: 4px;
+			padding-right: 4px;
+			padding-bottom: 0px;
+			padding-left: 0px;
 			border: none;
 			text-align: center;
 			width: 18px;
 			height: 14px;
 			font: 20px Tahoma, Verdana, sans-serif;
-				font-size: 20px;
-				font-family: Tahoma, Verdana, sans-serif;
+			font-size: 20px;
+			font-family: Tahoma, Verdana, sans-serif;
 			color: #c3c3c3;
 			text-decoration: none;
 			font-weight: bold;
@@ -489,9 +498,9 @@
 			background-color: #ffffff;
 		}
 
-		.leaflet-control-scale-line:not(:first-child) {
-			border: 2px solid rgba(0, 0, 0, 0.2);
-		}
+			.leaflet-control-scale-line:not(:first-child) {
+				border: 2px solid rgba(0, 0, 0, 0.2);
+			}
 
 		.leaflet-popup-close-button {
 			color: black;
@@ -502,7 +511,7 @@
 			font-family: "Roboto-Light";
 		}
 
-		.leaflet-control-geosearch .results>* {
+		.leaflet-control-geosearch .results > * {
 			font-family: "Roboto-Light";
 			color: black;
 		}
@@ -562,7 +571,7 @@
 			padding: 0 5px;
 		}
 
-		.nameInput{
+		.nameInput {
 			border: 2px solid #ddd;
 			background-color: #ffffff;
 			border-radius: 0;
@@ -589,7 +598,7 @@
 		#controllerContainer {
 			display: inline-block;
 			overflow-y: scroll;
-			overflow-x: hidden !important;
+			overflow-x: auto !important;
 			position: absolute;
 			height: auto;
 			top: 85px;
@@ -626,31 +635,31 @@
 			background-color: transparent;
 			border: 0;
 			border-radius: 8px;
-			font-size: 20px !important; 
+			font-size: 20px !important;
 		}
 
-		#controllerListClose:hover {
-			color: lightgray;
-		}
+			#controllerListClose:hover {
+				color: lightgray;
+			}
 
 		#controllerList {
 			text-align: left;
 			position: relative;
-			left: -20px;
+			left: 20px;
 			right: 0;
 			top: 0;
 			overflow: auto;
 		}
 
-		#controllerList ul p {
-			padding-bottom: 5px;
-			color: var(--dark);
-		}
+			#controllerList ul p {
+				padding-bottom: 5px;
+				color: var(--dark);
+			}
 
-		#controllerList li {
-			padding-bottom: 5px;
-			margin-left: 20px;
-		}
+			#controllerList li {
+				padding-bottom: 5px;
+				margin-left: 20px;
+			}
 
 		h3#controllerHeader {
 			padding-bottom: 10px;
@@ -658,7 +667,7 @@
 			padding-top: 15px;
 		}
 
-		.atisText{
+		.atisText {
 			word-wrap: break-word;
 		}
 
@@ -730,53 +739,53 @@
 			background-color: #ffffff;
 		}
 
-		.number-input,
-		.number-input * {
-			box-sizing: border-box;
-			width: 100%;
-			width: 100%;
-		}
+			.number-input,
+			.number-input * {
+				box-sizing: border-box;
+				width: 100%;
+				width: 100%;
+			}
 
-		.number-input button {
-			outline: none;
-			-webkit-appearance: none;
-			background-color: transparent;
-			border: none;
-			align-items: center;
-			justify-content: center;
-			min-width: 1.5rem;
-			cursor: pointer;
-			margin: 0;
-			position: relative;
-		}
+				.number-input button {
+					outline: none;
+					-webkit-appearance: none;
+					background-color: transparent;
+					border: none;
+					align-items: center;
+					justify-content: center;
+					min-width: 1.5rem;
+					cursor: pointer;
+					margin: 0;
+					position: relative;
+				}
 
-		.number-input button:before,
-		.number-input button:after {
-			display: inline-block;
-			position: absolute;
-			content: '';
-			width: 0.9rem;
-			height: 2px;
-			background-color: #212121;
-			transform: translate(-50%, -50%);
-		}
+					.number-input button:before,
+					.number-input button:after {
+						display: inline-block;
+						position: absolute;
+						content: '';
+						width: 0.9rem;
+						height: 2px;
+						background-color: #212121;
+						transform: translate(-50%, -50%);
+					}
 
-		.number-input button.plus:after {
-			transform: translate(-50%, -50%) rotate(90deg);
-		}
+					.number-input button.plus:after {
+						transform: translate(-50%, -50%) rotate(90deg);
+					}
 
-		.number-input input[type=text] {
-			font-family: "Roboto-Light";
-			/* padding: 0.5rem; */
-			min-width: 5rem;
-			border: solid #ddd;
-			border-width: 0 2px;
-			font-size: 0.9rem;
-			height: 1.5rem;
-			font-weight: bold;
-			text-align: center;
-			background-color: #ffffff;
-		}
+				.number-input input[type=text] {
+					font-family: "Roboto-Light";
+					/* padding: 0.5rem; */
+					min-width: 5rem;
+					border: solid #ddd;
+					border-width: 0 2px;
+					font-size: 0.9rem;
+					height: 1.5rem;
+					font-weight: bold;
+					text-align: center;
+					background-color: #ffffff;
+				}
 
 		.teleportButton {
 			color: black;
@@ -821,44 +830,42 @@
 			width: 10px;
 			height: 10px;
 			border: 2px solid transparent;
-			box-shadow:
-				0 0 0 2px,
-				inset 0 0 0 10px;
+			box-shadow: 0 0 0 2px, inset 0 0 0 10px;
 			border-radius: 100px;
 			left: 15px;
-			top:22px;
+			top: 22px;
 		}
 
-		.gg-track:hover {
-			color: dimgray;
-		}
+			.gg-track:hover {
+				color: dimgray;
+			}
 
-		.gg-track::after,
-		.gg-track::before {
-			content: "";
-			display: block;
-			box-sizing: border-box;
-			position: absolute;
-			border-radius: 3px
-		}
+			.gg-track::after,
+			.gg-track::before {
+				content: "";
+				display: block;
+				box-sizing: border-box;
+				position: absolute;
+				border-radius: 3px
+			}
 
-		.gg-track::before {
-			border-left: 4px solid;
-			border-right: 4px solid;
-			width: 18px;
-			height: 2px;
-			left: -6px;
-			top: 2px
-		}
+			.gg-track::before {
+				border-left: 4px solid;
+				border-right: 4px solid;
+				width: 18px;
+				height: 2px;
+				left: -6px;
+				top: 2px
+			}
 
-		.gg-track::after {
-			width: 2px;
-			height: 18px;
-			border-top: 4px solid;
-			border-bottom: 4px solid;
-			left: 2px;
-			top: -6px
-		}
+			.gg-track::after {
+				width: 2px;
+				height: 18px;
+				border-top: 4px solid;
+				border-bottom: 4px solid;
+				left: 2px;
+				top: -6px
+			}
 
 		.gg-track-gray {
 			color: lightgrey;
@@ -869,40 +876,38 @@
 			width: 10px;
 			height: 10px;
 			border: 2px solid transparent;
-			box-shadow:
-				0 0 0 2px,
-				inset 0 0 0 10px;
+			box-shadow: 0 0 0 2px, inset 0 0 0 10px;
 			border-radius: 100px;
 			margin-top: 47%;
 			margin-left: 23%;
 		}
 
-		.gg-track-gray::after,
-		.gg-track-gray::before {
-			content: "";
-			display: block;
-			box-sizing: border-box;
-			position: absolute;
-			border-radius: 3px
-		}
+			.gg-track-gray::after,
+			.gg-track-gray::before {
+				content: "";
+				display: block;
+				box-sizing: border-box;
+				position: absolute;
+				border-radius: 3px
+			}
 
-		.gg-track-gray::before {
-			border-left: 4px solid;
-			border-right: 4px solid;
-			width: 18px;
-			height: 2px;
-			left: -6px;
-			top: 2px
-		}
+			.gg-track-gray::before {
+				border-left: 4px solid;
+				border-right: 4px solid;
+				width: 18px;
+				height: 2px;
+				left: -6px;
+				top: 2px
+			}
 
-		.gg-track-gray::after {
-			width: 2px;
-			height: 18px;
-			border-top: 4px solid;
-			border-bottom: 4px solid;
-			left: 2px;
-			top: -6px
-		}
+			.gg-track-gray::after {
+				width: 2px;
+				height: 18px;
+				border-top: 4px solid;
+				border-bottom: 4px solid;
+				left: 2px;
+				top: -6px
+			}
 
 		.gg-arrow-down {
 			color: gray;
@@ -914,30 +919,30 @@
 			height: 22px;
 		}
 
-		.gg-arrow-down::after,
-		.gg-arrow-down::before {
-			content: "";
-			display: block;
-			box-sizing: border-box;
-			position: absolute;
-			bottom: 4px
-		}
+			.gg-arrow-down::after,
+			.gg-arrow-down::before {
+				content: "";
+				display: block;
+				box-sizing: border-box;
+				position: absolute;
+				bottom: 4px
+			}
 
-		.gg-arrow-down::after {
-			width: 8px;
-			height: 8px;
-			border-bottom: 2px solid;
-			border-left: 2px solid;
-			transform: rotate(-45deg);
-			left: 7px
-		}
+			.gg-arrow-down::after {
+				width: 8px;
+				height: 8px;
+				border-bottom: 2px solid;
+				border-left: 2px solid;
+				transform: rotate(-45deg);
+				left: 7px
+			}
 
-		.gg-arrow-down::before {
-			width: 2px;
-			height: 16px;
-			left: 10px;
-			background: currentColor
-		}
+			.gg-arrow-down::before {
+				width: 2px;
+				height: 16px;
+				left: 10px;
+				background: currentColor
+			}
 
 		#arrowButton {
 			height: var(--buttonSize);
@@ -958,22 +963,18 @@
 			top: 5px;
 		}
 
-		.gg-controller::before {
-			content: "";
-			display: block;
-			box-sizing: border-box;
-			position: absolute;
-			width: 14px;
-			height: 14px;
-			box-shadow:
-				-6px -6px 0 -4px,
-				6px 6px 0 -4px,
-				6px -6px 0 -4px,
-				-6px 6px 0 -4px;
-			left: -5px;
-			top: -5px;
-			transform: rotate(45deg)
-		}
+			.gg-controller::before {
+				content: "";
+				display: block;
+				box-sizing: border-box;
+				position: absolute;
+				width: 14px;
+				height: 14px;
+				box-shadow: -6px -6px 0 -4px, 6px 6px 0 -4px, 6px -6px 0 -4px, -6px 6px 0 -4px;
+				left: -5px;
+				top: -5px;
+				transform: rotate(45deg)
+			}
 
 		.gg-erase {
 			color: gray;
@@ -987,35 +988,32 @@
 			top: 3px;
 		}
 
-		.gg-erase::after,
-		.gg-erase::before {
-			content: "";
-			display: block;
-			box-sizing: border-box;
-			position: absolute
-		}
+			.gg-erase::after,
+			.gg-erase::before {
+				content: "";
+				display: block;
+				box-sizing: border-box;
+				position: absolute
+			}
 
-		.gg-erase::before {
-			width: 6px;
-			height: 14px;
-			border-bottom:
-				4px solid transparent;
-			border-radius: 1px;
-			box-shadow:
-				0 0 0 2px,
-				inset 0 -2px 0 0;
-			left: 7px;
-			top: 2px;
-			transform: rotate(45deg)
-		}
+			.gg-erase::before {
+				width: 6px;
+				height: 14px;
+				border-bottom: 4px solid transparent;
+				border-radius: 1px;
+				box-shadow: 0 0 0 2px, inset 0 -2px 0 0;
+				left: 7px;
+				top: 2px;
+				transform: rotate(45deg)
+			}
 
-		.gg-erase::after {
-			background: currentColor;
-			width: 22px;
-			height: 2px;
-			bottom: 0;
-			border-radius: 20px
-		}
+			.gg-erase::after {
+				background: currentColor;
+				width: 22px;
+				height: 2px;
+				bottom: 0;
+				border-radius: 20px
+			}
 
 		.gg-edit-markup {
 			color: gray;
@@ -1033,34 +1031,34 @@
 			top: 2px;
 		}
 
-		.gg-edit-markup::after,
-		.gg-edit-markup::before {
-			content: "";
-			display: block;
-			position: absolute;
-			box-sizing: border-box
-		}
+			.gg-edit-markup::after,
+			.gg-edit-markup::before {
+				content: "";
+				display: block;
+				position: absolute;
+				box-sizing: border-box
+			}
 
-		.gg-edit-markup::before {
-			width: 0;
-			height: 6px;
-			border-bottom: 6px solid;
-			border-left: 3px solid transparent;
-			border-right: 3px solid transparent;
-			bottom: 9px;
-			left: 6px
-		}
+			.gg-edit-markup::before {
+				width: 0;
+				height: 6px;
+				border-bottom: 6px solid;
+				border-left: 3px solid transparent;
+				border-right: 3px solid transparent;
+				bottom: 9px;
+				left: 6px
+			}
 
-		.gg-edit-markup::after {
-			width: 10px;
-			height: 12px;
-			border: 2px solid;
-			border-top: 4px solid;
-			border-bottom: 0;
-			bottom: 0;
-			left: 4px;
-			transform: rotateX(60deg)
-		}
+			.gg-edit-markup::after {
+				width: 10px;
+				height: 12px;
+				border: 2px solid;
+				border-top: 4px solid;
+				border-bottom: 0;
+				bottom: 0;
+				left: 4px;
+				transform: rotateX(60deg)
+			}
 
 		.gg-globe-alt,
 		.gg-globe-alt::after,
@@ -1082,24 +1080,24 @@
 			border-radius: 22px
 		}
 
-		.gg-globe-alt::after,
-		.gg-globe-alt::before {
-			content: "";
-			position: absolute;
-			width: 8px;
-			border-radius: 100%;
-			top: -2px;
-			left: 3px
-		}
+			.gg-globe-alt::after,
+			.gg-globe-alt::before {
+				content: "";
+				position: absolute;
+				width: 8px;
+				border-radius: 100%;
+				top: -2px;
+				left: 3px
+			}
 
-		.gg-globe-alt::after {
-			width: 24px;
-			height: 20px;
-			border: 2px solid transparent;
-			border-bottom: 2px solid;
-			top: -11px;
-			left: -5px
-		}
+			.gg-globe-alt::after {
+				width: 24px;
+				height: 20px;
+				border: 2px solid transparent;
+				border-bottom: 2px solid;
+				top: -11px;
+				left: -5px
+			}
 
 		.gg-trash {
 			color: gray;
@@ -1112,42 +1110,39 @@
 			width: 10px;
 			height: 12px;
 			border: 2px solid transparent;
-			box-shadow:
-				0 0 0 2px,
-				inset -2px 0 0,
-				inset 2px 0 0;
+			box-shadow: 0 0 0 2px, inset -2px 0 0, inset 2px 0 0;
 			border-bottom-left-radius: 1px;
 			border-bottom-right-radius: 1px;
 			margin-top: 4px
 		}
 
-		.gg-trash::after,
-		.gg-trash::before {
-			content: "";
-			display: block;
-			box-sizing: border-box;
-			position: absolute
-		}
+			.gg-trash::after,
+			.gg-trash::before {
+				content: "";
+				display: block;
+				box-sizing: border-box;
+				position: absolute
+			}
 
-		.gg-trash::after {
-			background: currentColor;
-			border-radius: 3px;
-			width: 16px;
-			height: 2px;
-			top: -4px;
-			left: -5px
-		}
+			.gg-trash::after {
+				background: currentColor;
+				border-radius: 3px;
+				width: 16px;
+				height: 2px;
+				top: -4px;
+				left: -5px
+			}
 
-		.gg-trash::before {
-			width: 10px;
-			height: 4px;
-			border: 2px solid;
-			border-bottom: transparent;
-			border-top-left-radius: 2px;
-			border-top-right-radius: 2px;
-			top: -7px;
-			left: -2px
-		}
+			.gg-trash::before {
+				width: 10px;
+				height: 4px;
+				border: 2px solid;
+				border-bottom: transparent;
+				border-top-left-radius: 2px;
+				border-top-right-radius: 2px;
+				top: -7px;
+				left: -2px
+			}
 
 		.gg-attribution {
 			color: gray;
@@ -1159,48 +1154,35 @@
 			transform: scale(var(--ggs, 1.7));
 			width: 16px;
 			height: 18px;
-			background:
-				linear-gradient(to left,
-					currentColor 14px,
-					transparent 0) no-repeat 1px 2px/8px 2px,
-				linear-gradient(to left,
-					currentColor 14px,
-					transparent 0) no-repeat 6px 14px/6px 2px,
-				radial-gradient(circle,
-					currentColor 60%,
-					transparent 40%) no-repeat 10px 12px/6px 6px,
-				radial-gradient(circle,
-					currentColor 60%,
-					transparent 40%) no-repeat 0 0/6px 6px;
-
+			background: linear-gradient(to left, currentColor 14px, transparent 0) no-repeat 1px 2px/8px 2px, linear-gradient(to left, currentColor 14px, transparent 0) no-repeat 6px 14px/6px 2px, radial-gradient(circle, currentColor 60%, transparent 40%) no-repeat 10px 12px/6px 6px, radial-gradient(circle, currentColor 60%, transparent 40%) no-repeat 0 0/6px 6px;
 		}
 
-		.gg-attribution::after,
-		.gg-attribution::before {
-			content: "";
-			display: block;
-			box-sizing: border-box;
-			position: absolute;
-			width: 8px;
-			height: 8px;
-			border: 2px solid;
-		}
+			.gg-attribution::after,
+			.gg-attribution::before {
+				content: "";
+				display: block;
+				box-sizing: border-box;
+				position: absolute;
+				width: 8px;
+				height: 8px;
+				border: 2px solid;
+			}
 
-		.gg-attribution::before {
-			border-right: 0;
-			border-top-left-radius: 10px;
-			border-bottom-left-radius: 10px;
-			top: 8px;
-			left: 2px
-		}
+			.gg-attribution::before {
+				border-right: 0;
+				border-top-left-radius: 10px;
+				border-bottom-left-radius: 10px;
+				top: 8px;
+				left: 2px
+			}
 
-		.gg-attribution::after {
-			border-left: 0;
-			border-top-right-radius: 10px;
-			border-bottom-right-radius: 10px;
-			right: 2px;
-			top: 2px
-		}
+			.gg-attribution::after {
+				border-left: 0;
+				border-top-right-radius: 10px;
+				border-bottom-right-radius: 10px;
+				right: 2px;
+				top: 2px
+			}
 
 		.gg-pin {
 			color: gray;
@@ -1217,18 +1199,18 @@
 			margin-top: -4px
 		}
 
-		.gg-pin::before {
-			content: "";
-			display: block;
-			box-sizing: border-box;
-			position: absolute;
-			width: 8px;
-			height: 8px;
-			border: 2px solid;
-			top: 3px;
-			left: 3px;
-			border-radius: 40px
-		}
+			.gg-pin::before {
+				content: "";
+				display: block;
+				box-sizing: border-box;
+				position: absolute;
+				width: 8px;
+				height: 8px;
+				border: 2px solid;
+				top: 3px;
+				left: 3px;
+				border-radius: 40px
+			}
 
 		.gg-repeat {
 			color: gray;
@@ -1236,38 +1218,36 @@
 			position: relative;
 			display: block;
 			transform: scale(var(--ggs,1.7));
-			box-shadow:
-			-2px -2px 0 0,
-			2px 2px 0 0;
+			box-shadow: -2px -2px 0 0, 2px 2px 0 0;
 			width: 14px;
 			height: 6px;
 			top: 24px;
 			left: 13px;
 		}
 
-		.gg-repeat::after,
-		.gg-repeat::before {
-			content: "";
-			display: block;
-			box-sizing: border-box;
-			position: absolute;
-			width: 0;
-			height: 0;
-			border-top: 3px solid transparent;
-			border-bottom: 3px solid transparent
-		}
+			.gg-repeat::after,
+			.gg-repeat::before {
+				content: "";
+				display: block;
+				box-sizing: border-box;
+				position: absolute;
+				width: 0;
+				height: 0;
+				border-top: 3px solid transparent;
+				border-bottom: 3px solid transparent
+			}
 
-		.gg-repeat::before {
-			border-left: 5px solid;
-			top: -4px;
-			right: 0
-		}
+			.gg-repeat::before {
+				border-left: 5px solid;
+				top: -4px;
+				right: 0
+			}
 
-		.gg-repeat::after {
-			border-right: 5px solid;
-			bottom: -4px;
-			left: 0
-		} 
+			.gg-repeat::after {
+				border-right: 5px solid;
+				bottom: -4px;
+				left: 0
+			}
 
 		.refreshIcon {
 			color: gray;
@@ -1282,10 +1262,7 @@
 		}
 
 		.gg-stopwatch {
-			background:
-				linear-gradient(to left,
-					currentColor 7px,transparent 0)
-					no-repeat 6px 2px/2px 6px;
+			background: linear-gradient(to left, currentColor 7px,transparent 0) no-repeat 6px 2px/2px 6px;
 			box-sizing: border-box;
 			position: relative;
 			display: block;
@@ -1296,18 +1273,19 @@
 			border: 2px solid transparent;
 			box-shadow: 0 0 0 2px
 		}
-		.gg-stopwatch::after {
-			content: "";
-			display: block;
-			box-sizing: border-box;
-			position: absolute;
-			width: 4px;
-			height: 2px;
-			background: currentColor;
-			transform: rotate(45deg);
-			right: -4px;
-			top: -3px
-		}
+
+			.gg-stopwatch::after {
+				content: "";
+				display: block;
+				box-sizing: border-box;
+				position: absolute;
+				width: 4px;
+				height: 2px;
+				background: currentColor;
+				transform: rotate(45deg);
+				right: -4px;
+				top: -3px
+			}
 
 
 		.gg-play-pause-o {
@@ -1320,18 +1298,19 @@
 			border: 2px solid;
 			border-radius: 22px
 		}
-		.gg-play-pause-o::before {
-			content: "";
-			display: block;
-			box-sizing: border-box;
-			position: absolute;
-			width: 6px;
-			height: 6px;
-			left: 6px;
-			top: 6px;
-			border-left: 2px solid;
-			border-right: 2px solid
-		}
+
+			.gg-play-pause-o::before {
+				content: "";
+				display: block;
+				box-sizing: border-box;
+				position: absolute;
+				width: 6px;
+				height: 6px;
+				left: 6px;
+				top: 6px;
+				border-left: 2px solid;
+				border-right: 2px solid
+			}
 
 		.gg-data {
 			transform: scale(var(--ggs, 1.7));
@@ -1340,43 +1319,41 @@
 			top: 20px
 		}
 
-		.gg-data,
-		.gg-data::after,
-		.gg-data::before {
-			box-sizing: border-box;
-			position: relative;
-			display: block;
-			border: 2px solid;
-			border-radius: 50%;
-			width: 14px;
-			height: 14px
-		}
+			.gg-data,
+			.gg-data::after,
+			.gg-data::before {
+				box-sizing: border-box;
+				position: relative;
+				display: block;
+				border: 2px solid;
+				border-radius: 50%;
+				width: 14px;
+				height: 14px
+			}
 
-		.gg-data::after,
-		.gg-data::before {
-			content: "";
-			position: absolute;
-			width: 6px;
-			height: 6px;
-			top: 2px;
-			left: 2px
-		}
+				.gg-data::after,
+				.gg-data::before {
+					content: "";
+					position: absolute;
+					width: 6px;
+					height: 6px;
+					top: 2px;
+					left: 2px
+				}
 
-		.gg-data::after {
-			background: linear-gradient( to left,
-			currentColor 8px,transparent 0)
-			no-repeat bottom center/2px 8px;
-			width: 22px;
-			height: 22px;
-			top: -6px;
-			left: -6px
-		}
+				.gg-data::after {
+					background: linear-gradient( to left, currentColor 8px,transparent 0) no-repeat bottom center/2px 8px;
+					width: 22px;
+					height: 22px;
+					top: -6px;
+					left: -6px
+				}
 
-		.gg-data,
-		.gg-data::after {
-			border-top-color: transparent;
-			border-bottom-color: transparent
-		} 
+				.gg-data,
+				.gg-data::after {
+					border-top-color: transparent;
+					border-bottom-color: transparent
+				}
 
 
 		#keyb {
@@ -1433,9 +1410,9 @@
 			position: relative;
 		}
 
-		.keyboard__key:active {
-			background: rgba(255, 255, 255, 0.12);
-		}
+			.keyboard__key:active {
+				background: rgba(255, 255, 255, 0.12);
+			}
 
 		.keyboard__key--wide {
 			width: 12vw;
@@ -1487,8 +1464,12 @@
 		<div id="keyb">&nbsp;</div>
 	</div>
 	<div id="overlay">
-		<div><span id='date-time'></span><button id="wpListMinimize" type="button" onclick="minimizeWpList()">_</button><button id="wpListClose"
-				type="button" onclick="hideWpList()">x</button></div>
+		<div>
+			<span id='date-time'></span><button id="wpListMinimize" type="button" onclick="minimizeWpList()">_</button><button id="wpListClose"
+																															   type="button" onclick="hideWpList()">
+				x
+			</button>
+		</div>
 		<div id="wpHeaderDiv">
 			<h3 id="wpHeader" style='font-size: 15; text-align: center;'>Flightplan</h3>
 			<br>
@@ -1531,8 +1512,10 @@
 		<div id="overlay2">
 			<table class="overlay2Table" style='text-align: center;'>
 				<tr>
-					<td>IAS: 9999kts I&nbsp;&nbsp;HEAD:&nbsp;999° I&nbsp;&nbsp;DIST:&nbsp;999999nm
-						I&nbsp;&nbsp;ALT:&nbsp;99999ft</td>
+					<td>
+						IAS: 9999kts I&nbsp;&nbsp;HEAD:&nbsp;999° I&nbsp;&nbsp;DIST:&nbsp;999999nm
+						I&nbsp;&nbsp;ALT:&nbsp;99999ft
+					</td>
 				</tr>
 			</table>
 		</div>
@@ -1705,21 +1688,19 @@
 		return airac_id.toString();
 	}
 
-
-	$(function() {
-		var height = $('#wpHeaderDiv').outerHeight(true);
-		var bottomheight = $('#overlayListSum ').outerHeight(true);
-		var overlayheight = $('#overlay ').height();
-		$('#content').css('height', overlayheight - height - bottomheight - 80 );
-	});
-
-	$(window).on('resize', function(){
+	$(function () {
 		var height = $('#wpHeaderDiv').outerHeight(true);
 		var bottomheight = $('#overlayListSum ').outerHeight(true);
 		var overlayheight = $('#overlay ').height();
 		$('#content').css('height', overlayheight - height - bottomheight - 80);
 	});
 
+	$(window).on('resize', function () {
+		var height = $('#wpHeaderDiv').outerHeight(true);
+		var bottomheight = $('#overlayListSum ').outerHeight(true);
+		var overlayheight = $('#overlay ').height();
+		$('#content').css('height', overlayheight - height - bottomheight - 80);
+	});
 
 	function getVatsimData() {
 		clearInterval(controllerInterval);
@@ -1732,6 +1713,7 @@
 		else {
 			getIVAO();
 		}
+		listControllers();
 	}
 
 	function loadMap(lat, lon) {
@@ -1895,7 +1877,7 @@
 		};
 
 		var openaip_basemap_osm = L.featureGroup([streets, airspacesEurope, openaip_cached_hotspot_off, aircraft, flightpath_off]);
-
+		
 		map = L.map('map', {
 			center: mapCenter,
 			minZoom: 2,
@@ -1920,7 +1902,7 @@
 			id: 'search',
 			showMarker: true,
 			showPopup: true,
-			popupFormat: ({ query, result }) => "<table class='searchboxTable'><tr><td><p style='font-size: 1.5rem'>Teleport<p></td></tr><tr><td class='resaultLabel'>" + result.label + "</td></tr><tr><td style='text-align:left; padding:0; font-size: 14px'><p style='text-align: left'>&nbsp;Altitude (ft): </p></td></tr><tr><td><div class='number-input'><button onclick='altitudeDwn()'></button><input id='altitudeInput' class='quantity' min='0' name='quantity' value= " + Math.round(altitude) + " type='text'><button onclick='altitudeUp()' class='plus'></button></div></td></tr><tr><td style='text-align:left; padding:0; font-size: 14px'><p style='text-align: left'>&nbsp;Heading (deg): </p></td><tr><td><div class='number-input'><button onclick='headingDwn()'></button><input id='headingInput' class='quantity' min='0' name='quantity' value= " + Math.round(heading) + " type='text'><button onclick='headingUp()' class='plus'></button></div></td></tr><tr><td style='text-align:left; padding:0; font-size: 14px'><p style='text-align: left'>&nbsp;Airspeed (kt): </p></td></tr><tr><td><div class='number-input'><button onclick='speedDwn()'></button><input id='speedInput' class='quantity' min='0' name='quantity' value= " + Math.round(speed) + " type='text'><button onclick='speedUp()' class='plus'></button></div></td></tr><br><tr><td><span style='margin-top: 15px'><button class='teleportButton' type='button' onclick='geoTeleport()'>OK</button></span></td></tr></table></div></div>", // optional: function    - default returns result label,			
+			popupFormat: ({ query, result }) => "<table class='searchboxTable'><tr><td><p style='font-size: 1.5rem'>Teleport<p></td></tr><tr><td class='resaultLabel'>" + result.label + "</td></tr><tr><td style='text-align:left; padding:0; font-size: 14px'><p style='text-align: left'>&nbsp;Altitude (ft): </p></td></tr><tr><td><div class='number-input'><button onclick='altitudeDwn()'></button><input id='altitudeInput' class='quantity' min='0' name='quantity' value= " + Math.round(altitude) + " type='text'><button onclick='altitudeUp()' class='plus'></button></div></td></tr><tr><td style='text-align:left; padding:0; font-size: 14px'><p style='text-align: left'>&nbsp;Heading (deg): </p></td><tr><td><div class='number-input'><button onclick='headingDwn()'></button><input id='headingInput' class='quantity' min='0' name='quantity' value= " + Math.round(heading) + " type='text'><button onclick='headingUp()' class='plus'></button></div></td></tr><tr><td style='text-align:left; padding:0; font-size: 14px'><p style='text-align: left'>&nbsp;Airspeed (kt): </p></td></tr><tr><td><div class='number-input'><button onclick='speedDwn()'></button><input id='speedInput' class='quantity' min='0' name='quantity' value= " + Math.round(speed) + " type='text'><button onclick='speedUp()' class='plus'></button></div></td></tr><br><tr><td><span style='margin-top: 15px'><button class='teleportButton' type='button' onclick='geoTeleport()'>OK</button></span></td></tr></table></div></div>", // optional: function    - default returns result label,
 			autoClose: true,
 			keepResult: false,
 			retainZoomLevel: true,
@@ -2137,7 +2119,7 @@
 				drawLines();
 				id = markerId;
 				markerId++;
-				if (document.getElementById("keyboard")){
+				if (document.getElementById("keyboard")) {
 					var x = document.getElementById("keyboard");
 					x.style.display = "none";
 				}
@@ -2227,15 +2209,15 @@
 		}
 
 		function loadName() {
-			if($('#WPnameInput')){
+			if ($('#WPnameInput')) {
 				if (wpNames[activeWP] != '') {
-					$('#WPnameInput').val(wpNames[activeWP]);			
+					$('#WPnameInput').val(wpNames[activeWP]);
 					//console.log('load ' + wpNames[activeWP]);
 				}
-				
-				$("#WPnameInput").focus(function(e){
+
+				$("#WPnameInput").focus(function (e) {
 					id = e.id;
-					//console.log(id + ' focused');					
+					//console.log(id + ' focused');
 					textstart = '';
 					textend = '';
 					document.getElementById("keyb").style.visibility = "visible";
@@ -2244,7 +2226,7 @@
 					});
 				});
 
-				$("#WPnameInput").click(function(e){
+				$("#WPnameInput").click(function (e) {
 					document.getElementById("keyb").style.visibility = "visible";
 					Keyboard.open(this.value, currentValue => {
 						this.value = currentValue;
@@ -2256,7 +2238,7 @@
 					getCursorpos();
 				});
 
-				$("#WPnameInput").select(function(e){
+				$("#WPnameInput").select(function (e) {
 					Keyboard.open(this.value, currentValue => {
 						this.value = currentValue;
 					});
@@ -2337,7 +2319,7 @@
 
 			$.each(map._layers, function (ml) {
 				var altitude = '0';
-				if(altitudes[wpi2 - 1]){
+				if (altitudes[wpi2 - 1]) {
 					altitude = altitudes[wpi2 - 1];
 				}
 				if (map._layers[ml].feature && map._layers[ml].feature.mytype != 'airport' && map._layers[ml].feature.mytype != 'navaid') {
@@ -2347,7 +2329,7 @@
 					}
 					if (wpi2 > 0) {
 						var bearing2 = calculateBearing(coordinatesArray[(wpi2 - 1)][0], coordinatesArray[(wpi2 - 1)][1], coordinatesArray[wpi2][0], coordinatesArray[wpi2][1]);
-						//console.log(bearing2)						
+						//console.log(bearing2)
 						if (altitudes[wpi2]) {
 							if (Math.round(bearing2) < 10) {
 								if (atbls[wpi2]) {
@@ -2396,20 +2378,20 @@
 
 			document.getElementById('start').innerHTML = 'START';
 			document.getElementById('target').innerHTML = 'DEST';
-			if(wpNames[0]){
+			if (wpNames[0]) {
 				document.getElementById('start').innerHTML = wpNames[0];
 			}
-			if(wpNames[wpNames.length - 1] && wpNames.length > 1){
+			if (wpNames[wpNames.length - 1] && wpNames.length > 1) {
 				document.getElementById('target').innerHTML = wpNames[wpNames.length - 1];
 			}
 			document.getElementById('depArrTable').style.display = '';
 			document.getElementById('dep').innerHTML = 'DEP';
 			document.getElementById('arr').innerHTML = 'ARR';
-			if(wpTypes[0]){
+			if (wpTypes[0]) {
 				document.getElementById('dep').innerHTML = wpTypes[0];
 			}
-			if(wpTypes[1]){
-				document.getElementById('arr').innerHTML = wpTypes[wpTypes.length-1];
+			if (wpTypes[1]) {
+				document.getElementById('arr').innerHTML = wpTypes[wpTypes.length - 1];
 			}
 
 
@@ -2418,7 +2400,7 @@
 			if (wpListMinimized == true) {
 				document.getElementById("overlay").style.minHeight = '8%';
 			}
-		
+
 			for (let i = wpTypes.length - 1; i >= 0; i--) {
 				var splitted = wpTypes[i].split(' ');
 				var type = splitted[0];
@@ -2440,7 +2422,7 @@
 			}
 
 			$('.target').on("click", function (event) {
-				if (startlineShow == false || targetMarker != event.target.id ) {
+				if (startlineShow == false || targetMarker != event.target.id) {
 					var targetMarker2 = event.target;
 					//console.log('target marker: ' + targetMarker2.id);
 					$(this).css('color', 'red');
@@ -2488,7 +2470,7 @@
 				var nlat = pos_lat;
 				var nlng = pos_lng;
 				var i = 0;
-				if (coordinatesArray[target]){
+				if (coordinatesArray[target]) {
 					if (target <= coordinatesArray.length) {
 						nwp1_lat = coordinatesArray[target][0];
 						nwp1_lng = coordinatesArray[target][1];
@@ -2496,7 +2478,7 @@
 						var pos2 = new L.LatLng(nlat, nlng);
 						var coordinates2 = [p2, pos2];
 					}
-					else{
+					else {
 						startlineShow = false;
 					}
 
@@ -2505,7 +2487,7 @@
 						startLineGroup.addLayer(L.polyline(coordinates2, { color: '#ff2e63' }));
 					}
 				}
-				
+
 				var x = document.querySelectorAll('#overlayList > ul > li');
 				for (let i = 0; i < x.length; i++) {
 					x[i].style.color = "";
@@ -2529,14 +2511,14 @@
 					alt1 = parseFloat(altitudes[target]);
 				}
 
-				if (distance2 > 0){
-					times = convertNumToTime(((distance2/vel)*60).toFixed(2));
+				if (distance2 > 0) {
+					times = convertNumToTime(((distance2 / vel) * 60).toFixed(2));
 				}
 
-				if (planeHeading != 0 && startlineShow == true){
-					$('#overlay2').html('<table class="overlay2Table" style="text-align: center;"><tr><td>IAS:&nbsp;' + vel + 'kts  &nbsp;I&nbsp;&nbsp;HEAD:&nbsp;' + heading.toFixed(0) + '° / '+ planeHeading.toFixed(0) + '°  &nbsp;I&nbsp;&nbsp;DIST:&nbsp;' + distance2.toFixed(2) + 'nm&nbsp;/ ' + times  + '  I&nbsp;&nbsp;ALT:&nbsp;' + alt + 'ft / ' + alt1.toFixed(0) + 'ft</td></tr></table>');
+				if (planeHeading != 0 && startlineShow == true) {
+					$('#overlay2').html('<table class="overlay2Table" style="text-align: center;"><tr><td>IAS:&nbsp;' + vel + 'kts  &nbsp;I&nbsp;&nbsp;HEAD:&nbsp;' + heading.toFixed(0) + '° / ' + planeHeading.toFixed(0) + '°  &nbsp;I&nbsp;&nbsp;DIST:&nbsp;' + distance2.toFixed(2) + 'nm&nbsp;/ ' + times + '  I&nbsp;&nbsp;ALT:&nbsp;' + alt + 'ft / ' + alt1.toFixed(0) + 'ft</td></tr></table>');
 				}
-				else{
+				else {
 					$('#overlay2').html('<table class="overlay2Table" style="text-align: center;"><tr><td>IAS:&nbsp;' + vel + 'kts  &nbsp;I&nbsp;&nbsp;HEAD:&nbsp;' + heading.toFixed(0) + '°  I&nbsp;&nbsp;ALT:&nbsp;' + alt + 'ft</td></tr></table>');
 				}
 
@@ -2573,20 +2555,20 @@
 			var secunde = Math.floor(decpart * 60) + '';
 			// Add padding if need
 			if (secunde.length < 2) {
-			secunde = '0' + secunde; 
+				secunde = '0' + secunde;
 			}
-			var hours = Math.floor(minutes/60);
+			var hours = Math.floor(minutes / 60);
 			// Add Sign in final result
 			sign = sign == 1 ? '' : '-';
-			minutes = (minutes-(hours*60));
+			minutes = (minutes - (hours * 60));
 			var time = '';
-			if (hours > 0 && minutes > 0 && secunde >0){
+			if (hours > 0 && minutes > 0 && secunde > 0) {
 				time = sign + hours + 'hour.&nbsp;' + minutes + 'min.&nbsp;' + secunde + 'sec.';
 			}
-			else if (hours < 1 && minutes > 0 && secunde > 0){
+			else if (hours < 1 && minutes > 0 && secunde > 0) {
 				time = sign + minutes + 'min.&nbsp;' + secunde + 'sec.';
 			}
-			else if (hours < 1 && minutes < 1 && secunde > 0){
+			else if (hours < 1 && minutes < 1 && secunde > 0) {
 				time = sign + secunde + 'sec.';
 			}
 			return time;
@@ -2772,13 +2754,13 @@
 			zoomLevel = map.getZoom();
 			window.localStorage.setItem("zoomLevel", zoomLevel)
 			//console.log("Current Zoom Level = " + zoomLevel);
-			if(zoomLevel>8){
+			if (zoomLevel > 8) {
 				toggle11.enable();
 				getWPData();
-			}else{
+			} else {
 				toggle11.disable();
 				airportsPanel = false;
-				if(panelState == 'airports'||panelState == 'navaids'){
+				if (panelState == 'airports' || panelState == 'navaids') {
 					var controllerOverlay = document.getElementById('controllerOverlay');
 					controllerOverlay.style.visibility = 'hidden';
 					var list = document.getElementById('controllerList');
@@ -2789,16 +2771,16 @@
 		});
 
 		var moveendTimeout;
-		map.on('moveend', function(e) {
+		map.on('moveend', function (e) {
 			map.invalidateSize();
 			clearTimeout(moveendTimeout);
-			moveendTimeout = setTimeout(function(){
+			moveendTimeout = setTimeout(function () {
 				zoomLevel = map.getZoom();
-				if(zoomLevel>8){
+				if (zoomLevel > 8) {
 					toggle11.enable();
 					getWPData();
 				}
-			},500);	
+			}, 500);
 		});
 
 		LayerControl = L.control.groupedLayers(baseMaps, groupedOverlays, options).addTo(map);
@@ -2942,9 +2924,7 @@
 				stateName: 'vatsim',
 				title: 'VATSIM',
 				onClick: function (control) {
-					if (document.getElementById('controllerOverlay').style.visibility == 'hidden'){
-						getVatsimData();
-						listControllers();
+					if (document.getElementById('controllerOverlay').style.visibility == 'hidden') {
 						lastVatsim = '';
 						lastSelected = -1;
 						lastSelectedElement = null;
@@ -2974,7 +2954,7 @@
 				stateName: 'ivao',
 				title: 'IVAO',
 				onClick: function (control) {
-					if (document.getElementById('controllerOverlay').style.visibility == 'visible'){
+					if (document.getElementById('controllerOverlay').style.visibility == 'visible') {
 						mout();
 						panelState = '';
 						return
@@ -3004,7 +2984,7 @@
 				stateName: 'airports',
 				title: 'AIRPORTS',
 				onClick: function (control) {
-					if (document.getElementById('controllerOverlay').style.visibility == 'hidden'){
+					if (document.getElementById('controllerOverlay').style.visibility == 'hidden') {
 						airportsToggle = false;
 						document.getElementById('controllerOverlay').style.visibility = 'visible';
 						document.getElementById('controllerList').style.visibility = 'visible';
@@ -3030,7 +3010,7 @@
 				stateName: 'navaids',
 				title: 'NAVAIDS',
 				onClick: function (control) {
-					if (document.getElementById('controllerOverlay').style.visibility == 'visible'){
+					if (document.getElementById('controllerOverlay').style.visibility == 'visible') {
 						mout();
 						panelState = '';
 						return
@@ -3076,13 +3056,14 @@
 		xhr.send(myText);
 		xhr.onreadystatechange = function () {
 			if (xhr.readyState == XMLHttpRequest.DONE) {
-				if(xhr.responseText){
-					if(lastVatsim != xhr.responseText){
+				if (xhr.responseText) {
+					if (lastVatsim != xhr.responseText) {
 						var myObj = JSON.parse(xhr.responseText);
 						filterAtis(myObj.atis);
 						filterControllers(myObj.controllers);
 						lastVatsim = xhr.responseText;
 					}
+					listControllers();
 				}
 			}
 		}
@@ -3096,8 +3077,9 @@
 		xhr.send(myText);
 		xhr.onreadystatechange = function () {
 			if (xhr.readyState == XMLHttpRequest.DONE) {
-				if(xhr.responseText){
+				if (xhr.responseText) {
 					transceivers = JSON.parse(xhr.responseText);
+					listControllers();
 				}
 			}
 		}
@@ -3111,12 +3093,13 @@
 		xhr.send(myText);
 		xhr.onreadystatechange = function () {
 			if (xhr.readyState == XMLHttpRequest.DONE) {
-				if(xhr.responseText){
-					if(lastIvao != xhr.responseText){
+				if (xhr.responseText) {
+					if (lastIvao != xhr.responseText) {
 						var myObj = xhr.responseText.split(/\r?\n/);
 						filterIVAO(myObj);
 						lastIvao = xhr.responseText;
 					}
+					listControllers();
 				}
 			}
 		}
@@ -3182,7 +3165,7 @@
 			if (_atis[i].text_atis) {
 				text_atis = _atis[i].text_atis;
 			}
-			else{
+			else {
 				text_atis = -1;
 			}
 			var controller = {
@@ -3205,7 +3188,7 @@
 			if (_controllers[i].text_atis) {
 				var text_atis = _controllers[i].text_atis;
 			}
-			else{
+			else {
 				var text_atis = -1;
 			}
 			var controller = {
@@ -3229,13 +3212,13 @@
 			var frequency = values[4];
 			var lat = values[5];
 			var lng = values[6];
-			var visualRange = values[19]; 
+			var visualRange = values[19];
 			var text_atis = [];
-			if (values[35]){
+			if (values[35]) {
 				text_atis = values[35].split('^§');
 				text_atis.shift(0);
 			}
-			else{
+			else {
 				text_atis = -1;
 			}
 			var controller = {
@@ -3339,7 +3322,7 @@
 		wpi3 = 0;
 		for (let index = 0; index < wpNames.length; index++) {
 			const element = wpNames[index];
-			if(element){
+			if (element) {
 				const elementSplit = element.split('WP');
 				if (elementSplit[1] && !isNaN(elementSplit[1])) {
 					markerIdArrray.push(elementSplit[1]);
@@ -3676,7 +3659,7 @@
 		var wpnum = 0;
 		$.each(map._layers, function (ml) {
 			if (map._layers[ml].feature && map._layers[ml].feature.mytype != 'airport' && map._layers[ml].feature.mytype != 'navaid') {
-				if(wpnum == (activeWP)){
+				if (wpnum == (activeWP)) {
 					map._layers[ml].options.name = wpNames[activeWP];
 					map._layers[ml].setTooltipContent(wpNames[activeWP]);
 				}
@@ -3689,14 +3672,14 @@
 
 	function updateUlElement() {
 		var x = document.querySelectorAll('#overlayList > ul > p > a')[activeWP];
-		if (x){
+		if (x) {
 			x.innerHTML = altitudes[activeWP] + ' ft';
 		}
 	}
 
 	function updateLiElement() {
 		var x = document.querySelectorAll('#overlayList > ul > li')[activeWP];
-		if (x){
+		if (x) {
 			x.innerHTML = wpNames[activeWP] + '<br>' + 'User';
 		}
 	}
@@ -3720,9 +3703,9 @@
 
 	function setWind(direction, speed) {
 		$('i#arrow').css('transform', 'rotate(' + Math.round(direction) + 'deg) scale(2.)');
-		$('.backButton').text(Math.round(direction) +'/' +  Math.round(speed));
+		$('.backButton').text(Math.round(direction) + '/' + Math.round(speed));
 	}
- 
+
 	function teleport(lat, lng) {
 		var x = document.getElementById("keyboard");
 		x.style.display = "none";
@@ -3794,7 +3777,7 @@
 				setRotation(heading);
 				setWind(latlng[5], latlng[6]);
 				if (latlng[0] != lastLat && latlng[1] != lastLng) {
-					if(showPath == true){
+					if (showPath == true) {
 						polyline.addLatLng([latlng[0], latlng[1]]);
 					}
 					lastLat = latlng[0];
@@ -3946,6 +3929,7 @@
 	var lastSelected = -1;
 	var lastSelectedElement;
 	function listControllers() {
+		$('#controllerList > ul').empty();
 		var list = document.getElementById('controllerList');
 		list.style.display = 'inline-block';
 		var ctr = controllersInRange.filter(x => x.callsign.substring(x.callsign.lastIndexOf("_") + 1, x.callsign.length) === 'CTR' || x.callsign.substring(x.callsign.lastIndexOf("_") + 1, x.callsign.length) === 'FSS');
@@ -3975,7 +3959,7 @@
 		for (var i = 0; i < del.length; i++) {
 			$('#controllerList > ul').append('<li href="#" class="station" id=' + del[i].callsign + '>' + del[i].callsign + ' -&nbsp' + del[i].frequency + '</li>');
 		}
-		if (vatsim == true){
+		if (vatsim == true) {
 			$('#controllerList > ul').append('<p>ATIS</p>');
 			for (var i = 0; i < atis.length; i++) {
 				$('#controllerList > ul').append('<li href="#" class="station" id=' + atis[i].callsign + '>' + atis[i].callsign + ' -&nbsp' + atis[i].frequency + '</li>');
@@ -3983,22 +3967,22 @@
 		}
 		$('#controllerList > ul').append('<p>UNICOM</p>');
 		$('#controllerList > ul').append('<li href="#" class="station" id="UNICOM">UNICOM - 122.800</li>');
-	
+
 		//console.log(controllersInRange);
 		var stations = document.getElementsByClassName("station");
 		var frequency = "";
 		for (var i = 0; i < stations.length; i++) {
-			stations[i].addEventListener('mousedown', function(e){ e.preventDefault(); }, false);
+			stations[i].addEventListener('mousedown', function (e) { e.preventDefault(); }, false);
 			stations[i].addEventListener("click", function (e) {
 				for (var i = 0; i < stations.length; i++) {
 					stations[i].style.color = 'black';
 				};
 				//console.log(this.id);
 				var index = controllersInRange.findIndex(x2 => x2.callsign === this.id);
-				if (lastSelected != this.id && this.id != 'UNICOM'){
-					if (lastSelected != -1){
+				if (lastSelected != this.id && this.id != 'UNICOM') {
+					if (lastSelected != -1) {
 						var index2 = controllersInRange.findIndex(x3 => x3.callsign === lastSelected);
-						lastSelectedElement.innerHTML =  controllersInRange[index2].callsign + ' -&nbsp' + controllersInRange[index2].frequency;;
+						lastSelectedElement.innerHTML = controllersInRange[index2].callsign + ' -&nbsp' + controllersInRange[index2].frequency;;
 					};
 					selected = true;
 					lastSelected = this.id;
@@ -4006,24 +3990,24 @@
 					//this.style.color = 'black';
 					//console.log(controllersInRange[index]);
 					if (index != -1) {
-						if(controllersInRange[index].text_atis != -1){
+						if (controllersInRange[index].text_atis != -1) {
 							var atisString = '';
 							controllersInRange[index].text_atis.forEach(element => {
-								if (element != ""){
+								if (element != "") {
 									atisString += element + '<br>';
 								}
 							});
 							var innerText = controllersInRange[index].callsign + ' -&nbsp' + controllersInRange[index].frequency + '<br><p class="atisText"><i>' + atisString + '</i></p>';
 							this.innerHTML = innerText;
-						}					
+						}
 						//console.log('Frequency: ' + controllersInRange[index].frequency);
 					};
-					if (this.id == "UNICOM"){
+					if (this.id == "UNICOM") {
 						//console.log('Frequency: 122.800');
 					}
 					clearInterval(controllerInterval);
 				}
-				else if (this.id !='UNICOM'){
+				else if (this.id != 'UNICOM') {
 					//this.style.color = 'black';
 					var innerText = controllersInRange[index].callsign + ' -&nbsp' + controllersInRange[index].frequency;
 					this.innerHTML = innerText;
@@ -4035,15 +4019,15 @@
 		};
 	}
 
-	function selectController(id){
+	function selectController(id) {
 		var target = document.getElementById(id);
 	}
 
-	function tuneController(id){
-		var target = document.getElementById(id);	
+	function tuneController(id) {
+		var target = document.getElementById(id);
 	}
 
-	function deselectController(id){
+	function deselectController(id) {
 		var target = document.getElementById(id);
 		target.style.color = 'black';
 		var innerText = controllersInRange[index].callsign + ' -&nbsp' + controllersInRange[index].frequency;
@@ -4054,15 +4038,15 @@
 	var navaidsCounter = 10;
 	var airportsCounter = 10;
 
-	function moreAirports(){
+	function moreAirports() {
 		//console.log('more Airports');
 		airportsCounter = airportsCounter + 10;
 		listNavaids();
 	}
 
-	function moreNavaids(){
+	function moreNavaids() {
 		//console.log('more Navaids');
-		navaidsCounter  = navaidsCounter +10;
+		navaidsCounter = navaidsCounter + 10;
 		listNavaids();
 	}
 
@@ -4070,13 +4054,13 @@
 		var list = document.getElementById('controllerList');
 		list.style.display = 'inline-block';
 		$('#controllerList > ul').empty();
-		if(airportsToggle == false){
+		if (airportsToggle == false) {
 			//console.log(airports);
 			//$('#controllerList > ul').append('<p>Test</p>');
 			navaidsCounter = 10;
 			var airportsI = 0;
 			airports.forEach(element => {
-				if(airportsI < airportsCounter){
+				if (airportsI < airportsCounter) {
 					switch (element.properties.type) {
 						case 0:
 							type = "Airport (civil/military)";
@@ -4121,25 +4105,25 @@
 							type = "Altiport";
 					}
 					//console.log(element);
-					if(element.properties.icaoCode){
-						$('#controllerList > ul').append('<li href="#" class="station2" id="'+ element.properties.name + '">' + element.properties.icaoCode + ' - ' + type+'</li>');		
-					}else{
-						$('#controllerList > ul').append('<li href="#" class="station2" id="'+ element.properties.name + '">' + element.properties.name + ' - ' + type +'</li>');	
+					if (element.properties.icaoCode) {
+						$('#controllerList > ul').append('<li href="#" class="station2" id="' + element.properties.name + '">' + element.properties.icaoCode + ' - ' + type + '</li>');
+					} else {
+						$('#controllerList > ul').append('<li href="#" class="station2" id="' + element.properties.name + '">' + element.properties.name + ' - ' + type + '</li>');
 					}
 					airportsI++;
 				}
 			});
-			if(airports.length > 10){			
-				$('#controllerList > ul').append('<span href="#" class="station2" onclick="moreAirports()" id="counter">' + "show&nbsp;more..." +'</span>');	
+			if (airports.length > 10) {
+				$('#controllerList > ul').append('<span href="#" class="station2" onclick="moreAirports()" id="counter">' + "show&nbsp;more..." + '</span>');
 			}
 		}
-		else if(airportsToggle == true){
+		else if (airportsToggle == true) {
 			var navaidsI = 0;
 			airportsCounter = 10;
 			//console.log(navaids);
 			//$('#controllerList > ul').append('<p>Test</p>');
 			navaids.forEach(element2 => {
-				if(navaidsI < navaidsCounter){
+				if (navaidsI < navaidsCounter) {
 					//console.log(element2.properties.identifier);
 					var type;
 					switch (element2.properties.type) {
@@ -4170,38 +4154,38 @@
 						case 8:
 							type = "DVORTAC";
 					}
-					$('#controllerList > ul').append('<li href="#" class="station2" id="'+ element2.properties.identifier + '">' + element2.properties.identifier + ' - ' + type +'</li>');		
+					$('#controllerList > ul').append('<li href="#" class="station2" id="' + element2.properties.identifier + '">' + element2.properties.identifier + ' - ' + type + '</li>');
 					navaidsI++;
 				}
 			});
-			if(navaids.length > 10){	
-				$('#controllerList > ul').append('<span href="#" class="station2" onclick="moreNavaids()" id="counter">' + "show&nbsp;more..." +'</span>');
+			if (navaids.length > 10) {
+				$('#controllerList > ul').append('<span href="#" class="station2" onclick="moreNavaids()" id="counter">' + "show&nbsp;more..." + '</span>');
 			}
-		}	
+		}
 
 		var stations2 = document.getElementsByClassName("station2");
 		for (var i = 0; i < stations2.length; i++) {
-			stations2[i].addEventListener('mousedown', function(e){ e.preventDefault(); }, false);
+			stations2[i].addEventListener('mousedown', function (e) { e.preventDefault(); }, false);
 			stations2[i].addEventListener("click", function (e) {
-				
+
 				for (var i = 0; i < stations2.length; i++) {
 					stations2[i].style.color = 'black';
 				};
 				const xname = this.id;
 				$.each(map._layers, function (ml) {
-		
+
 					if (map._layers[ml].feature && map._layers[ml].feature.mytype != 'navaid') {
 						console.log(e);
-						if(map._layers[ml].feature.properties.name == xname){
+						if (map._layers[ml].feature.properties.name == xname) {
 							//var posX = new L.LatLng(map._layers[ml].feature.properties.geometry.coordinates[1], map._layers[ml].feature.properties.geometry.coordinates[0]);
 							//map.panTo(posX);
-							setTimeout(function(){map._layers[ml].openPopup();},500);	
+							setTimeout(function () { map._layers[ml].openPopup(); }, 500);
 						}
 					}
 					else if (map._layers[ml].feature && map._layers[ml].feature.mytype == 'navaid') {
 						console.log(e);
-						if(map._layers[ml].feature.properties.identifier == xname){
-							setTimeout(function(){map._layers[ml].openPopup();},500);					
+						if (map._layers[ml].feature.properties.identifier == xname) {
+							setTimeout(function () { map._layers[ml].openPopup(); }, 500);
 						}
 					}
 
@@ -4218,14 +4202,14 @@
 		return mapDistance;
 	}
 
-	function getWPData(){
+	function getWPData() {
 		var mapCenter = map.getCenter();
 		//console.log(mapCenter);
-		getAirports(mapCenter.lat,mapCenter.lng);
-		getNavaids(mapCenter.lat,mapCenter.lng);
+		getAirports(mapCenter.lat, mapCenter.lng);
+		getNavaids(mapCenter.lat, mapCenter.lng);
 	}
 
-	async function getAirports(lat,lng){
+	async function getAirports(lat, lng) {
 		airports = [];
 		var url = "https://api.core.openaip.net/api/airports?page=1&limit=1000&pos=" + lat + "%2C" + lng + "&dist=" + getMapRadius() + "&sortBy=name&sortDesc=true&approved=true&searchOptLwc=false";
 		var xhr = new XMLHttpRequest();
@@ -4233,130 +4217,131 @@
 		xhr.setRequestHeader("accept", "application/json");
 		xhr.setRequestHeader("x-openaip-client-id", "1d96f836f115bc032c90e9335299e6c3");
 		xhr.onreadystatechange = function () {
-		if (xhr.readyState === 4) {
-			//console.log(xhr.status);
-			//console.log(xhr.responseText);
-			//console.log(obj);
-			var airportsJSON = JSON.parse(xhr.responseText);
-			//console.log(airportsJSON);
-			for (var airport of airportsJSON.items){
-				var outGeoJson = {}
-				outGeoJson['properties'] = airport
-				outGeoJson['type']= "Feature"
-				outGeoJson['geometry'] = airport.geometry
-				outGeoJson['mytype']= "airport"
-				
-				airports.push(outGeoJson);
-			}
-			//console.log(airports);
-			var label = '';
-			var runwayLabels = '';
-			var airportElevation = '';
-			//console.log('zoooooomlevel: ' + zoomLevel);
-			airportMarkers = L.geoJSON(airports, {
-				pointToLayer: function(feature,latlng){
-					label = String(feature.properties.name);
-					var type;
-					var elevation;
-					if (feature.properties.icaoCode){
-						label = String(feature.properties.icaoCode);
-					}
+			if (xhr.readyState === 4) {
+				//console.log(xhr.status);
+				//console.log(xhr.responseText);
+				//console.log(obj);
+				var airportsJSON = JSON.parse(xhr.responseText);
+				//console.log(airportsJSON);
+				for (var airport of airportsJSON.items) {
+					var outGeoJson = {}
+					outGeoJson['properties'] = airport
+					outGeoJson['type'] = "Feature"
+					outGeoJson['geometry'] = airport.geometry
+					outGeoJson['mytype'] = "airport"
 
-					if (feature.properties.elevation.value){
-						elevation = String(Math.floor(feature.properties.elevation.value * 3.28084));
-					}
-					
-					switch (feature.properties.type) {
-						case 0:
-							type = "Airport (civil/military)";
-							break;
-						case 1:
-							type = "Glider Site";
-							break;
-						case 2:
-							type = "Airfield Civil";
-							break;
-						case 3:
-							type = "International Airport";
-							break;
-						case 4:
-							type = "Heliport Military";
-							break;
-						case 5:
-							type = "Military Aerodrome";
-							break;
-						case 6:
-							type = "Ultra Light Flying Site";
-							break;
-						case 7:
-							type = "Heliport Civil";
-							break;
-						case 8:
-							type = "Aerodrome Closed";
-							break;
-						case 9:
-							type = "Airport resp. Airfield IFR";
-							break;
-						case 10:
-							type = "Airfield Water";
-							break;
-						case 11:
-							type = "Landing Strip";
-							break;
-						case 12:
-							type = "Agricultural Landing Strip";
-							break;
-						case 13:
-							type = "Altiport";
-					}
-					
-					console.log(feature.properties.runways);
-					runwayLabels = '';
-					airportElevation = '';
-					airportElevation +=  elevation + '&apos;';
-					if (feature.properties.runways){
-						$.each(feature.properties.runways, function (runway) {
-							runwayLabels += String(feature.properties.runways[runway].designator) + '&nbsp;' + '<br>';
-						});				
-					};
-					const airportPopup = L.popup({
-						closeOnClick: false,
-						autoClose: true	
-					});
-					if(runwayLabels != ''){
-						airportPopup.setContent("<p style='font-size: 1rem'><br>&nbsp;&nbsp;" + label +"&nbsp;&nbsp;</p><p style='font-size: 0.8rem'>" + type + "<br></p><p style='font-size: 0.6rem'> Elevation:<br>" + airportElevation + "<br>Runways: <br>" + runwayLabels + "</p><br><tr><td><span style='margin-top: 15px'><button style='margin-top:0px; text-align: center' class='marker-delete-button' onclick='appendWaypoint(" + latlng.lat + ',' + latlng.lng + ");'>&nbsp;Add WP&nbsp</button></span></td></tr><br><tr><td><span style='margin-top: 15px'><button style='margin-top:10px; text-align: center' class='marker-delete-button' onclick='teleport(" + latlng.lat + ',' + latlng.lng + ")' >&nbsp;Teleport&nbsp;</button></span></tr></td>");
-					}
-					else{
-						airportPopup.setContent("<p style='font-size: 1rem'><br>&nbsp;&nbsp;" + label +"&nbsp;&nbsp;</p><p style='font-size: 0.8rem'>" + type + "<br></p><p style='font-size: 0.6rem'> Elevation:<br>" + airportElevation + "</p><br><tr><td><span style='margin-top: 15px'><button style='margin-top:0px; text-align: center' class='marker-delete-button' onclick='appendWaypoint(" + latlng.lat + ',' + latlng.lng + ");'>&nbsp;Add WP&nbsp;</button></span></td></tr><br><tr><td><span style='margin-top: 15px'><button style='margin-top:10px; text-align: center' class='marker-delete-button' onclick='teleport(" + latlng.lat + ',' + latlng.lng + ")' >&nbsp;Teleport&nbsp;</button></span></tr></td>");
-					}
-					return new L.CircleMarker(latlng, {
-					color: 'transparent',
-					radius: 14,
-					}).bindPopup(airportPopup).bindTooltip(label).openTooltip().on("popupopen", onPopupOpenAirport);
+					airports.push(outGeoJson);
 				}
-			});
-			if(map.getZoom()>8){
-				if(!map.hasLayer(airportMarkers)){
-					airportMarkers.addTo(map);
+				//console.log(airports);
+				var label = '';
+				var runwayLabels = '';
+				var airportElevation = '';
+				//console.log('zoooooomlevel: ' + zoomLevel);
+				airportMarkers = L.geoJSON(airports, {
+					pointToLayer: function (feature, latlng) {
+						label = String(feature.properties.name);
+						var type;
+						var elevation;
+						if (feature.properties.icaoCode) {
+							label = String(feature.properties.icaoCode);
+						}
+
+						if (feature.properties.elevation.value) {
+							elevation = String(Math.floor(feature.properties.elevation.value * 3.28084));
+						}
+
+						switch (feature.properties.type) {
+							case 0:
+								type = "Airport (civil/military)";
+								break;
+							case 1:
+								type = "Glider Site";
+								break;
+							case 2:
+								type = "Airfield Civil";
+								break;
+							case 3:
+								type = "International Airport";
+								break;
+							case 4:
+								type = "Heliport Military";
+								break;
+							case 5:
+								type = "Military Aerodrome";
+								break;
+							case 6:
+								type = "Ultra Light Flying Site";
+								break;
+							case 7:
+								type = "Heliport Civil";
+								break;
+							case 8:
+								type = "Aerodrome Closed";
+								break;
+							case 9:
+								type = "Airport resp. Airfield IFR";
+								break;
+							case 10:
+								type = "Airfield Water";
+								break;
+							case 11:
+								type = "Landing Strip";
+								break;
+							case 12:
+								type = "Agricultural Landing Strip";
+								break;
+							case 13:
+								type = "Altiport";
+						}
+
+						console.log(feature.properties.runways);
+						runwayLabels = '';
+						airportElevation = '';
+						airportElevation += elevation + '&apos;';
+						if (feature.properties.runways) {
+							$.each(feature.properties.runways, function (runway) {
+								runwayLabels += String(feature.properties.runways[runway].designator) + '&nbsp;' + '<br>';
+							});
+						};
+						const airportPopup = L.popup({
+							closeOnClick: false,
+							autoClose: true
+						});
+						if (runwayLabels != '') {
+							airportPopup.setContent("<p style='font-size: 1rem'><br>&nbsp;&nbsp;" + label + "&nbsp;&nbsp;</p><p style='font-size: 0.8rem'>" + type + "<br></p><p style='font-size: 0.6rem'> Elevation:<br>" + airportElevation + "<br>Runways: <br>" + runwayLabels + "</p><br><tr><td><span style='margin-top: 15px'><button style='margin-top:0px; text-align: center' class='marker-delete-button' onclick='appendWaypoint(" + latlng.lat + ',' + latlng.lng + ");'>&nbsp;Add WP&nbsp</button></span></td></tr><br><tr><td><span style='margin-top: 15px'><button style='margin-top:10px; text-align: center' class='marker-delete-button' onclick='teleport(" + latlng.lat + ',' + latlng.lng + ")' >&nbsp;Teleport&nbsp;</button></span></tr></td>");
+						}
+						else {
+							airportPopup.setContent("<p style='font-size: 1rem'><br>&nbsp;&nbsp;" + label + "&nbsp;&nbsp;</p><p style='font-size: 0.8rem'>" + type + "<br></p><p style='font-size: 0.6rem'> Elevation:<br>" + airportElevation + "</p><br><tr><td><span style='margin-top: 15px'><button style='margin-top:0px; text-align: center' class='marker-delete-button' onclick='appendWaypoint(" + latlng.lat + ',' + latlng.lng + ");'>&nbsp;Add WP&nbsp;</button></span></td></tr><br><tr><td><span style='margin-top: 15px'><button style='margin-top:10px; text-align: center' class='marker-delete-button' onclick='teleport(" + latlng.lat + ',' + latlng.lng + ")' >&nbsp;Teleport&nbsp;</button></span></tr></td>");
+						}
+						return new L.CircleMarker(latlng, {
+							color: 'transparent',
+							radius: 14,
+						}).bindPopup(airportPopup).bindTooltip(label).openTooltip().on("popupopen", onPopupOpenAirport);
+					}
+				});
+				if (map.getZoom() > 8) {
+					if (!map.hasLayer(airportMarkers)) {
+						airportMarkers.addTo(map);
+					}
+					else {
+						map.removeLayer(airportMarkers);
+						airportMarkers.addTo(map);
+					}
 				}
-				else{
-					map.removeLayer(airportMarkers);
-					airportMarkers.addTo(map);
+				else {
+					if (map.hasLayer(airportMarkers)) {
+						map.removeLayer(airportMarkers);
+					}
+				}
+				if (panelState == 'airports') {
+					listNavaids();
 				}
 			}
-			else{
-				if(map.hasLayer(airportMarkers)){
-					map.removeLayer(airportMarkers);
-				}
-			}
-			if(panelState == 'airports'){
-				listNavaids();
-			}
-		}};
+		};
 		xhr.send(null);
 	}
 
-	async function getNavaids(lat,lng){
+	async function getNavaids(lat, lng) {
 		navaids = [];
 		var url = "https://api.core.openaip.net/api/navaids?page=1&limit=1000&pos=" + lat + "%2C" + lng + "&dist=" + getMapRadius() + "&sortBy=name&sortDesc=true&approved=true&searchOptLwc=false";
 		var xhr = new XMLHttpRequest();
@@ -4364,147 +4349,148 @@
 		xhr.setRequestHeader("accept", "application/json");
 		xhr.setRequestHeader("x-openaip-client-id", "1d96f836f115bc032c90e9335299e6c3");
 		xhr.onreadystatechange = function () {
-		if (xhr.readyState === 4) {
-			//console.log(xhr.status);
-			//console.log(xhr.responseText);
-			//console.log(obj);
-			var navaidsJSON = JSON.parse(xhr.responseText);
-			//console.log(navaidsJSON);
-			for (var navaid of navaidsJSON.items){
-				var outGeoJson = {}
-				outGeoJson['properties'] = navaid
-				outGeoJson['type']= "Feature"
-				outGeoJson['geometry'] = navaid.geometry
-				outGeoJson['mytype']= "navaid"
-				navaids.push(outGeoJson);
-			}
-			//console.log(navaids);
-			navaidMarkers = L.geoJSON(navaids, {
-				pointToLayer: function(feature,latlng){
-					var label = String(feature.properties.name);
-					var navaidMarkerName = String(feature.properties.name);
-					var frequency = feature.properties.frequency.value;
-					var identifier = feature.properties.identifier;
-					var type;
-					switch (feature.properties.type) {
-						case 0:
-							type = "DME";
-							break;
-						case 1:
-							type = "TACAN";
-							break;
-						case 2:
-							type = "NDB";
-							break;
-						case 3:
-							type = "VOR";
-							break;
-						case 4:
-							type = "VOR-DME";
-							break;
-						case 5:
-							type = "VORTAC";
-							break;
-						case 6:
-							type = "DVOR";
-							break;
-						case 7:
-							type = "DVOR-DME";
-							break;
-						case 8:
-							type = "DVORTAC";
+			if (xhr.readyState === 4) {
+				//console.log(xhr.status);
+				//console.log(xhr.responseText);
+				//console.log(obj);
+				var navaidsJSON = JSON.parse(xhr.responseText);
+				//console.log(navaidsJSON);
+				for (var navaid of navaidsJSON.items) {
+					var outGeoJson = {}
+					outGeoJson['properties'] = navaid
+					outGeoJson['type'] = "Feature"
+					outGeoJson['geometry'] = navaid.geometry
+					outGeoJson['mytype'] = "navaid"
+					navaids.push(outGeoJson);
+				}
+				//console.log(navaids);
+				navaidMarkers = L.geoJSON(navaids, {
+					pointToLayer: function (feature, latlng) {
+						var label = String(feature.properties.name);
+						var navaidMarkerName = String(feature.properties.name);
+						var frequency = feature.properties.frequency.value;
+						var identifier = feature.properties.identifier;
+						var type;
+						switch (feature.properties.type) {
+							case 0:
+								type = "DME";
+								break;
+							case 1:
+								type = "TACAN";
+								break;
+							case 2:
+								type = "NDB";
+								break;
+							case 3:
+								type = "VOR";
+								break;
+							case 4:
+								type = "VOR-DME";
+								break;
+							case 5:
+								type = "VORTAC";
+								break;
+							case 6:
+								type = "DVOR";
+								break;
+							case 7:
+								type = "DVOR-DME";
+								break;
+							case 8:
+								type = "DVORTAC";
+						}
+						var freqUnit;
+						switch (feature.properties.frequency.unit) {
+							case 1:
+								freqUnit = "kHz";
+								frequency = Math.ceil(frequency);
+								break;
+							case 2:
+								freqUnit = "MHz";
+						}
+						identifier = identifier + '<br>' + type + '<br>' + label + '<br>' + frequency + '&nbsp;' + freqUnit;
+						const navaidPopup = L.popup({
+							closeOnClick: false,
+							autoClose: true,
+						});
+						navaidPopup.setContent("<table><tr><td><p style='font-size: 1.0rem'>" + label + "</p></td></tr><tr style='text-align: left;'><td style='text-align: left;'><p style='font-size: 1rem, text-align: left;'></p></td></tr><br><tr><td><span style='margin-top: 15px'><button style='margin-top:10px; text-align: center' class='marker-delete-button' onclick='appendWaypoint(" + latlng.lat + ',' + latlng.lng + ");'>Add WP</button></span></td></tr><br><tr><td><span style='margin-top: 15px'><button style='margin-top:10px; text-align: center' class='marker-delete-button' onclick='teleport(" + latlng.lat + ',' + latlng.lng + ")' >Teleport</button></span></td></tr></table>");
+						return new L.CircleMarker(latlng, {
+							color: 'transparent',
+							radius: 14
+						}).bindPopup(navaidPopup).bindTooltip(identifier).openTooltip().on("popupopen", onPopupOpenNavaid);
 					}
-					var freqUnit;
-					switch (feature.properties.frequency.unit) {
-						case 1:
-							freqUnit = "kHz";
-							frequency = Math.ceil(frequency);
-							break;
-						case 2:
-							freqUnit = "MHz";
+				});
+				if (map.getZoom() > 8) {
+					if (!map.hasLayer(navaidMarkers)) {
+						navaidMarkers.addTo(map);
 					}
-					identifier =  identifier + '<br>' +  type + '<br>' + label + '<br>' + frequency + '&nbsp;'+ freqUnit;
-					const navaidPopup = L.popup({
-						closeOnClick: false,
-						autoClose: true,	
-					});
-					navaidPopup.setContent("<table><tr><td><p style='font-size: 1.0rem'>" + label + "</p></td></tr><tr style='text-align: left;'><td style='text-align: left;'><p style='font-size: 1rem, text-align: left;'></p></td></tr><br><tr><td><span style='margin-top: 15px'><button style='margin-top:10px; text-align: center' class='marker-delete-button' onclick='appendWaypoint(" + latlng.lat + ',' + latlng.lng + ");'>Add WP</button></span></td></tr><br><tr><td><span style='margin-top: 15px'><button style='margin-top:10px; text-align: center' class='marker-delete-button' onclick='teleport(" + latlng.lat + ',' + latlng.lng + ")' >Teleport</button></span></td></tr></table>");
-					return new L.CircleMarker(latlng, {
-					color: 'transparent',
-					radius: 14
-					}).bindPopup(navaidPopup).bindTooltip(identifier).openTooltip().on("popupopen", onPopupOpenNavaid);
+					else {
+						map.removeLayer(navaidMarkers);
+						navaidMarkers.addTo(map);
+					}
 				}
-			});
-			if(map.getZoom()>8){
-				if(!map.hasLayer(navaidMarkers)){
-					navaidMarkers.addTo(map);
+				else {
+					if (map.hasLayer(navaidMarkers)) {
+						map.removeLayer(navaidMarkers);
+					}
 				}
-				else{
-					map.removeLayer(navaidMarkers);
-					navaidMarkers.addTo(map);
+				if (panelState == 'navaids') {
+					listNavaids();
 				}
 			}
-			else{
-				if(map.hasLayer(navaidMarkers)){
-					map.removeLayer(navaidMarkers);
-				}
-			}	
-			if(panelState == 'navaids'){
-				listNavaids();
-			}
-		}};
+		};
 		xhr.send(null);
 	}
 
 	function onPopupOpenAirport(e) {
 		//console.log(this);
 		tempWPName = this.feature.properties.name;
-		if (this.feature.properties.icaoCode){
+		if (this.feature.properties.icaoCode) {
 			tempWPName = this.feature.properties.icaoCode;
 		}
 		//console.log(tempWPName);
 		switch (this.feature.properties.type) {
 			case 0:
-			tempWPType = "Airport (civil/military)";
+				tempWPType = "Airport (civil/military)";
 				break;
 			case 1:
-			tempWPType = "Glider Site";
+				tempWPType = "Glider Site";
 				break;
 			case 2:
-			tempWPType = "Airfield Civil";
+				tempWPType = "Airfield Civil";
 				break;
 			case 3:
-			tempWPType = "International Airport";
+				tempWPType = "International Airport";
 				break;
 			case 4:
-			tempWPType = "Heliport Military";
+				tempWPType = "Heliport Military";
 				break;
 			case 5:
-			tempWPType = "Military Aerodrome";
+				tempWPType = "Military Aerodrome";
 				break;
 			case 6:
-			tempWPType = "Ultra Light Flying Site";
+				tempWPType = "Ultra Light Flying Site";
 				break;
 			case 7:
-			tempWPType = "Heliport Civil";
+				tempWPType = "Heliport Civil";
 				break;
 			case 8:
-			tempWPType = "Aerodrome Closed";
+				tempWPType = "Aerodrome Closed";
 				break;
 			case 9:
-			tempWPType = "Airport resp. Airfield IFR";
+				tempWPType = "Airport resp. Airfield IFR";
 				break;
 			case 10:
-			tempWPType = "Airfield Water";
+				tempWPType = "Airfield Water";
 				break;
 			case 11:
-			tempWPType = "Landing Strip";
+				tempWPType = "Landing Strip";
 				break;
 			case 12:
-			tempWPType = "Agricultural Landing Strip";
+				tempWPType = "Agricultural Landing Strip";
 				break;
 			case 13:
-			tempWPType = "Altiport";
+				tempWPType = "Altiport";
 		}
 		//console.log(tempWPType);
 		polylinepoints = [];
@@ -4523,31 +4509,31 @@
 		//console.log(tempWPName);
 		switch (this.feature.properties.type) {
 			case 0:
-			tempWPType = "DME";
+				tempWPType = "DME";
 				break;
 			case 1:
-			tempWPType = "TACAN";
+				tempWPType = "TACAN";
 				break;
 			case 2:
-			tempWPType = "NDB";
+				tempWPType = "NDB";
 				break;
 			case 3:
-			tempWPType = "VOR";
+				tempWPType = "VOR";
 				break;
 			case 4:
-			tempWPType = "VOR-DME";
+				tempWPType = "VOR-DME";
 				break;
 			case 5:
-			tempWPType = "VORTAC";
+				tempWPType = "VORTAC";
 				break;
 			case 6:
-			tempWPType = "DVOR";
+				tempWPType = "DVOR";
 				break;
 			case 7:
-			tempWPType = "DVOR-DME";
+				tempWPType = "DVOR-DME";
 				break;
 			case 8:
-			tempWPType = "DVORTAC";
+				tempWPType = "DVORTAC";
 		}
 		var frequency = this.feature.properties.frequency.value;
 		var freqUnit;
@@ -4571,7 +4557,7 @@
 		map.setView(e.target._popup._latlng, e.target._zoom);
 	}
 
-	function appendWaypoint(lat,lng){
+	function appendWaypoint(lat, lng) {
 		wpNames.push(tempWPName);
 		wpTypes.push(tempWPType);
 		altitudes.push('0');
@@ -4604,7 +4590,7 @@
 			capsLock: false
 		},
 		init() {
-			// Create main elements       
+			// Create main elements
 			this.elements.main = document.createElement("div");
 			this.elements.main.setAttribute("id", "keyboard");
 			this.elements.keysContainer = document.createElement("div");
@@ -4621,7 +4607,7 @@
 			document.querySelectorAll(".glass ").forEach(element => {
 				element.addEventListener("focus", () => {
 					id = element.id;
-					//console.log(id + ' focused');					
+					//console.log(id + ' focused');
 					textstart = '';
 					textend = '';
 					map.closePopup();
