@@ -14,6 +14,7 @@
 	<script src="./leaflet/jquery.min.js"></script>
 	<script src="./leaflet/leaflet.edgebuffer.js"></script>
 	<script src="./leaflet/geosearch.js"></script>
+	<script src="./leaflet/leaflet-hash.js"></script>
 	<script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
 
 	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
@@ -1724,6 +1725,8 @@
 		var northEast = new L.LatLng(90, 180);
 		var maxExtent = new L.LatLngBounds(southWest, northEast);
 
+    	const OPENAIP_API_KEY = '1d96f836f115bc032c90e9335299e6c3';
+
 		var streets = L.tileLayer('https://{s}.tile.openstreetmap.de/tiles/osmde/{z}/{x}/{y}.png', {
 			attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
 			bounds: maxExtent,
@@ -1782,46 +1785,37 @@
 			subdomains: 'abcd'
 		});
 
-		var airspaces = L.tileLayer('http://{s}.tile.maps.openaip.net/geowebcache/service/tms/1.0.0/openaip_basemap@EPSG%3A900913@png/{z}/{x}/{y}.{ext}', {
-			attribution: '<a href="https://www.openaip.net/">openAIP Data</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-NC-SA</a>)',
-			ext: 'png',
-			bounds: maxExtent,
-			maxZoom: 13,
-			minZoom: 7,
-			tms: true,
-			detectRetina: true,
-			subdomains: '12',
-			format: 'image/png',
-			transparent: true,
-			reuseTiles: true
+		var airspacesX = L.tileLayer(`https://{s}.api.tiles.openaip.net/api/data/airspaces/{z}/{x}/{y}.png?apiKey=${OPENAIP_API_KEY}`, {
+			attribution: '<a href="https://www.openaip.net/">openAIP Data</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-NC-SA</a>)'
 		});
 
-		var airspacesEurope = new L.TileLayer("https://nwy-tiles-api.prod.newaydata.com/tiles/{z}/{x}/{y}.png?path=" + airac + "/aero/latest", {
-			maxZoom: 18,
-			minZoom: 7,
-			detectRetina: true,
-			format: "image/png",
-			transparent: true,
-			reuseTiles: true
+		var airportsX = L.tileLayer(`https://{s}.api.tiles.openaip.net/api/data/airports/{z}/{x}/{y}.png?apiKey=${OPENAIP_API_KEY}`, {
+			attribution: '<a href="https://www.openaip.net/">openAIP Data</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-NC-SA</a>)'
 		});
 
-		var openaip_cached_hotspot = new L.TileLayer('http://{s}.tile.maps.openaip.net/geowebcache/service/tms/1.0.0/openaip_approved_hotspots@EPSG%3A900913@png/{z}/{x}/{y}.png', {
-			bounds: maxExtent,
-			maxZoom: 12,
-			minZoom: 9,
-			tms: true,
-			detectRetina: true,
-			subdomains: '12',
-			format: 'image/png',
-			transparent: true,
-			reuseTiles: true,
-			edgeBufferTiles: 5
+		var navaidsX = L.tileLayer(`https://{s}.api.tiles.openaip.net/api/data/navaids/{z}/{x}/{y}.png?apiKey=${OPENAIP_API_KEY}`, {
+			attribution: '<a href="https://www.openaip.net/">openAIP Data</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-NC-SA</a>)'
 		});
 
-		var openaip_cached_hotspot_off = L.tileLayer('http://', {
+		var reporting_pointsX = L.tileLayer(`https://{s}.api.tiles.openaip.net/api/data/hotspots/{z}/{x}/{y}.png?apiKey=${OPENAIP_API_KEY}`, {
+			attribution: '<a href="https://www.openaip.net/">openAIP Data</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-NC-SA</a>)'
 		});
+
+		var hotspotsX = new L.TileLayer(`https://{s}.api.tiles.openaip.net/api/data/reporting-points/{z}/{x}/{y}.png?apiKey=${OPENAIP_API_KEY}`);
 
 		var airspaces_off = L.tileLayer('http://', {
+		});
+
+		var airports_off = L.tileLayer('http://', {
+		});
+
+		var navaids_off = L.tileLayer('http://', {
+		});
+
+		var hotspots_off = L.tileLayer('http://', {
+		});
+
+		var reporting_points_off = L.tileLayer('http://', {
 		});
 
 		var aircraft = L.tileLayer('http://', {
@@ -1850,13 +1844,24 @@
 
 		var groupedOverlays = {
 			"Airspaces": {
-				'World': airspaces,
-				'Europe': airspacesEurope,
+				'On': airspacesX,
 				'Off': airspaces_off
 			},
+			"Airports": {
+				'On': airportsX,
+				'Off': airports_off
+			},
+			"Navaids": {
+				'On': navaidsX,
+				'Off': navaids_off
+			},
 			"Hotspots": {
-				'On': openaip_cached_hotspot,
-				'Off': openaip_cached_hotspot_off
+				'On': hotspotsX,
+				'Off': hotspots_off
+			},
+			"Reporting-points": {
+				'On': reporting_pointsX,
+				'Off': reporting_points_off
 			},
 			"Aircraft": {
 				'On': aircraft,
@@ -1868,16 +1873,16 @@
 				'Reset': flightpath_reset
 			}
 		};
-		
+
 		var options = {
 			// Make the "Landmarks" group exclusive (use radio inputs)
-			exclusiveGroups: ["Airspaces", "Hotspots", "Aircraft", "Flightpath"],
+			exclusiveGroups: ["Airspaces", "Airports", "Navaids", "Hotspots", "Reporting-points", "Aircraft", "Flightpath"],
 			// Show a checkbox next to non-exclusive group labels for toggling all
 			groupCheckboxes: true
 		};
 
-		var openaip_basemap_osm = L.featureGroup([streets, airspacesEurope, openaip_cached_hotspot_off, aircraft, flightpath_off]);
-		
+		var openaip_basemap_osm = L.featureGroup([streets, airspacesX, navaidsX, airportsX, reporting_pointsX, hotspotsX, aircraft, flightpath_off]);
+
 		map = L.map('map', {
 			center: mapCenter,
 			minZoom: 2,
@@ -1886,6 +1891,8 @@
 			layers: [openaip_basemap_osm],
 			bounds: maxExtent
 		});
+
+		const hash = new L.Hash(map);
 
 		L.control.scale({ maxWidth: 100 }).addTo(map);
 
