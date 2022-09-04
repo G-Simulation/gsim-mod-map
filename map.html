@@ -3538,15 +3538,15 @@
 	var wpListMinimized = false;
 	function minimizeWpList() {
 		if (wpListMinimized == false) {
-			document.getElementById("overlayContainer").style.visibility = 'hidden';
-			document.getElementById("overlayListSum").style.visibility = 'hidden';
+			document.getElementById("overlayContainer").style.display = 'none';
+			document.getElementById("overlayListSum").style.display = 'none';
 			document.getElementById("overlay").style.minHeight = '2%';
 			document.getElementById("wpListMinimize").innerHTML = '+';
 			wpListMinimized = true;
 		}
 		else {
-			document.getElementById("overlayContainer").style.visibility = 'visible';
-			document.getElementById("overlayListSum").style.visibility = 'visible';
+			document.getElementById("overlayContainer").style.display = '';
+			document.getElementById("overlayListSum").style.display = '';
 			document.getElementById("overlay").style.minHeight = '50%';
 			document.getElementById("wpListMinimize").innerHTML = '_';
 			wpListMinimized = false;
@@ -3714,6 +3714,7 @@
 	}
 
 	function teleport(lat, lng) {
+		teleporting = true;
 		var x = document.getElementById("keyboard");
 		x.style.display = "none";
 
@@ -3729,6 +3730,7 @@
 				map.removeLayer(newMarker);
 			}
 		}
+		teleporting = false;
 	}
 
 	function geoTeleport() {
@@ -4086,12 +4088,11 @@
 		list.style.display = 'inline-block';
 		$('#controllerList > ul').empty();
 		if (airportsToggle == false) {
-			//console.log(airports);
-			//$('#controllerList > ul').append('<p>Test</p>');
 			navaidsCounter = 10;
 			var airportsI = 0;
+			var type = '';
 			airports.forEach(element => {
-				if (airportsI < airportsCounter) {
+				if (airportsI < airportsCounter && element.properties.type) {
 					switch (element.properties.type) {
 						case 0:
 							type = "Airport (civil/military)";
@@ -4154,9 +4155,9 @@
 			//console.log(navaids);
 			//$('#controllerList > ul').append('<p>Test</p>');
 			navaids.forEach(element2 => {
-				if (navaidsI < navaidsCounter) {
+				if (navaidsI < navaidsCounter && element2.properties.type) {
 					//console.log(element2.properties.identifier);
-					var type;
+					var type = '';
 					switch (element2.properties.type) {
 						case 0:
 							type = "DME";
@@ -4233,11 +4234,15 @@
 		return mapDistance;
 	}
 
+	var teleporting = false;
+
 	function getWPData() {
 		var mapCenter = map.getCenter();
 		//console.log(mapCenter);
-		getAirports(mapCenter.lat, mapCenter.lng);
-		getNavaids(mapCenter.lat, mapCenter.lng);
+		if (teleporting != true){
+			getAirports(mapCenter.lat, mapCenter.lng);
+			getNavaids(mapCenter.lat, mapCenter.lng);
+		}
 	}
 
 	async function getAirports(lat, lng) {
@@ -4260,7 +4265,6 @@
 					outGeoJson['type'] = "Feature"
 					outGeoJson['geometry'] = airport.geometry
 					outGeoJson['mytype'] = "airport"
-
 					airports.push(outGeoJson);
 				}
 				//console.log(airports);
@@ -4270,62 +4274,69 @@
 				//console.log('zoooooomlevel: ' + zoomLevel);
 				airportMarkers = L.geoJSON(airports, {
 					pointToLayer: function (feature, latlng) {
-						label = String(feature.properties.name);
-						var type;
-						var elevation;
+						var label = '';
+						var elevation = '';
+
 						if (feature.properties.icaoCode) {
-							label = String(feature.properties.icaoCode);
+							label += String(feature.properties.icaoCode) + '<br>';
+						}		
+						
+						if (feature.properties.name){
+							label += String(feature.properties.name);
 						}
 
 						if (feature.properties.elevation.value) {
 							elevation = String(Math.floor(feature.properties.elevation.value * 3.28084));
 						}
 
-						switch (feature.properties.type) {
-							case 0:
-								type = "Airport (civil/military)";
-								break;
-							case 1:
-								type = "Glider Site";
-								break;
-							case 2:
-								type = "Airfield Civil";
-								break;
-							case 3:
-								type = "International Airport";
-								break;
-							case 4:
-								type = "Heliport Military";
-								break;
-							case 5:
-								type = "Military Aerodrome";
-								break;
-							case 6:
-								type = "Ultra Light Flying Site";
-								break;
-							case 7:
-								type = "Heliport Civil";
-								break;
-							case 8:
-								type = "Aerodrome Closed";
-								break;
-							case 9:
-								type = "Airport resp. Airfield IFR";
-								break;
-							case 10:
-								type = "Airfield Water";
-								break;
-							case 11:
-								type = "Landing Strip";
-								break;
-							case 12:
-								type = "Agricultural Landing Strip";
-								break;
-							case 13:
-								type = "Altiport";
+						var type = '';
+						if (feature.properties.type){
+							switch (feature.properties.type) {
+								case 0:
+									type = "Airport (civil/military)";
+									break;
+								case 1:
+									type = "Glider Site";
+									break;
+								case 2:
+									type = "Airfield Civil";
+									break;
+								case 3:
+									type = "International Airport";
+									break;
+								case 4:
+									type = "Heliport Military";
+									break;
+								case 5:
+									type = "Military Aerodrome";
+									break;
+								case 6:
+									type = "Ultra Light Flying Site";
+									break;
+								case 7:
+									type = "Heliport Civil";
+									break;
+								case 8:
+									type = "Aerodrome Closed";
+									break;
+								case 9:
+									type = "Airport resp. Airfield IFR";
+									break;
+								case 10:
+									type = "Airfield Water";
+									break;
+								case 11:
+									type = "Landing Strip";
+									break;
+								case 12:
+									type = "Agricultural Landing Strip";
+									break;
+								case 13:
+									type = "Altiport";
+							}
+							label += String('<br>' + type);
 						}
-
-						console.log(feature.properties.runways);
+						//console.log(feature.properties.runways);
 						runwayLabels = '';
 						airportElevation = '';
 						airportElevation += elevation + '&apos;';
@@ -4397,47 +4408,62 @@
 				//console.log(navaids);
 				navaidMarkers = L.geoJSON(navaids, {
 					pointToLayer: function (feature, latlng) {
-						var label = String(feature.properties.name);
-						var navaidMarkerName = String(feature.properties.name);
-						var frequency = feature.properties.frequency.value;
-						var identifier = feature.properties.identifier;
-						var type;
-						switch (feature.properties.type) {
-							case 0:
-								type = "DME";
-								break;
-							case 1:
-								type = "TACAN";
-								break;
-							case 2:
-								type = "NDB";
-								break;
-							case 3:
-								type = "VOR";
-								break;
-							case 4:
-								type = "VOR-DME";
-								break;
-							case 5:
-								type = "VORTAC";
-								break;
-							case 6:
-								type = "DVOR";
-								break;
-							case 7:
-								type = "DVOR-DME";
-								break;
-							case 8:
-								type = "DVORTAC";
+						var label ='';
+						var frequency ='';
+						var identifier = '';
+						var type = '';
+
+						if (feature.properties.name){
+							label = String(feature.properties.name);
 						}
-						var freqUnit;
-						switch (feature.properties.frequency.unit) {
-							case 1:
-								freqUnit = "kHz";
-								frequency = Math.ceil(frequency);
-								break;
-							case 2:
-								freqUnit = "MHz";
+
+						if(feature.properties.frequency.value){
+							frequency = feature.properties.frequency.value;
+						}
+						if(feature.properties.identifier){
+							identifier = feature.properties.identifier;
+						}
+
+						if(feature.properties.type){
+							switch (feature.properties.type) {
+								case 0:
+									type = "DME";
+									break;
+								case 1:
+									type = "TACAN";
+									break;
+								case 2:
+									type = "NDB";
+									break;
+								case 3:
+									type = "VOR";
+									break;
+								case 4:
+									type = "VOR-DME";
+									break;
+								case 5:
+									type = "VORTAC";
+									break;
+								case 6:
+									type = "DVOR";
+									break;
+								case 7:
+									type = "DVOR-DME";
+									break;
+								case 8:
+									type = "DVORTAC";
+							}
+						}
+						var freqUnit = '';
+						if (feature.properties.frequency.unit){
+							switch (feature.properties.frequency.unit) {
+								case 1:
+									freqUnit = "kHz";
+									frequency = Math.ceil(frequency);
+									break;
+								case 2:
+									freqUnit = "MHz";
+							}
 						}
 						identifier = identifier + '<br>' + type + '<br>' + label + '<br>' + frequency + '&nbsp;' + freqUnit;
 						const navaidPopup = L.popup({
