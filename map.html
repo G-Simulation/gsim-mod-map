@@ -7,30 +7,29 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Map</title>
 
-	<script type="text/javascript" src="http://maps.stamen.com/js/tile.stamen.js?v1.3.0"></script>
-	<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+	<script src="http://maps.stamen.com/js/tile.stamen.js?v1.3.0"></script>
+	<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" crossorigin=""></script>
 	<script src="./leaflet/easy-button.js"></script>
 	<script src="./leaflet/leaflet.groupedlayercontrol.min.js"></script>
 	<script src="./leaflet/jquery.min.js"></script>
 	<script src="./leaflet/leaflet.edgebuffer.js"></script>
 	<script src="./leaflet/geosearch.js"></script>
 	<script src="./leaflet/leaflet-hash.js"></script>
-	<script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js"></script>
+	<script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js" crossorigin=""></script>
 
-	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" crossorigin="" />
 	<link rel="stylesheet" href="./leaflet/easy-button.css" />
 	<link rel="stylesheet" href="./leaflet/leaflet.groupedlayercontrol.min.css" />
 	<link rel="stylesheet" href="./leaflet/geosearch.css" />
-	<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css" />
+	<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css" crossorigin="" />
 	<link href='https://css.gg/airplane.css' rel='stylesheet'>
-
 
 	<style>
 		@font-face {
 			font-family: "Roboto-Light";
 			src: url("./Fonts/Roboto-Light.ttf") format("truetype");
 			font-weight: normal;
-			font-style: normal; 
+			font-style: normal;
 		}
 
 		* {
@@ -360,7 +359,7 @@
 		#wpListClose {
 			position: absolute;
 			top: 5px;
-			right: 10px;
+			right: 0px;
 			color: gray;
 			background-color: white;
 			border: 0;
@@ -375,7 +374,7 @@
 		#wpListMinimize {
 			position: absolute;
 			top: 5px;
-			right: 30px;
+			right: 15px;
 			color: gray;
 			background-color: white;
 			border: 0;
@@ -1725,7 +1724,7 @@
 		var northEast = new L.LatLng(90, 180);
 		var maxExtent = new L.LatLngBounds(southWest, northEast);
 
-    	const OPENAIP_API_KEY = '1d96f836f115bc032c90e9335299e6c3';
+		const OPENAIP_API_KEY = '1d96f836f115bc032c90e9335299e6c3';
 
 		var streets = L.tileLayer('https://{s}.tile.openstreetmap.de/tiles/osmde/{z}/{x}/{y}.png', {
 			attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
@@ -3779,7 +3778,7 @@
 				document.documentElement.style.setProperty('--fontLight', latlng[10]);
 				document.documentElement.style.setProperty('--fontDark', latlng[11]);
 				var dt = new Date();
-				var time = dt.getUTCHours() + ":" + dt.getUTCMinutes() + ":" + dt.getUTCSeconds();
+				var time = dt.getUTCHours() + ":" + dt.getUTCMinutes();
 				var date = dt.getFullYear() + '-' + (dt.getMonth() + 1) + '-' + dt.getDate();
 				document.getElementById('date-time').innerHTML = date + " " + time + "z";
 				setPosition(latlng[0], latlng[1]);
@@ -3787,7 +3786,7 @@
 				setWind(latlng[5], latlng[6]);
 				if (latlng[0] != lastLat && latlng[1] != lastLng) {
 					if (showPath == true) {
-						if (calcCrow(59.3293371,13.4877472,59.3225525,13.4619422).toFixed(1)*1000 > 5){
+						if (calcCrow(59.3293371, 13.4877472, 59.3225525, 13.4619422).toFixed(1) * 1000 > 5) {
 							polyline.addLatLng([latlng[0], latlng[1]]);
 						}
 					}
@@ -3808,27 +3807,25 @@
 		}
 	}
 
-	    //This function takes in latitude and longitude of two location and returns the distance between them as the crow flies (in km)
-		function calcCrow(lat1, lon1, lat2, lon2) 
-    {
-      var R = 6371; // km
-      var dLat = toRad(lat2-lat1);
-      var dLon = toRad(lon2-lon1);
-      var lat1 = toRad(lat1);
-      var lat2 = toRad(lat2);
+	//This function takes in latitude and longitude of two location and returns the distance between them as the crow flies (in km)
+	function calcCrow(lat1, lon1, lat2, lon2) {
+		var R = 6371; // km
+		var dLat = toRad(lat2 - lat1);
+		var dLon = toRad(lon2 - lon1);
+		var lat1 = toRad(lat1);
+		var lat2 = toRad(lat2);
 
-      var a = Math.sin(dLat/2) * Math.sin(dLat/2) +
-        Math.sin(dLon/2) * Math.sin(dLon/2) * Math.cos(lat1) * Math.cos(lat2); 
-      var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
-      var d = R * c;
-      return d;
-    }
+		var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+			Math.sin(dLon / 2) * Math.sin(dLon / 2) * Math.cos(lat1) * Math.cos(lat2);
+		var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+		var d = R * c;
+		return d;
+	}
 
-    // Converts numeric degrees to radians
-    function toRad(Value) 
-    {
-        return Value * Math.PI / 180;
-    }
+	// Converts numeric degrees to radians
+	function toRad(Value) {
+		return Value * Math.PI / 180;
+	}
 
 	function setWaypoints() {
 		var i = 0;
@@ -4239,7 +4236,7 @@
 	function getWPData() {
 		var mapCenter = map.getCenter();
 		//console.log(mapCenter);
-		if (teleporting != true){
+		if (teleporting != true) {
 			getAirports(mapCenter.lat, mapCenter.lng);
 			getNavaids(mapCenter.lat, mapCenter.lng);
 		}
@@ -4275,22 +4272,21 @@
 				airportMarkers = L.geoJSON(airports, {
 					pointToLayer: function (feature, latlng) {
 						var label = '';
+						var label2 = '';
 						var elevation = '';
 
 						if (feature.properties.icaoCode) {
 							label += String(feature.properties.icaoCode) + '<br>';
-						}		
-						
-						if (feature.properties.name){
-							label += String(feature.properties.name);
+							label2 += String(feature.properties.icaoCode) + '<br>';
 						}
 
-						if (feature.properties.elevation.value) {
-							elevation = String(Math.floor(feature.properties.elevation.value * 3.28084));
+						if (feature.properties.name) {
+							label += String(feature.properties.name);
+							label2 += String(feature.properties.name) + '<br>';
 						}
 
 						var type = '';
-						if (feature.properties.type){
+						if (feature.properties.type) {
 							switch (feature.properties.type) {
 								case 0:
 									type = "Airport (civil/military)";
@@ -4334,8 +4330,15 @@
 								case 13:
 									type = "Altiport";
 							}
-							label += String('<br>' + type);
+							//label += String(type) + '<br>';
+							label2 += String(type);
 						}
+
+						if (feature.properties.elevation.value) {
+							elevation = String(Math.floor(feature.properties.elevation.value * 3.28084));
+							//label += 'Elev: ' + elevation + 'ft' + '<br>';
+						}
+
 						//console.log(feature.properties.runways);
 						runwayLabels = '';
 						airportElevation = '';
@@ -4358,7 +4361,7 @@
 						return new L.CircleMarker(latlng, {
 							color: 'transparent',
 							radius: 14,
-						}).bindPopup(airportPopup).bindTooltip(label).openTooltip().on("popupopen", onPopupOpenAirport);
+						}).bindPopup(airportPopup).bindTooltip(label2).openTooltip().on("popupopen", onPopupOpenAirport);
 					}
 				});
 				if (map.getZoom() > 8) {
@@ -4408,23 +4411,23 @@
 				//console.log(navaids);
 				navaidMarkers = L.geoJSON(navaids, {
 					pointToLayer: function (feature, latlng) {
-						var label ='';
-						var frequency ='';
+						var label = '';
+						var frequency = '';
 						var identifier = '';
-						var type = '';
 
-						if (feature.properties.name){
+						if (feature.properties.name) {
 							label = String(feature.properties.name);
 						}
 
-						if(feature.properties.frequency.value){
+						if (feature.properties.frequency.value) {
 							frequency = feature.properties.frequency.value;
 						}
-						if(feature.properties.identifier){
+						if (feature.properties.identifier) {
 							identifier = feature.properties.identifier;
 						}
 
-						if(feature.properties.type){
+						var type = '';
+						if (feature.properties.type) {
 							switch (feature.properties.type) {
 								case 0:
 									type = "DME";
@@ -4455,7 +4458,7 @@
 							}
 						}
 						var freqUnit = '';
-						if (feature.properties.frequency.unit){
+						if (feature.properties.frequency.unit) {
 							switch (feature.properties.frequency.unit) {
 								case 1:
 									freqUnit = "kHz";
@@ -4470,7 +4473,7 @@
 							closeOnClick: false,
 							autoClose: true,
 						});
-						navaidPopup.setContent("<table><tr><td><p style='font-size: 1.0rem'>" + label + "</p></td></tr><tr style='text-align: left;'><td style='text-align: left;'><p style='font-size: 1rem, text-align: left;'></p></td></tr><br><tr><td><span style='margin-top: 15px'><button style='margin-top:10px; text-align: center' class='marker-delete-button' onclick='appendWaypoint(" + latlng.lat + ',' + latlng.lng + ");'>Add WP</button></span></td></tr><br><tr><td><span style='margin-top: 15px'><button style='margin-top:10px; text-align: center' class='marker-delete-button' onclick='teleport(" + latlng.lat + ',' + latlng.lng + ")' >Teleport</button></span></td></tr></table>");
+						navaidPopup.setContent("<table><tr><td><p style='font-size: 1.0rem'>" + identifier + "</p></td></tr><tr style='text-align: left;'><td style='text-align: left;'><p style='font-size: 1rem, text-align: left;'></p></td></tr><br><tr><td><span style='margin-top: 15px'><button style='margin-top:10px; text-align: center' class='marker-delete-button' onclick='appendWaypoint(" + latlng.lat + ',' + latlng.lng + ");'>Add WP</button></span></td></tr><br><tr><td><span style='margin-top: 15px'><button style='margin-top:10px; text-align: center' class='marker-delete-button' onclick='teleport(" + latlng.lat + ',' + latlng.lng + ")' >Teleport</button></span></td></tr></table>");
 						return new L.CircleMarker(latlng, {
 							color: 'transparent',
 							radius: 14
