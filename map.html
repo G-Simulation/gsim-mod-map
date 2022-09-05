@@ -374,7 +374,7 @@
 		#wpListMinimize {
 			position: absolute;
 			top: 5px;
-			right: 15px;
+			right: 20px;
 			color: gray;
 			background-color: white;
 			border: 0;
@@ -1942,6 +1942,8 @@
 			}
 		}
 
+		polyline = L.polyline(polylinepoints);
+
 		function reloadImg() { // reload image by changing its src
 			var src = $(this).attr("src");
 			var i = src.lastIndexOf('?');
@@ -2646,7 +2648,7 @@
 			toggle4.enable();
 		});
 
-		polyline = L.polyline(polylinepoints);
+
 
 		map.on('overlayadd', function (e) {
 			//console.log(e.group.name);
@@ -2744,7 +2746,7 @@
 					polylinepoints = [];
 					polyline = [];
 					if (showPath == true) {
-						polyline = L.polyline(polylinepoints).addTo(map);
+						polyline = L.polyline(polylinepoints);
 						map.addLayer(polyline);
 					}
 				}
@@ -2760,7 +2762,8 @@
 			zoomLevel = map.getZoom();
 			window.localStorage.setItem("zoomLevel", zoomLevel)
 			//console.log("Current Zoom Level = " + zoomLevel);
-			if (zoomLevel > 8) {
+
+			if (zoomLevel > 9) {
 				toggle11.enable();
 				getWPData();
 			} else {
@@ -2773,6 +2776,15 @@
 					list.style.visibility = 'hidden';
 					panelState = '';
 				}
+
+				if (map.hasLayer(navaidMarkers)){
+					map.removeLayer(navaidMarkers);
+				}
+
+				if (map.hasLayer(airportMarkers)){
+					map.removeLayer(airportMarkers);
+				}
+
 			}
 		});
 
@@ -3357,13 +3369,13 @@
 			polylinepoints = [];
 			polyline = [];
 			if (showPath == true) {
-				polyline = L.polyline(polylinepoints).addTo(map);
+				polyline = L.polyline(polylinepoints);
 				map.addLayer(polyline);
 			}
 		}
 		else {
 			if (showPath == true) {
-				polyline = L.polyline(polylinepoints).addTo(map);
+				polyline = L.polyline(polylinepoints);
 				map.addLayer(polyline);
 			}
 		}
@@ -3730,6 +3742,7 @@
 			}
 		}
 		teleporting = false;
+		map.invalidateSize();
 	}
 
 	function geoTeleport() {
@@ -3746,7 +3759,7 @@
 		polylinepoints = [];
 		polyline = [];
 		if (showPath == true) {
-			polyline = L.polyline(polylinepoints).addTo(map);
+			polyline = L.polyline(polylinepoints);
 			map.addLayer(polyline);
 		}
 	}
@@ -3778,8 +3791,8 @@
 				document.documentElement.style.setProperty('--fontLight', latlng[10]);
 				document.documentElement.style.setProperty('--fontDark', latlng[11]);
 				var dt = new Date();
-				var time = dt.getUTCHours() + ":" + dt.getUTCMinutes();
-				var date = dt.getFullYear() + '-' + (dt.getMonth() + 1) + '-' + dt.getDate();
+                var time = addZeroBefore(dt.getUTCHours()) + ":" + addZeroBefore(dt.getUTCMinutes());
+                var date = dt.getFullYear().toString().substr(-2) + '-' + addZeroBefore(dt.getMonth()+1) + '-' + addZeroBefore(dt.getDate());
 				document.getElementById('date-time').innerHTML = date + " " + time + "z";
 				setPosition(latlng[0], latlng[1]);
 				setRotation(heading);
@@ -3806,6 +3819,10 @@
 			}
 		}
 	}
+
+    function addZeroBefore(n) {
+        return (n < 10 ? '0' : '') + n;
+    }
 
 	//This function takes in latitude and longitude of two location and returns the distance between them as the crow flies (in km)
 	function calcCrow(lat1, lon1, lat2, lon2) {
@@ -4352,24 +4369,23 @@
 							closeOnClick: false,
 							autoClose: true
 						});
+						
 						if (runwayLabels != '') {
 							airportPopup.setContent("<p style='font-size: 1rem'><br>&nbsp;&nbsp;" + label + "&nbsp;&nbsp;</p><p style='font-size: 0.8rem'>" + type + "<br></p><p style='font-size: 0.6rem'> Elevation:<br>" + airportElevation + "<br>Runways: <br>" + runwayLabels + "</p><br><tr><td><span style='margin-top: 15px'><button style='margin-top:0px; text-align: center' class='marker-delete-button' onclick='appendWaypoint(" + latlng.lat + ',' + latlng.lng + ");'>&nbsp;Add WP&nbsp</button></span></td></tr><br><tr><td><span style='margin-top: 15px'><button style='margin-top:10px; text-align: center' class='marker-delete-button' onclick='teleport(" + latlng.lat + ',' + latlng.lng + ")' >&nbsp;Teleport&nbsp;</button></span></tr></td>");
 						}
 						else {
 							airportPopup.setContent("<p style='font-size: 1rem'><br>&nbsp;&nbsp;" + label + "&nbsp;&nbsp;</p><p style='font-size: 0.8rem'>" + type + "<br></p><p style='font-size: 0.6rem'> Elevation:<br>" + airportElevation + "</p><br><tr><td><span style='margin-top: 15px'><button style='margin-top:0px; text-align: center' class='marker-delete-button' onclick='appendWaypoint(" + latlng.lat + ',' + latlng.lng + ");'>&nbsp;Add WP&nbsp;</button></span></td></tr><br><tr><td><span style='margin-top: 15px'><button style='margin-top:10px; text-align: center' class='marker-delete-button' onclick='teleport(" + latlng.lat + ',' + latlng.lng + ")' >&nbsp;Teleport&nbsp;</button></span></tr></td>");
 						}
+
 						return new L.CircleMarker(latlng, {
 							color: 'transparent',
 							radius: 14,
 						}).bindPopup(airportPopup).bindTooltip(label2).openTooltip().on("popupopen", onPopupOpenAirport);
 					}
 				});
-				if (map.getZoom() > 8) {
+
+				if (map.getZoom() > 9) {
 					if (!map.hasLayer(airportMarkers)) {
-						airportMarkers.addTo(map);
-					}
-					else {
-						map.removeLayer(airportMarkers);
 						airportMarkers.addTo(map);
 					}
 				}
@@ -4419,11 +4435,9 @@
 							label = String(feature.properties.name);
 						}
 
-						if (feature.properties.frequency.value) {
-							frequency = feature.properties.frequency.value;
-						}
+
 						if (feature.properties.identifier) {
-							identifier = feature.properties.identifier;
+							identifier += feature.properties.identifier;
 						}
 
 						var type = '';
@@ -4456,7 +4470,14 @@
 								case 8:
 									type = "DVORTAC";
 							}
+							identifier += "<br>" + type;
 						}
+
+						if (feature.properties.frequency.value) {
+							frequency = feature.properties.frequency.value;
+							identifier += "<br>" + frequency;
+						}
+
 						var freqUnit = '';
 						if (feature.properties.frequency.unit) {
 							switch (feature.properties.frequency.unit) {
@@ -4467,8 +4488,8 @@
 								case 2:
 									freqUnit = "MHz";
 							}
+							identifier += "&nbsp" + freqUnit;
 						}
-						identifier = identifier + '<br>' + type + '<br>' + label + '<br>' + frequency + '&nbsp;' + freqUnit;
 						const navaidPopup = L.popup({
 							closeOnClick: false,
 							autoClose: true,
@@ -4480,12 +4501,9 @@
 						}).bindPopup(navaidPopup).bindTooltip(identifier).openTooltip().on("popupopen", onPopupOpenNavaid);
 					}
 				});
-				if (map.getZoom() > 8) {
+
+				if (map.getZoom() > 9) {
 					if (!map.hasLayer(navaidMarkers)) {
-						navaidMarkers.addTo(map);
-					}
-					else {
-						map.removeLayer(navaidMarkers);
 						navaidMarkers.addTo(map);
 					}
 				}
@@ -4494,6 +4512,7 @@
 						map.removeLayer(navaidMarkers);
 					}
 				}
+
 				if (panelState == 'navaids') {
 					listNavaids();
 				}
