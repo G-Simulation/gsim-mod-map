@@ -1944,21 +1944,6 @@
 
 		polyline = L.polyline(polylinepoints);
 
-		function reloadImg() { // reload image by changing its src
-			var src = $(this).attr("src");
-			var i = src.lastIndexOf('?');
-			if (i > 0) { // remove previous cache string
-				src = src.substring(0, i);
-			}
-			$(this).attr("src", src + "?nocache=" + (Math.random() * 1000));
-		}
-
-		map.on('layeradd', function (ILayer) { // on adding a new tile
-			if ($.isFunction(ILayer.layer.getContainer)) { // get the container holding the images
-				$("img", ILayer.layer.getContainer()).error(reloadImg); // apply error handling event
-			}
-		});
-
 		map.on('click', function (e) {
 			if (waypointmode == false) {
 				if (map.hasLayer(newMarker)) {
