@@ -131,6 +131,10 @@
 			text-indent: 20px !important;
 		}
 
+		.results.active {
+			margin-left: 30px;
+		}
+
 		.leaflet-control-zoom-in, .leaflet-control-zoom-out {
 			font-size: 44px !important;
 		}
@@ -214,6 +218,81 @@
 			line-height: 60px;
 		}
 
+		span.button-state.state-get-center.get-center-active {
+			margin-left: -3px;
+		}
+
+		#metarContainer{
+			display: none;
+			position: absolute;
+			width: 50%;
+			height: auto;
+			min-height: 25%;
+			max-height: 25%;
+			left: 100px;
+			top: 17%;
+			background-color: white;
+			z-index: 500;
+			border: 2px solid rgba(0, 0, 0, 0.2);
+			background-clip: padding-box;
+			border-radius: 4px;
+		}
+
+		h1#metarTop {
+			text-align: center;
+			font-size: large;
+		}
+
+		table#MetarInputTable {
+			display: inline-block;
+			position: absolute;
+			top: 40px;
+			left: 0;
+			right: 0;
+			font-size: small;
+		}
+
+		p#metarPanel {
+			display: inline-block;
+			position: absolute;
+			top: 100px;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			overflow-y: auto;
+			padding-left: 30px;
+			padding-right: 30px;
+		}
+
+		strong {
+			padding-left: 10px;
+			padding-right: 10px;
+		}
+
+		input#boton {
+			color: black;
+			font-family: "Roboto-Light";
+			font-weight: normal;
+			background-color: #ffffff;
+			border: solid #ddd;
+			border-width: 2px;
+			height: 1.6rem;
+			font-size: 0.9rem;
+			margin: 0;
+		}
+
+		input#reset {
+			color: black;
+			font-family: "Roboto-Light";
+			font-weight: normal;
+			background-color: #ffffff;
+			border: solid #ddd;
+			border-width: 2px;
+			height: 1.6rem;
+			font-size: 0.9rem;
+			margin: 0;
+		}
+
 		#overlay {
 			position: absolute;
 			width: 25%;
@@ -226,7 +305,7 @@
 			z-index: 500;
 			border: 2px solid rgba(0, 0, 0, 0.2);
 			background-clip: padding-box;
-			border-radius: 8px;
+			border-radius: 4px;
 		}
 
 		h4#depArrTop {
@@ -323,7 +402,7 @@
 			z-index: 1000;
 			border: 2px solid rgba(0, 0, 0, 0.2);
 			background-clip: padding-box;
-			border-radius: 8px;
+			border-radius: 4px;
 			vertical-align: middle;
 			display: hidden;
 			padding-left: 20px;
@@ -363,7 +442,7 @@
 			color: gray;
 			background-color: white;
 			border: 0;
-			border-radius: 8px;
+			border-radius: 4px;
 			font-size: 20px;
 		}
 
@@ -378,7 +457,7 @@
 			color: gray;
 			background-color: white;
 			border: 0;
-			border-radius: 8px;
+			border-radius: 4px;
 			font-size: 20px;
 		}
 
@@ -483,7 +562,7 @@
 			margin: 3px;
 			padding: 5px;
 			text-align: left;
-			border-radius: 8px;
+			border-radius: 4px;
 		}
 
 		.leaflet-popup-content p {
@@ -592,7 +671,7 @@
 			z-index: 500;
 			border: 2px solid rgba(0, 0, 0, 0.2);
 			background-clip: padding-box;
-			border-radius: 8px;
+			border-radius: 4px;
 		}
 
 		#controllerContainer {
@@ -601,7 +680,7 @@
 			overflow-x: auto !important;
 			position: absolute;
 			height: auto;
-			top: 85px;
+			top: 75px;
 			bottom: 5px;
 			left: 0;
 			right: 0;
@@ -634,7 +713,7 @@
 			color: gray;
 			background-color: transparent;
 			border: 0;
-			border-radius: 8px;
+			border-radius: 4px;
 			font-size: 20px !important;
 		}
 
@@ -647,7 +726,7 @@
 			position: relative;
 			left: 20px;
 			right: 0;
-			top: 0;
+			top: -20px;
 			overflow: auto;
 		}
 
@@ -662,8 +741,6 @@
 			}
 
 		h3#controllerHeader {
-			padding-bottom: 10px;
-			margin-bottom: 10px;
 			padding-top: 15px;
 		}
 
@@ -1498,7 +1575,7 @@
 		<div>
 			<button id="controllerListClose" type="button" onclick="mout()">x</button>
 		</div>
-		<div id="controllerHeaderDiv" style="padding-top: 10px;">
+		<div id="controllerHeaderDiv" style="margin-top: -20px;">
 			<h3 id="controllerHeader" style='font-size: 20px; text-align: center;'>VATSIM Controllers</h3>
 		</div>
 		<div id="controllerContainer">
@@ -1506,6 +1583,29 @@
 				<ul id="controllerListUl">
 				</ul>
 			</div>
+		</div>
+	</div>
+	<div id="metarContainer">
+		<span id='date-time'></span><button id="wpListClose" type="button" onclick="hideMetarContainer()">x</button>
+		<div id="MetarPanel">
+
+			<h1 id="metarTop">METAR</h1><br>
+			<br />
+			<form class="contenedor-METAR" method="post">
+			<table id="MetarInputTable" align="center" cellspacing="8" cellpadding="8">
+			<tr>
+			<td align="center">
+			<strong>ICAO: </strong> <input type="text" name="icaoID" id="aeropuerto" class="glass" maxlength="4" size="4" autofocus autocomplete="off" />
+			<input type="button" value="Search" id="boton" onclick="metarSearch(this.form);" />  
+			</td>
+			</tr>
+			</table>
+			</form>
+			<br />
+			<p id= "metarPanel" class="contenedor-METAR" style="font-size:14;">
+			<span id="zona-metar"></span>
+			<span id="zona-aeropuerto"></span>
+			</p>
 		</div>
 	</div>
 	<div id="banner" style="text-align: center;">
@@ -1538,6 +1638,7 @@
 	var toggle5;
 	var toggle10;
 	var toggle11;
+	var toggle12;
 	var newMarker;
 	var airplane;
 	var follow;
@@ -1597,7 +1698,7 @@
 	var arr = "";
 	var controllersInRange = [];
 	var vatsim = true;
-	var airportsToggle = true;
+	var airportsToggle = 'airports';
 	var headerText = "Vatsim Controllers";
 	var airports = [];
 	var transceivers = [];
@@ -1610,8 +1711,10 @@
 	var airportsPanel = false;
 	var airports = [];
 	var navaids = [];
+	var reportingPoints = [];
 	var airportMarkers;
 	var navaidMarkers;
+	var reportingPointMarkers;
 	var panelState = '';
 
 	window.addEventListener("DOMContentLoaded", function () {
@@ -1658,6 +1761,18 @@
 		map.panTo(pos);
 		Keyboard.init();
 		setTimeout(function () { Keyboard.close(); }, 10);
+
+		document.getElementById("getMetar").addEventListener("click", myFunction);
+		
+		let ID_Aeropuerto=document.getElementById("aeropuerto");
+			ID_Aeropuerto.addEventListener("keypress",function(usuario){
+			if(usuario.keyCode===13) {
+				usuario.preventDefault();
+				document.getElementById("boton").click();
+			}
+		});
+	
+
 	});
 
 	function calculate_airac_cycle() {
@@ -1726,7 +1841,7 @@
 
 		const OPENAIP_API_KEY = '1d96f836f115bc032c90e9335299e6c3';
 
-		var streets = L.tileLayer('https://{s}.tile.openstreetmap.de/tiles/osmde/{z}/{x}/{y}.png', {
+		var streets = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 			attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
 			bounds: maxExtent,
 			maxZoom: 18,
@@ -1786,21 +1901,43 @@
 
 		var airspacesX = L.tileLayer(`https://{s}.api.tiles.openaip.net/api/data/airspaces/{z}/{x}/{y}.png?apiKey=${OPENAIP_API_KEY}`, {
 			attribution: '<a href="https://www.openaip.net/">openAIP Data</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-NC-SA</a>)'
+			, bounds: maxExtent,
+			reuseTiles: true,
+			minZoom: 7,
+			maxZoom: 12
 		});
 
 		var airportsX = L.tileLayer(`https://{s}.api.tiles.openaip.net/api/data/airports/{z}/{x}/{y}.png?apiKey=${OPENAIP_API_KEY}`, {
 			attribution: '<a href="https://www.openaip.net/">openAIP Data</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-NC-SA</a>)'
+			, bounds: maxExtent,
+			reuseTiles: true,
+			minZoom: 7,
+			maxZoom: 12
 		});
 
 		var navaidsX = L.tileLayer(`https://{s}.api.tiles.openaip.net/api/data/navaids/{z}/{x}/{y}.png?apiKey=${OPENAIP_API_KEY}`, {
 			attribution: '<a href="https://www.openaip.net/">openAIP Data</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-NC-SA</a>)'
+			, bounds: maxExtent,
+			reuseTiles: true,
+			minZoom: 7,
+			maxZoom: 12
 		});
 
-		var reporting_pointsX = L.tileLayer(`https://{s}.api.tiles.openaip.net/api/data/hotspots/{z}/{x}/{y}.png?apiKey=${OPENAIP_API_KEY}`, {
+		var reporting_pointsX = L.tileLayer(`https://{s}.api.tiles.openaip.net/api/data/reporting-points/{z}/{x}/{y}.png?apiKey=${OPENAIP_API_KEY}`, {
 			attribution: '<a href="https://www.openaip.net/">openAIP Data</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-NC-SA</a>)'
+			, bounds: maxExtent,
+			reuseTiles: true,
+			minZoom: 7,
+			maxZoom: 12
 		});
 
-		var hotspotsX = new L.TileLayer(`https://{s}.api.tiles.openaip.net/api/data/reporting-points/{z}/{x}/{y}.png?apiKey=${OPENAIP_API_KEY}`);
+		var hotspotsX = L.tileLayer(`https://{s}.api.tiles.openaip.net/api/data/hotspots/{z}/{x}/{y}.png?apiKey=${OPENAIP_API_KEY}`, {
+			attribution: '<a href="https://www.openaip.net/">openAIP Data</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-NC-SA</a>)'
+			, bounds: maxExtent,
+			reuseTiles: true,
+			minZoom: 7,
+			maxZoom: 12
+		});
 
 		var airspaces_off = L.tileLayer('http://', {
 		});
@@ -1897,7 +2034,7 @@
 
 		GeoSearchControl = window.GeoSearch.GeoSearchControl;
 		AlgoliaProvider = window.GeoSearch.AlgoliaProvider;
-		provider = new AlgoliaProvider({});
+		provider = new GeoSearch.OpenStreetMapProvider();
 
 		//  Define search controls
 		searchControl = new GeoSearchControl({
@@ -2019,7 +2156,12 @@
 					}
 				}).addTo(map);
 
-				marker.bindTooltip(marker.options.type + " " + marker.options.name,
+				var type = marker.options.type;
+				if (type == 'reportingPoint') {
+					type = 'MRP';
+				}
+
+				marker.bindTooltip(type + " " + marker.options.name,
 					{
 						permanent: false,
 						direction: 'right'
@@ -2067,7 +2209,7 @@
 						wpTypes.splice(tempMarker.options.myId, 1);
 						//console.log(wpNames);
 						$.each(map._layers, function (ml) {
-							if (map._layers[ml].feature && map._layers[ml].feature.mytype != 'airport' && map._layers[ml].feature.mytype != 'navaid') {
+							if (map._layers[ml].feature && map._layers[ml].feature.mytype != 'airport' && map._layers[ml].feature.mytype != 'navaid' && map._layers[ml].feature.mytype != 'reportingPoint') {
 								//map._layers[ml].feature.id = i;
 								//map._layers[ml].options.myId = i;
 								coordinates.push(map._layers[ml].feature.geometry.coordinates);
@@ -2165,7 +2307,7 @@
 				var i = 0;
 				markerId = 0;
 				$.each(map._layers, function (ml) {
-					if (map._layers[ml].feature && map._layers[ml].feature.mytype != 'airport' && map._layers[ml].feature.mytype != 'navaid') {
+					if (map._layers[ml].feature && map._layers[ml].feature.mytype != 'airport' && map._layers[ml].feature.mytype != 'navaid' && map._layers[ml].feature.mytype != 'reportingPoint') {
 						map._layers[ml].feature.id = i;
 						map._layers[ml].options.myId = i;
 						coordinates.push(map._layers[ml].feature.geometry.coordinates);
@@ -2191,6 +2333,7 @@
 				getMarkerId();
 				drawLines();
 			});
+
 		}
 
 		function loadAltitude() {
@@ -2229,6 +2372,10 @@
 					textend = text.slice(this.selectionEnd, this.value.length);
 					Keyboard.properties.value = textstart;
 					getCursorpos();
+				});
+
+				$("#WPnameInput").change(function (e) {
+					setWPname();
 				});
 
 				$("#WPnameInput").select(function (e) {
@@ -2270,7 +2417,7 @@
 				wpTypes = JSON.parse(window.localStorage.getItem("wpTypes"));
 			}
 			$.each(map._layers, function (ml) {
-				if (map._layers[ml].feature && map._layers[ml].feature.mytype != 'airport' && map._layers[ml].feature.mytype != 'navaid') {
+				if (map._layers[ml].feature && map._layers[ml].feature.mytype != 'airport' && map._layers[ml].feature.mytype != 'navaid' && map._layers[ml].feature.mytype != 'reportingPoint') {
 					//console.log(map._layers[ml].feature);
 					coordinatesArray.push(map._layers[ml].feature.geometry.coordinates);
 					wpi++;
@@ -2315,7 +2462,7 @@
 				if (altitudes[wpi2 - 1]) {
 					altitude = altitudes[wpi2 - 1];
 				}
-				if (map._layers[ml].feature && map._layers[ml].feature.mytype != 'airport' && map._layers[ml].feature.mytype != 'navaid') {
+				if (map._layers[ml].feature && map._layers[ml].feature.mytype != 'airport' && map._layers[ml].feature.mytype != 'navaid' && map._layers[ml].feature.mytype != 'reportingPoint') {
 					//console.log(map._layers[ml].feature);
 					if (wpi2 == 0) {
 						$('#overlayList > ul').append('<li href="#" class="target" id="' + wpi2 + '">' + map._layers[ml].options.name + '<br>' + map._layers[ml].options.type + ' ' + '<a href="#" class="" id="' + wpi2 + ' "></a></li>');
@@ -2363,7 +2510,13 @@
 						if (distances[wpi2 - 1]) {
 							$('#overlayList > ul').append('<a style="">' + parseFloat(distances[wpi2 - 1]).toFixed(0) + ' nm</a> ');
 						}
-						$('#overlayList > ul').append('<li href="#" class="target" id="' + wpi2 + '">' + map._layers[ml].options.name + '<br>' + map._layers[ml].options.type + ' ' + '<a href="#" class="" id="' + wpi2 + ' "></a></li>');
+						var type = map._layers[ml].options.type;
+
+						if (type == 'reportingPoint') {
+							type = 'MRP'
+						}
+
+						$('#overlayList > ul').append('<li href="#" class="target" id="' + wpi2 + '">' + map._layers[ml].options.name + '<br>' + type + ' ' + '<a href="#" class="" id="' + wpi2 + ' "></a></li>');
 					}
 					wpi2++;
 				}
@@ -2380,15 +2533,22 @@
 			document.getElementById('depArrTable').style.display = '';
 			document.getElementById('dep').innerHTML = 'DEP';
 			document.getElementById('arr').innerHTML = 'ARR';
+
 			if (wpTypes[0]) {
-				document.getElementById('dep').innerHTML = wpTypes[0];
+				var type = wpTypes[0];
+				if (type == 'reportingPoint') {
+					type = 'MRP';
+				}
+				document.getElementById('dep').innerHTML = type;
 			}
+
 			if (wpTypes[1]) {
-				document.getElementById('arr').innerHTML = wpTypes[wpTypes.length - 1];
+				var type = wpTypes[wpTypes.length - 1]
+				if (type == 'reportingPoint') {
+					type = 'MRP';
+				}
+				document.getElementById('arr').innerHTML = type;
 			}
-
-
-
 
 			if (wpListMinimized == true) {
 				document.getElementById("overlay").style.minHeight = '8%';
@@ -2594,6 +2754,19 @@
 			return heading;
 		}
 
+		toggle12 = L.easyButton({
+			id: 'getMetar', // an id for the generated button
+			class: 'getMetar',
+			position: 'topleft', // inherited from L.Control -- the corner it goes in
+			type: 'replace', // set to animate when you're comfy with css
+			leafletClasses: true, // use leaflet classes to style the button?
+			states: [{ // specify different icons and responses for your button
+				stateName: 'get-center',
+				title: 'METAR',
+				icon: '<i id="getMetar"; class="getMetar"></i>' + 'METAR',
+			}]
+		}).addTo(map);
+
 		toggle = L.easyButton('gg-track', function () {
 			follow = true;
 			toggle.disable();
@@ -2754,7 +2927,7 @@
 			} else {
 				toggle11.disable();
 				airportsPanel = false;
-				if (panelState == 'airports' || panelState == 'navaids') {
+				if (panelState == 'airports' || panelState == 'navaids' || panelState == 'reportingPoints') {
 					var controllerOverlay = document.getElementById('controllerOverlay');
 					controllerOverlay.style.visibility = 'hidden';
 					var list = document.getElementById('controllerList');
@@ -2762,11 +2935,11 @@
 					panelState = '';
 				}
 
-				if (map.hasLayer(navaidMarkers)){
+				if (map.hasLayer(navaidMarkers)) {
 					map.removeLayer(navaidMarkers);
 				}
 
-				if (map.hasLayer(airportMarkers)){
+				if (map.hasLayer(airportMarkers)) {
 					map.removeLayer(airportMarkers);
 				}
 
@@ -2828,6 +3001,8 @@
 		}).addTo(map);
 
 
+
+
 		toggle4 = L.easyButton({
 			states: [{
 				stateName: 'teleport',
@@ -2857,7 +3032,7 @@
 					}
 
 					$.each(map._layers, function (ml) {
-						if (map._layers[ml].feature && map._layers[ml].feature.mytype != 'airport' && map._layers[ml].feature.mytype != 'navaid') {
+						if (map._layers[ml].feature && map._layers[ml].feature.mytype != 'airport' && map._layers[ml].feature.mytype != 'navaid' && map._layers[ml].feature.mytype != 'reportingPoint') {
 							map.removeLayer(this);
 						}
 					})
@@ -2911,6 +3086,7 @@
 			}
 		}).addTo(map);
 
+
 		toggle3 = L.easyButton('gg-trash', function () {
 			removeAllMarkers();
 			var x = document.getElementById("keyboard");
@@ -2939,6 +3115,7 @@
 						control.state('vatsim');
 						panelState = 'vatsim';
 						mover();
+						hideMetarContainer();
 						return
 					}
 					lastIvao = '';
@@ -2951,6 +3128,7 @@
 					getVatsimData();
 					control.state('ivao');
 					panelState = 'ivao';
+					hideMetarContainer();
 				}
 			}, {
 				icon: '<i id="controllerIcon"; class="gg-data"></i>' + '<span class="backButton2">&nbspIVAO</span><br>',
@@ -2972,10 +3150,78 @@
 					getVatsimData();
 					control.state('vatsim');
 					panelState = 'vatsim';
+					hideMetarContainer();
 				}
 			}]
 		}).addTo(map);
 
+		/*
+				toggle11 = L.easyButton({
+					id: 'navaidButton', // an id for the generated button
+					position: 'topright', // inherited from L.Control -- the corner it goes in
+					type: 'replace', // set to animate when you're comfy with css
+					leafletClasses: true, // use leaflet classes to style the button?
+					states: [{
+						icon: '<i id="controllerIcon"; class="gg-controller"></i>' + '<span class="backButton2">&nbspAIRPORTS</span><br>',
+						stateName: 'airports',
+						title: 'AIRPORTS',
+						onClick: function (control) {
+							if (document.getElementById('controllerOverlay').style.visibility == 'hidden') {
+								airportsToggle = 'airports';
+								document.getElementById('controllerOverlay').style.visibility = 'visible';
+								document.getElementById('controllerList').style.visibility = 'visible';
+								document.getElementById('controllerListUl').innerHTML = '';
+								document.getElementById("controllerHeader").innerHTML = "Airports";
+								control.state('airports');
+								getWPData();
+								mover();
+								airportsPanel = false;
+								panelState = 'airports';
+								return
+							}
+							airportsToggle = 'navaids';
+							document.getElementById('controllerListUl').innerHTML = '';
+							document.getElementById("controllerHeader").innerHTML = "Navaids";
+							control.state('navaids');
+							getWPData();
+							airportsPanel = true;
+							panelState = 'navaids';
+						}
+					}, {
+						icon: '<i id="controllerIcon"; class="gg-controller"></i>' + '<span class="backButton2">&nbspNAVAIDS</span><br>',
+						stateName: 'navaids',
+						title: 'NAVAIDS',
+						onClick: function (control) {
+							document.getElementById('controllerListUl').innerHTML = '';
+							airportsToggle = 'reportingPoints';
+							airportsPanel = true;
+							document.getElementById("controllerHeader").innerHTML = "Reporting Points";
+							getWPData();
+							control.state('reportingPoints');
+							panelState = 'reportingPoints';
+						}
+					}, {
+						icon: '<i id="controllerIcon"; class="gg-controller"></i>' + '<span class="backButton2">'+ "&nbspMRP's" +'</span><br>',
+						stateName: 'reportingPoints',
+						title: "MRP's",
+						onClick: function (control) {
+							if (document.getElementById('controllerOverlay').style.visibility == 'visible') {
+								mout();
+								panelState = '';
+								return
+							}
+							document.getElementById('controllerListUl').innerHTML = '';
+							airportsToggle = 'airports';
+							airportsPanel = true;
+							document.getElementById("controllerHeader").innerHTML = "Navaids";
+							getWPData();
+							control.state('airports');
+							panelState = 'airports';
+						}
+					}]
+				}).addTo(map);
+
+		*/
 
 		toggle11 = L.easyButton({
 			id: 'navaidButton', // an id for the generated button
@@ -2988,7 +3234,7 @@
 				title: 'AIRPORTS',
 				onClick: function (control) {
 					if (document.getElementById('controllerOverlay').style.visibility == 'hidden') {
-						airportsToggle = false;
+						airportsToggle = 'airports';
 						document.getElementById('controllerOverlay').style.visibility = 'visible';
 						document.getElementById('controllerList').style.visibility = 'visible';
 						document.getElementById('controllerListUl').innerHTML = '';
@@ -2998,15 +3244,17 @@
 						mover();
 						airportsPanel = false;
 						panelState = 'airports';
+						hideMetarContainer();
 						return
 					}
-					airportsToggle = true;
+					airportsToggle = 'navaids';
 					document.getElementById('controllerListUl').innerHTML = '';
 					document.getElementById("controllerHeader").innerHTML = "Navaids";
 					control.state('navaids');
 					getWPData();
 					airportsPanel = true;
 					panelState = 'navaids';
+					hideMetarContainer();
 				}
 			}, {
 				icon: '<i id="controllerIcon"; class="gg-controller"></i>' + '<span class="backButton2">&nbspNAVAIDS</span><br>',
@@ -3019,15 +3267,19 @@
 						return
 					}
 					document.getElementById('controllerListUl').innerHTML = '';
-					airportsToggle = false;
+					airportsToggle = 'airports';
 					airportsPanel = true;
-					document.getElementById("controllerHeader").innerHTML = "Navaids";
+					document.getElementById("controllerHeader").innerHTML = "Airports";
 					getWPData();
 					control.state('airports');
 					panelState = 'airports';
+					hideMetarContainer();
 				}
 			}]
 		}).addTo(map);
+
+
+
 
 
 		function clearArray(array) {
@@ -3047,6 +3299,99 @@
 			icon: iconAirplane
 		}).addTo(map);
 	}
+
+
+	function hideMetarContainer(){
+			document.getElementById("metarContainer").style.display = "none";
+			metarSearchExpandet = false;
+			//console.log("hide-Metar")
+			Keyboard.close();
+		}
+
+	
+	var metarSearchExpandet = false;
+	function myFunction() {
+		if (metarSearchExpandet == false){
+			document.getElementById("metarContainer").style.display = "inline-Block";
+			metarSearchExpandet = true;
+			document.getElementById("metarContainer").style.top = getOffset(document.getElementById("getMetar")).top + "px";
+			console.log();
+			mout();
+		}
+		else{
+			document.getElementById("metarContainer").style.display = "none";
+			metarSearchExpandet = false;
+			//$(".metarContainer").hide();
+
+		}
+	}
+
+	function getOffset(el) {
+		const rect = el.getBoundingClientRect();
+		return {
+			left: rect.left + window.scrollX,
+			top: rect.top + window.scrollY
+		};
+	}
+
+	function METARAbrufen(e) {
+		let texto_metar = ' ' + e.raw + ' <br />  ' + e.summary + '<br /><br />';
+		return texto_metar
+	}
+
+	function onERROR(e) {
+		reset('ICAO not found!');
+		return error = e.error
+	}
+
+	function pedirXML(e, t) {
+		const TOKEN_PRIVADO='8nJJFLHc6Zqz6gu2gSfGZLpJqbzpuv-A0UWPgNZprzk';
+		const a = new XMLHttpRequest
+		, r = 'https://avwx.rest/api/' + e + '/' + t + '?options=translate,summary&format=json&token='+TOKEN_PRIVADO;
+		a.ontimeout = function() {
+			return alert('Server Timed Out.')
+		}
+		,
+		a.onreadystatechange = function() {
+			if ( this.readyState === 4 ) {
+				const t = this.response.search('doctype') > 0;
+				if (!t && 200 === this.status)
+					return 'metar' === e && (caja_METAR.innerHTML = METARAbrufen(JSON.parse(this.response))),
+					'station' === e;
+				if (this.status >= 400 && this.status < 500)
+					return onERROR(JSON.parse(this.response));
+			}
+		}
+		,
+		a.open('GET', r, !0),
+		a.responseType = 'text',
+		a.setRequestHeader('Content-Type', 'text/plain'),
+		a.timeout = 1e4,
+		a.send()
+	}
+
+	function check_ICAO(e) {
+		return !('' === e || 4 != e.length || !e.match('[A-Z]{4}'))
+	}
+
+	function reset(e) {
+		localStorage.clear();
+		caja_METAR.innerHTML = '';
+		caja_AEROPUERTO.innerHTML = e;
+	}
+
+	function metarSearch(e) {
+		e.icaoID.value=e.icaoID.value.toUpperCase();
+		const t = e.icaoID.value;
+		if (!check_ICAO(t)) return; // ICAO Incorrecto
+		//reset('Searching...');
+		pedirXML('metar', t);
+		//pedirXML('station', t);
+	}
+
+	let caja_METAR = document.getElementById('zona-metar');
+
+
 
 	var lastIvao = "";
 	var lastVatsim = "";
@@ -3382,7 +3727,7 @@
 	function deleteAllMarkers() {
 		deleted = true;
 		$.each(map._layers, function (ml) {
-			if (map._layers[ml].feature && map._layers[ml].feature.mytype != 'airport' && map._layers[ml].feature.mytype != 'navaid') {
+			if (map._layers[ml].feature && map._layers[ml].feature.mytype != 'airport' && map._layers[ml].feature.mytype != 'navaid' && map._layers[ml].feature.mytype != 'reportingPoint') {
 				map.removeLayer(this);
 			}
 		})
@@ -3440,7 +3785,7 @@
 	function savePoints() {
 		var coordinates = [];
 		$.each(map._layers, function (ml) {
-			if (map._layers[ml].feature && map._layers[ml].feature.mytype != 'airport' && map._layers[ml].feature.mytype != 'navaid') {
+			if (map._layers[ml].feature && map._layers[ml].feature.mytype != 'airport' && map._layers[ml].feature.mytype != 'navaid' && map._layers[ml].feature.mytype != 'reportingPoint') {
 				//console.log(map._layers[ml].feature);
 				coordinates.push(map._layers[ml].feature.geometry.coordinates);
 			}
@@ -3652,16 +3997,28 @@
 
 	function setWPname() {
 		//altitudes[activeWP] = parseFloat(alt);
-		wpNames[activeWP] = document.getElementById('WPnameInput').value;
+		if(document.getElementById('WPnameInput')){
+			wpNames[activeWP] = document.getElementById('WPnameInput').value;
+		}
+
 		//console.log(wpNames[activeWP]);
-		window.localStorage.setItem("wpNames", JSON.stringify(wpNames));
+
+		if(document.getElementById('wpNames')){
+			window.localStorage.setItem("wpNames", JSON.stringify(wpNames));
+		}
 		//altitudes[id] = alt;
 		//altitudes.splice(0, 0, parseFloat(document.getElementById('WPaltitudeInput').value));
-		var WPnameInput = document.getElementById('WPnameInput').value;
-		document.getElementById('WPnameInput').value = WPnameInput;
+		
+		if(document.getElementById('WPnameInput')){
+			var WPnameInput = document.getElementById('WPnameInput').value;
+			document.getElementById('WPnameInput').value = WPnameInput;
+		}
+
+		
+		
 		var wpnum = 0;
 		$.each(map._layers, function (ml) {
-			if (map._layers[ml].feature && map._layers[ml].feature.mytype != 'airport' && map._layers[ml].feature.mytype != 'navaid') {
+			if (map._layers[ml].feature && map._layers[ml].feature.mytype != 'airport' && map._layers[ml].feature.mytype != 'navaid' && map._layers[ml].feature.mytype != 'reportingPoint') {
 				if (wpnum == (activeWP)) {
 					map._layers[ml].options.name = wpNames[activeWP];
 					map._layers[ml].setTooltipContent(wpNames[activeWP]);
@@ -3776,8 +4133,8 @@
 				document.documentElement.style.setProperty('--fontLight', latlng[10]);
 				document.documentElement.style.setProperty('--fontDark', latlng[11]);
 				var dt = new Date();
-                var time = addZeroBefore(dt.getUTCHours()) + ":" + addZeroBefore(dt.getUTCMinutes());
-                var date = dt.getFullYear().toString().substr(-2) + '-' + addZeroBefore(dt.getMonth()+1) + '-' + addZeroBefore(dt.getDate());
+				var time = addZeroBefore(dt.getUTCHours()) + ":" + addZeroBefore(dt.getUTCMinutes());
+				var date = dt.getFullYear().toString().substr(-2) + '-' + addZeroBefore(dt.getMonth() + 1) + '-' + addZeroBefore(dt.getDate());
 				document.getElementById('date-time').innerHTML = date + " " + time + "z";
 				setPosition(latlng[0], latlng[1]);
 				setRotation(heading);
@@ -3805,9 +4162,9 @@
 		}
 	}
 
-    function addZeroBefore(n) {
-        return (n < 10 ? '0' : '') + n;
-    }
+	function addZeroBefore(n) {
+		return (n < 10 ? '0' : '') + n;
+	}
 
 	//This function takes in latitude and longitude of two location and returns the distance between them as the crow flies (in km)
 	function calcCrow(lat1, lon1, lat2, lon2) {
@@ -4069,6 +4426,7 @@
 	}
 	var navaidsCounter = 10;
 	var airportsCounter = 10;
+	var reportingPointsCounter = 10;
 
 	function moreAirports() {
 		//console.log('more Airports');
@@ -4082,11 +4440,17 @@
 		listNavaids();
 	}
 
+	function moreReportingPoints() {
+		//console.log('more Navaids');
+		reportingPointsCounter = reportingPointsCounter + 10;
+		listNavaids();
+	}
+
 	function listNavaids() {
 		var list = document.getElementById('controllerList');
 		list.style.display = 'inline-block';
 		$('#controllerList > ul').empty();
-		if (airportsToggle == false) {
+		if (airportsToggle == 'airports') {
 			navaidsCounter = 10;
 			var airportsI = 0;
 			var type = '';
@@ -4148,7 +4512,7 @@
 				$('#controllerList > ul').append('<span href="#" class="station2" onclick="moreAirports()" id="counter">' + "show&nbsp;more..." + '</span>');
 			}
 		}
-		else if (airportsToggle == true) {
+		else if (airportsToggle == 'navaids') {
 			var navaidsI = 0;
 			airportsCounter = 10;
 			//console.log(navaids);
@@ -4193,7 +4557,22 @@
 				$('#controllerList > ul').append('<span href="#" class="station2" onclick="moreNavaids()" id="counter">' + "show&nbsp;more..." + '</span>');
 			}
 		}
-
+		else if (airportsToggle == 'reportingPoints') {
+			var reportingPointsI = 0;
+			reportingPointsCounter = 10;
+			//console.log(navaids);
+			//$('#controllerList > ul').append('<p>Test</p>');
+			reportingPoints.forEach(element2 => {
+				if (reportingPointsI < reportingPointsCounter) {
+					//console.log(element2.properties.identifier);
+					$('#controllerList > ul').append('<li href="#" class="station2" id="' + element2.properties._id + '">' + element2.properties.name + '</li>');
+					reportingPointsI++;
+				}
+			});
+			if (reportingPoints.length > 10) {
+				$('#controllerList > ul').append('<span href="#" class="station2" onclick="moreReportingPoints()" id="counter">' + "show&nbsp;more..." + '</span>');
+			}
+		}
 		var stations2 = document.getElementsByClassName("station2");
 		for (var i = 0; i < stations2.length; i++) {
 			stations2[i].addEventListener('mousedown', function (e) { e.preventDefault(); }, false);
@@ -4204,9 +4583,8 @@
 				};
 				const xname = this.id;
 				$.each(map._layers, function (ml) {
-
-					if (map._layers[ml].feature && map._layers[ml].feature.mytype != 'navaid') {
-						console.log(e);
+					if (map._layers[ml].feature && map._layers[ml].feature.mytype == 'airport') {
+						//console.log(e);
 						if (map._layers[ml].feature.properties.name == xname) {
 							//var posX = new L.LatLng(map._layers[ml].feature.properties.geometry.coordinates[1], map._layers[ml].feature.properties.geometry.coordinates[0]);
 							//map.panTo(posX);
@@ -4214,8 +4592,14 @@
 						}
 					}
 					else if (map._layers[ml].feature && map._layers[ml].feature.mytype == 'navaid') {
-						console.log(e);
+						//console.log(e);
 						if (map._layers[ml].feature.properties.identifier == xname) {
+							setTimeout(function () { map._layers[ml].openPopup(); }, 500);
+						}
+					}
+					else if (map._layers[ml].feature && map._layers[ml].feature.mytype == 'reportingPoint') {
+						//console.log(e);
+						if (map._layers[ml].feature.properties._id == xname) {
 							setTimeout(function () { map._layers[ml].openPopup(); }, 500);
 						}
 					}
@@ -4224,8 +4608,6 @@
 			});
 		};
 	}
-
-
 
 	function getMapRadius() {
 		var mapBoundNorthEast = map.getBounds().getNorthEast();
@@ -4241,6 +4623,7 @@
 		if (teleporting != true) {
 			getAirports(mapCenter.lat, mapCenter.lng);
 			getNavaids(mapCenter.lat, mapCenter.lng);
+			getReportingPoints(mapCenter.lat, mapCenter.lng);
 		}
 	}
 
@@ -4354,7 +4737,7 @@
 							closeOnClick: false,
 							autoClose: true
 						});
-						
+
 						if (runwayLabels != '') {
 							airportPopup.setContent("<p style='font-size: 1rem'><br>&nbsp;&nbsp;" + label + "&nbsp;&nbsp;</p><p style='font-size: 0.8rem'>" + type + "<br></p><p style='font-size: 0.6rem'> Elevation:<br>" + airportElevation + "<br>Runways: <br>" + runwayLabels + "</p><br><tr><td><span style='margin-top: 15px'><button style='margin-top:0px; text-align: center' class='marker-delete-button' onclick='appendWaypoint(" + latlng.lat + ',' + latlng.lng + ");'>&nbsp;Add WP&nbsp</button></span></td></tr><br><tr><td><span style='margin-top: 15px'><button style='margin-top:10px; text-align: center' class='marker-delete-button' onclick='teleport(" + latlng.lat + ',' + latlng.lng + ")' >&nbsp;Teleport&nbsp;</button></span></tr></td>");
 						}
@@ -4506,6 +4889,78 @@
 		xhr.send(null);
 	}
 
+	async function getReportingPoints(lat, lng) {
+		reportingPoints = [];
+		var url = "https://api.core.openaip.net/api/reporting-points?page=1&limit=1000&pos=" + lat + "%2C" + lng + "&dist=" + getMapRadius() + "&sortBy=name&sortDesc=true&approved=true&searchOptLwc=false";
+		var xhr = new XMLHttpRequest();
+		xhr.open("GET", url);
+		xhr.setRequestHeader("accept", "application/json");
+		xhr.setRequestHeader("x-openaip-client-id", "1d96f836f115bc032c90e9335299e6c3");
+		xhr.onreadystatechange = function () {
+			if (xhr.readyState === 4) {
+				//console.log(xhr.status);
+				//console.log(xhr.responseText);
+				//console.log(obj);
+				var reportingPointsJSON = JSON.parse(xhr.responseText);
+				//console.log(navaidsJSON);
+				for (var reportingPoint of reportingPointsJSON.items) {
+					var outGeoJson = {}
+					outGeoJson['properties'] = reportingPoint
+					outGeoJson['type'] = "Feature"
+					outGeoJson['geometry'] = reportingPoint.geometry
+					outGeoJson['mytype'] = "reportingPoint"
+					reportingPoints.push(outGeoJson);
+				}
+				//console.log(reportingPoints);
+				reportingPointMarkers = L.geoJSON(reportingPoints, {
+					pointToLayer: function (feature, latlng) {
+						var label = '';
+						var identifier = '';
+
+						if (feature.properties.name) {
+							label = String(feature.properties.name);
+						}
+
+						if (feature.properties.name) {
+							label = String(feature.properties.name);
+						}
+
+						if (feature.properties.id) {
+							identifier = feature.properties.id;
+						}
+
+						const reportingPointPopup = L.popup({
+							closeOnClick: false,
+							autoClose: true,
+						});
+						reportingPointPopup.setContent("<table><tr><td><p style='font-size: 1.0rem'>" + label + "</p></td></tr><tr style='text-align: left;'><td style='text-align: left;'><p style='font-size: 1rem, text-align: left;'></p></td></tr><br><tr><td><span style='margin-top: 15px'><button style='margin-top:10px; text-align: center' class='marker-delete-button' onclick='appendWaypoint(" + latlng.lat + ',' + latlng.lng + ");'>Add WP</button></span></td></tr><br><tr><td><span style='margin-top: 15px'><button style='margin-top:10px; text-align: center' class='marker-delete-button' onclick='teleport(" + latlng.lat + ',' + latlng.lng + ")' >Teleport</button></span></td></tr></table>");
+						return new L.CircleMarker(latlng, {
+							color: 'transparent',
+							radius: 14
+						}).bindPopup(reportingPointPopup).bindTooltip(label).openTooltip().on("popupopen", onPopupOpenReportingPoint);
+					}
+				});
+
+				if (map.getZoom() > 9) {
+					if (!map.hasLayer(reportingPointMarkers)) {
+						reportingPointMarkers.addTo(map);
+					}
+				}
+				else {
+					if (map.hasLayer(reportingPointMarkers)) {
+						map.removeLayer(reportingPointMarkers);
+					}
+				}
+
+				if (panelState == 'reportingPoints') {
+					listNavaids();
+				}
+			}
+		};
+		xhr.send(null);
+	}
+
+
 	function onPopupOpenAirport(e) {
 		//console.log(this);
 		tempWPName = this.feature.properties.name;
@@ -4610,6 +5065,22 @@
 				freqUnit = "MHz";
 		}
 		tempWPType += '&nbsp;' + frequency + '&nbsp;' + freqUnit;
+		//console.log(tempWPType);
+		polylinepoints = [];
+		polyline = [];
+		follow = false;
+		toggle.enable();
+		if (map.hasLayer(polyline)) {
+			map.removeLayer(polyline);
+		}
+		map.setView(e.target._popup._latlng, e.target._zoom);
+	}
+
+	function onPopupOpenReportingPoint(e) {
+		//console.log(this);
+		tempWPName = this.feature.properties.name;
+		//console.log(tempWPName);
+		tempWPType = 'reportingPoint';
 		//console.log(tempWPType);
 		polylinepoints = [];
 		polyline = [];
@@ -4754,6 +5225,9 @@
 						keyElement.classList.add("keyboard__key--wide");
 						keyElement.innerHTML = createIconHTML("Enter");
 						keyElement.addEventListener("click", () => {
+							if(metarSearchExpandet == true){
+								document.getElementById("boton").click();
+							}
 							this.properties.value += "\n";
 							this._triggerEvent("oninput");
 						});
@@ -4871,7 +5345,7 @@
 							}
 							cursorPos = cursorPos + 1;
 							this._triggerEvent("oninput");
-							//keyPress(key);
+							keyPress(key);
 						});
 						break;
 				}
@@ -4997,6 +5471,32 @@
 			showWpList();
 		}
 	};
+
+	function keyPress(char){
+		// get the element in question
+		const input = document.getElementsByTagName("input")[0];
+		// focus on the input element
+		input.focus();
+
+		// add event listeners to the input element
+		input.addEventListener('keypress', (event) => {
+			//console.log("You have pressed key: ", event.key);
+		});
+
+		input.addEventListener('keydown', (event) => {
+			//console.log(`key: ${event.key} has been pressed down`);
+		});
+
+		input.addEventListener('keyup', (event) => {
+			//console.log(`key: ${event.key} has been released`);
+		});
+
+		// dispatch keyboard events
+		input.dispatchEvent(new KeyboardEvent('keypress',  {'key': char}));
+		input.dispatchEvent(new KeyboardEvent('keydown',  {'key':char}));
+		input.dispatchEvent(new KeyboardEvent('keyup', {'key': char}));
+	}
+
 
 	const box = document.querySelector('#keyb');
 	box.addEventListener('click', function (e) {
