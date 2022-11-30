@@ -222,7 +222,7 @@
 			margin-left: -3px;
 		}
 
-		#metarContainer{
+		#metarContainer {
 			display: none;
 			position: absolute;
 			width: 50%;
@@ -1592,19 +1592,19 @@
 			<h1 id="metarTop">METAR</h1><br>
 			<br />
 			<form class="contenedor-METAR" method="post">
-			<table id="MetarInputTable" align="center" cellspacing="8" cellpadding="8">
-			<tr>
-			<td align="center">
-			<strong>ICAO: </strong> <input type="text" name="icaoID" id="aeropuerto" class="glass" maxlength="4" size="4" autofocus autocomplete="off" />
-			<input type="button" value="Search" id="boton" onclick="metarSearch(this.form);" />  
-			</td>
-			</tr>
-			</table>
+				<table id="MetarInputTable" align="center" cellspacing="8" cellpadding="8">
+					<tr>
+						<td align="center">
+							<strong>ICAO: </strong> <input type="text" name="icaoID" id="aeropuerto" class="glass" maxlength="4" size="4" autofocus autocomplete="off" />
+							<input type="button" value="Search" id="boton" onclick="metarSearch(this.form);" />
+						</td>
+					</tr>
+				</table>
 			</form>
 			<br />
-			<p id= "metarPanel" class="contenedor-METAR" style="font-size:14;">
-			<span id="zona-metar"></span>
-			<span id="zona-aeropuerto"></span>
+			<p id="metarPanel" class="contenedor-METAR" style="font-size:14;">
+				<span id="zona-metar"></span>
+				<span id="zona-taf"></span>
 			</p>
 		</div>
 	</div>
@@ -1763,15 +1763,15 @@
 		setTimeout(function () { Keyboard.close(); }, 10);
 
 		document.getElementById("getMetar").addEventListener("click", myFunction);
-		
-		let ID_Aeropuerto=document.getElementById("aeropuerto");
-			ID_Aeropuerto.addEventListener("keypress",function(usuario){
-			if(usuario.keyCode===13) {
+
+		let ID_Aeropuerto = document.getElementById("aeropuerto");
+		ID_Aeropuerto.addEventListener("keypress", function (usuario) {
+			if (usuario.keyCode === 13) {
 				usuario.preventDefault();
 				document.getElementById("boton").click();
 			}
 		});
-	
+
 
 	});
 
@@ -3301,24 +3301,24 @@
 	}
 
 
-	function hideMetarContainer(){
-			document.getElementById("metarContainer").style.display = "none";
-			metarSearchExpandet = false;
-			//console.log("hide-Metar")
-			Keyboard.close();
-		}
+	function hideMetarContainer() {
+		document.getElementById("metarContainer").style.display = "none";
+		metarSearchExpandet = false;
+		//console.log("hide-Metar")
+		Keyboard.close();
+	}
 
-	
+
 	var metarSearchExpandet = false;
 	function myFunction() {
-		if (metarSearchExpandet == false){
+		if (metarSearchExpandet == false) {
 			document.getElementById("metarContainer").style.display = "inline-Block";
 			metarSearchExpandet = true;
 			document.getElementById("metarContainer").style.top = getOffset(document.getElementById("getMetar")).top + "px";
 			console.log();
 			mout();
 		}
-		else{
+		else {
 			document.getElementById("metarContainer").style.display = "none";
 			metarSearchExpandet = false;
 			//$(".metarContainer").hide();
@@ -3335,8 +3335,14 @@
 	}
 
 	function METARAbrufen(e) {
-		let texto_metar = ' ' + e.raw + ' <br />  ' + e.summary + '<br /><br />';
+		//let texto_metar = ' METAR: <br /> ' + e.raw + ' <br />  ' + e.summary.replace(/;/g, '<br />') + '<br /><br />';
+		let texto_metar = ' METAR: <br /> ' + e.raw + ' <br /><br />';
 		return texto_metar
+	}
+
+	function TAFAbrufen(e2) {
+		let texto_taf =  ' TAF: <br /> ' + e2.raw + ' <br /><br />';
+		return texto_taf
 	}
 
 	function onERROR(e) {
@@ -3344,30 +3350,57 @@
 		return error = e.error
 	}
 
+	const TOKEN_PRIVADO = '8nJJFLHc6Zqz6gu2gSfGZLpJqbzpuv-A0UWPgNZprzk';
 	function pedirXML(e, t) {
-		const TOKEN_PRIVADO='8nJJFLHc6Zqz6gu2gSfGZLpJqbzpuv-A0UWPgNZprzk';
+		//console.log('get Metar')
 		const a = new XMLHttpRequest
-		, r = 'https://avwx.rest/api/' + e + '/' + t + '?options=translate,summary&format=json&token='+TOKEN_PRIVADO;
-		a.ontimeout = function() {
+			, r = 'https://avwx.rest/api/' + e + '/' + t + '?options=translate,summary&format=json&token=' + TOKEN_PRIVADO;
+		a.ontimeout = function () {
 			return alert('Server Timed Out.')
 		}
-		,
-		a.onreadystatechange = function() {
-			if ( this.readyState === 4 ) {
-				const t = this.response.search('doctype') > 0;
-				if (!t && 200 === this.status)
-					return 'metar' === e && (caja_METAR.innerHTML = METARAbrufen(JSON.parse(this.response))),
-					'station' === e;
-				if (this.status >= 400 && this.status < 500)
-					return onERROR(JSON.parse(this.response));
+			,
+			a.onreadystatechange = function () {
+				if (this.readyState === 4) {
+					const t = this.response.search('doctype') > 0;
+					if (!t && 200 === this.status)
+						return 'metar' === e && (caja_METAR.innerHTML = METARAbrufen(JSON.parse(this.response))),
+							'station' === e;
+					if (this.status >= 400 && this.status < 500)
+						return onERROR(JSON.parse(this.response));
+				}
 			}
+			,
+			a.open('GET', r, !0),
+			a.responseType = 'text',
+			a.setRequestHeader('Content-Type', 'text/plain'),
+			a.timeout = 1e4,
+			a.send()
+	}
+
+	function pedirXMLTAF(e, t) {
+		//console.log('get Taf')
+		const a2 = new XMLHttpRequest
+			, r2 = 'https://avwx.rest/api/' + e + '/' + t + '?options=translate,summary&format=json&token=' + TOKEN_PRIVADO;
+		a2.ontimeout = function () {
+			return alert('Server Timed Out.')
 		}
-		,
-		a.open('GET', r, !0),
-		a.responseType = 'text',
-		a.setRequestHeader('Content-Type', 'text/plain'),
-		a.timeout = 1e4,
-		a.send()
+			,
+			a2.onreadystatechange = function () {
+				if (this.readyState === 4) {
+					const t = this.response.search('doctype') > 0;
+					if (!t && 200 === this.status)
+						return 'taf' === e && (caja_Taf.innerHTML = TAFAbrufen(JSON.parse(this.response))),
+							'station' === e;
+					if (this.status >= 400 && this.status < 500)
+						return onERROR(JSON.parse(this.response));
+				}
+			}
+			,
+			a2.open('GET', r2, !0),
+			a2.responseType = 'text',
+			a2.setRequestHeader('Content-Type', 'text/plain'),
+			a2.timeout = 1e4,
+			a2.send()
 	}
 
 	function check_ICAO(e) {
@@ -3377,20 +3410,21 @@
 	function reset(e) {
 		localStorage.clear();
 		caja_METAR.innerHTML = '';
-		caja_AEROPUERTO.innerHTML = e;
+		caja_Taf.innerHTML = '';
 	}
 
 	function metarSearch(e) {
-		e.icaoID.value=e.icaoID.value.toUpperCase();
+		e.icaoID.value = e.icaoID.value.toUpperCase();
 		const t = e.icaoID.value;
 		if (!check_ICAO(t)) return; // ICAO Incorrecto
 		//reset('Searching...');
 		pedirXML('metar', t);
+		pedirXMLTAF('taf', t);
 		//pedirXML('station', t);
 	}
 
 	let caja_METAR = document.getElementById('zona-metar');
-
+	let caja_Taf= document.getElementById('zona-taf');
 
 
 	var lastIvao = "";
@@ -3997,25 +4031,25 @@
 
 	function setWPname() {
 		//altitudes[activeWP] = parseFloat(alt);
-		if(document.getElementById('WPnameInput')){
+		if (document.getElementById('WPnameInput')) {
 			wpNames[activeWP] = document.getElementById('WPnameInput').value;
 		}
 
 		//console.log(wpNames[activeWP]);
 
-		if(document.getElementById('wpNames')){
+		if (document.getElementById('wpNames')) {
 			window.localStorage.setItem("wpNames", JSON.stringify(wpNames));
 		}
 		//altitudes[id] = alt;
 		//altitudes.splice(0, 0, parseFloat(document.getElementById('WPaltitudeInput').value));
-		
-		if(document.getElementById('WPnameInput')){
+
+		if (document.getElementById('WPnameInput')) {
 			var WPnameInput = document.getElementById('WPnameInput').value;
 			document.getElementById('WPnameInput').value = WPnameInput;
 		}
 
-		
-		
+
+
 		var wpnum = 0;
 		$.each(map._layers, function (ml) {
 			if (map._layers[ml].feature && map._layers[ml].feature.mytype != 'airport' && map._layers[ml].feature.mytype != 'navaid' && map._layers[ml].feature.mytype != 'reportingPoint') {
@@ -5225,7 +5259,7 @@
 						keyElement.classList.add("keyboard__key--wide");
 						keyElement.innerHTML = createIconHTML("Enter");
 						keyElement.addEventListener("click", () => {
-							if(metarSearchExpandet == true){
+							if (metarSearchExpandet == true) {
 								document.getElementById("boton").click();
 							}
 							this.properties.value += "\n";
@@ -5472,7 +5506,7 @@
 		}
 	};
 
-	function keyPress(char){
+	function keyPress(char) {
 		// get the element in question
 		const input = document.getElementsByTagName("input")[0];
 		// focus on the input element
@@ -5492,9 +5526,9 @@
 		});
 
 		// dispatch keyboard events
-		input.dispatchEvent(new KeyboardEvent('keypress',  {'key': char}));
-		input.dispatchEvent(new KeyboardEvent('keydown',  {'key':char}));
-		input.dispatchEvent(new KeyboardEvent('keyup', {'key': char}));
+		input.dispatchEvent(new KeyboardEvent('keypress', { 'key': char }));
+		input.dispatchEvent(new KeyboardEvent('keydown', { 'key': char }));
+		input.dispatchEvent(new KeyboardEvent('keyup', { 'key': char }));
 	}
 
 
