@@ -32,6 +32,16 @@
             font-style: normal;
         }
 
+        @media only screen and (-webkit-min-device-pixel-ratio : 2), only screen and (min-device-pixel-ratio : 2) {
+            .wpHeader {
+                font-size: 30px;
+            }
+
+            td#start, td#target {
+                font-size: 50px;
+            }
+        }
+
         * {
             font-family: "Roboto-Light" !important;
         }
@@ -240,13 +250,13 @@
 
         h1#metarTop {
             text-align: center;
-            font-size: large;
+            font-size: 2vh;
         }
 
         table#MetarInputTable {
             display: inline-block;
             position: absolute;
-            top: 40px;
+            top: 4vh;
             left: 0;
             right: 0;
             font-size: small;
@@ -255,18 +265,20 @@
         p#metarPanel {
             display: inline-block;
             position: absolute;
-            top: 100px;
+            top: 9vh;
             bottom: 0;
             left: 0;
             right: 0;
             overflow-y: auto;
             padding-left: 30px;
             padding-right: 30px;
+            font-size: 2vh;
         }
 
         strong {
             padding-left: 10px;
             padding-right: 10px;
+            font-size: 2vh;
         }
 
         input#boton {
@@ -276,9 +288,13 @@
             background-color: #ffffff;
             border: solid #ddd;
             border-width: 2px;
-            height: 1.6rem;
-            font-size: 0.9rem;
+            height: 3vh;
+            font-size: 2vh;
             margin: 0;
+        }
+
+        input#aeropuerto {
+            font-size: 2vh;
         }
 
         input#reset {
@@ -299,8 +315,8 @@
             height: auto;
             min-height: 50%;
             max-height: 50%;
-            right: 10px;
-            bottom: 80px;
+            right: 1vh;
+            bottom: 8vh;
             background-color: white;
             z-index: 500;
             border: 2px solid rgba(0, 0, 0, 0.2);
@@ -319,30 +335,38 @@
 
         td#start,
         td#target {
-            font-size: small;
+            font-size: 1.5vh;
         }
 
         td#dep,
         td#arr {
-            font-size: x-small;
+            font-size: 1vh;
         }
 
         #overlayContainer {
             margin-top: -10px;
+            font-size: 1.8vh;
+            margin-left: 1vh;
         }
 
         div#overlayListSum {
             position: absolute;
             display: inline-block;
-            bottom: 15px;
+            bottom: 1.5vh;
             left: 0;
             right: 0;
             text-align: center;
             height: 3%;
+            font-size: 1.5vh;
         }
 
         #wpHeaderDiv {
-            margin-top: 0;
+            margin-top: 4vh;
+            position: relative;
+        }
+
+        h3#wpHeader {
+            margin-bottom: 1.5vh;
         }
 
         #depArrTop {
@@ -356,7 +380,7 @@
         }
 
         ul {
-            margin-top: 0;
+            margin-top: -1vh;
             height: 50px;
             overflow-x: hidden;
             overflow-y: auto;
@@ -373,7 +397,7 @@
         }
 
         h3 {
-            margin-top: 40px;
+            margin-top: 2.5vh;
             margin-block-start: 0;
         }
 
@@ -421,14 +445,14 @@
 
         span#date-time {
             position: absolute;
-            top: 18px;
-            font-size: 12px;
+            top: 1vh;
+            font-size: 1.5vh;
             width: 100%;
             text-align: center;
         }
 
         #overlay ul li {
-            padding-top: 5px;
+            padding-top: 10px;
         }
 
         #overlay ul p {
@@ -1548,16 +1572,16 @@
             </button>
         </div>
         <div id="wpHeaderDiv">
-            <h3 id="wpHeader" style='font-size: 15; text-align: center;'>Flightplan</h3>
+            <h3 id="wpHeader" style='font-size: 2.5vh; text-align: center;'>Flightplan</h3>
             <br>
-            <h4 id="depArrTop" style='font-size: 15; text-align: center; ;'>
+            <h4 id="depArrTop" style='font-size: 15px; text-align: center; ;'>
                 <table id="depArrTable">
-                    <tr style="font-size: small;">
+                    <tr style="font-size: 1.5vh;">
                         <td id="start" style="text-align: center; width: 41%;">Start</td>
                         <td style="text-align: center; width: 18%;" rowspan="2">-</td>
                         <td id="target" style="text-align: center; width: 41%;">Target</td>
                     </tr>
-                    <tr style="font-size: smaller;">
+                    <tr style="font-size: 1vh;">
                         <td id="dep" style="text-align: center;">Departure</td>
                         <td id="arr" style="text-align: center;">Arrival</td>
                     </tr>
@@ -1592,9 +1616,9 @@
             <h1 id="metarTop">METAR</h1><br>
             <br />
             <form class="contenedor-METAR" method="post">
-                <table id="MetarInputTable" align="center" cellspacing="8" cellpadding="8">
+                <table id="MetarInputTable" cellspacing="8" cellpadding="8">
                     <tr>
-                        <td align="center">
+                        <td>
                             <strong>ICAO: </strong> <input type="text" name="icaoID" id="aeropuerto" class="glass" maxlength="4" size="4" autofocus autocomplete="off" />
                             <input type="button" value="Search" id="boton" onclick="metarSearch(this.form);" />
                         </td>
@@ -1602,7 +1626,7 @@
                 </table>
             </form>
             <br />
-            <p id="metarPanel" class="contenedor-METAR" style="font-size:14;">
+            <p id="metarPanel" class="contenedor-METAR">
                 <span id="zona-metar"></span>
                 <span id="zona-taf"></span>
             </p>
@@ -1841,18 +1865,18 @@
 
         const OPENAIP_API_KEY = '1d96f836f115bc032c90e9335299e6c3';
 
-		var streets = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-			attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-			bounds: maxExtent,
-			maxZoom: 18,
-			minZoom: 0,
-			format: 'image/png',
-			transparent: true,
-			reuseTiles: true,
-			subdomains: ['a', 'b', 'c']
-		});
+        var streets = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+            bounds: maxExtent,
+            maxZoom: 18,
+            minZoom: 0,
+            format: 'image/png',
+            transparent: true,
+            reuseTiles: true,
+            subdomains: ['a', 'b', 'c']
+        });
 
-		var hybrid = L.tileLayer('http://{s}.google.com/vt/lyrs=s,h&x={x}&y={y}&z={z}', {
+        var hybrid = L.tileLayer('http://{s}.google.com/vt/lyrs=s,h&x={x}&y={y}&z={z}', {
 			attribution: "<a href=\'http://maps.google.com/\'>Google</a> Maps Satellite",
 			bounds: maxExtent,
 			maxZoom: 20,
