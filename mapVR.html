@@ -22,7 +22,7 @@
     <link rel="stylesheet" href="./leaflet/leaflet.groupedlayercontrol.min.css" />
     <link rel="stylesheet" href="./leaflet/geosearch.css" />
     <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.4.1/dist/MarkerCluster.css" crossorigin="" />
-    <link href='https://css.gg/airplane.css' rel='stylesheet'>
+    <link href='https://unpkg.com/css.gg@2.0.0/icons/css/airplane.css' rel='stylesheet'>
 
     <style>
         @font-face {
@@ -45,7 +45,6 @@
         * {
             font-family: "Roboto-Light" !important;
         }
-
 
         :root {
             --light: #357987;
@@ -100,7 +99,6 @@
             height: 120px!important;
             line-height: 120px!important;
         }
-
         label {
             padding: 1px;
             font-size: 18px;
@@ -157,7 +155,8 @@
             margin-left: 30px;
         }
 
-        .leaflet-control-zoom-in, .leaflet-control-zoom-out {
+        .leaflet-control-zoom-in,
+        .leaflet-control-zoom-out {
             font-size: 44px !important;
         }
 
@@ -223,10 +222,10 @@
             background: var(--dark);
         }
 
-            /* Handle on hover */
-            ::-webkit-scrollbar-thumb:hover {
-                background: var(--light);
-            }
+        /* Handle on hover */
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--light);
+        }
 
         .leaflet-touch .leaflet-bar button {
             width: 60px;
@@ -247,7 +246,7 @@
         #metarContainer {
             display: none;
             position: absolute;
-            width: 50%;
+            width: 42%;
             height: auto;
             min-height: 25%;
             max-height: 25%;
@@ -300,13 +299,20 @@
             background-color: #ffffff;
             border: solid #ddd;
             border-width: 2px;
-            height: 3vh;
+            height: 3.5vh;
             font-size: 2vh;
             margin: 0;
+            margin-left: 10px;
         }
 
         input#aeropuerto {
             font-size: 2vh;
+            width: 13vw;
+        }
+
+        input#aeropuerto2 {
+            font-size: 2vh;
+            width: 13vw;
         }
 
         input#reset {
@@ -347,12 +353,14 @@
 
         td#start,
         td#target {
-            font-size: 1.5vh;
+            padding-top: 5px;
+            font-size: 1.75vh;
         }
 
         td#dep,
         td#arr {
-            font-size: 1vh;
+            padding-top: 20px;
+            font-size: 1.5vh;
         }
 
         #overlayContainer {
@@ -482,9 +490,9 @@
             font-size: 20px;
         }
 
-            #wpListClose:hover {
-                color: lightgray;
-            }
+        #wpListClose:hover {
+            color: lightgray;
+        }
 
         #wpListMinimize {
             position: absolute;
@@ -497,9 +505,9 @@
             font-size: 20px;
         }
 
-            #wpListMinimize:hover {
-                color: lightgray;
-            }
+        #wpListMinimize:hover {
+            color: lightgray;
+        }
 
         p {
             font-family: "Roboto-Light";
@@ -613,9 +621,9 @@
             background-color: #ffffff;
         }
 
-            .leaflet-control-scale-line:not(:first-child) {
-                border: 2px solid rgba(0, 0, 0, 0.2);
-            }
+        .leaflet-control-scale-line:not(:first-child) {
+            border: 2px solid rgba(0, 0, 0, 0.2);
+        }
 
         .leaflet-popup-close-button {
             color: black;
@@ -626,7 +634,7 @@
             font-family: "Roboto-Light";
         }
 
-        .leaflet-control-geosearch .results > * {
+        .leaflet-control-geosearch .results>* {
             font-family: "Roboto-Light";
             color: black;
         }
@@ -829,9 +837,9 @@
             font-size: 20px !important;
         }
 
-            #controllerListClose:hover {
-                color: lightgray;
-            }
+        #controllerListClose:hover {
+            color: lightgray;
+        }
 
         #controllerList {
             text-align: left;
@@ -842,15 +850,15 @@
             overflow: auto;
         }
 
-            #controllerList ul p {
-                padding-bottom: 5px;
-                color: var(--dark);
-            }
+        #controllerList ul p {
+            padding-bottom: 5px;
+            color: var(--dark);
+        }
 
-            #controllerList li {
-                padding-bottom: 5px;
-                margin-left: 20px;
-            }
+        #controllerList li {
+            padding-bottom: 5px;
+            margin-left: 20px;
+        }
 
         h3#controllerHeader {
             padding-top: 15px;
@@ -928,53 +936,53 @@
             background-color: #ffffff;
         }
 
-            .number-input,
-            .number-input * {
-                box-sizing: border-box;
-                width: 100%;
-                width: 100%;
-            }
+        .number-input,
+        .number-input * {
+            box-sizing: border-box;
+            width: 100%;
+            width: 100%;
+        }
 
-                .number-input button {
-                    outline: none;
-                    -webkit-appearance: none;
-                    background-color: transparent;
-                    border: none;
-                    align-items: center;
-                    justify-content: center;
-                    min-width: 1.5rem;
-                    cursor: pointer;
-                    margin: 0;
-                    position: relative;
-                }
+        .number-input button {
+            outline: none;
+            -webkit-appearance: none;
+            background-color: transparent;
+            border: none;
+            align-items: center;
+            justify-content: center;
+            min-width: 1.5rem;
+            cursor: pointer;
+            margin: 0;
+            position: relative;
+        }
 
-                    .number-input button:before,
-                    .number-input button:after {
-                        display: inline-block;
-                        position: absolute;
-                        content: '';
-                        width: 0.9rem;
-                        height: 2px;
-                        background-color: #212121;
-                        transform: translate(-50%, -50%);
-                    }
+        .number-input button:before,
+        .number-input button:after {
+            display: inline-block;
+            position: absolute;
+            content: '';
+            width: 0.9rem;
+            height: 2px;
+            background-color: #212121;
+            transform: translate(-50%, -50%);
+        }
 
-                    .number-input button.plus:after {
-                        transform: translate(-50%, -50%) rotate(90deg);
-                    }
+        .number-input button.plus:after {
+            transform: translate(-50%, -50%) rotate(90deg);
+        }
 
-                .number-input input[type=text] {
-                    font-family: "Roboto-Light";
-                    /* padding: 0.5rem; */
-                    min-width: 5rem;
-                    border: solid #ddd;
-                    border-width: 0 2px;
-                    font-size: 0.9rem;
-                    height: 1.5rem;
-                    font-weight: bold;
-                    text-align: center;
-                    background-color: #ffffff;
-                }
+        .number-input input[type=text] {
+            font-family: "Roboto-Light";
+            /* padding: 0.5rem; */
+            min-width: 5rem;
+            border: solid #ddd;
+            border-width: 0 2px;
+            font-size: 0.9rem;
+            height: 1.5rem;
+            font-weight: bold;
+            text-align: center;
+            background-color: #ffffff;
+        }
 
         .teleportButton {
             color: black;
@@ -1025,36 +1033,36 @@
             top: 55px;
         }
 
-            .gg-track:hover {
-                color: dimgray;
-            }
+        .gg-track:hover {
+            color: dimgray;
+        }
 
-            .gg-track::after,
-            .gg-track::before {
-                content: "";
-                display: block;
-                box-sizing: border-box;
-                position: absolute;
-                border-radius: 3px
-            }
+        .gg-track::after,
+        .gg-track::before {
+            content: "";
+            display: block;
+            box-sizing: border-box;
+            position: absolute;
+            border-radius: 3px
+        }
 
-            .gg-track::before {
-                border-left: 4px solid;
-                border-right: 4px solid;
-                width: 18px;
-                height: 2px;
-                left: -6px;
-                top: 2px
-            }
+        .gg-track::before {
+            border-left: 4px solid;
+            border-right: 4px solid;
+            width: 18px;
+            height: 2px;
+            left: -6px;
+            top: 2px
+        }
 
-            .gg-track::after {
-                width: 2px;
-                height: 18px;
-                border-top: 4px solid;
-                border-bottom: 4px solid;
-                left: 2px;
-                top: -6px
-            }
+        .gg-track::after {
+            width: 2px;
+            height: 18px;
+            border-top: 4px solid;
+            border-bottom: 4px solid;
+            left: 2px;
+            top: -6px
+        }
 
         .gg-track-gray {
             color: lightgrey;
@@ -1071,34 +1079,34 @@
             margin-left: 23%;
         }
 
-            .gg-track-gray::after,
-            .gg-track-gray::before {
-                content: "";
-                display: block;
-                box-sizing: border-box;
-                position: absolute;
-                border-radius: 3px
-            }
+        .gg-track-gray::after,
+        .gg-track-gray::before {
+            content: "";
+            display: block;
+            box-sizing: border-box;
+            position: absolute;
+            border-radius: 3px
+        }
 
-            .gg-track-gray::before {
-                border-left: 4px solid;
-                border-right: 4px solid;
-                width: 18px;
-                height: 2px;
-                left: -6px;
-                top: 2px
-            }
+        .gg-track-gray::before {
+            border-left: 4px solid;
+            border-right: 4px solid;
+            width: 18px;
+            height: 2px;
+            left: -6px;
+            top: 2px
+        }
 
-            .gg-track-gray::after {
-                width: 2px;
-                height: 18px;
-                border-top: 4px solid;
-                border-bottom: 4px solid;
-                left: 2px;
-                top: -6px
-            }
+        .gg-track-gray::after {
+            width: 2px;
+            height: 18px;
+            border-top: 4px solid;
+            border-bottom: 4px solid;
+            left: 2px;
+            top: -6px
+        }
 
-            .gg-arrow-down {
+        .gg-arrow-down {
             color: gray;
             box-sizing: border-box;
             position: relative;
@@ -1152,18 +1160,18 @@
             top: 5px;
         }
 
-            .gg-controller::before {
-                content: "";
-                display: block;
-                box-sizing: border-box;
-                position: absolute;
-                width: 14px;
-                height: 14px;
-                box-shadow: -6px -6px 0 -4px, 6px 6px 0 -4px, 6px -6px 0 -4px, -6px 6px 0 -4px;
-                left: -5px;
-                top: -5px;
-                transform: rotate(45deg)
-            }
+        .gg-controller::before {
+            content: "";
+            display: block;
+            box-sizing: border-box;
+            position: absolute;
+            width: 14px;
+            height: 14px;
+            box-shadow: -6px -6px 0 -4px, 6px 6px 0 -4px, 6px -6px 0 -4px, -6px 6px 0 -4px;
+            left: -5px;
+            top: -5px;
+            transform: rotate(45deg)
+        }
 
         .gg-erase {
             color: gray;
@@ -1177,32 +1185,32 @@
             top: 3px;
         }
 
-            .gg-erase::after,
-            .gg-erase::before {
-                content: "";
-                display: block;
-                box-sizing: border-box;
-                position: absolute
-            }
+        .gg-erase::after,
+        .gg-erase::before {
+            content: "";
+            display: block;
+            box-sizing: border-box;
+            position: absolute
+        }
 
-            .gg-erase::before {
-                width: 6px;
-                height: 14px;
-                border-bottom: 4px solid transparent;
-                border-radius: 1px;
-                box-shadow: 0 0 0 2px, inset 0 -2px 0 0;
-                left: 7px;
-                top: 2px;
-                transform: rotate(45deg)
-            }
+        .gg-erase::before {
+            width: 6px;
+            height: 14px;
+            border-bottom: 4px solid transparent;
+            border-radius: 1px;
+            box-shadow: 0 0 0 2px, inset 0 -2px 0 0;
+            left: 7px;
+            top: 2px;
+            transform: rotate(45deg)
+        }
 
-            .gg-erase::after {
-                background: currentColor;
-                width: 22px;
-                height: 2px;
-                bottom: 0;
-                border-radius: 20px
-            }
+        .gg-erase::after {
+            background: currentColor;
+            width: 22px;
+            height: 2px;
+            bottom: 0;
+            border-radius: 20px
+        }
 
         .gg-edit-markup {
             color: gray;
@@ -1220,34 +1228,34 @@
             top: 2px;
         }
 
-            .gg-edit-markup::after,
-            .gg-edit-markup::before {
-                content: "";
-                display: block;
-                position: absolute;
-                box-sizing: border-box
-            }
+        .gg-edit-markup::after,
+        .gg-edit-markup::before {
+            content: "";
+            display: block;
+            position: absolute;
+            box-sizing: border-box
+        }
 
-            .gg-edit-markup::before {
-                width: 0;
-                height: 6px;
-                border-bottom: 6px solid;
-                border-left: 3px solid transparent;
-                border-right: 3px solid transparent;
-                bottom: 9px;
-                left: 6px
-            }
+        .gg-edit-markup::before {
+            width: 0;
+            height: 6px;
+            border-bottom: 6px solid;
+            border-left: 3px solid transparent;
+            border-right: 3px solid transparent;
+            bottom: 9px;
+            left: 6px
+        }
 
-            .gg-edit-markup::after {
-                width: 10px;
-                height: 12px;
-                border: 2px solid;
-                border-top: 4px solid;
-                border-bottom: 0;
-                bottom: 0;
-                left: 4px;
-                transform: rotateX(60deg)
-            }
+        .gg-edit-markup::after {
+            width: 10px;
+            height: 12px;
+            border: 2px solid;
+            border-top: 4px solid;
+            border-bottom: 0;
+            bottom: 0;
+            left: 4px;
+            transform: rotateX(60deg)
+        }
 
         .gg-globe-alt,
         .gg-globe-alt::after,
@@ -1269,24 +1277,24 @@
             border-radius: 22px
         }
 
-            .gg-globe-alt::after,
-            .gg-globe-alt::before {
-                content: "";
-                position: absolute;
-                width: 8px;
-                border-radius: 100%;
-                top: -2px;
-                left: 3px
-            }
+        .gg-globe-alt::after,
+        .gg-globe-alt::before {
+            content: "";
+            position: absolute;
+            width: 8px;
+            border-radius: 100%;
+            top: -2px;
+            left: 3px
+        }
 
-            .gg-globe-alt::after {
-                width: 24px;
-                height: 20px;
-                border: 2px solid transparent;
-                border-bottom: 2px solid;
-                top: -11px;
-                left: -5px
-            }
+        .gg-globe-alt::after {
+            width: 24px;
+            height: 20px;
+            border: 2px solid transparent;
+            border-bottom: 2px solid;
+            top: -11px;
+            left: -5px
+        }
 
         .gg-trash {
             color: gray;
@@ -1305,33 +1313,33 @@
             margin-top: 4px
         }
 
-            .gg-trash::after,
-            .gg-trash::before {
-                content: "";
-                display: block;
-                box-sizing: border-box;
-                position: absolute
-            }
+        .gg-trash::after,
+        .gg-trash::before {
+            content: "";
+            display: block;
+            box-sizing: border-box;
+            position: absolute
+        }
 
-            .gg-trash::after {
-                background: currentColor;
-                border-radius: 3px;
-                width: 16px;
-                height: 2px;
-                top: -4px;
-                left: -5px
-            }
+        .gg-trash::after {
+            background: currentColor;
+            border-radius: 3px;
+            width: 16px;
+            height: 2px;
+            top: -4px;
+            left: -5px
+        }
 
-            .gg-trash::before {
-                width: 10px;
-                height: 4px;
-                border: 2px solid;
-                border-bottom: transparent;
-                border-top-left-radius: 2px;
-                border-top-right-radius: 2px;
-                top: -7px;
-                left: -2px
-            }
+        .gg-trash::before {
+            width: 10px;
+            height: 4px;
+            border: 2px solid;
+            border-bottom: transparent;
+            border-top-left-radius: 2px;
+            border-top-right-radius: 2px;
+            top: -7px;
+            left: -2px
+        }
 
         .gg-attribution {
             color: gray;
@@ -1346,32 +1354,32 @@
             background: linear-gradient(to left, currentColor 14px, transparent 0) no-repeat 1px 2px/8px 2px, linear-gradient(to left, currentColor 14px, transparent 0) no-repeat 6px 14px/6px 2px, radial-gradient(circle, currentColor 60%, transparent 40%) no-repeat 10px 12px/6px 6px, radial-gradient(circle, currentColor 60%, transparent 40%) no-repeat 0 0/6px 6px;
         }
 
-            .gg-attribution::after,
-            .gg-attribution::before {
-                content: "";
-                display: block;
-                box-sizing: border-box;
-                position: absolute;
-                width: 8px;
-                height: 8px;
-                border: 2px solid;
-            }
+        .gg-attribution::after,
+        .gg-attribution::before {
+            content: "";
+            display: block;
+            box-sizing: border-box;
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            border: 2px solid;
+        }
 
-            .gg-attribution::before {
-                border-right: 0;
-                border-top-left-radius: 10px;
-                border-bottom-left-radius: 10px;
-                top: 8px;
-                left: 2px
-            }
+        .gg-attribution::before {
+            border-right: 0;
+            border-top-left-radius: 10px;
+            border-bottom-left-radius: 10px;
+            top: 8px;
+            left: 2px
+        }
 
-            .gg-attribution::after {
-                border-left: 0;
-                border-top-right-radius: 10px;
-                border-bottom-right-radius: 10px;
-                right: 2px;
-                top: 2px
-            }
+        .gg-attribution::after {
+            border-left: 0;
+            border-top-right-radius: 10px;
+            border-bottom-right-radius: 10px;
+            right: 2px;
+            top: 2px
+        }
 
         .gg-pin {
             color: gray;
@@ -1388,18 +1396,18 @@
             margin-top: -4px
         }
 
-            .gg-pin::before {
-                content: "";
-                display: block;
-                box-sizing: border-box;
-                position: absolute;
-                width: 8px;
-                height: 8px;
-                border: 2px solid;
-                top: 3px;
-                left: 3px;
-                border-radius: 40px
-            }
+        .gg-pin::before {
+            content: "";
+            display: block;
+            box-sizing: border-box;
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            border: 2px solid;
+            top: 3px;
+            left: 3px;
+            border-radius: 40px
+        }
 
         .gg-repeat {
             color: gray;
@@ -1414,29 +1422,29 @@
             left: 42px;
         }
 
-            .gg-repeat::after,
-            .gg-repeat::before {
-                content: "";
-                display: block;
-                box-sizing: border-box;
-                position: absolute;
-                width: 0;
-                height: 0;
-                border-top: 3px solid transparent;
-                border-bottom: 3px solid transparent
-            }
+        .gg-repeat::after,
+        .gg-repeat::before {
+            content: "";
+            display: block;
+            box-sizing: border-box;
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-top: 3px solid transparent;
+            border-bottom: 3px solid transparent
+        }
 
-            .gg-repeat::before {
-                border-left: 5px solid;
-                top: -4px;
-                right: 0
-            }
+        .gg-repeat::before {
+            border-left: 5px solid;
+            top: -4px;
+            right: 0
+        }
 
-            .gg-repeat::after {
-                border-right: 5px solid;
-                bottom: -4px;
-                left: 0
-            }
+        .gg-repeat::after {
+            border-right: 5px solid;
+            bottom: -4px;
+            left: 0
+        }
 
         .refreshIcon {
             color: gray;
@@ -1463,18 +1471,18 @@
             box-shadow: 0 0 0 2px
         }
 
-            .gg-stopwatch::after {
-                content: "";
-                display: block;
-                box-sizing: border-box;
-                position: absolute;
-                width: 4px;
-                height: 2px;
-                background: currentColor;
-                transform: rotate(45deg);
-                right: -4px;
-                top: -3px
-            }
+        .gg-stopwatch::after {
+            content: "";
+            display: block;
+            box-sizing: border-box;
+            position: absolute;
+            width: 4px;
+            height: 2px;
+            background: currentColor;
+            transform: rotate(45deg);
+            right: -4px;
+            top: -3px
+        }
 
 
         .gg-play-pause-o {
@@ -1488,18 +1496,18 @@
             border-radius: 22px
         }
 
-            .gg-play-pause-o::before {
-                content: "";
-                display: block;
-                box-sizing: border-box;
-                position: absolute;
-                width: 6px;
-                height: 6px;
-                left: 6px;
-                top: 6px;
-                border-left: 2px solid;
-                border-right: 2px solid
-            }
+        .gg-play-pause-o::before {
+            content: "";
+            display: block;
+            box-sizing: border-box;
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            left: 6px;
+            top: 6px;
+            border-left: 2px solid;
+            border-right: 2px solid
+        }
 
         .gg-data {
             transform: scale(var(--ggs, 3.5));
@@ -1508,41 +1516,41 @@
             top: 55px
         }
 
-            .gg-data,
-            .gg-data::after,
-            .gg-data::before {
-                box-sizing: border-box;
-                position: relative;
-                display: block;
-                border: 2px solid;
-                border-radius: 50%;
-                width: 14px;
-                height: 14px
-            }
+        .gg-data,
+        .gg-data::after,
+        .gg-data::before {
+            box-sizing: border-box;
+            position: relative;
+            display: block;
+            border: 2px solid;
+            border-radius: 50%;
+            width: 14px;
+            height: 14px
+        }
 
-                .gg-data::after,
-                .gg-data::before {
-                    content: "";
-                    position: absolute;
-                    width: 6px;
-                    height: 6px;
-                    top: 2px;
-                    left: 2px
-                }
+        .gg-data::after,
+        .gg-data::before {
+            content: "";
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            top: 2px;
+            left: 2px
+        }
 
-                .gg-data::after {
-                    background: linear-gradient( to left, currentColor 8px,transparent 0) no-repeat bottom center/2px 8px;
-                    width: 22px;
-                    height: 22px;
-                    top: -6px;
-                    left: -6px
-                }
+        .gg-data::after {
+            background: linear-gradient(to left, currentColor 8px, transparent 0) no-repeat bottom center/2px 8px;
+            width: 22px;
+            height: 22px;
+            top: -6px;
+            left: -6px
+        }
 
-                .gg-data,
-                .gg-data::after {
-                    border-top-color: transparent;
-                    border-bottom-color: transparent
-                }
+        .gg-data,
+        .gg-data::after {
+            border-top-color: transparent;
+            border-bottom-color: transparent
+        }
 
 
         #keyb {
@@ -1599,9 +1607,9 @@
             position: relative;
         }
 
-            .keyboard__key:active {
-                background: rgba(255, 255, 255, 0.12);
-            }
+        .keyboard__key:active {
+            background: rgba(255, 255, 255, 0.12);
+        }
 
         .keyboard__key--wide {
             width: 12vw;
@@ -1654,8 +1662,8 @@
     </div>
     <div id="overlay">
         <div>
-            <span id='date-time'></span><button id="wpListMinimize" type="button" onclick="minimizeWpList()">_</button><button id="wpListClose"
-                                                                                                                               type="button" onclick="hideWpList()">
+            <span id='date-time'></span><button id="wpListMinimize" type="button"
+                onclick="minimizeWpList()">_</button><button id="wpListClose" type="button" onclick="hideWpList()">
                 x
             </button>
         </div>
@@ -1707,16 +1715,21 @@
                 <table id="MetarInputTable" cellspacing="8" cellpadding="8">
                     <tr>
                         <td>
-                            <strong>ICAO: </strong> <input type="text" name="icaoID" id="aeropuerto" class="glass" maxlength="4" size="4" autofocus autocomplete="off" />
-                            <input type="button" value="Search" id="boton" onclick="metarSearch(this.form);" />
+                            <input type="text" name="icaoID" id="aeropuerto" class="glass" maxlength="4" size="4"
+                                placeholder="START" />
+                            <input type="text" name="icaoID2" id="aeropuerto2" class="glass" maxlength="4" size="4"
+                                placeholder="DESTINATION" />
+                            <input type="button" value="Search" id="boton" onclick="metarSearch();" />
                         </td>
                     </tr>
                 </table>
             </form>
             <br />
             <p id="metarPanel" class="contenedor-METAR">
-                <span id="zona-metar"></span>
+                <br><span id="zona-metar"></span>
                 <span id="zona-taf"></span>
+                <br><span id="zona-metar2"></span>
+                <span id="zona-taf2"></span>
             </p>
         </div>
     </div>
@@ -1795,11 +1808,17 @@
     var clickArr = [];
     var markerId = 0;
     var coordinatesArray = [];
+    var coordinatesArrayDEP = [];
+    var coordinatesArrayARR = [];
     var geojsonFeature;
     var id = 0;
     var markerTimeout;
     var pLineGroup;
+    var pLineGroupDEP;
+    var pLineGroupARR;
     var pline;
+    var plineDEP;
+    var plineARR;
     var wpNames = [];
     var wpTypes = [];
     var atbls = [];
@@ -1828,6 +1847,8 @@
     var navaidMarkers;
     var reportingPointMarkers;
     var panelState = '';
+    var ActiveMarker;
+    var WpBlocked = false;
 
     window.addEventListener("DOMContentLoaded", function () {
         // Get the message reference
@@ -1883,8 +1904,6 @@
                 document.getElementById("boton").click();
             }
         });
-
-
     });
 
     function calculate_airac_cycle() {
@@ -1919,14 +1938,14 @@
         var height = $('#wpHeaderDiv').outerHeight(true);
         var bottomheight = $('#overlayListSum ').outerHeight(true);
         var overlayheight = $('#overlay ').height();
-        $('#content').css('height', overlayheight - height - bottomheight - 80);
+        $('#content').css('height', overlayheight - height - bottomheight - 20);
     });
 
     $(window).on('resize', function () {
         var height = $('#wpHeaderDiv').outerHeight(true);
         var bottomheight = $('#overlayListSum ').outerHeight(true);
         var overlayheight = $('#overlay ').height();
-        $('#content').css('height', overlayheight - height - bottomheight - 80);
+        $('#content').css('height', overlayheight - height - bottomheight - 20);
     });
 
     function getVatsimData() {
@@ -1993,22 +2012,20 @@
             subdomains: ['a', 'b', 'c']
         });
 
-        var monochrome = L.tileLayer('http://{s}.tile.stamen.com/toner/{z}/{x}/{y}.png', {
-            attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a href="http://openstreetmap.org"> OpenStreetMap </a>, under <a href="http://www.openstreetmap.org/copyright">ODbL</a>.',
+        var monochrome = L.tileLayer('https://tiles.stadiamaps.com/tiles/stamen_toner/{z}/{x}/{y}{r}.png', {
+            attribution: 'Map tiles by <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://www.stamen.com/" target="_blank">Stamen Design</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>.',
             bounds: maxExtent,
             minZoom: 0,
             maxZoom: 14,
-            reuseTiles: true,
-            subdomains: 'abcd'
+            reuseTiles: true
         });
 
-        var water = L.tileLayer('http://{s}.tile.stamen.com/watercolor/{z}/{x}/{y}.png', {
-            attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, under <a href="http://creativecommons.org/licenses/by-sa/3.0">CC BY SA</a>.',
+        var water = L.tileLayer('http://tiles.stadiamaps.com/tiles/stamen_watercolor/{z}/{x}/{y}.jpg', {
+            attribution: 'Map tiles by <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://www.stamen.com/" target="_blank">Stamen Design</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> .',
             bounds: maxExtent,
             minZoom: 0,
             maxZoom: 14,
-            reuseTiles: true,
-            subdomains: 'abcd'
+            reuseTiles: true
         });
 
         var airspacesX = L.tileLayer(`https://{s}.api.tiles.openaip.net/api/data/airspaces/{z}/{x}/{y}.png?apiKey=${OPENAIP_API_KEY}`, {
@@ -2137,7 +2154,9 @@
             zoom: 9,
             edgeBufferTiles: 2,
             layers: [openaip_basemap_osm],
-            bounds: maxExtent
+            bounds: maxExtent,
+            zoomAnimation: true,
+            fadeAnimation: true
         });
 
         const hash = new L.Hash(map);
@@ -2170,7 +2189,6 @@
 
         // Add searchbar to the map
         map.addControl(searchControl);
-
 
         /* Create new layer for markers  */
 
@@ -2208,171 +2226,182 @@
                 follow = false;
                 toggle.enable();
             } else {
-                var marker;
-                deleted = false;
-                document.getElementById("overlay").style.visibility = 'visible';
-                document.getElementById("overlay2").style.visibility = 'visible';
-                clearTimeout(markerTimeout);
-                //markerTimeout = setTimeout(function(){map.closePopup();}, 6000);
-                //document.getElementById("overlay2").style.display= 'block' ;
-                $(".leaflet-geosearch-bar").css('top', 0);
-                //console.log(geojsonFeature.length);
-                //// hier ändern .....
-                geojsonFeature = {
-                    "type": "Feature",
-                    "properties": {
-                    },
-                    "geometry": {
-                        "type": "Point",
-                        "coordinates": [e.latlng.lat, e.latlng.lng]
-                    },
-                    "id": markerId,
-                }
-
-                if (markerId == 0) {
-                    wp1_lat = e.latlng.lat;
-                    wp1_lng = e.latlng.lng;
-                }
-
-                const svgIcon = L.divIcon({
-                    html: `<svg height="30" width="30"><circle cx="15" cy="15" r="5" stroke="grey" stroke-width="3" fill="rgb(41, 129, 202)" /></svg>`,
-                    className: "",
-                    iconSize: [30, 30],
-                    iconAnchor: [15, 15],
-                });
-
-                if (!wpNames[markerId]) {
-                    wpNames.push('WP' + (wpi3 + 1));
-                    wpTypes.push('User');
-                    altitudes.push('0');
-                    wpi3++;
-                }
-
-                getMarkerId();
-
-                markers = L.layerGroup();
-                markers = L.geoJson(geojsonFeature, {
-                    pointToLayer: function (feature, latlng) {
-                        marker = L.marker(e.latlng, {
-                            title: "WP",
-                            alt: 0,
-                            name: wpNames[markerId],
-                            type: wpTypes[markerId],
-                            myId: markerId,
-                            coord: e.latlng,
-                            riseOnHover: true,
-                            draggable: true,
-                            icon: svgIcon
-                        });
-                        return marker;
+                if (WpBlocked == false) {
+                    var marker;
+                    deleted = false;
+                    document.getElementById("overlay").style.visibility = 'visible';
+                    document.getElementById("overlay2").style.visibility = 'visible';
+                    clearTimeout(markerTimeout);
+                    //markerTimeout = setTimeout(function(){map.closePopup();}, 6000);
+                    //document.getElementById("overlay2").style.display= 'block' ;
+                    $(".leaflet-geosearch-bar").css('top', 0);
+                    //console.log(geojsonFeature.length);
+                    //// hier ändern .....
+                    geojsonFeature = {
+                        "type": "Feature",
+                        "properties": {
+                        },
+                        "geometry": {
+                            "type": "Point",
+                            "coordinates": [e.latlng.lat, e.latlng.lng]
+                        },
+                        "id": markerId,
                     }
-                }).addTo(map);
 
-                var type = marker.options.type;
-                if (type == 'reportingPoint') {
-                    type = 'MRP';
-                }
+                    if (markerId == 0) {
+                        wp1_lat = e.latlng.lat;
+                        wp1_lng = e.latlng.lng;
+                    }
 
-                marker.bindTooltip(type + " " + marker.options.name,
-                    {
-                        permanent: false,
-                        direction: 'right'
+                    const svgIcon = L.divIcon({
+                        html: `<svg height="30" width="30"><circle cx="15" cy="15" r="5" stroke="grey" stroke-width="3" fill="rgb(41, 129, 202)" /></svg>`,
+                        className: "",
+                        iconSize: [30, 30],
+                        iconAnchor: [15, 15],
                     });
 
-                coordinates.push(e.latlng);
+                    const svgIcon2 = L.divIcon({
+                        html: `<svg height="30" width="30"><circle cx="15" cy="15" r="5" stroke="grey" stroke-width="3" fill="rgb(255, 0, 0)" /></svg>`,
+                        className: "",
+                        iconSize: [30, 30],
+                        iconAnchor: [15, 15],
+                    });
 
-                const popup = L.popup({
-                    closeOnClick: false,
-                    autoClose: true,
-                });
-                popup.setContent("<table><tr><td><input style= font-size: 1.3rem class='nameInput' onchange='setWPname();' id='WPnameInput' min='0' name='WPnameInput' value = '0' type='text'></input></td></tr><tr><td><p style='font-size: 0.8rem'>" + marker.options.type + "</p></td></tr><tr style='text-align: left;'><td style='text-align: left;'><p style='font-size: 0.8rem, text-align: left;'>" + e.latlng.lat.toFixed(6) + ",<br>" + e.latlng.lng.toFixed(6) + "</p></td></tr><tr><td style='text-align:left; padding:0; font-size: 14px'><p style='text-align: center'>Altitude (ft): </p></td></tr><tr><td><div class='number-input'; onchange='setWPaltitude2();'><button onclick='WPaltitudeDwn()' ondblclick='WPaltitudeDwnDwn()'></button><input id='WPaltitudeInput' class='quantityTeleport' min='0' name='WPaltitudeInput' value=0 type='text'><button onclick='WPaltitudeUp()' ondblclick='WPaltitudeUpUp()' class='plus'></button></div></td></tr><br><tr><td><span style='margin-top: 5px'><button style='margin-top:5px; text-align: center' class='marker-delete-button' onclick='' >Delete</button></span></td></tr><tr><td><span><button style='margin-top:0px; text-align: center' class='teleportButton' onclick='teleport(" + e.latlng.lat + "," + e.latlng.lng + ")' >Teleport</button></span></td></tr></table>");
+                    if (!wpNames[markerId]) {
+                        wpNames.push('WP' + (wpi3 + 1));
+                        wpTypes.push('User');
+                        altitudes.push('0');
+                        wpi3++;
+                    }
 
-                marker.bindPopup(popup);
-                marker.on("popupopen", onPopupOpen);
-                marker.on("click", function (e) {
-                    //console.log(this.options.myId);
-                    id = this.options.myId;
-                    startlineShow = true;
-                    showWpList();
-                    //console.log(marker.feature.id);
-                    const input = document.getElementsByTagName("input")[0];
-                    input.focus();
-                });
+                    getMarkerId();
 
-                marker.on('mouseover', function (e) {
-                    //this.openPopup();
-                    id = this.options.myId;
-                    showWpList();
-                    var tempMarker = this;
-                    activeWP = this.options.myId;
-                    //setTimeout(loadName, 200);
-                    //setTimeout(loadAltitude, 300);
-
-                    $(".marker-delete-button:visible").click(function () {
-                        map.removeLayer(tempMarker);
-                        pLineGroup.clearLayers();
-                        coordinatesArray = [];
-                        //console.log(tempMarker);
-                        //console.log(tempMarker.feature.geometry.coordinates[0]);
-                        $(tempMarker).parent('li').remove();
-                        var i = 0;
-                        markerId = 0;
-                        wpNames.splice(tempMarker.options.myId, 1);
-                        wpTypes.splice(tempMarker.options.myId, 1);
-                        //console.log(wpNames);
-                        $.each(map._layers, function (ml) {
-                            if (map._layers[ml].feature && map._layers[ml].feature.mytype != 'airport' && map._layers[ml].feature.mytype != 'navaid' && map._layers[ml].feature.mytype != 'reportingPoint') {
-                                //map._layers[ml].feature.id = i;
-                                //map._layers[ml].options.myId = i;
-                                coordinates.push(map._layers[ml].feature.geometry.coordinates);
-                                //console.log(map._layers[ml].feature.id);
-                                if (i == 0) {
-                                    //console.log(map._layers[ml]);
-                                    //console.log(map._layers[ml].feature.geometry.coordinates);
-                                    wp1_lat = map._layers[ml].feature.geometry.coordinates[0];
-                                    wp1_lng = map._layers[ml].feature.geometry.coordinates[1];
-                                }
-                                i++;
-                                markerId++;
-                            }
-                        });
-                        if (i == 0) {
-                            removeAllMarkers();
-                        } else {
-                            startLineGroup.clearLayers();
-                            startlineShow = false;
+                    markers = L.layerGroup();
+                    markers = L.geoJson(geojsonFeature, {
+                        pointToLayer: function (feature, latlng) {
+                            marker = L.marker(e.latlng, {
+                                title: "WP",
+                                alt: 0,
+                                name: wpNames[markerId],
+                                type: wpTypes[markerId],
+                                myId: markerId,
+                                coord: e.latlng,
+                                riseOnHover: true,
+                                draggable: true,
+                                icon: svgIcon
+                            });
+                            return marker;
                         }
-                        $('.target').css('color', 'black');
-                        localStorage.removeItem('targetMarker');
-                        getMarkerId();
-                        drawLines();
-                    });
-                    showWpList();
-                    Keyboard.close();
-                    clearTimeout(popupTimeout);
-                    popupTimeout = setTimeout(function () { map.closePopup(); }, 5000);
-                });
+                    }).addTo(map);
 
-                marker.on('mouseout', function (e) {
-                    //this.closePopup();
-                });
-                var points = getJSON('clickedPoints');
-                follow = false;
-                toggle.enable();
-                //console.log(points);
-                map.closePopup();
-                marker.openPopup();
-                coordinatesArray = [];
-                drawLines();
-                id = markerId;
-                markerId++;
-                if (document.getElementById("keyboard")) {
-                    var x = document.getElementById("keyboard");
-                    x.style.display = "none";
+                    var type = marker.options.type;
+                    if (type == 'reportingPoint') {
+                        type = 'MRP';
+                    }
+
+                    marker.bindTooltip(type + " " + marker.options.name,
+                        {
+                            permanent: false,
+                            direction: 'right'
+                        });
+
+                    coordinates.push(e.latlng);
+
+                    const popup = L.popup({
+                        autoClose: true,
+                        closeOnClick: true
+                    });
+                    popup.setContent("<table><tr><td><input style= font-size: 1.3rem class='nameInput' onchange='setWPname();' id='WPnameInput' min='0' name='WPnameInput' value = '0' type='text'></input></td></tr><tr><td><p style='font-size: 0.8rem'>" + marker.options.type + "</p></td></tr><tr style='text-align: left;'><td style='text-align: left;'><p style='font-size: 0.8rem, text-align: left;'>" + e.latlng.lat.toFixed(6) + ",<br>" + e.latlng.lng.toFixed(6) + "</p></td></tr><tr><td style='text-align:left; padding:0; font-size: 14px'><p style='text-align: center'>Altitude (ft): </p></td></tr><tr><td><div class='number-input'; onchange='setWPaltitude2();'><button onclick='WPaltitudeDwn()' ondblclick='WPaltitudeDwnDwn()'></button><input id='WPaltitudeInput' class='quantityTeleport' min='0' name='WPaltitudeInput' value=0 type='text'><button onclick='WPaltitudeUp()' ondblclick='WPaltitudeUpUp()' class='plus'></button></div></td></tr><br><tr><td><span style='margin-top: 5px'><button style='margin-top:5px; text-align: center' class='marker-delete-button' onclick='' >Delete</button></span></td></tr><tr><td><span><button style='margin-top:0px; text-align: center' class='teleportButton' onclick='teleport(" + e.latlng.lat + "," + e.latlng.lng + ")' >Teleport</button></span></td></tr></table>");
+
+                    marker.bindPopup(popup);
+                    marker.on("popupopen", onPopupOpen);
+                    marker.on("click", function (e) {
+                        //console.log(this.options.myId);
+                        id = this.options.myId;
+                        startlineShow = true;
+                        showWpList();
+                        //console.log(marker.feature.id);
+                        const input = document.getElementsByTagName("input")[0];
+                        input.focus();
+                    });
+
+                    marker.on('mouseover', function (e) {
+                        //this.openPopup();
+                        id = this.options.myId;
+                        showWpList();
+                        var tempMarker = this;
+                        activeWP = this.options.myId;
+                        //setTimeout(loadName, 200);
+                        //setTimeout(loadAltitude, 300);
+
+                        $(".marker-delete-button:visible").click(function () {
+                            map.removeLayer(tempMarker);
+                            pLineGroup.clearLayers();
+                            coordinatesArray = [];
+                            //console.log(tempMarker);
+                            //console.log(tempMarker.feature.geometry.coordinates[0]);
+                            $(tempMarker).parent('li').remove();
+                            var i = 0;
+                            markerId = 0;
+                            wpNames.splice(tempMarker.options.myId, 1);
+                            wpTypes.splice(tempMarker.options.myId, 1);
+                            //console.log(wpNames);
+                            $.each(map._layers, function (ml) {
+                                if (map._layers[ml].feature && map._layers[ml].feature.mytype != 'airport' && map._layers[ml].feature.mytype != 'navaid' && map._layers[ml].feature.mytype != 'reportingPoint') {
+                                    //map._layers[ml].feature.id = i;
+                                    //map._layers[ml].options.myId = i;
+                                    coordinates.push(map._layers[ml].feature.geometry.coordinates);
+                                    //console.log(map._layers[ml].feature.id);
+                                    if (i == 0) {
+                                        //console.log(map._layers[ml]);
+                                        //console.log(map._layers[ml].feature.geometry.coordinates);
+                                        wp1_lat = map._layers[ml].feature.geometry.coordinates[0];
+                                        wp1_lng = map._layers[ml].feature.geometry.coordinates[1];
+                                    }
+                                    i++;
+                                    markerId++;
+                                }
+                            });
+                            if (i == 0) {
+                                removeAllMarkers();
+                            } else {
+                                startLineGroup.clearLayers();
+                                startlineShow = false;
+                            }
+                            $('.target').css('color', 'black');
+                            localStorage.removeItem('targetMarker');
+                            getMarkerId();
+                            drawLines();
+                        });
+                        showWpList();
+                        Keyboard.close();
+                        clearTimeout(popupTimeout);
+                        popupTimeout = setTimeout(function () { map.closePopup(); }, 5000);
+                    });
+
+                    marker.on('mouseout', function (e) {
+                        //this.closePopup();
+                    });
+                    var points = getJSON('clickedPoints');
+                    follow = false;
+                    toggle.enable();
+                    //console.log(points);
+                    map.closePopup();
+                    marker.openPopup();
+                    coordinatesArray = [];
+                    coordinatesArrayDEP = [];
+                    coordinatesArrayARR = [];
+                    drawLines();
+                    id = markerId;
+                    markerId++;
+                    if (document.getElementById("keyboard")) {
+                        var x = document.getElementById("keyboard");
+                        x.style.display = "none";
+                    }
+                    showWpList();
+                    targetMarker = 0;
+                    localStorage.setItem('targetMarker', 0);
                 }
-                showWpList();
-                targetMarker = 0;
-                localStorage.setItem('targetMarker', 0);
             }
 
             marker.on('dragend', function (e) {
@@ -2385,6 +2414,8 @@
                     coordinatesArray[dragid][1] = lng;
                     coordinatesArray[dragid][2] = dragid;
                     coordinatesArray = [];
+                    coordinatesArrayDEP = [];
+                    coordinatesArrayARR = [];
                     drawLines();
                 }, 10);
 
@@ -2409,7 +2440,11 @@
             $(".marker-delete-button:visible").click(function () {
                 map.removeLayer(tempMarker);
                 pLineGroup.clearLayers();
+                pLineGroupDEP.clearLayers();
+                pLineGroupARR.clearLayers();
                 coordinatesArray = [];
+                coordinatesArrayDEP = [];
+                coordinatesArrayARR = [];
                 //console.log(tempMarker);
                 //console.log(tempMarker.feature.geometry.coordinates[0]);
                 $(tempMarker).parent('li').remove();
@@ -2503,9 +2538,13 @@
         }
 
         pLineGroup = new L.FeatureGroup();
+        pLineGroupDEP = new L.FeatureGroup();
+        pLineGroupARR = new L.FeatureGroup();
         startLineGroup = new L.FeatureGroup();
         middleMarkers = new L.FeatureGroup();
         pLineGroup.addTo(map);
+        pLineGroupDEP.addTo(map);
+        pLineGroupARR.addTo(map);
 
         function drawLines() {
             savePoints();
@@ -2528,13 +2567,39 @@
             if (window.localStorage.getItem("wpTypes")) {
                 wpTypes = JSON.parse(window.localStorage.getItem("wpTypes"));
             }
+
+            coordinatesArrayDEP = [];
+            coordinatesArrayARR = [];
+
             $.each(map._layers, function (ml) {
                 if (map._layers[ml].feature && map._layers[ml].feature.mytype != 'airport' && map._layers[ml].feature.mytype != 'navaid' && map._layers[ml].feature.mytype != 'reportingPoint') {
-                    //console.log(map._layers[ml].feature);
+                    //console.log(map._layers[ml]);
                     coordinatesArray.push(map._layers[ml].feature.geometry.coordinates);
+
+                    if (wpi == 0) {
+                        if (map._layers[ml].options.type.startsWith("AIRPORT")) {
+                            coordinatesArrayDEP.push(map._layers[ml].feature.geometry.coordinates);
+                        }
+                    }
+
+                    if (map._layers[ml].options.type.startsWith("DEP")) {
+                        coordinatesArrayDEP.push(map._layers[ml].feature.geometry.coordinates);
+                    }
+                    else if (map._layers[ml].options.type.startsWith("ARR")) {
+                        coordinatesArrayARR.push(map._layers[ml].feature.geometry.coordinates);
+                    }
+                    //console.log(map._layers[ml].options.type);
                     wpi++;
                 }
             });
+            coordinatesArrayARR.push(coordinatesArray[coordinatesArray.length - 1]);
+
+
+            pline = L.polyline(coordinatesArray, { color: 'rgb(41,129,202)' });
+            plineDEP = L.polyline(coordinatesArrayDEP, { color: 'rgb(70,195,51)' });
+            plineARR = L.polyline(coordinatesArrayARR, { color: 'rgb(255,198,0)' });
+
+
             if (wpi == 0) {
                 startLineGroup.clearLayers();
                 map.removeLayer(startLineGroup);
@@ -2550,7 +2615,17 @@
                 pLineGroup.clearLayers();
             }
 
+            if (map.hasLayer(pLineGroupDEP)) {
+                pLineGroupDEP.clearLayers();
+            }
+
+            if (map.hasLayer(pLineGroupARR)) {
+                pLineGroupARR.clearLayers();
+            }
+
             pLineGroup.addLayer(pline);
+            pLineGroupDEP.addLayer(plineDEP);
+            pLineGroupARR.addLayer(plineARR);
 
             var startline = setInterval(line, 100);
 
@@ -2699,8 +2774,8 @@
                     if (!map.hasLayer(startLineGroup)) {
                         map.addLayer(startLineGroup);
                     }
-                    //document.getElementById("overlay2").style.visibility = 'visible';
                     $(".leaflet-geosearch-bar").css('top', 72);
+                    markerFunction(event.target.id);
                 }
                 else {
                     $(this).css('color', 'black');
@@ -2712,18 +2787,59 @@
                     $(".leaflet-geosearch-bar").css('top', -2);
                     targetMarker = -2;
                     localStorage.setItem('targetMarker', -2);
+                    if (ActiveMarker != undefined) {
+                        map.removeLayer(ActiveMarker);
+                    };
+                    map.closePopup();
                 }
                 map.closePopup();
             });
         }
 
         function markerFunction(id) {
-            for (var i in markers) {
-                var markerID = markers[i].options.title;
-                if (markerID == id) {
-                    markers[i].openPopup();
-                };
-            }
+            map.eachLayer(function (layer) {
+                if (layer.options.myId == id) {
+                    //console.log(layer.options.myId);
+                    //layer.openTooltip();
+                    //layer.options.icon.options = svgIcon2;
+                    const svgIcon = L.divIcon({
+                        html: `<svg height="30" width="30"><circle cx="15" cy="15" r="5" stroke="grey" stroke-width="3" fill="rgb(41, 129, 202)" /></svg>`,
+                        className: "",
+                        iconSize: [30, 30],
+                        iconAnchor: [15, 15],
+                    });
+
+                    const svgIcon2 = L.divIcon({
+                        html: `<svg height="30" width="30"><circle cx="15" cy="15" r="5" stroke="grey" stroke-width="3" fill="rgb(255, 0, 0)" /></svg>`,
+                        className: "",
+                        iconSize: [30, 30],
+                        iconAnchor: [15, 15],
+                    });
+
+                    console.log(layer.options.coord);
+                    if (ActiveMarker != undefined) {
+                        map.removeLayer(ActiveMarker);
+                    };
+                    ActiveMarker = L.marker(layer.options.coord, {
+                        title: "Active-WP",
+                        alt: 0,
+                        name: id,
+                        type: id,
+                        myId: id,
+                        coord: layer.options.coord,
+                        riseOnHover: true,
+                        draggable: true,
+                        icon: svgIcon2
+                    }).addTo(map);
+                    layer.openTooltip();
+                    setTimeout(() => {
+                        layer.closeTooltip();
+                    }, 2000);
+
+                } else {
+                    layer.closeTooltip();
+                }
+            });
         }
 
         function line() {
@@ -2839,7 +2955,6 @@
             return time;
         }
 
-
         // Converts from degrees to radians.
         function toRadians(degrees) {
             return degrees * Math.PI / 180;
@@ -2918,11 +3033,8 @@
             toggle4.enable();
         });
 
-
-
         map.on('overlayadd', function (e) {
             //console.log(e.group.name);
-
             if (e.group.name === 'Flightpath') {
                 if (e.name === 'On') {
                     //console.log('Flightpath on!');
@@ -2933,7 +3045,6 @@
                         }
                     }
                 }
-
                 if (e.name === 'Off') {
                     //console.log('Flightpath off!');
                     if (map.hasLayer(polyline)) {
@@ -2941,14 +3052,12 @@
                         showPath = false;
                     }
                 }
-
                 if (e.name === 'Reset') {
                     if (map.hasLayer(aircraft)) {
                         flightpathReset();
                     }
                 }
             }
-
             if (e.group.name === 'Aircraft') {
                 if (e.name === 'On') {
                     //console.log('Aircraft on!');
@@ -2975,7 +3084,6 @@
                         showWpList();
                     }
                 }
-
                 if (e.name === 'Off') {
                     //console.log('Aircraft off!');
                     var imgAirplane = document.getElementById('imageAirplane');
@@ -3005,6 +3113,7 @@
         });
 
         map.on('overlayremove', onOverlayRemove);
+
         function onOverlayRemove(e) {
         }
 
@@ -3025,7 +3134,6 @@
             else if (showPath == false) {
                 setTimeout(function () { map.removeLayer(flightpath_reset); map.addLayer(flightpath_off); }, 100);
             }
-
         }
 
         map.on('zoomend', function () {
@@ -3033,7 +3141,7 @@
             window.localStorage.setItem("zoomLevel", zoomLevel)
             //console.log("Current Zoom Level = " + zoomLevel);
 
-            if (zoomLevel > 9) {
+            if (zoomLevel > 0) {
                 toggle11.enable();
                 getWPData();
             } else {
@@ -3064,7 +3172,7 @@
             clearTimeout(moveendTimeout);
             moveendTimeout = setTimeout(function () {
                 zoomLevel = map.getZoom();
-                if (zoomLevel > 9) {
+                if (zoomLevel > 0) {
                     toggle11.enable();
                     getWPData();
                 }
@@ -3112,9 +3220,6 @@
             }]
         }).addTo(map);
 
-
-
-
         toggle4 = L.easyButton({
             states: [{
                 stateName: 'teleport',
@@ -3136,6 +3241,17 @@
                         map.removeLayer(pLineGroup);
                         pLineGroup.clearLayers();
                     }
+
+                    if (map.hasLayer(pLineGroupDEP)) {
+                        map.removeLayer(pLineGroupDEP);
+                        pLineGroupDEP.clearLayers();
+                    }
+
+                    if (map.hasLayer(pLineGroupARR)) {
+                        map.removeLayer(pLineGroupARR);
+                        pLineGroupARR.clearLayers();
+                    }
+
 
                     if (map.hasLayer(middleMarkers)) {
 
@@ -3171,6 +3287,12 @@
                     if (!map.hasLayer(pLineGroup)) {
                         map.addLayer(pLineGroup);
                     }
+                    if (!map.hasLayer(pLineGroupDEP)) {
+                        map.addLayer(pLineGroupDEP);
+                    }
+                    if (!map.hasLayer(pLineGroupARR)) {
+                        map.addLayer(pLineGroupARR);
+                    }
                     waypointmode = true;
                     loadPoints();
                 },
@@ -3189,7 +3311,12 @@
                 xhr2.onreadystatechange = function () {
                     if (xhr2.readyState == XMLHttpRequest.DONE) {
                         //console.log('Response: ' + xhr2.responseText);
-                        window.parent.postMessage('PLN:' + xhr2.responseText, 'coui://html_ui');
+                        if (browserDebug == 0) {
+                            window.parent.postMessage('PLN:' + xhr2.responseText, 'coui://html_ui');
+                        }
+                        else {
+                            window.parent.postMessage('PLN:' + xhr2.responseText, '*');
+                        }
                     }
                 }
             }
@@ -3198,14 +3325,11 @@
             }
         }).addTo(map);
 
-
         toggle3 = L.easyButton('gg-trash', function () {
             removeAllMarkers();
             var x = document.getElementById("keyboard");
             x.style.display = "none";
         }).addTo(map);
-
-
 
         toggle10 = L.easyButton({
             id: 'controllerButton', // an id for the generated button
@@ -3268,70 +3392,6 @@
             }]
         }).addTo(map);
 
-        /*
-                toggle10 = L.easyButton({
-                    id: 'controllerButton', // an id for the generated button
-                    position: 'topright', // inherited from L.Control -- the corner it goes in
-                    type: 'replace', // set to animate when you're comfy with css
-                    leafletClasses: true, // use leaflet classes to style the button?
-                    states: [{
-                        icon: '<i id="controllerIcon"; class="gg-data"></i>' + '<span class="backButton2">&nbspVATSIM</span><br>',
-                        stateName: 'vatsim',
-                        title: 'VATSIM',
-                        onClick: function (control) {
-                            if (document.getElementById('controllerOverlay').style.visibility == 'hidden') {
-                                lastVatsim = '';
-                                lastSelected = -1;
-                                lastSelectedElement = null;
-                                document.getElementById('controllerListUl').innerHTML = '';
-                                vatsim = true;
-                                airportsPanel = false;
-                                document.getElementById("controllerHeader").innerHTML = "VATSIM Controllers";
-                                getVatsimData();
-                                control.state('vatsim');
-                                panelState = 'vatsim';
-                                mover();
-                                hideMetarContainer();
-                                return
-                            }
-                            lastIvao = '';
-                            lastSelected = -1;
-                            lastSelectedElement = null;
-                            document.getElementById('controllerListUl').innerHTML = '';
-                            vatsim = false;
-                            airportsPanel = false;
-                            document.getElementById("controllerHeader").innerHTML = "IVAO Controllers";
-                            getVatsimData();
-                            control.state('ivao');
-                            panelState = 'ivao';
-                            hideMetarContainer();
-                        }
-                    }, {
-                        icon: '<i id="controllerIcon"; class="gg-data"></i>' + '<span class="backButton2">&nbspIVAO</span><br>',
-                        stateName: 'ivao',
-                        title: 'IVAO',
-                        onClick: function (control) {
-                            if (document.getElementById('controllerOverlay').style.visibility == 'visible') {
-                                mout();
-                                panelState = '';
-                                return
-                            }
-                            lastVatsim = '';
-                            lastSelected = -1;
-                            lastSelectedElement = null;
-                            document.getElementById('controllerListUl').innerHTML = '';
-                            vatsim = true;
-                            airportsPanel = false;
-                            document.getElementById("controllerHeader").innerHTML = "VATSIM Controllers";
-                            getVatsimData();
-                            control.state('vatsim');
-                            panelState = 'vatsim';
-                            hideMetarContainer();
-                        }
-                    }]
-                }).addTo(map);
-        */
-
         toggle11 = L.easyButton({
             id: 'navaidButton', // an id for the generated button
             position: 'topright', // inherited from L.Control -- the corner it goes in
@@ -3387,10 +3447,6 @@
             }]
         }).addTo(map);
 
-
-
-
-
         function clearArray(array) {
             while (array.length) {
                 array.pop();
@@ -3409,14 +3465,11 @@
         }).addTo(map);
     }
 
-
     function hideMetarContainer() {
         document.getElementById("metarContainer").style.display = "none";
         metarSearchExpandet = false;
-        //console.log("hide-Metar")
         Keyboard.close();
     }
-
 
     var metarSearchExpandet = false;
     function myFunction() {
@@ -3430,8 +3483,6 @@
         else {
             document.getElementById("metarContainer").style.display = "none";
             metarSearchExpandet = false;
-            //$(".metarContainer").hide();
-
         }
     }
 
@@ -3444,7 +3495,6 @@
     }
 
     function METARAbrufen(e) {
-        //let texto_metar = ' METAR: <br /> ' + e.raw + ' <br />  ' + e.summary.replace(/;/g, '<br />') + '<br /><br />';
         let texto_metar = ' METAR: <br /> ' + e.raw + ' <br /><br />';
         return texto_metar
     }
@@ -3460,30 +3510,59 @@
     }
 
     const TOKEN_PRIVADO = '8nJJFLHc6Zqz6gu2gSfGZLpJqbzpuv-A0UWPgNZprzk';
-    function pedirXML(e, t) {
-        //console.log('get Metar')
+    function pedirXML(e, t, start) {
+        caja_METAR.innerHTML = "";
+        caja_METAR2.innerHTML = "";
         const a = new XMLHttpRequest
-            , r = 'https://avwx.rest/api/' + e + '/' + t + '?options=translate,summary&format=json&token=' + TOKEN_PRIVADO;
+        , r = 'https://avwx.rest/api/' + e + '/' + t + '?options=translate,summary&format=json&token=' + TOKEN_PRIVADO;
         a.ontimeout = function () {
             return alert('Server Timed Out.')
         }
-            ,
-            a.onreadystatechange = function () {
-                if (this.readyState === 4) {
-                    const t = this.response.search('doctype') > 0;
-                    if (!t && 200 === this.status)
-                        return 'metar' === e && (caja_METAR.innerHTML = METARAbrufen(JSON.parse(this.response))),
-                            'station' === e;
-                    if (this.status >= 400 && this.status < 500)
-                        return onERROR(JSON.parse(this.response));
-                }
+        ,
+        a.onreadystatechange = function () {
+            if (this.readyState === 4) {
+                const t = this.response.search('doctype') > 0;
+                if (!t && 200 === this.status)
+                    return 'metar' === e && (caja_METAR.innerHTML = start + ':<br></br>' + METARAbrufen(JSON.parse(this.response))),
+                        'station' === e;
+                if (this.status >= 400 && this.status < 500)
+                    return onERROR(JSON.parse(this.response));
             }
-            ,
-            a.open('GET', r, !0),
-            a.responseType = 'text',
-            a.setRequestHeader('Content-Type', 'text/plain'),
-            a.timeout = 1e4,
-            a.send()
+        }
+        ,
+        a.open('GET', r, !0),
+        a.responseType = 'text',
+        a.setRequestHeader('Content-Type', 'text/plain'),
+        a.timeout = 1e4,
+        a.send()
+    }
+
+    function pedirXML2(e, t, destination) {
+        caja_METAR.innerHTML = "";
+        caja_METAR2.innerHTML = "";
+        //console.log('get Metar')
+        const a = new XMLHttpRequest
+        , r = 'https://avwx.rest/api/' + e + '/' + t + '?options=translate,summary&format=json&token=' + TOKEN_PRIVADO;
+        a.ontimeout = function () {
+            return alert('Server Timed Out.')
+        }
+        ,
+        a.onreadystatechange = function () {
+            if (this.readyState === 4) {
+                const t = this.response.search('doctype') > 0;
+                if (!t && 200 === this.status)
+                    return 'metar' === e && (caja_METAR2.innerHTML = destination + ':<br></br>' + METARAbrufen(JSON.parse(this.response))),
+                        'station' === e;
+                if (this.status >= 400 && this.status < 500)
+                    return onERROR(JSON.parse(this.response));
+            }
+        }
+        ,
+        a.open('GET', r, !0),
+        a.responseType = 'text',
+        a.setRequestHeader('Content-Type', 'text/plain'),
+        a.timeout = 1e4,
+        a.send()
     }
 
     function pedirXMLTAF(e, t) {
@@ -3493,23 +3572,49 @@
         a2.ontimeout = function () {
             return alert('Server Timed Out.')
         }
-            ,
-            a2.onreadystatechange = function () {
-                if (this.readyState === 4) {
-                    const t = this.response.search('doctype') > 0;
-                    if (!t && 200 === this.status)
-                        return 'taf' === e && (caja_Taf.innerHTML = TAFAbrufen(JSON.parse(this.response))),
-                            'station' === e;
-                    if (this.status >= 400 && this.status < 500)
-                        return onERROR(JSON.parse(this.response));
-                }
+        ,
+        a2.onreadystatechange = function () {
+            if (this.readyState === 4) {
+                const t = this.response.search('doctype') > 0;
+                if (!t && 200 === this.status)
+                    return 'taf' === e && (caja_Taf.innerHTML = TAFAbrufen(JSON.parse(this.response))),
+                        'station' === e;
+                if (this.status >= 400 && this.status < 500)
+                    return onERROR(JSON.parse(this.response));
             }
-            ,
-            a2.open('GET', r2, !0),
-            a2.responseType = 'text',
-            a2.setRequestHeader('Content-Type', 'text/plain'),
-            a2.timeout = 1e4,
-            a2.send()
+        }
+        ,
+        a2.open('GET', r2, !0),
+        a2.responseType = 'text',
+        a2.setRequestHeader('Content-Type', 'text/plain'),
+        a2.timeout = 1e4,
+        a2.send()
+    }
+
+    function pedirXMLTAF2(e, t) {
+        //console.log('get Taf')
+        const a2 = new XMLHttpRequest
+            , r2 = 'https://avwx.rest/api/' + e + '/' + t + '?options=translate,summary&format=json&token=' + TOKEN_PRIVADO;
+        a2.ontimeout = function () {
+            return alert('Server Timed Out.')
+        }
+        ,
+        a2.onreadystatechange = function () {
+            if (this.readyState === 4) {
+                const t = this.response.search('doctype') > 0;
+                if (!t && 200 === this.status)
+                    return 'taf' === e && (caja_Taf2.innerHTML = TAFAbrufen(JSON.parse(this.response))),
+                        'station' === e;
+                if (this.status >= 400 && this.status < 500)
+                    return onERROR(JSON.parse(this.response));
+            }
+        }
+        ,
+        a2.open('GET', r2, !0),
+        a2.responseType = 'text',
+        a2.setRequestHeader('Content-Type', 'text/plain'),
+        a2.timeout = 1e4,
+        a2.send()
     }
 
     function check_ICAO(e) {
@@ -3520,22 +3625,41 @@
         localStorage.clear();
         caja_METAR.innerHTML = '';
         caja_Taf.innerHTML = '';
+        caja_METAR2.innerHTML = '';
+        caja_Taf2.innerHTML = '';
     }
 
-    function metarSearch(e) {
-        e.icaoID.value = e.icaoID.value.toUpperCase();
-        const t = e.icaoID.value;
-        if (!check_ICAO(t)) return; // ICAO Incorrecto
-        //reset('Searching...');
-        pedirXML('metar', t);
-        pedirXMLTAF('taf', t);
-        //pedirXML('station', t);
+    var Timer;
+    function metarSearch() {
+        var e = document.getElementById('aeropuerto').value;
+        var e2 = document.getElementById('aeropuerto2').value;
+        e = e.toUpperCase();
+        //console.log(e);
+        e2 = e2.toUpperCase();
+        document.getElementById('aeropuerto').value = e;
+        document.getElementById('aeropuerto2').value = e2;
+        //console.log(e2);
+        const t = e;
+        const t2 = e2;
+        if (document.getElementById('aeropuerto').value.length == 4) {
+            if (!check_ICAO(t)) return; // ICAO Incorrecto
+            pedirXML('metar', t, t);
+            pedirXMLTAF('taf', t);
+            pedirXML('station', t);
+        }
+
+        if (document.getElementById('aeropuerto2').value.length == 4) {
+            if (!check_ICAO(t2)) return; // ICAO Incorrecto        pedirXML('metar', t);
+            pedirXML2('metar', t2, t2);
+            pedirXMLTAF2('taf', t2);
+            pedirXML2('station', t2);
+        }
     }
 
     let caja_METAR = document.getElementById('zona-metar');
     let caja_Taf = document.getElementById('zona-taf');
-
-
+    let caja_METAR2 = document.getElementById('zona-metar2');
+    let caja_Taf2 = document.getElementById('zona-taf2');
     var lastIvao = "";
     var lastVatsim = "";
 
@@ -3780,22 +3904,23 @@
             var distance = calculateDistance2(parseFloat(pos_lat), parseFloat(pos_lng), _controllersWithCoordArray[i].lat, _controllersWithCoordArray[i].lng);
             var distance = distance.toFixed(0);
             var station = _controllersWithCoordArray[i].callsign.substring(_controllersWithCoordArray[i].callsign.lastIndexOf("_") + 1, _controllersWithCoordArray[i].callsign.length);
+            var range = _controllersWithCoordArray[i].visualRange;
             if (station == "CTR" || station == "FSS") {
-                if (distance < 700) {
+                if (distance < range) {
                     var controllerInRange = _controllersWithCoordArray[i];
                     controllerInRange.distance = distance;
                     controllersInRange.push(controllerInRange);
                 };
             }
             else if (station == "ATIS") {
-                if (distance < 150) {
+                if (distance < range) {
                     var controllerInRange = _controllersWithCoordArray[i];
                     controllerInRange.distance = distance;
                     controllersInRange.push(controllerInRange);
                 };
             }
             else {
-                if (distance < 100) {
+                if (distance < range) {
                     var controllerInRange = _controllersWithCoordArray[i];
                     controllerInRange.distance = distance;
                     controllersInRange.push(controllerInRange);
@@ -3829,6 +3954,7 @@
     }
 
     function removeAllMarkers() {
+        WpBlocked = false;
         markerId = 0;
         wpi = 0;
         coordinates = [];
@@ -3840,6 +3966,8 @@
         }
         middleMarkers.clearLayers();
         pLineGroup.clearLayers();
+        pLineGroupDEP.clearLayers();
+        pLineGroupARR.clearLayers();
         if (map.hasLayer(polyline)) {
             map.removeLayer(polyline);
             polylinepoints = [];
@@ -3854,6 +3982,10 @@
                 polyline = L.polyline(polylinepoints);
                 map.addLayer(polyline);
             }
+        }
+
+        if (map.hasLayer(ActiveMarker)) {
+            map.removeLayer(ActiveMarker);
         }
         localStorage.setItem('targetMarker', -1);
         startlineShow = false;
@@ -3871,6 +4003,7 @@
     }
 
     function deleteAllMarkers() {
+        WpBlocked = false;
         deleted = true;
         $.each(map._layers, function (ml) {
             if (map._layers[ml].feature && map._layers[ml].feature.mytype != 'airport' && map._layers[ml].feature.mytype != 'navaid' && map._layers[ml].feature.mytype != 'reportingPoint') {
@@ -3920,6 +4053,7 @@
                 toggle.disable();
                 follow = true;
             }
+            WpBlocked = true;
             map.closePopup();
         }
         else {
@@ -4160,8 +4294,6 @@
             document.getElementById('WPnameInput').value = WPnameInput;
         }
 
-
-
         var wpnum = 0;
         $.each(map._layers, function (ml) {
             if (map._layers[ml].feature && map._layers[ml].feature.mytype != 'airport' && map._layers[ml].feature.mytype != 'navaid' && map._layers[ml].feature.mytype != 'reportingPoint') {
@@ -4172,7 +4304,6 @@
                 wpnum++;
             }
         });
-
         updateLiElement();
     }
 
@@ -4216,7 +4347,6 @@
         teleporting = true;
         var x = document.getElementById("keyboard");
         x.style.display = "none";
-
         if (waypointmode == true) {
             postMessage('map:' + lat + '_' + lng + '_' + altitude + '_' + heading + '_' + speed)
         }
@@ -4241,6 +4371,8 @@
         var speedInput = parseFloat(document.getElementById('speedInput').value);
         postMessage('map:' + geosearchLng + '_' + geosearchLat + '_' + Math.round(altInput) + '_' + Math.round(headingInput) + '_' + Math.round(speedInput));
         pLineGroup.clearLayers();
+        pLineGroupDEP.clearLayers();
+        pLineGroupARR.clearLayers();
         if (map.hasLayer(polyline)) {
             map.removeLayer(polyline);
         }
@@ -4259,6 +4391,7 @@
     lastLat = '13.493889';
     lastLng = '52.351389';
     var tunedFrequency = '';
+    let readyToPost = false;
     // Receive controls from parent page
     function receiveMessage(e) {
         var sender = e.data.substr(0, e.data.indexOf(':'));
@@ -4287,9 +4420,7 @@
                 setWind(latlng[5], latlng[6]);
                 if (latlng[0] != lastLat && latlng[1] != lastLng) {
                     if (showPath == true) {
-                        if (calcCrow(59.3293371, 13.4877472, 59.3225525, 13.4619422).toFixed(1) * 1000 > 5) {
-                            polyline.addLatLng([latlng[0], latlng[1]]);
-                        }
+                        setTimeout(polyline.addLatLng([lastLat, lastLng]), 1000);
                     }
                     lastLat = latlng[0];
                     lastLng = latlng[1];
@@ -4413,6 +4544,7 @@
         }
         map.closePopup();
         getMarkerId();
+        WpBlocked = true;
     }
 
     // Send postMessage
@@ -4422,6 +4554,9 @@
             // Get the iFrame and the button reference
             window.parent.postMessage(message, 'coui://html_ui');
             //console.log('Postmessage send: ' + message);
+        }
+        else {
+            window.parent.postMessage(message, '*');
         }
     }
 
@@ -4770,6 +4905,7 @@
             getAirports(mapCenter.lat, mapCenter.lng);
             getNavaids(mapCenter.lat, mapCenter.lng);
             getReportingPoints(mapCenter.lat, mapCenter.lng);
+            clearInterval(controllerInterval);
         }
     }
 
