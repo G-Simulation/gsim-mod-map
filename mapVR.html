@@ -8,7 +8,7 @@
     <title>Map</title>
 
     <script src="http://maps.stamen.com/js/tile.stamen.js?v1.3.0"></script>
-    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" crossorigin=""></script>
+    <script src="./leaflet/leaflet.js" crossorigin=""></script>
     <script src="./leaflet/easy-button.js"></script>
     <script src="./leaflet/leaflet.groupedlayercontrol.min.js"></script>
     <script src="./leaflet/jquery.min.js"></script>
@@ -17,7 +17,7 @@
     <script src="./leaflet/leaflet-hash.js"></script>
     <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js" crossorigin=""></script>
 
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" crossorigin="" />
+    <link rel="stylesheet" href="./leaflet/leaflet.css" crossorigin="" />
     <link rel="stylesheet" href="./leaflet/easy-button.css" />
     <link rel="stylesheet" href="./leaflet/leaflet.groupedlayercontrol.min.css" />
     <link rel="stylesheet" href="./leaflet/geosearch.css" />
@@ -45,6 +45,7 @@
         * {
             font-family: "Roboto-Light" !important;
         }
+
 
         :root {
             --light: #357987;
@@ -99,6 +100,7 @@
             height: 120px!important;
             line-height: 120px!important;
         }
+
         label {
             padding: 1px;
             font-size: 18px;
@@ -155,8 +157,7 @@
             margin-left: 30px;
         }
 
-        .leaflet-control-zoom-in,
-        .leaflet-control-zoom-out {
+        .leaflet-control-zoom-in, .leaflet-control-zoom-out {
             font-size: 44px !important;
         }
 
@@ -222,10 +223,10 @@
             background: var(--dark);
         }
 
-        /* Handle on hover */
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--light);
-        }
+            /* Handle on hover */
+            ::-webkit-scrollbar-thumb:hover {
+                background: var(--light);
+            }
 
         .leaflet-touch .leaflet-bar button {
             width: 60px;
@@ -353,14 +354,12 @@
 
         td#start,
         td#target {
-            padding-top: 5px;
-            font-size: 1.75vh;
+            font-size: 1.5vh;
         }
 
         td#dep,
         td#arr {
-            padding-top: 20px;
-            font-size: 1.5vh;
+            font-size: 1vh;
         }
 
         #overlayContainer {
@@ -490,9 +489,9 @@
             font-size: 20px;
         }
 
-        #wpListClose:hover {
-            color: lightgray;
-        }
+            #wpListClose:hover {
+                color: lightgray;
+            }
 
         #wpListMinimize {
             position: absolute;
@@ -505,9 +504,9 @@
             font-size: 20px;
         }
 
-        #wpListMinimize:hover {
-            color: lightgray;
-        }
+            #wpListMinimize:hover {
+                color: lightgray;
+            }
 
         p {
             font-family: "Roboto-Light";
@@ -621,9 +620,9 @@
             background-color: #ffffff;
         }
 
-        .leaflet-control-scale-line:not(:first-child) {
-            border: 2px solid rgba(0, 0, 0, 0.2);
-        }
+            .leaflet-control-scale-line:not(:first-child) {
+                border: 2px solid rgba(0, 0, 0, 0.2);
+            }
 
         .leaflet-popup-close-button {
             color: black;
@@ -837,9 +836,9 @@
             font-size: 20px !important;
         }
 
-        #controllerListClose:hover {
-            color: lightgray;
-        }
+            #controllerListClose:hover {
+                color: lightgray;
+            }
 
         #controllerList {
             text-align: left;
@@ -850,15 +849,15 @@
             overflow: auto;
         }
 
-        #controllerList ul p {
-            padding-bottom: 5px;
-            color: var(--dark);
-        }
+            #controllerList ul p {
+                padding-bottom: 5px;
+                color: var(--dark);
+            }
 
-        #controllerList li {
-            padding-bottom: 5px;
-            margin-left: 20px;
-        }
+            #controllerList li {
+                padding-bottom: 5px;
+                margin-left: 20px;
+            }
 
         h3#controllerHeader {
             padding-top: 15px;
@@ -936,53 +935,53 @@
             background-color: #ffffff;
         }
 
-        .number-input,
-        .number-input * {
-            box-sizing: border-box;
-            width: 100%;
-            width: 100%;
-        }
+            .number-input,
+            .number-input * {
+                box-sizing: border-box;
+                width: 100%;
+                width: 100%;
+            }
 
-        .number-input button {
-            outline: none;
-            -webkit-appearance: none;
-            background-color: transparent;
-            border: none;
-            align-items: center;
-            justify-content: center;
-            min-width: 1.5rem;
-            cursor: pointer;
-            margin: 0;
-            position: relative;
-        }
+                .number-input button {
+                    outline: none;
+                    -webkit-appearance: none;
+                    background-color: transparent;
+                    border: none;
+                    align-items: center;
+                    justify-content: center;
+                    min-width: 1.5rem;
+                    cursor: pointer;
+                    margin: 0;
+                    position: relative;
+                }
 
-        .number-input button:before,
-        .number-input button:after {
-            display: inline-block;
-            position: absolute;
-            content: '';
-            width: 0.9rem;
-            height: 2px;
-            background-color: #212121;
-            transform: translate(-50%, -50%);
-        }
+                    .number-input button:before,
+                    .number-input button:after {
+                        display: inline-block;
+                        position: absolute;
+                        content: '';
+                        width: 0.9rem;
+                        height: 2px;
+                        background-color: #212121;
+                        transform: translate(-50%, -50%);
+                    }
 
-        .number-input button.plus:after {
-            transform: translate(-50%, -50%) rotate(90deg);
-        }
+                    .number-input button.plus:after {
+                        transform: translate(-50%, -50%) rotate(90deg);
+                    }
 
-        .number-input input[type=text] {
-            font-family: "Roboto-Light";
-            /* padding: 0.5rem; */
-            min-width: 5rem;
-            border: solid #ddd;
-            border-width: 0 2px;
-            font-size: 0.9rem;
-            height: 1.5rem;
-            font-weight: bold;
-            text-align: center;
-            background-color: #ffffff;
-        }
+                .number-input input[type=text] {
+                    font-family: "Roboto-Light";
+                    /* padding: 0.5rem; */
+                    min-width: 5rem;
+                    border: solid #ddd;
+                    border-width: 0 2px;
+                    font-size: 0.9rem;
+                    height: 1.5rem;
+                    font-weight: bold;
+                    text-align: center;
+                    background-color: #ffffff;
+                }
 
         .teleportButton {
             color: black;
@@ -1033,36 +1032,36 @@
             top: 55px;
         }
 
-        .gg-track:hover {
-            color: dimgray;
-        }
+            .gg-track:hover {
+                color: dimgray;
+            }
 
-        .gg-track::after,
-        .gg-track::before {
-            content: "";
-            display: block;
-            box-sizing: border-box;
-            position: absolute;
-            border-radius: 3px
-        }
+            .gg-track::after,
+            .gg-track::before {
+                content: "";
+                display: block;
+                box-sizing: border-box;
+                position: absolute;
+                border-radius: 3px
+            }
 
-        .gg-track::before {
-            border-left: 4px solid;
-            border-right: 4px solid;
-            width: 18px;
-            height: 2px;
-            left: -6px;
-            top: 2px
-        }
+            .gg-track::before {
+                border-left: 4px solid;
+                border-right: 4px solid;
+                width: 18px;
+                height: 2px;
+                left: -6px;
+                top: 2px
+            }
 
-        .gg-track::after {
-            width: 2px;
-            height: 18px;
-            border-top: 4px solid;
-            border-bottom: 4px solid;
-            left: 2px;
-            top: -6px
-        }
+            .gg-track::after {
+                width: 2px;
+                height: 18px;
+                border-top: 4px solid;
+                border-bottom: 4px solid;
+                left: 2px;
+                top: -6px
+            }
 
         .gg-track-gray {
             color: lightgrey;
@@ -1079,34 +1078,34 @@
             margin-left: 23%;
         }
 
-        .gg-track-gray::after,
-        .gg-track-gray::before {
-            content: "";
-            display: block;
-            box-sizing: border-box;
-            position: absolute;
-            border-radius: 3px
-        }
+            .gg-track-gray::after,
+            .gg-track-gray::before {
+                content: "";
+                display: block;
+                box-sizing: border-box;
+                position: absolute;
+                border-radius: 3px
+            }
 
-        .gg-track-gray::before {
-            border-left: 4px solid;
-            border-right: 4px solid;
-            width: 18px;
-            height: 2px;
-            left: -6px;
-            top: 2px
-        }
+            .gg-track-gray::before {
+                border-left: 4px solid;
+                border-right: 4px solid;
+                width: 18px;
+                height: 2px;
+                left: -6px;
+                top: 2px
+            }
 
-        .gg-track-gray::after {
-            width: 2px;
-            height: 18px;
-            border-top: 4px solid;
-            border-bottom: 4px solid;
-            left: 2px;
-            top: -6px
-        }
+            .gg-track-gray::after {
+                width: 2px;
+                height: 18px;
+                border-top: 4px solid;
+                border-bottom: 4px solid;
+                left: 2px;
+                top: -6px
+            }
 
-        .gg-arrow-down {
+            .gg-arrow-down {
             color: gray;
             box-sizing: border-box;
             position: relative;
@@ -1160,18 +1159,18 @@
             top: 5px;
         }
 
-        .gg-controller::before {
-            content: "";
-            display: block;
-            box-sizing: border-box;
-            position: absolute;
-            width: 14px;
-            height: 14px;
-            box-shadow: -6px -6px 0 -4px, 6px 6px 0 -4px, 6px -6px 0 -4px, -6px 6px 0 -4px;
-            left: -5px;
-            top: -5px;
-            transform: rotate(45deg)
-        }
+            .gg-controller::before {
+                content: "";
+                display: block;
+                box-sizing: border-box;
+                position: absolute;
+                width: 14px;
+                height: 14px;
+                box-shadow: -6px -6px 0 -4px, 6px 6px 0 -4px, 6px -6px 0 -4px, -6px 6px 0 -4px;
+                left: -5px;
+                top: -5px;
+                transform: rotate(45deg)
+            }
 
         .gg-erase {
             color: gray;
@@ -1185,32 +1184,32 @@
             top: 3px;
         }
 
-        .gg-erase::after,
-        .gg-erase::before {
-            content: "";
-            display: block;
-            box-sizing: border-box;
-            position: absolute
-        }
+            .gg-erase::after,
+            .gg-erase::before {
+                content: "";
+                display: block;
+                box-sizing: border-box;
+                position: absolute
+            }
 
-        .gg-erase::before {
-            width: 6px;
-            height: 14px;
-            border-bottom: 4px solid transparent;
-            border-radius: 1px;
-            box-shadow: 0 0 0 2px, inset 0 -2px 0 0;
-            left: 7px;
-            top: 2px;
-            transform: rotate(45deg)
-        }
+            .gg-erase::before {
+                width: 6px;
+                height: 14px;
+                border-bottom: 4px solid transparent;
+                border-radius: 1px;
+                box-shadow: 0 0 0 2px, inset 0 -2px 0 0;
+                left: 7px;
+                top: 2px;
+                transform: rotate(45deg)
+            }
 
-        .gg-erase::after {
-            background: currentColor;
-            width: 22px;
-            height: 2px;
-            bottom: 0;
-            border-radius: 20px
-        }
+            .gg-erase::after {
+                background: currentColor;
+                width: 22px;
+                height: 2px;
+                bottom: 0;
+                border-radius: 20px
+            }
 
         .gg-edit-markup {
             color: gray;
@@ -1228,34 +1227,34 @@
             top: 2px;
         }
 
-        .gg-edit-markup::after,
-        .gg-edit-markup::before {
-            content: "";
-            display: block;
-            position: absolute;
-            box-sizing: border-box
-        }
+            .gg-edit-markup::after,
+            .gg-edit-markup::before {
+                content: "";
+                display: block;
+                position: absolute;
+                box-sizing: border-box
+            }
 
-        .gg-edit-markup::before {
-            width: 0;
-            height: 6px;
-            border-bottom: 6px solid;
-            border-left: 3px solid transparent;
-            border-right: 3px solid transparent;
-            bottom: 9px;
-            left: 6px
-        }
+            .gg-edit-markup::before {
+                width: 0;
+                height: 6px;
+                border-bottom: 6px solid;
+                border-left: 3px solid transparent;
+                border-right: 3px solid transparent;
+                bottom: 9px;
+                left: 6px
+            }
 
-        .gg-edit-markup::after {
-            width: 10px;
-            height: 12px;
-            border: 2px solid;
-            border-top: 4px solid;
-            border-bottom: 0;
-            bottom: 0;
-            left: 4px;
-            transform: rotateX(60deg)
-        }
+            .gg-edit-markup::after {
+                width: 10px;
+                height: 12px;
+                border: 2px solid;
+                border-top: 4px solid;
+                border-bottom: 0;
+                bottom: 0;
+                left: 4px;
+                transform: rotateX(60deg)
+            }
 
         .gg-globe-alt,
         .gg-globe-alt::after,
@@ -1277,24 +1276,24 @@
             border-radius: 22px
         }
 
-        .gg-globe-alt::after,
-        .gg-globe-alt::before {
-            content: "";
-            position: absolute;
-            width: 8px;
-            border-radius: 100%;
-            top: -2px;
-            left: 3px
-        }
+            .gg-globe-alt::after,
+            .gg-globe-alt::before {
+                content: "";
+                position: absolute;
+                width: 8px;
+                border-radius: 100%;
+                top: -2px;
+                left: 3px
+            }
 
-        .gg-globe-alt::after {
-            width: 24px;
-            height: 20px;
-            border: 2px solid transparent;
-            border-bottom: 2px solid;
-            top: -11px;
-            left: -5px
-        }
+            .gg-globe-alt::after {
+                width: 24px;
+                height: 20px;
+                border: 2px solid transparent;
+                border-bottom: 2px solid;
+                top: -11px;
+                left: -5px
+            }
 
         .gg-trash {
             color: gray;
@@ -1313,33 +1312,33 @@
             margin-top: 4px
         }
 
-        .gg-trash::after,
-        .gg-trash::before {
-            content: "";
-            display: block;
-            box-sizing: border-box;
-            position: absolute
-        }
+            .gg-trash::after,
+            .gg-trash::before {
+                content: "";
+                display: block;
+                box-sizing: border-box;
+                position: absolute
+            }
 
-        .gg-trash::after {
-            background: currentColor;
-            border-radius: 3px;
-            width: 16px;
-            height: 2px;
-            top: -4px;
-            left: -5px
-        }
+            .gg-trash::after {
+                background: currentColor;
+                border-radius: 3px;
+                width: 16px;
+                height: 2px;
+                top: -4px;
+                left: -5px
+            }
 
-        .gg-trash::before {
-            width: 10px;
-            height: 4px;
-            border: 2px solid;
-            border-bottom: transparent;
-            border-top-left-radius: 2px;
-            border-top-right-radius: 2px;
-            top: -7px;
-            left: -2px
-        }
+            .gg-trash::before {
+                width: 10px;
+                height: 4px;
+                border: 2px solid;
+                border-bottom: transparent;
+                border-top-left-radius: 2px;
+                border-top-right-radius: 2px;
+                top: -7px;
+                left: -2px
+            }
 
         .gg-attribution {
             color: gray;
@@ -1354,32 +1353,32 @@
             background: linear-gradient(to left, currentColor 14px, transparent 0) no-repeat 1px 2px/8px 2px, linear-gradient(to left, currentColor 14px, transparent 0) no-repeat 6px 14px/6px 2px, radial-gradient(circle, currentColor 60%, transparent 40%) no-repeat 10px 12px/6px 6px, radial-gradient(circle, currentColor 60%, transparent 40%) no-repeat 0 0/6px 6px;
         }
 
-        .gg-attribution::after,
-        .gg-attribution::before {
-            content: "";
-            display: block;
-            box-sizing: border-box;
-            position: absolute;
-            width: 8px;
-            height: 8px;
-            border: 2px solid;
-        }
+            .gg-attribution::after,
+            .gg-attribution::before {
+                content: "";
+                display: block;
+                box-sizing: border-box;
+                position: absolute;
+                width: 8px;
+                height: 8px;
+                border: 2px solid;
+            }
 
-        .gg-attribution::before {
-            border-right: 0;
-            border-top-left-radius: 10px;
-            border-bottom-left-radius: 10px;
-            top: 8px;
-            left: 2px
-        }
+            .gg-attribution::before {
+                border-right: 0;
+                border-top-left-radius: 10px;
+                border-bottom-left-radius: 10px;
+                top: 8px;
+                left: 2px
+            }
 
-        .gg-attribution::after {
-            border-left: 0;
-            border-top-right-radius: 10px;
-            border-bottom-right-radius: 10px;
-            right: 2px;
-            top: 2px
-        }
+            .gg-attribution::after {
+                border-left: 0;
+                border-top-right-radius: 10px;
+                border-bottom-right-radius: 10px;
+                right: 2px;
+                top: 2px
+            }
 
         .gg-pin {
             color: gray;
@@ -1396,18 +1395,18 @@
             margin-top: -4px
         }
 
-        .gg-pin::before {
-            content: "";
-            display: block;
-            box-sizing: border-box;
-            position: absolute;
-            width: 8px;
-            height: 8px;
-            border: 2px solid;
-            top: 3px;
-            left: 3px;
-            border-radius: 40px
-        }
+            .gg-pin::before {
+                content: "";
+                display: block;
+                box-sizing: border-box;
+                position: absolute;
+                width: 8px;
+                height: 8px;
+                border: 2px solid;
+                top: 3px;
+                left: 3px;
+                border-radius: 40px
+            }
 
         .gg-repeat {
             color: gray;
@@ -1422,29 +1421,29 @@
             left: 42px;
         }
 
-        .gg-repeat::after,
-        .gg-repeat::before {
-            content: "";
-            display: block;
-            box-sizing: border-box;
-            position: absolute;
-            width: 0;
-            height: 0;
-            border-top: 3px solid transparent;
-            border-bottom: 3px solid transparent
-        }
+            .gg-repeat::after,
+            .gg-repeat::before {
+                content: "";
+                display: block;
+                box-sizing: border-box;
+                position: absolute;
+                width: 0;
+                height: 0;
+                border-top: 3px solid transparent;
+                border-bottom: 3px solid transparent
+            }
 
-        .gg-repeat::before {
-            border-left: 5px solid;
-            top: -4px;
-            right: 0
-        }
+            .gg-repeat::before {
+                border-left: 5px solid;
+                top: -4px;
+                right: 0
+            }
 
-        .gg-repeat::after {
-            border-right: 5px solid;
-            bottom: -4px;
-            left: 0
-        }
+            .gg-repeat::after {
+                border-right: 5px solid;
+                bottom: -4px;
+                left: 0
+            }
 
         .refreshIcon {
             color: gray;
@@ -1471,18 +1470,18 @@
             box-shadow: 0 0 0 2px
         }
 
-        .gg-stopwatch::after {
-            content: "";
-            display: block;
-            box-sizing: border-box;
-            position: absolute;
-            width: 4px;
-            height: 2px;
-            background: currentColor;
-            transform: rotate(45deg);
-            right: -4px;
-            top: -3px
-        }
+            .gg-stopwatch::after {
+                content: "";
+                display: block;
+                box-sizing: border-box;
+                position: absolute;
+                width: 4px;
+                height: 2px;
+                background: currentColor;
+                transform: rotate(45deg);
+                right: -4px;
+                top: -3px
+            }
 
 
         .gg-play-pause-o {
@@ -1496,18 +1495,18 @@
             border-radius: 22px
         }
 
-        .gg-play-pause-o::before {
-            content: "";
-            display: block;
-            box-sizing: border-box;
-            position: absolute;
-            width: 6px;
-            height: 6px;
-            left: 6px;
-            top: 6px;
-            border-left: 2px solid;
-            border-right: 2px solid
-        }
+            .gg-play-pause-o::before {
+                content: "";
+                display: block;
+                box-sizing: border-box;
+                position: absolute;
+                width: 6px;
+                height: 6px;
+                left: 6px;
+                top: 6px;
+                border-left: 2px solid;
+                border-right: 2px solid
+            }
 
         .gg-data {
             transform: scale(var(--ggs, 3.5));
@@ -1516,41 +1515,41 @@
             top: 55px
         }
 
-        .gg-data,
-        .gg-data::after,
-        .gg-data::before {
-            box-sizing: border-box;
-            position: relative;
-            display: block;
-            border: 2px solid;
-            border-radius: 50%;
-            width: 14px;
-            height: 14px
-        }
+            .gg-data,
+            .gg-data::after,
+            .gg-data::before {
+                box-sizing: border-box;
+                position: relative;
+                display: block;
+                border: 2px solid;
+                border-radius: 50%;
+                width: 14px;
+                height: 14px
+            }
 
-        .gg-data::after,
-        .gg-data::before {
-            content: "";
-            position: absolute;
-            width: 6px;
-            height: 6px;
-            top: 2px;
-            left: 2px
-        }
+                .gg-data::after,
+                .gg-data::before {
+                    content: "";
+                    position: absolute;
+                    width: 6px;
+                    height: 6px;
+                    top: 2px;
+                    left: 2px
+                }
 
-        .gg-data::after {
-            background: linear-gradient(to left, currentColor 8px, transparent 0) no-repeat bottom center/2px 8px;
-            width: 22px;
-            height: 22px;
-            top: -6px;
-            left: -6px
-        }
+                .gg-data::after {
+                    background: linear-gradient(to left, currentColor 8px, transparent 0) no-repeat bottom center/2px 8px;
+                    width: 22px;
+                    height: 22px;
+                    top: -6px;
+                    left: -6px
+                }
 
-        .gg-data,
-        .gg-data::after {
-            border-top-color: transparent;
-            border-bottom-color: transparent
-        }
+                .gg-data,
+                .gg-data::after {
+                    border-top-color: transparent;
+                    border-bottom-color: transparent
+                }
 
 
         #keyb {
@@ -1607,9 +1606,9 @@
             position: relative;
         }
 
-        .keyboard__key:active {
-            background: rgba(255, 255, 255, 0.12);
-        }
+            .keyboard__key:active {
+                background: rgba(255, 255, 255, 0.12);
+            }
 
         .keyboard__key--wide {
             width: 12vw;
@@ -1851,10 +1850,8 @@
     var WpBlocked = false;
 
     window.addEventListener("DOMContentLoaded", function () {
-        // Get the message reference
         airac = calculate_airac_cycle();
         var messageElement = document.getElementById('message');
-        // Register the event listener
         window.addEventListener('message', receiveMessage);
 
         if (window.localStorage.getItem("mapCenterLat")) {
@@ -1963,7 +1960,6 @@
     }
 
     function loadMap(lat, lon) {
-        // Create Leaflet map on map element.
         var initMapCenter = mapCenter;
         var initMapZoom = zoomLevel;
         var southWest = new L.LatLng(-90, -180);
@@ -2012,60 +2008,84 @@
             subdomains: ['a', 'b', 'c']
         });
 
-        var monochrome = L.tileLayer('https://tiles.stadiamaps.com/tiles/stamen_toner/{z}/{x}/{y}{r}.png', {
-            attribution: 'Map tiles by <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://www.stamen.com/" target="_blank">Stamen Design</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>.',
+        var monochrome = L.tileLayer('http://{s}.tile.stamen.com/toner/{z}/{x}/{y}.png', {
+            attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a href="http://openstreetmap.org"> OpenStreetMap </a>, under <a href="http://www.openstreetmap.org/copyright">ODbL</a>.',
             bounds: maxExtent,
             minZoom: 0,
             maxZoom: 14,
-            reuseTiles: true
+            reuseTiles: true,
+            subdomains: 'abcd'
         });
 
-        var water = L.tileLayer('http://tiles.stadiamaps.com/tiles/stamen_watercolor/{z}/{x}/{y}.jpg', {
-            attribution: 'Map tiles by <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://www.stamen.com/" target="_blank">Stamen Design</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> .',
+        var water = L.tileLayer('http://{s}.tile.stamen.com/watercolor/{z}/{x}/{y}.png', {
+            attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, under <a href="http://creativecommons.org/licenses/by-sa/3.0">CC BY SA</a>.',
             bounds: maxExtent,
             minZoom: 0,
             maxZoom: 14,
-            reuseTiles: true
+            reuseTiles: true,
+            subdomains: 'abcd'
         });
 
         var airspacesX = L.tileLayer(`https://{s}.api.tiles.openaip.net/api/data/airspaces/{z}/{x}/{y}.png?apiKey=${OPENAIP_API_KEY}`, {
-            attribution: '<a href="https://www.openaip.net/">openAIP Data</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-NC-SA</a>)'
-            , bounds: maxExtent,
+            attribution: '<a href="https://www.openaip.net/">openAIP Data</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-NC-SA</a>)',
+            bounds: maxExtent,
             reuseTiles: true,
             minZoom: 7,
             maxZoom: 12
         });
 
         var airportsX = L.tileLayer(`https://{s}.api.tiles.openaip.net/api/data/airports/{z}/{x}/{y}.png?apiKey=${OPENAIP_API_KEY}`, {
-            attribution: '<a href="https://www.openaip.net/">openAIP Data</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-NC-SA</a>)'
-            , bounds: maxExtent,
+            attribution: '<a href="https://www.openaip.net/">openAIP Data</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-NC-SA</a>)',
+            bounds: maxExtent,
             reuseTiles: true,
             minZoom: 7,
             maxZoom: 12
         });
 
         var navaidsX = L.tileLayer(`https://{s}.api.tiles.openaip.net/api/data/navaids/{z}/{x}/{y}.png?apiKey=${OPENAIP_API_KEY}`, {
-            attribution: '<a href="https://www.openaip.net/">openAIP Data</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-NC-SA</a>)'
-            , bounds: maxExtent,
+            attribution: '<a href="https://www.openaip.net/">openAIP Data</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-NC-SA</a>)',
+            bounds: maxExtent,
             reuseTiles: true,
             minZoom: 7,
             maxZoom: 12
         });
 
         var reporting_pointsX = L.tileLayer(`https://{s}.api.tiles.openaip.net/api/data/reporting-points/{z}/{x}/{y}.png?apiKey=${OPENAIP_API_KEY}`, {
-            attribution: '<a href="https://www.openaip.net/">openAIP Data</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-NC-SA</a>)'
-            , bounds: maxExtent,
+            attribution: '<a href="https://www.openaip.net/">openAIP Data</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-NC-SA</a>)',
+            bounds: maxExtent,
             reuseTiles: true,
             minZoom: 7,
             maxZoom: 12
         });
 
         var hotspotsX = L.tileLayer(`https://{s}.api.tiles.openaip.net/api/data/hotspots/{z}/{x}/{y}.png?apiKey=${OPENAIP_API_KEY}`, {
-            attribution: '<a href="https://www.openaip.net/">openAIP Data</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-NC-SA</a>)'
-            , bounds: maxExtent,
+            attribution: '<a href="https://www.openaip.net/">openAIP Data</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-NC-SA</a>)',
+            bounds: maxExtent,
             reuseTiles: true,
             minZoom: 7,
             maxZoom: 12
+        });
+
+        var dfs = L.tileLayer('https://secais.dfs.de/static-maps/icao500/tiles/{z}/{x}/{y}.png', {
+			attribution: '&copy; <a href="https://www.dfs.de/homepage/de/">DFS Deutsche Flugsicherung GmbH</a>',
+			bounds: maxExtent,
+			maxZoom: 18,
+			minZoom: 0,
+			format: 'image/png',
+			transparent: true,
+			reuseTiles: true,
+			subdomains: ['a', 'b', 'c']
+		});
+
+        var faa = L.tileLayer('http://www.linair.net/map/tiles/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="http://www.linair.net">Linair Chicago Sectional</a>',
+            bounds: maxExtent,
+            maxZoom: 18,
+            minZoom: 0,
+            format: 'image/png',
+			reuseTiles: true,
+            tms: true,
+			preferCanvas: true,
         });
 
         var airspaces_off = L.tileLayer('http://', {
@@ -2098,16 +2118,24 @@
         var flightpath_reset = L.tileLayer('http://', {
         });
 
+        var faaDfsOff= L.tileLayer('http://', {
+        });
+
         var baseMaps = {
-			"Streets": streets,
-			"Hybrid": hybrid,
-			"Satellite": satellite,
-			"Terrain": terrain,
-			"Monochrome": monochrome,
-			"Water": water
+            "Streets": streets,
+            "Hybrid": hybrid,
+            "Sattelite": satellite,
+            "Terrain": terrain,
+            "Monochrome": monochrome,
+            "Water": water
         }
 
         var groupedOverlays = {
+            "Sectionals": {
+                'FAA': faa,
+                'Dfs': dfs,
+                'Off': faaDfsOff
+            },
             "Airspaces": {
                 'On': airspacesX,
                 'Off': airspaces_off
@@ -2140,13 +2168,11 @@
         };
 
         var options = {
-            // Make the "Landmarks" group exclusive (use radio inputs)
-            exclusiveGroups: ["Airspaces", "Airports", "Navaids", "Hotspots", "Reporting-points", "Aircraft", "Flightpath"],
-            // Show a checkbox next to non-exclusive group labels for toggling all
+            exclusiveGroups: ["Sectionals", "Airspaces", "Airports", "Navaids", "Hotspots", "Reporting-points", "Aircraft", "Flightpath"],
             groupCheckboxes: true
         };
 
-        var openaip_basemap_osm = L.featureGroup([streets, airspacesX, navaidsX, airportsX, reporting_pointsX, hotspotsX, aircraft, flightpath_off]);
+        var openaip_basemap_osm = L.featureGroup([streets, faa, airspacesX, navaidsX, airportsX, reporting_pointsX, hotspotsX, aircraft, flightpath_off]);
 
         map = L.map('map', {
             center: mapCenter,
@@ -2159,6 +2185,8 @@
             fadeAnimation: true
         });
 
+        LayerControl = L.control.groupedLayers(baseMaps, groupedOverlays, options).addTo(map);
+
         const hash = new L.Hash(map);
 
         L.control.scale({ maxWidth: 100 }).addTo(map);
@@ -2167,7 +2195,6 @@
         AlgoliaProvider = window.GeoSearch.AlgoliaProvider;
         provider = new GeoSearch.OpenStreetMapProvider();
 
-        //  Define search controls
         searchControl = new GeoSearchControl({
             provider: provider,
             autoComplete: true,
@@ -2186,11 +2213,7 @@
                 draggable: true
             }
         });
-
-        // Add searchbar to the map
         map.addControl(searchControl);
-
-        /* Create new layer for markers  */
 
         map.on('geosearch/showlocation', function (e) {
             disableFollow();
@@ -2591,21 +2614,17 @@
                     //console.log(map._layers[ml].options.type);
                     wpi++;
                 }
-            });
+            });         
             coordinatesArrayARR.push(coordinatesArray[coordinatesArray.length - 1]);
-
 
             pline = L.polyline(coordinatesArray, { color: 'rgb(41,129,202)' });
             plineDEP = L.polyline(coordinatesArrayDEP, { color: 'rgb(70,195,51)' });
             plineARR = L.polyline(coordinatesArrayARR, { color: 'rgb(255,198,0)' });
 
-
             if (wpi == 0) {
                 startLineGroup.clearLayers();
                 map.removeLayer(startLineGroup);
             }
-
-            pline = L.polyline(coordinatesArray, { color: 'rgb(41,129,202)' });
 
             if (map.hasLayer(middleMarkers)) {
                 map.removeLayer(middleMarkers);
@@ -2642,7 +2661,6 @@
             pLineGroup.eachLayer(function (layer) {
                 createMiddleMarkers(layer);
             });
-
 
             $.each(map._layers, function (ml) {
                 var altitude = '0';
@@ -2711,12 +2729,15 @@
 
             document.getElementById('start').innerHTML = 'START';
             document.getElementById('target').innerHTML = 'DEST';
+
             if (wpNames[0]) {
                 document.getElementById('start').innerHTML = wpNames[0];
             }
+
             if (wpNames[wpNames.length - 1] && wpNames.length > 1) {
                 document.getElementById('target').innerHTML = wpNames[wpNames.length - 1];
             }
+
             document.getElementById('depArrTable').style.display = '';
             document.getElementById('dep').innerHTML = 'DEP';
             document.getElementById('arr').innerHTML = 'ARR';
@@ -2888,6 +2909,7 @@
                     distance2 = calculateDistance(nlat, nlng, nwp1_lat, nwp1_lng, 'nm');
                     planeHeading = calculateBearing(nlat, nlng, nwp1_lat, nwp1_lng);
                 }
+
                 if (altitudes[target] && startlineShow == true) {
                     alt1 = parseFloat(altitudes[target]);
                 }
@@ -3016,7 +3038,6 @@
             //console.log('invalidate');
         }, 100);
 
-
         map.on("dragstart", function (e) {
             toggle.enable();
             follow = false;
@@ -3112,11 +3133,6 @@
             }
         });
 
-        map.on('overlayremove', onOverlayRemove);
-
-        function onOverlayRemove(e) {
-        }
-
         function flightpathReset() {
             if (showPath == true) {
                 //console.log('Flightpath reset!');
@@ -3178,8 +3194,6 @@
                 }
             }, 500);
         });
-
-        LayerControl = L.control.groupedLayers(baseMaps, groupedOverlays, options).addTo(map);
 
         $('.leaflet-control').on('mouseenter', () => {
             if (wpListOn == true) {
@@ -4020,7 +4034,6 @@
         window.localStorage.removeItem("wpNames");
         window.localStorage.removeItem("wpTypes");
     }
-
 
     function setJSON(key, value) {
         window.localStorage.setItem(key, JSON.stringify(value));
@@ -5788,5 +5801,4 @@
         e.stopPropagation();
     });
 </script>
-
 </html>
