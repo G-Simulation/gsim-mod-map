@@ -8,7 +8,7 @@
     <title>Map</title>
 
     <script src="http://maps.stamen.com/js/tile.stamen.js?v1.3.0"></script>
-    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" crossorigin=""></script>
+    <script src="./leaflet/leaflet.js" crossorigin=""></script>
     <script src="./leaflet/easy-button.js"></script>
     <script src="./leaflet/leaflet.groupedlayercontrol.min.js"></script>
     <script src="./leaflet/jquery.min.js"></script>
@@ -17,7 +17,7 @@
     <script src="./leaflet/leaflet-hash.js"></script>
     <script src="https://unpkg.com/leaflet.markercluster@1.4.1/dist/leaflet.markercluster.js" crossorigin=""></script>
 
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" crossorigin="" />
+    <link rel="stylesheet" href="./leaflet/leaflet.css" crossorigin="" />
     <link rel="stylesheet" href="./leaflet/easy-button.css" />
     <link rel="stylesheet" href="./leaflet/leaflet.groupedlayercontrol.min.css" />
     <link rel="stylesheet" href="./leaflet/geosearch.css" />
@@ -1766,10 +1766,8 @@
     var WpBlocked = false;
 
     window.addEventListener("DOMContentLoaded", function () {
-        // Get the message reference
         airac = calculate_airac_cycle();
         var messageElement = document.getElementById('message');
-        // Register the event listener
         window.addEventListener('message', receiveMessage);
 
         if (window.localStorage.getItem("mapCenterLat")) {
@@ -1878,7 +1876,6 @@
     }
 
     function loadMap(lat, lon) {
-        // Create Leaflet map on map element.
         var initMapCenter = mapCenter;
         var initMapZoom = zoomLevel;
         var southWest = new L.LatLng(-90, -180);
@@ -1927,60 +1924,84 @@
             subdomains: ['a', 'b', 'c']
         });
 
-        var monochrome = L.tileLayer('https://tiles.stadiamaps.com/tiles/stamen_toner/{z}/{x}/{y}{r}.png', {
-            attribution: 'Map tiles by <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://www.stamen.com/" target="_blank">Stamen Design</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>.',
+        var monochrome = L.tileLayer('http://{s}.tile.stamen.com/toner/{z}/{x}/{y}.png', {
+            attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a href="http://openstreetmap.org"> OpenStreetMap </a>, under <a href="http://www.openstreetmap.org/copyright">ODbL</a>.',
             bounds: maxExtent,
             minZoom: 0,
             maxZoom: 14,
-            reuseTiles: true
+            reuseTiles: true,
+            subdomains: 'abcd'
         });
 
-        var water = L.tileLayer('http://tiles.stadiamaps.com/tiles/stamen_watercolor/{z}/{x}/{y}.jpg', {
-            attribution: 'Map tiles by <a href="https://www.stadiamaps.com/" target="_blank">Stadia Maps</a> &copy; <a href="https://www.stamen.com/" target="_blank">Stamen Design</a> &copy; <a href="https://openmaptiles.org/" target="_blank">OpenMapTiles</a> &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> .',
+        var water = L.tileLayer('http://{s}.tile.stamen.com/watercolor/{z}/{x}/{y}.png', {
+            attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>. Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, under <a href="http://creativecommons.org/licenses/by-sa/3.0">CC BY SA</a>.',
             bounds: maxExtent,
             minZoom: 0,
             maxZoom: 14,
-            reuseTiles: true
+            reuseTiles: true,
+            subdomains: 'abcd'
         });
 
         var airspacesX = L.tileLayer(`https://{s}.api.tiles.openaip.net/api/data/airspaces/{z}/{x}/{y}.png?apiKey=${OPENAIP_API_KEY}`, {
-            attribution: '<a href="https://www.openaip.net/">openAIP Data</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-NC-SA</a>)'
-            , bounds: maxExtent,
+            attribution: '<a href="https://www.openaip.net/">openAIP Data</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-NC-SA</a>)',
+            bounds: maxExtent,
             reuseTiles: true,
             minZoom: 7,
             maxZoom: 12
         });
 
         var airportsX = L.tileLayer(`https://{s}.api.tiles.openaip.net/api/data/airports/{z}/{x}/{y}.png?apiKey=${OPENAIP_API_KEY}`, {
-            attribution: '<a href="https://www.openaip.net/">openAIP Data</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-NC-SA</a>)'
-            , bounds: maxExtent,
+            attribution: '<a href="https://www.openaip.net/">openAIP Data</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-NC-SA</a>)',
+            bounds: maxExtent,
             reuseTiles: true,
             minZoom: 7,
             maxZoom: 12
         });
 
         var navaidsX = L.tileLayer(`https://{s}.api.tiles.openaip.net/api/data/navaids/{z}/{x}/{y}.png?apiKey=${OPENAIP_API_KEY}`, {
-            attribution: '<a href="https://www.openaip.net/">openAIP Data</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-NC-SA</a>)'
-            , bounds: maxExtent,
+            attribution: '<a href="https://www.openaip.net/">openAIP Data</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-NC-SA</a>)',
+            bounds: maxExtent,
             reuseTiles: true,
             minZoom: 7,
             maxZoom: 12
         });
 
         var reporting_pointsX = L.tileLayer(`https://{s}.api.tiles.openaip.net/api/data/reporting-points/{z}/{x}/{y}.png?apiKey=${OPENAIP_API_KEY}`, {
-            attribution: '<a href="https://www.openaip.net/">openAIP Data</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-NC-SA</a>)'
-            , bounds: maxExtent,
+            attribution: '<a href="https://www.openaip.net/">openAIP Data</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-NC-SA</a>)',
+            bounds: maxExtent,
             reuseTiles: true,
             minZoom: 7,
             maxZoom: 12
         });
 
         var hotspotsX = L.tileLayer(`https://{s}.api.tiles.openaip.net/api/data/hotspots/{z}/{x}/{y}.png?apiKey=${OPENAIP_API_KEY}`, {
-            attribution: '<a href="https://www.openaip.net/">openAIP Data</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-NC-SA</a>)'
-            , bounds: maxExtent,
+            attribution: '<a href="https://www.openaip.net/">openAIP Data</a> (<a href="https://creativecommons.org/licenses/by-sa/3.0/">CC-BY-NC-SA</a>)',
+            bounds: maxExtent,
             reuseTiles: true,
             minZoom: 7,
             maxZoom: 12
+        });
+
+        var dfs = L.tileLayer('https://secais.dfs.de/static-maps/icao500/tiles/{z}/{x}/{y}.png', {
+			attribution: '&copy; <a href="https://www.dfs.de/homepage/de/">DFS Deutsche Flugsicherung GmbH</a>',
+			bounds: maxExtent,
+			maxZoom: 18,
+			minZoom: 0,
+			format: 'image/png',
+			transparent: true,
+			reuseTiles: true,
+			subdomains: ['a', 'b', 'c']
+		});
+
+        var faa = L.tileLayer('http://www.linair.net/map/tiles/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="http://www.linair.net">Linair Chicago Sectional</a>',
+            bounds: maxExtent,
+            maxZoom: 18,
+            minZoom: 0,
+            format: 'image/png',
+			reuseTiles: true,
+            tms: true,
+			preferCanvas: true,
         });
 
         var airspaces_off = L.tileLayer('http://', {
@@ -2013,16 +2034,24 @@
         var flightpath_reset = L.tileLayer('http://', {
         });
 
+        var faaDfsOff= L.tileLayer('http://', {
+        });
+
         var baseMaps = {
-			"Streets": streets,
-			"Hybrid": hybrid,
-			"Satellite": satellite,
-			"Terrain": terrain,
-			"Monochrome": monochrome,
-			"Water": water
+            "Streets": streets,
+            "Hybrid": hybrid,
+            "Sattelite": satellite,
+            "Terrain": terrain,
+            "Monochrome": monochrome,
+            "Water": water
         }
 
         var groupedOverlays = {
+            "Sectionals": {
+                'FAA': faa,
+                'Dfs': dfs,
+                'Off': faaDfsOff
+            },
             "Airspaces": {
                 'On': airspacesX,
                 'Off': airspaces_off
@@ -2055,13 +2084,11 @@
         };
 
         var options = {
-            // Make the "Landmarks" group exclusive (use radio inputs)
-            exclusiveGroups: ["Airspaces", "Airports", "Navaids", "Hotspots", "Reporting-points", "Aircraft", "Flightpath"],
-            // Show a checkbox next to non-exclusive group labels for toggling all
+            exclusiveGroups: ["Sectionals", "Airspaces", "Airports", "Navaids", "Hotspots", "Reporting-points", "Aircraft", "Flightpath"],
             groupCheckboxes: true
         };
 
-        var openaip_basemap_osm = L.featureGroup([streets, airspacesX, navaidsX, airportsX, reporting_pointsX, hotspotsX, aircraft, flightpath_off]);
+        var openaip_basemap_osm = L.featureGroup([streets, faa, airspacesX, navaidsX, airportsX, reporting_pointsX, hotspotsX, aircraft, flightpath_off]);
 
         map = L.map('map', {
             center: mapCenter,
@@ -2074,6 +2101,8 @@
             fadeAnimation: true
         });
 
+        LayerControl = L.control.groupedLayers(baseMaps, groupedOverlays, options).addTo(map);
+
         const hash = new L.Hash(map);
 
         L.control.scale({ maxWidth: 100 }).addTo(map);
@@ -2082,7 +2111,6 @@
         AlgoliaProvider = window.GeoSearch.AlgoliaProvider;
         provider = new GeoSearch.OpenStreetMapProvider();
 
-        //  Define search controls
         searchControl = new GeoSearchControl({
             provider: provider,
             autoComplete: true,
@@ -2101,11 +2129,7 @@
                 draggable: true
             }
         });
-
-        // Add searchbar to the map
         map.addControl(searchControl);
-
-        /* Create new layer for markers  */
 
         map.on('geosearch/showlocation', function (e) {
             disableFollow();
@@ -2506,21 +2530,17 @@
                     //console.log(map._layers[ml].options.type);
                     wpi++;
                 }
-            });
+            });         
             coordinatesArrayARR.push(coordinatesArray[coordinatesArray.length - 1]);
-
 
             pline = L.polyline(coordinatesArray, { color: 'rgb(41,129,202)' });
             plineDEP = L.polyline(coordinatesArrayDEP, { color: 'rgb(70,195,51)' });
             plineARR = L.polyline(coordinatesArrayARR, { color: 'rgb(255,198,0)' });
 
-
             if (wpi == 0) {
                 startLineGroup.clearLayers();
                 map.removeLayer(startLineGroup);
             }
-
-            pline = L.polyline(coordinatesArray, { color: 'rgb(41,129,202)' });
 
             if (map.hasLayer(middleMarkers)) {
                 map.removeLayer(middleMarkers);
@@ -2557,7 +2577,6 @@
             pLineGroup.eachLayer(function (layer) {
                 createMiddleMarkers(layer);
             });
-
 
             $.each(map._layers, function (ml) {
                 var altitude = '0';
@@ -2626,12 +2645,15 @@
 
             document.getElementById('start').innerHTML = 'START';
             document.getElementById('target').innerHTML = 'DEST';
+
             if (wpNames[0]) {
                 document.getElementById('start').innerHTML = wpNames[0];
             }
+
             if (wpNames[wpNames.length - 1] && wpNames.length > 1) {
                 document.getElementById('target').innerHTML = wpNames[wpNames.length - 1];
             }
+
             document.getElementById('depArrTable').style.display = '';
             document.getElementById('dep').innerHTML = 'DEP';
             document.getElementById('arr').innerHTML = 'ARR';
@@ -2803,6 +2825,7 @@
                     distance2 = calculateDistance(nlat, nlng, nwp1_lat, nwp1_lng, 'nm');
                     planeHeading = calculateBearing(nlat, nlng, nwp1_lat, nwp1_lng);
                 }
+
                 if (altitudes[target] && startlineShow == true) {
                     alt1 = parseFloat(altitudes[target]);
                 }
@@ -2931,7 +2954,6 @@
             //console.log('invalidate');
         }, 100);
 
-
         map.on("dragstart", function (e) {
             toggle.enable();
             follow = false;
@@ -3027,11 +3049,6 @@
             }
         });
 
-        map.on('overlayremove', onOverlayRemove);
-
-        function onOverlayRemove(e) {
-        }
-
         function flightpathReset() {
             if (showPath == true) {
                 //console.log('Flightpath reset!');
@@ -3093,8 +3110,6 @@
                 }
             }, 500);
         });
-
-        LayerControl = L.control.groupedLayers(baseMaps, groupedOverlays, options).addTo(map);
 
         $('.leaflet-control').on('mouseenter', () => {
             if (wpListOn == true) {
@@ -3935,7 +3950,6 @@
         window.localStorage.removeItem("wpNames");
         window.localStorage.removeItem("wpTypes");
     }
-
 
     function setJSON(key, value) {
         window.localStorage.setItem(key, JSON.stringify(value));
@@ -5703,5 +5717,4 @@
         e.stopPropagation();
     });
 </script>
-
 </html>
